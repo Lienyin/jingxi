@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.login.LoginActivity;
 import com.jxxc.jingxi.ui.main.MainActivity;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
 
 public class StartActivity extends Activity {
 
-    private Timer timer;//123
+    private Timer timer;//123111
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
