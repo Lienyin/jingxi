@@ -15,12 +15,14 @@
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@mipmap/loading" />
+            android:src="@mipmap/jingxi_logo" />
 
     </LinearLayout>
-    <ImageView
-        android:layout_width="130dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
-        android:src="@mipmap/loading1" />
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="江苏汇智拓信息科技有限公司"/>
 </LinearLayout>
