@@ -6,5 +6,5 @@
         />
     <item
         android:state_checked="true"
-        android:drawable="@mipmap/logo" />
+        android:drawable="@mipmap/jingxi_logo" />
 </selector>

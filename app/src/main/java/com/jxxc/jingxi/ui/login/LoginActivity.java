@@ -36,7 +36,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     @Override
     protected int layoutId() {
         return R.layout.activity_login;
-    }
+}
 
     @Override
     public void initData() {

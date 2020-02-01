@@ -64,7 +64,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="22dp"
-            android:background="@mipmap/jingxi_jingxi_logo" />
+            android:background="@mipmap/jingxi_logo" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
