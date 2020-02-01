@@ -26,12 +26,20 @@ import butterknife.OnClick;
 
 public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
-    @BindView(R.id.et_account)
-    EditText etAccount;
-    @BindView(R.id.et_password)
-    EditText etPassword;
-    @BindView(R.id.btn_login)
-    Button btn_login;
+    @BindView(R.id.btn_qiye)
+    Button btn_qiye;
+    @BindView(R.id.btn_geren)
+    Button btn_geren;
+    @BindView(R.id.tv_msg_login)
+    TextView tv_msg_login;
+    @BindView(R.id.tv_pw_login)
+    TextView tv_pw_login;
+    @BindView(R.id.gerenView)
+    View gerenView;
+    @BindView(R.id.qiyeView)
+    View qiyeView;
+    @BindView(R.id.msgView)
+    View msgView;
 
     @Override
     protected int layoutId() {
@@ -43,19 +51,29 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     }
 
-    @OnClick({R.id.btn_login})
+    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-            case R.id.btn_login:
-                if (AppUtils.isEmpty(etAccount)){
-                    toast(this,"请输入账户");
-                }else if ((AppUtils.isEmpty(etPassword))){
-                    toast(this,"请输入密码");
-                }else{
-                    StyledDialog.buildLoading("正在登录").setActivity(this).show();
-                    mPresenter.login("13916141340","111111");
-                }
+            case R.id.btn_qiye://企业用户
+                gerenView.setVisibility(View.GONE);
+                qiyeView.setVisibility(View.VISIBLE);
+                msgView.setVisibility(View.GONE);
+                break;
+            case R.id.btn_geren://个人用户
+                gerenView.setVisibility(View.VISIBLE);
+                qiyeView.setVisibility(View.GONE);
+                msgView.setVisibility(View.GONE);
+                break;
+            case R.id.tv_msg_login://短信验证码
+                gerenView.setVisibility(View.GONE);
+                qiyeView.setVisibility(View.GONE);
+                msgView.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tv_pw_login://账户密码登录
+                gerenView.setVisibility(View.VISIBLE);
+                qiyeView.setVisibility(View.GONE);
+                msgView.setVisibility(View.GONE);
                 break;
             default:
         }
