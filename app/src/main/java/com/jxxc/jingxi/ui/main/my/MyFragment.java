@@ -28,7 +28,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.first_fragment, container, false);
+        View view = inflater.inflate(R.layout.my_fragment, container, false);
         //tv_todayOrderCount = view.findViewById(R.id.tv_todayOrderCount);
         return view;
     }

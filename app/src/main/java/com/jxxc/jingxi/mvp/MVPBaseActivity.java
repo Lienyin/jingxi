@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.ui.main.MainActivity;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -36,6 +38,7 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
         initView();
         initData();
         initListener();
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
     }
     protected void initListener() {};
     protected abstract int layoutId();
