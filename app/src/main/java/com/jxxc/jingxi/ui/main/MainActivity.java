@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxi.ui.main.msg.MsgFragment;
@@ -186,5 +187,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    //个人信息返回数据
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+
     }
 }

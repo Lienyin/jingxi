@@ -32,10 +32,12 @@
         android:background="@color/public_all">
 
         <ImageView
+            android:id="@+id/iv_user_head"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:src="@mipmap/iv_head"/>
         <TextView
+            android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -43,6 +45,7 @@
             android:layout_marginTop="5dp"
             android:text="XXX"/>
         <TextView
+            android:id="@+id/tv_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"

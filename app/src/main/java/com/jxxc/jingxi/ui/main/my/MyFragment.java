@@ -10,14 +10,19 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.GlideImgManager;
 
 /**
  * MVPPlugin
@@ -29,6 +34,8 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
 
     private Context context;
     private LinearLayout ll_my_car,ll_my_order,ll_my_wallet,ll_msg,ll_setting;
+    private TextView tv_user_name,tv_phone_number;
+    private ImageView iv_user_head;
     public MyFragment(Context context){
         this.context = context;
     }
@@ -42,12 +49,17 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
         ll_my_wallet = view.findViewById(R.id.ll_my_wallet);
         ll_msg = view.findViewById(R.id.ll_msg);
         ll_setting = view.findViewById(R.id.ll_setting);
+        tv_user_name = view.findViewById(R.id.tv_user_name);
+        tv_phone_number = view.findViewById(R.id.tv_phone_number);
+        iv_user_head = view.findViewById(R.id.iv_user_head);
 
         ll_my_car.setOnClickListener(this);
         ll_my_order.setOnClickListener(this);
         ll_my_wallet.setOnClickListener(this);
         ll_msg.setOnClickListener(this);
         ll_setting.setOnClickListener(this);
+
+        mPresenter.getUserInfo();
         return view;
     }
 
@@ -77,5 +89,13 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
     @Override
     public void onRefresh() {
 
+    }
+
+    //个人信息返回数据
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+        GlideImgManager.loadCircleImage(context, data.avatar, iv_user_head);
+        tv_user_name.setText(AppUtils.isEmpty(data.userName)?data.realName:data.userName);
+        tv_phone_number.setText(data.phonenumber);
     }
 }

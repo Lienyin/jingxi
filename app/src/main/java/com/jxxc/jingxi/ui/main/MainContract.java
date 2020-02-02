@@ -1,5 +1,6 @@
 package com.jxxc.jingxi.ui.main;
 
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.mvp.BaseView;
 import com.jxxc.jingxi.mvp.BasePresenter;
 
@@ -10,8 +11,10 @@ import com.jxxc.jingxi.mvp.BasePresenter;
 
 public class MainContract {
     interface View extends BaseView {
+        void getUserInfoCallBack(UserInfoEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
+        void getUserInfo();
     }
 }
