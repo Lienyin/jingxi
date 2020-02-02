@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center_vertical"
-        android:background="#ffffff">
+        android:background="@color/public_all">
 
         <TextView
             android:id="@+id/tv_back"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="菁喜洗车"
-            android:textColor="#424242"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <TextView
