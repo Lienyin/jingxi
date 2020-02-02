@@ -140,6 +140,7 @@
         android:background="@color/set_bg" />
     <!--优惠券-->
     <LinearLayout
+        android:id="@+id/ll_Discount_Coupon"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"

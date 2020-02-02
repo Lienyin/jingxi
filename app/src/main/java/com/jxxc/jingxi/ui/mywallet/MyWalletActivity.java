@@ -11,6 +11,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.discountcoupon.DiscountCouponActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
@@ -40,8 +41,6 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     LinearLayout ll_comm_details;
     @BindView(R.id.tv_ke_tixian_money)
     TextView tv_ke_tixian_money;
-    @BindView(R.id.tv_today_order)
-    TextView tv_today_order;
     @BindView(R.id.tv_tixian_money)
     TextView tv_tixian_money;
     @BindView(R.id.tv_zong_order)
@@ -50,8 +49,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_zhanghu_number;
     @BindView(R.id.iv_tixian_zhanghu)
     ImageView iv_tixian_zhanghu;
-    @BindView(R.id.ll_today_order)
-    LinearLayout ll_today_order;
+    @BindView(R.id.ll_Discount_Coupon)
+    LinearLayout ll_Discount_Coupon;
     private String canWithdrawMoney="";
     @Override
     protected int layoutId() {
@@ -66,8 +65,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
         mPresenter.getUserInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
-    R.id.tv_affirm,R.id.ll_today_order})
+    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
+    R.id.tv_affirm,R.id.ll_Discount_Coupon})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -86,8 +85,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
             case R.id.tv_affirm://提现明细
                 //ZzRouter.gotoActivity(this, WithdrawDepositDetailActivity.class);
                 break;
-            case R.id.ll_today_order://提现明细
-                //ZzRouter.gotoActivity(this, OrderListActivity.class);
+            case R.id.ll_Discount_Coupon://优惠券
+                ZzRouter.gotoActivity(this, DiscountCouponActivity.class);
                 break;
             default:
         }

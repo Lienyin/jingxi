@@ -11,4 +11,6 @@ public class Api {
     public static final String LOGIN_BY_CODE = BASEURL + "/customer/login_by_code";
     //3-个人信息
     public static final String INFO_USER = BASEURL + "/customer/info";
+    //4-优惠券
+    public static final String COUPONS = BASEURL + "";
 }

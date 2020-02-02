@@ -65,5 +65,8 @@
         <!--我的钱包-->
         <activity android:name=".ui.mywallet.MyWalletActivity"
             android:screenOrientation="portrait"/>
+        <!--优惠券-->
+        <activity android:name=".ui.discountcoupon.DiscountCouponActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

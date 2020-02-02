@@ -10,5 +10,7 @@
     <color name="set_bg">#FAF7F8</color>
     <color name="blackccc">#cccccc</color>
     <color name="black555">#555555</color>
+    <color name="black999">#999999</color>
     <color name="qianbao_bg">#09896A</color>
+    <color name="help_button_view">#ffcccccc</color>
 </resources>

@@ -33,6 +33,16 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
     }
 
     @Override
+    public View initView(LayoutInflater inflater, ViewGroup container) {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
 //            case R.id.ll_door_photo://门头照

@@ -32,6 +32,16 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     }
 
     @Override
+    public View initView(LayoutInflater inflater, ViewGroup container) {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void onClick(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
