@@ -26,7 +26,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_user_phone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:textColor="@color/black"
@@ -49,28 +49,23 @@
                 android:layout_marginLeft="4dp"
                 android:textColor="@color/black"
                 android:text="登录密码"/>
+
             <EditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_pass_word"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="请输入登录密码"
                 android:inputType="textPassword"
-                android:textSize="14sp"/>
-            <!--        <Button-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:background="@drawable/send_code_btn_bg"-->
-            <!--            android:textColor="@color/public_all"-->
-            <!--            android:text="获取验证码"/>-->
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!--登录按钮-->
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_geren_login"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_bg_button"
             android:text="登录"

@@ -23,14 +23,14 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     /**
      * 登录接口
-     * @param userName
-     * @param passWord
+     * @param phonenumber
+     * @param password
      */
     @Override
-    public void login(String userName, String passWord) {
+    public void login(String phonenumber, String password) {
         OkGo.<HttpResult<back_Login>>post(Api.LOGIN)
-                .params("userName",userName)
-                .params("password", MD5Utils.md5(passWord))
+                .params("phonenumber",phonenumber)
+                .params("password", MD5Utils.shaPassword(password).trim().toUpperCase())
                 .execute(new JsonCallback<HttpResult<back_Login>>(){
                     @Override
                     public void onSuccess(Response<HttpResult<back_Login>> response) {

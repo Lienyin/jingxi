@@ -30,6 +30,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     Button btn_qiye;
     @BindView(R.id.btn_geren)
     Button btn_geren;
+    @BindView(R.id.btn_geren_login)
+    Button btn_geren_login;
     @BindView(R.id.tv_msg_login)
     TextView tv_msg_login;
     @BindView(R.id.tv_pw_login)
@@ -40,6 +42,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     View qiyeView;
     @BindView(R.id.msgView)
     View msgView;
+    @BindView(R.id.et_user_phone)
+    EditText et_user_phone;
+    @BindView(R.id.et_pass_word)
+    EditText et_pass_word;
 
     @Override
     protected int layoutId() {
@@ -51,7 +57,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     }
 
-    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login})
+    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -74,6 +80,15 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 gerenView.setVisibility(View.VISIBLE);
                 qiyeView.setVisibility(View.GONE);
                 msgView.setVisibility(View.GONE);
+                break;
+            case R.id.btn_geren_login://个人界面登录按钮
+                if (AppUtils.isEmpty(et_user_phone.getText().toString())){
+                    toast(this,"请输入手机号码");
+                }else if (AppUtils.isEmpty(et_pass_word.getText().toString())){
+                    toast(this,"请输入登录密码");
+                }else{
+                    mPresenter.login(et_user_phone.getText().toString(),et_pass_word.getText().toString());
+                }
                 break;
             default:
         }
