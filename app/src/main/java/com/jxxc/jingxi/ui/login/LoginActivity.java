@@ -1,6 +1,8 @@
 package com.jxxc.jingxi.ui.login;
 
 
+import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +56,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_phone_number_code;
     @BindView(R.id.et_pass_word_code)
     EditText et_pass_word_code;
+    private long exitTime = 0;
 
     @Override
     protected int layoutId() {
@@ -122,5 +125,26 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     @Override
     public void loginCodeCallBack() {
         ZzRouter.gotoActivity(this, MainActivity.class);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            toast(this, "再按一次退出程序");
+            exitTime = System.currentTimeMillis();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            System.exit(0);
+        }
     }
 }

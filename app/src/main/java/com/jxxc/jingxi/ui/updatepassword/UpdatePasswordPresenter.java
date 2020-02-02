@@ -5,6 +5,7 @@ import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
 import com.jxxc.jingxi.mvp.BasePresenterImpl;
+import com.jxxc.jingxi.utils.MD5Utils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
@@ -28,8 +29,9 @@ public class UpdatePasswordPresenter extends BasePresenterImpl<UpdatePasswordCon
     @Override
     public void updatePassword(String oldPassword, String newPassword) {
         OkGo.<HttpResult>post(Api.UPDATE_PASSWORD)
-                .params("oldPassword",oldPassword)
-                .params("newPassword",newPassword)
+                .params("oldPassword", MD5Utils.shaPassword(oldPassword).trim().toUpperCase())
+                //.params("oldPassword", oldPassword)
+                .params("newPassword",MD5Utils.shaPassword(newPassword).trim().toUpperCase())
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {

@@ -7,7 +7,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.login.LoginActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
@@ -77,6 +79,7 @@ public class UpdatePasswordActivity extends MVPBaseActivity<UpdatePasswordContra
     @Override
     public void updatePasswordCallBack() {
         toast(this,"修改成功");
+        ZzRouter.gotoActivity(this, LoginActivity.class);
         finish();
     }
 }
