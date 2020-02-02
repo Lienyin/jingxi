@@ -21,6 +21,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
+import com.jxxc.jingxi.ui.seting.SetingActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -91,7 +92,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
                 ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);
                 break;
             case R.id.ll_setting://系统设置
-                ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);
+                ZzRouter.gotoActivity((Activity) context, SetingActivity.class);
                 break;
         }
     }

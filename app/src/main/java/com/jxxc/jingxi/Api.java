@@ -13,4 +13,10 @@ public class Api {
     public static final String INFO_USER = BASEURL + "/customer/info";
     //4-优惠券
     public static final String COUPONS = BASEURL + "";
+    //5-明细
+    public static final String COMMISSION_DETAIL = BASEURL + "";
+    //6-修改密码
+    public static final String UPDATE_PASSWORD = BASEURL + "/customer/update_password";
+    //7-查询版本
+    public static final String LATEST_VERSION = BASEURL + "/upgrade_pack/latest_version";
 }

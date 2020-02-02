@@ -9,30 +9,32 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.bumptech.glide.Glide;
+import com.jxxc.jingxi.http.Constants;
+import com.jxxc.jingxi.http.DensityHelper;
+import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.BasicThreadFactory;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.wanjian.cockroach.Cockroach;
-import com.jxxc.jingxi.http.Constants;
-import com.jxxc.jingxi.http.DensityHelper;
-import com.jxxc.jingxi.utils.AppUtils;
-import com.jxxc.jingxi.utils.SPUtils;
-
+import com.yuyh.library.imgsel.ISNav;
+import com.yuyh.library.imgsel.common.ImageLoader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
-
 import okhttp3.OkHttpClient;
 
 public class ConfigApplication extends MultiDexApplication implements Serializable {
@@ -48,6 +50,8 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
     private static ConfigApplication instans;
     private static Context mContext;
     public static  String CACHA_URL;
+    public static ScheduledThreadPoolExecutor pool = new ScheduledThreadPoolExecutor(3,
+            new BasicThreadFactory.Builder().namingPattern("轮询").daemon(true).build());
 
     @Override
     public void onCreate() {
@@ -55,7 +59,12 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
         instans = this;
         mContext = instans.getApplicationContext();
         MultiDex.install(this);
-
+        ISNav.getInstance().init(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, String path, ImageView imageView) {
+                Glide.with(context).load(path).into(imageView);
+            }
+        });
         //将可以延时初始化的框架放入服务中
 //        MyIntentService.start(this);
         Cockroach.install(new Cockroach.ExceptionHandler() {
@@ -106,6 +115,9 @@ public class ConfigApplication extends MultiDexApplication implements Serializab
 //        Stetho.initializeWithDefaults(this);
         SPUtils.init(this);
          CACHA_URL = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() : Environment.getDownloadCacheDirectory().getAbsolutePath();
+        //极光推送
+//        JPushInterface.setDebugMode(true);
+//        JPushInterface.init(this);
     }
 
 

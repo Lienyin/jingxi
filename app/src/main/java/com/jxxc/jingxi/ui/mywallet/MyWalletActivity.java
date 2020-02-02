@@ -11,6 +11,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.commissionlist.CommissionListActivity;
 import com.jxxc.jingxi.ui.discountcoupon.DiscountCouponActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -82,8 +83,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
             case R.id.ll_comm_details://账单明细
                 //ZzRouter.gotoActivity(this, CommissionListActivity.class);
                 break;
-            case R.id.tv_affirm://提现明细
-                //ZzRouter.gotoActivity(this, WithdrawDepositDetailActivity.class);
+            case R.id.tv_affirm://明细
+                ZzRouter.gotoActivity(this, CommissionListActivity.class);
                 break;
             case R.id.ll_Discount_Coupon://优惠券
                 ZzRouter.gotoActivity(this, DiscountCouponActivity.class);
