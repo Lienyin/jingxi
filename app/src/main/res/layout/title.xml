@@ -45,7 +45,6 @@
             android:drawablePadding="10dp"
             android:text=""
             android:textSize="16dp"
-            android:drawableRight="@mipmap/ic_search"
             android:visibility="gone"/>
     </RelativeLayout>
     <View

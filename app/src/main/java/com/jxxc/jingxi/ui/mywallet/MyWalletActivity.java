@@ -62,10 +62,11 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     public void initData() {
         tv_title.setText("我的钱包");
         tv_affirm.setVisibility(View.VISIBLE);
+        tv_affirm.setText("明细");
         mPresenter.getUserInfo();
     }
 
-    @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
+    @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
     R.id.tv_affirm,R.id.ll_today_order})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
