@@ -32,6 +32,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     Button btn_geren;
     @BindView(R.id.btn_geren_login)
     Button btn_geren_login;
+    @BindView(R.id.btn_login_code)
+    Button btn_login_code;
+    @BindView(R.id.btn_send_msg_code)
+    Button btn_send_msg_code;
     @BindView(R.id.tv_msg_login)
     TextView tv_msg_login;
     @BindView(R.id.tv_pw_login)
@@ -46,6 +50,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_user_phone;
     @BindView(R.id.et_pass_word)
     EditText et_pass_word;
+    @BindView(R.id.et_phone_number_code)
+    EditText et_phone_number_code;
+    @BindView(R.id.et_pass_word_code)
+    EditText et_pass_word_code;
 
     @Override
     protected int layoutId() {
@@ -57,7 +65,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     }
 
-    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login})
+    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
+    R.id.btn_login_code,R.id.btn_send_msg_code})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -90,12 +99,28 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                     mPresenter.login(et_user_phone.getText().toString(),et_pass_word.getText().toString());
                 }
                 break;
+            case R.id.btn_login_code://短信验证码登录
+                if (AppUtils.isEmpty(et_phone_number_code.getText().toString())){
+                    toast(this,"请输入手机号码");
+                }else if (AppUtils.isEmpty(et_pass_word_code.getText().toString())){
+                    toast(this,"请输入短信验证码");
+                }else{
+                    mPresenter.loginCode(et_phone_number_code.getText().toString(),et_pass_word_code.getText().toString());
+                }
+                break;
+            case R.id.btn_send_msg_code://发送验证码
+                break;
             default:
         }
     }
 
     @Override
     public void loginCallBack() {
+        ZzRouter.gotoActivity(this, MainActivity.class);
+    }
+
+    @Override
+    public void loginCodeCallBack() {
         ZzRouter.gotoActivity(this, MainActivity.class);
     }
 }

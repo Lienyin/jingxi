@@ -7,4 +7,6 @@ public class Api {
 
     //1-客户登录
     public static final String LOGIN = BASEURL + "/system/customer/login";
+    //2-短信验证码登录
+    public static final String LOGIN_BY_CODE = BASEURL + "/system/customer/login_by_code";
 }

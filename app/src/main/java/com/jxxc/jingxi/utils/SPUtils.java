@@ -23,6 +23,7 @@ public class SPUtils {
 
     public static final String K_TOKEN = "token";
     public static final String K_SESSION_TIMEOUT = "sessionTimeout";
+    public static final String K_SESSION_MOBILE = "phonenumber";
     private static Context mContext;
 
     public static SharedPreferences init(Context context) {

@@ -25,7 +25,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_phone_number_code"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="请输入手机号码"
@@ -56,15 +56,15 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_pass_word_code"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="50dp"
                 android:hint="请输入短信验证码"
-                android:inputType="textPassword"
                 android:textSize="14sp" />
 
             <Button
+                android:id="@+id/btn_send_msg_code"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/send_code_btn_bg"
@@ -75,7 +75,7 @@
 
     <!--登录按钮-->
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_login_code"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_marginLeft="20dp"

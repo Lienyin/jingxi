@@ -11,9 +11,11 @@ import com.jxxc.jingxi.mvp.BasePresenter;
 public class LoginContract {
     interface View extends BaseView {
         void loginCallBack();
+        void loginCodeCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void login(String phonenumber,String password);
+        void loginCode(String phonenumber,String code);
     }
 }
