@@ -1,4 +1,4 @@
-package com.jxxc.jingxi.ui.main.myfragment.secondfragment;
+package com.jxxc.jingxi.ui.main.myCarfragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,11 +13,11 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 
 @SuppressLint("ValidFragment")
-public class MyFragment extends MVPBaseFragment<MyFragmentContract.View, MyFragmentPresenter> implements View.OnClickListener, MyFragmentContract.View {
+public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, MyCarFragmentPresenter> implements View.OnClickListener, MyCarFragmentContract.View {
     private Context context;
     private TextView tv_user_name;
 
-    public MyFragment(Context context){
+    public MyCarFragment(Context context){
         this.context = context;
     }
 

@@ -1,5 +1,6 @@
-package com.jxxc.jingxi.ui.main.myfragment.secondfragment;
+package com.jxxc.jingxi.ui.main.msg;
 
+import android.content.Context;
 
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
@@ -9,10 +10,12 @@ import com.jxxc.jingxi.mvp.BaseView;
  *  邮箱 784787081@qq.com
  */
 
-public class MyFragmentContract {
+public class MsgContract {
     interface View extends BaseView {
+        
     }
 
     interface  Presenter extends BasePresenter<View> {
+        
     }
 }

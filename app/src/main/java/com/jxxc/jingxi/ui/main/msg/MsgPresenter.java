@@ -1,4 +1,6 @@
-package com.jxxc.jingxi.ui.main.myfragment.secondfragment;
+package com.jxxc.jingxi.ui.main.msg;
+
+import android.content.Context;
 
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.mvp.BasePresenterImpl;
@@ -8,7 +10,8 @@ import com.jxxc.jingxi.mvp.BasePresenterImpl;
  *  邮箱 784787081@qq.com
  */
 
-public class MyFragmentPresenter extends BasePresenterImpl<MyFragmentContract.View> implements MyFragmentContract.Presenter{
+public class MsgPresenter extends BasePresenterImpl<MsgContract.View> implements MsgContract.Presenter{
+
     @Override
     protected void onEventComing(EventCenter center) {
 

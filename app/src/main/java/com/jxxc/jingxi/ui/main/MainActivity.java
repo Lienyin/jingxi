@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
-import com.jxxc.jingxi.ui.main.myfragment.secondfragment.MyFragment;
+import com.jxxc.jingxi.ui.main.msg.MsgFragment;
+import com.jxxc.jingxi.ui.main.my.MyFragment;
+import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
 
 
@@ -25,14 +27,19 @@ import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
 
 public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresenter> implements MainContract.View, View.OnClickListener {
 
-    private TextView topOrder;
-    private TextView tabDeal;
-    private TextView tabMore;
+    private TextView txt_deal1;
+    private TextView txt_deal2;
+    private TextView txt_deal3;
+    private TextView txt_deal4;
+    private TextView txt_deal5;
     private FrameLayout ly_content;
 
     private FirstFragment f1;
     private SecondFragment f2;
-    private MyFragment f3;
+    private MyCarFragment f3;
+    private MsgFragment f4;
+    private MyFragment f5;
+
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
@@ -48,23 +55,29 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     //UI组件初始化与事件绑定
     private void bindView() {
-        topOrder = (TextView)this.findViewById(R.id.txt_order);
-        tabDeal = (TextView)this.findViewById(R.id.txt_deal);
-        tabMore = (TextView)this.findViewById(R.id.txt_more);
+        txt_deal1 = (TextView)this.findViewById(R.id.txt_deal1);
+        txt_deal2 = (TextView)this.findViewById(R.id.txt_deal2);
+        txt_deal3 = (TextView)this.findViewById(R.id.txt_deal3);
+        txt_deal4 = (TextView)this.findViewById(R.id.txt_deal4);
+        txt_deal5 = (TextView)this.findViewById(R.id.txt_deal5);
         ly_content = (FrameLayout) findViewById(R.id.fragment_container);
 
-        tabDeal.setOnClickListener(this);
-        tabMore.setOnClickListener(this);
-        topOrder.setOnClickListener(this);
+        txt_deal1.setOnClickListener(this);
+        txt_deal2.setOnClickListener(this);
+        txt_deal3.setOnClickListener(this);
+        txt_deal4.setOnClickListener(this);
+        txt_deal5.setOnClickListener(this);
         //默认显示第一个Fragment
-        tabDeal.performClick();//自动触发首页按钮
+        txt_deal1.performClick();//自动触发首页按钮
     }
 
     //重置所有文本的选中状态
     public void selected(){
-        tabDeal.setSelected(false);
-        tabMore.setSelected(false);
-        topOrder.setSelected(false);
+        txt_deal1.setSelected(false);
+        txt_deal2.setSelected(false);
+        txt_deal3.setSelected(false);
+        txt_deal4.setSelected(false);
+        txt_deal5.setSelected(false);
     }
 
     //隐藏所有Fragment
@@ -78,6 +91,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         if(f3!=null){
             transaction.hide(f3);
         }
+        if(f4!=null){
+            transaction.hide(f4);
+        }
+        if(f5!=null){
+            transaction.hide(f5);
+        }
     }
 
     @Override
@@ -85,9 +104,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
         switch(v.getId()){
-            case R.id.txt_deal:
+            case R.id.txt_deal1:
                 selected();
-                tabDeal.setSelected(true);
+                txt_deal1.setSelected(true);
                 if(f1==null){
                     f1 = new FirstFragment(this);
                     transaction.add(R.id.fragment_container,f1);
@@ -96,9 +115,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
 
-            case R.id.txt_more:
+            case R.id.txt_deal2:
                 selected();
-                tabMore.setSelected(true);
+                txt_deal2.setSelected(true);
                 if(f2==null){
                     f2 = new SecondFragment(this);
                     transaction.add(R.id.fragment_container,f2);
@@ -106,14 +125,34 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                     transaction.show(f2);
                 }
                 break;
-            case R.id.txt_order:
+            case R.id.txt_deal3:
                 selected();
-                topOrder.setSelected(true);
+                txt_deal3.setSelected(true);
                 if(f3==null){
-                    f3 = new MyFragment(this);
+                    f3 = new MyCarFragment(this);
                     transaction.add(R.id.fragment_container,f3);
                 }else{
                     transaction.show(f3);
+                }
+                break;
+            case R.id.txt_deal4:
+                selected();
+                txt_deal4.setSelected(true);
+                if(f4==null){
+                    f4 = new MsgFragment(this);
+                    transaction.add(R.id.fragment_container,f4);
+                }else{
+                    transaction.show(f4);
+                }
+                break;
+            case R.id.txt_deal5:
+                selected();
+                txt_deal5.setSelected(true);
+                if(f5==null){
+                    f5 = new MyFragment(this);
+                    transaction.add(R.id.fragment_container,f5);
+                }else{
+                    transaction.show(f5);
                 }
                 break;
         }
