@@ -24,7 +24,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.my_fragment,container,false);
+        View view = inflater.inflate(R.layout.my_car_fragment,container,false);
         //tv_user_name = (TextView)view.findViewById(R.id.tv_user_name);
 
         //tv_user_name.setOnClickListener(this);
