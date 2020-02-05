@@ -10,10 +10,13 @@ import com.jxxc.jingxi.mvp.BasePresenter;
 
 public class UsercenterContract {
     interface View extends BaseView {
-        
+        void updateInfoCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void initImageSelecter();
+        void gotoImageSelect(UsercenterActivity activity, int requestCodeChoose);
+        void uploadImage(String s);
+        void updateInfo(String avatar);
     }
 }

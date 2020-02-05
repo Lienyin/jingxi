@@ -21,4 +21,8 @@ public class Api {
     public static final String LATEST_VERSION = BASEURL + "/system/upgrade_pack/latest_version";
     //8-获取短信验证码
     public static final String GET_CODE = BASEURL + "/common/auth/get_code";
+    //9-文件上传
+    public static final String UPLOAD = BASEURL + "";
+    //10-修改信息（头像）
+    public static final String UPDATE_INFO = BASEURL + "/system/customer/update_info";
 }

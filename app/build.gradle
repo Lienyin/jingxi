@@ -55,4 +55,5 @@ dependencies {
     implementation 'com.lzy.net:okrx2:2.0.2'
     implementation 'com.yuyh.imgsel:library:2.0.2'
     implementation 'zlc.season:rxdownload2:2.0.4'
+    implementation 'top.zibin:Luban:1.1.3'
 }

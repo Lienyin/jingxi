@@ -22,6 +22,7 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
 import com.jxxc.jingxi.ui.seting.SetingActivity;
+import com.jxxc.jingxi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -60,6 +61,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
         ll_my_wallet.setOnClickListener(this);
         ll_msg.setOnClickListener(this);
         ll_setting.setOnClickListener(this);
+        iv_user_head.setOnClickListener(this);
 
         mPresenter.getUserInfo();
         return view;
@@ -93,6 +95,9 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
                 break;
             case R.id.ll_setting://系统设置
                 ZzRouter.gotoActivity((Activity) context, SetingActivity.class);
+                break;
+            case R.id.iv_user_head://头像
+                ZzRouter.gotoActivity((Activity) context, UsercenterActivity.class);
                 break;
         }
     }
