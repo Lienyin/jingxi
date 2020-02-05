@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical">
 
     <ScrollView
@@ -15,7 +16,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="55dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp">
@@ -97,7 +98,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"
+                android:background="@drawable/attestation_bg_edittext"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -188,20 +189,52 @@
 <!--            洗车-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="230dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:gravity="center_vertical">
+                android:background="@drawable/attestation_bg_edittext">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_work_order_all"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:checked="true"
+                            android:text="菁喜上门洗车"
+                            android:textColor="@drawable/radio"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_work_order_dai_jie"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="菁喜到店洗车"
+                            android:textColor="@drawable/radio"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+                </LinearLayout>
             </LinearLayout>
 <!--            创富梦想，即刻出发-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:background="@mipmap/icon_115"
                 android:gravity="center_vertical">

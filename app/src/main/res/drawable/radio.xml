@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="false"
-        android:drawable="@mipmap/back"
+        android:color="#ababab"
         />
     <item
         android:state_checked="true"
-        android:drawable="@mipmap/jingxi_logo" />
+        android:color="@color/public_all" />
 </selector>
