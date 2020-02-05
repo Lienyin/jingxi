@@ -1,20 +1,42 @@
 package com.jxxc.jingxi.ui.login;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.main.MainActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.wxapi.Constant;
+import com.jxxc.jingxi.wxapi.WeiXin;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,6 +78,13 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_phone_number_code;
     @BindView(R.id.et_pass_word_code)
     EditText et_pass_word_code;
+    @BindView(R.id.iv_open_wx_login)
+    ImageView iv_open_wx_login;
+    //微信
+    public IWXAPI api;
+    private String wxOpenid = "";
+    private String wxHeadimgurl = "";//头像
+    private String fullName = "";//昵称
     private long exitTime = 0;
 
     @Override
@@ -65,11 +94,13 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void initData() {
-
+        api = WXAPIFactory.createWXAPI(this, Constant.APP_ID,true);
+        api.registerApp(Constant.APP_ID);
+        EventBus.getDefault().register(this);
     }
 
     @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
-    R.id.btn_login_code,R.id.btn_send_msg_code})
+    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -118,6 +149,13 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                     mPresenter.getCode(et_phone_number_code.getText().toString());
                 }
                 break;
+            case R.id.iv_open_wx_login://微信登录
+                if (isAvilible(this,"com.tencent.mm")){
+                    weiXinLogin();
+                }else{
+                    toast(this,"目前您安装的微信版本过低或尚未安装");
+                }
+                break;
             default:
         }
     }
@@ -151,5 +189,103 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             startActivity(intent);
             System.exit(0);
         }
+    }
+
+    /**
+     * 检查手机上是否安装了指定的软件
+     * @param context
+     * @param packageName
+     * @return
+     */
+    public static boolean isAvilible(Context context, String packageName) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> packageInfos = packageManager.getInstalledPackages(0);
+        List<String> packageNames = new ArrayList<String>();
+
+        if (packageInfos != null) {
+            for (int i = 0; i < packageInfos.size(); i++) {
+                String packName = packageInfos.get(i).packageName;
+                packageNames.add(packName);
+            }
+        }
+        // 判断packageNames中是否有目标程序的包名，有TRUE，没有FALSE
+        return packageNames.contains(packageName);
+    }
+
+    //----------------------微信登录开始（需要重置APP_secret）--------------------------------------
+    public void weiXinLogin() {
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = String.valueOf(System.currentTimeMillis());
+        api.sendReq(req);
+    }
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void onEventMainThread(WeiXin wx) {
+        getAccessToken(wx.getCode());
+    }
+    //获取Token
+    public void getAccessToken(String code) {
+        String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
+                "appid=" + Constant.APP_ID + "&secret=" + Constant.WECHAT_SECRET +
+                "&code=" + code + "&grant_type=authorization_code";
+        OkGo.<String>post(url)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject dataJson = new JSONObject(response.body());
+                            String access_token = dataJson.getString("access_token");
+                            String openid = dataJson.getString("openid");
+                            getWeiXinUserInfo(access_token, openid);
+                        } catch (JSONException e) {
+                            System.out.println("Something wrong...");
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+    //获取用户信息
+    public void getWeiXinUserInfo(String access_token, String Openid) {
+        String url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + Openid;
+        OkGo.<String>post(url)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject dataJson = new JSONObject(response.body());
+                            wxOpenid = dataJson.getString("openid");
+                            wxHeadimgurl = dataJson.getString("headimgurl");
+                            fullName = dataJson.getString("nickname");
+                            mPresenter.thirdPartyLogin(wxOpenid);
+                        } catch (JSONException e) {
+                            System.out.println("Something wrong...");
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+    //---------------------------------微信登录结束----------------------------------------------
+
+    //第三方登录返回数据
+    @Override
+    public void getThirdPartyLogin(ThirdPartyLogin data) {
+        if ("ok".equals(data.step)) {
+            //第一种状态：授权登录成功
+            toast(this,"登录成功");
+            //ZzRouter.gotoActivity(this, NewMainActivity.class);
+        }else if ("not_auth".equals(data.step)){
+            //第一次授权登录，跳转到手机获取验证码界面(新用户)
+//            Intent intent = new Intent(this, BindingPhoneNumberActivity.class);
+//            intent.putExtra("otherAppId", wxOpenid);
+//            intent.putExtra("userHeadImage", wxHeadimgurl);
+//            intent.putExtra("fullName", fullName);
+//            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

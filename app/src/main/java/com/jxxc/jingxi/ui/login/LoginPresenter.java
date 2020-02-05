@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.login;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.jxxc.jingxi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -70,6 +71,24 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         }else {
                             toast(mContext,response.body().message);
                         }
+                    }
+                });
+    }
+
+    /**
+     * 微信登录
+     * @param wxOpenId
+     */
+    @Override
+    public void thirdPartyLogin(String wxOpenId) {
+        OkGo.<HttpResult<ThirdPartyLogin>>post(Api.LOGIN_BY_WECHAT)
+                .params("wxOpenId",wxOpenId)
+                .execute(new JsonCallback<HttpResult<ThirdPartyLogin>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<ThirdPartyLogin>> response) {
+                        ThirdPartyLogin d = response.body().data;
+                        mView.getThirdPartyLogin(d);
+                        SPUtils.put(SPUtils.K_TOKEN,d.token);
                     }
                 });
     }

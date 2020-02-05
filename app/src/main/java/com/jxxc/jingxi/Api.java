@@ -27,4 +27,6 @@ public class Api {
     public static final String UPLOAD = SPUtils.get(SPUtils.K_STATIC_URL,"") + "common/upload";
     //10-修改信息（头像）
     public static final String UPDATE_INFO = BASEURL + "/system/customer/update_info";
+    //11-微信登录
+    public static final String LOGIN_BY_WECHAT = BASEURL + "/system/customer/login_by_wechat";
 }
