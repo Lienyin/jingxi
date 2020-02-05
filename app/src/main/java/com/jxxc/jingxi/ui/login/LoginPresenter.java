@@ -74,6 +74,26 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                 });
     }
 
+    /**
+     * 获取验证码
+     * @param phonenumber
+     */
+    @Override
+    public void getCode(String phonenumber) {
+        OkGo.<HttpResult>post(Api.GET_CODE)
+                .params("phonenumber",phonenumber)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            toast(mContext,"发送成功");
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
     @Override
     protected void onEventComing(EventCenter center) {
 

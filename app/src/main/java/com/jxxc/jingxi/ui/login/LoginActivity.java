@@ -112,6 +112,11 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }
                 break;
             case R.id.btn_send_msg_code://发送验证码
+                if (AppUtils.isEmpty(et_phone_number_code.getText().toString())){
+                    toast(this,"请输入手机号码");
+                }else{
+                    mPresenter.getCode(et_phone_number_code.getText().toString());
+                }
                 break;
             default:
         }

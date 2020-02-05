@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_deal"
+            android:drawableTop="@drawable/tab_menu_faxian"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="发现"/>
@@ -57,7 +57,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_deal"
+            android:drawableTop="@drawable/tab_menu_xiche"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="我要洗车"/>
@@ -67,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_deal"
+            android:drawableTop="@drawable/tab_menu_xiaoxi"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="消息"/>
@@ -77,7 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_deal"
+            android:drawableTop="@drawable/tab_menu_my"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="我的"/>
