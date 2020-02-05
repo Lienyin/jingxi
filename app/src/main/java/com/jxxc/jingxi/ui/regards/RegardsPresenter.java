@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.BuildConfig;
 import com.jxxc.jingxi.ConfigApplication;
@@ -53,6 +54,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                 .execute(new JsonCallback<HttpResult<LatestVersionEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<LatestVersionEntity>> response) {
+                        StyledDialog.dismissLoading();
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);

@@ -52,6 +52,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     public void initData() {
         bindView();
+        mPresenter.queryAppVersion("3");//查询版本
     }
 
     //UI组件初始化与事件绑定

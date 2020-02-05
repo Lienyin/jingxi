@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -50,12 +51,19 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
     public void initData() {
         tv_title.setText("个人资料");
         mPresenter.initImageSelecter();
+        mPresenter.getUserInfo();
     }
 
     //修改头像返回数据
     @Override
     public void updateInfoCallBack() {
+        mPresenter.getUserInfo();
+    }
 
+    //个人信息返回数据
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+        GlideImgManager.loadCircleImage(this, data.avatar, iv_user_head);
     }
 
     @OnClick({R.id.tv_back,R.id.iv_user_head,R.id.ll_update_password})

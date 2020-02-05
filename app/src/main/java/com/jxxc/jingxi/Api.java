@@ -1,5 +1,7 @@
 package com.jxxc.jingxi;
 
+import com.jxxc.jingxi.utils.SPUtils;
+
 public class Api {
 //       public static final String BASEURL = "https://repair-api-sit.zhizukj.com/zhizu/repair";//测试环境
 //    public static final String BASEURL = "https://zhizuxia.zhizukj.com/ydb/app/";//生产
@@ -22,7 +24,7 @@ public class Api {
     //8-获取短信验证码
     public static final String GET_CODE = BASEURL + "/common/auth/get_code";
     //9-文件上传
-    public static final String UPLOAD = BASEURL + "";
+    public static final String UPLOAD = SPUtils.get(SPUtils.K_STATIC_URL,"") + "common/upload";
     //10-修改信息（头像）
     public static final String UPDATE_INFO = BASEURL + "/system/customer/update_info";
 }

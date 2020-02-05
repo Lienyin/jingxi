@@ -16,5 +16,7 @@ public class MainContract {
 
     interface  Presenter extends BasePresenter<View> {
         void getUserInfo();
+        //查询app版本
+        void queryAppVersion(String type);
     }
 }
