@@ -1,5 +1,7 @@
 package com.jxxc.jingxi.ui.login;
 
+import android.widget.TextView;
+
 import com.jxxc.jingxi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxi.mvp.BaseView;
 import com.jxxc.jingxi.mvp.BasePresenter;
@@ -21,6 +23,6 @@ public class LoginContract {
         void loginCode(String phonenumber,String code);
         void thirdPartyLogin(String wxOpenid);
 
-        void getCode(String phonenumber);
+        void getCode(String phonenumber, TextView tvAuthCode);
     }
 }

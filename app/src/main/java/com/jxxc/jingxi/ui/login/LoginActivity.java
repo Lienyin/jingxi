@@ -15,11 +15,13 @@ import android.widget.TextView;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.bindingphonenumber.BindingPhoneNumberActivity;
 import com.jxxc.jingxi.ui.main.MainActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.wxapi.Constant;
 import com.jxxc.jingxi.wxapi.WeiXin;
 import com.lzy.okgo.OkGo;
@@ -97,6 +99,9 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         api = WXAPIFactory.createWXAPI(this, Constant.APP_ID,true);
         api.registerApp(Constant.APP_ID);
         EventBus.getDefault().register(this);
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
+            et_user_phone.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        }
     }
 
     @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
@@ -139,6 +144,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }else if (AppUtils.isEmpty(et_pass_word_code.getText().toString())){
                     toast(this,"请输入短信验证码");
                 }else{
+                    StyledDialog.buildLoading("正在登录").setActivity(this).show();
                     mPresenter.loginCode(et_phone_number_code.getText().toString(),et_pass_word_code.getText().toString());
                 }
                 break;
@@ -146,7 +152,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 if (AppUtils.isEmpty(et_phone_number_code.getText().toString())){
                     toast(this,"请输入手机号码");
                 }else{
-                    mPresenter.getCode(et_phone_number_code.getText().toString());
+                    StyledDialog.buildLoading("正在发送").setActivity(this).show();
+                    mPresenter.getCode(et_phone_number_code.getText().toString(),btn_send_msg_code);
                 }
                 break;
             case R.id.iv_open_wx_login://微信登录
@@ -272,14 +279,14 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         if ("ok".equals(data.step)) {
             //第一种状态：授权登录成功
             toast(this,"登录成功");
-            //ZzRouter.gotoActivity(this, NewMainActivity.class);
+            ZzRouter.gotoActivity(this, MainActivity.class);
         }else if ("not_auth".equals(data.step)){
             //第一次授权登录，跳转到手机获取验证码界面(新用户)
-//            Intent intent = new Intent(this, BindingPhoneNumberActivity.class);
-//            intent.putExtra("otherAppId", wxOpenid);
-//            intent.putExtra("userHeadImage", wxHeadimgurl);
-//            intent.putExtra("fullName", fullName);
-//            startActivity(intent);
+            Intent intent = new Intent(this, BindingPhoneNumberActivity.class);
+            intent.putExtra("otherAppId", wxOpenid);
+            intent.putExtra("userHeadImage", wxHeadimgurl);
+            intent.putExtra("fullName", fullName);
+            startActivity(intent);
         }
     }
 
