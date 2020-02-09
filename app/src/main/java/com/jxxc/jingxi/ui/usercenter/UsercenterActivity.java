@@ -38,6 +38,10 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_user_info_mobile)
+    TextView tv_user_info_mobile;
+    @BindView(R.id.tv_user_authentication)
+    TextView tv_user_authentication;
     @BindView(R.id.iv_user_head)
     ImageView iv_user_head;
     private static final int REQUEST_CODE_CHOOSE = 1100;
@@ -64,9 +68,10 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
         GlideImgManager.loadCircleImage(this, data.avatar, iv_user_head);
+        tv_user_info_mobile.setText(data.phonenumber);
     }
 
-    @OnClick({R.id.tv_back,R.id.iv_user_head,R.id.ll_update_password})
+    @OnClick({R.id.tv_back,R.id.iv_user_head})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -76,9 +81,6 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
             case R.id.iv_user_head://头像
                 mPresenter.gotoImageSelect(this, REQUEST_CODE_CHOOSE);
                 break;
-//            case R.id.ll_update_password://修改密码
-//                ZzRouter.gotoActivity(this, UpdatePasswordActivity.class);
-//                break;
             default:
         }
     }
