@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.main.firstfragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,16 +9,23 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+
+import java.util.List;
 
 @SuppressLint("ValidFragment")
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
     private Context context;
-    private TextView tv_todayOrderCount;
+    private TextView tv_map_jingsi;
+    private GridView gv_home_data;
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -27,7 +35,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_fragment, container, false);
-        //tv_todayOrderCount = view.findViewById(R.id.tv_todayOrderCount);
+        tv_map_jingsi = view.findViewById(R.id.tv_map_jingsi);
+        gv_home_data = view.findViewById(R.id.gv_home_data);
+
+        tv_map_jingsi.setOnClickListener(this);
+
+        mPresenter.productInfo();
         return view;
     }
 
@@ -45,15 +58,21 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void onClick(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-//            case R.id.ll_gong_dan://工单
-//                ZzRouter.gotoActivity((Activity) context, WorkOrderActivity.class,"2");
-//                break;
+            case R.id.tv_map_jingsi://工单
+                ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
+                break;
         }
     }
 
     //刷新
     @Override
     public void onRefresh() {
+
+    }
+
+    //首页基本服务项展示返回数据
+    @Override
+    public void productInfoCallBack(List<ProductInfoEntity> data) {
 
     }
 }

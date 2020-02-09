@@ -31,4 +31,6 @@ public class Api {
     public static final String LOGIN_BY_WECHAT = BASEURL + "/system/customer/login_by_wechat";
     //12-绑定微信
     public static final String AUTH_WECHAT = BASEURL + "/system/customer/auth_wechat";
+    //13-首页基本服务项展示
+    public static final String PRODUCT_INFO = BASEURL + "/biz/order/productInfo";
 }

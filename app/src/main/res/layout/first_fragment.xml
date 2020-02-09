@@ -193,6 +193,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:orientation="vertical"
                 android:background="@drawable/attestation_bg_edittext">
 
                 <LinearLayout
@@ -228,6 +229,12 @@
                             android:textSize="14sp" />
                     </RadioGroup>
                 </LinearLayout>
+<!--                服务类型-->
+                <GridView
+                    android:id="@+id/gv_home_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="4"/>
             </LinearLayout>
 <!--            创富梦想，即刻出发-->
             <LinearLayout
@@ -241,6 +248,7 @@
 
             </LinearLayout>
             <TextView
+                android:id="@+id/tv_map_jingsi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
