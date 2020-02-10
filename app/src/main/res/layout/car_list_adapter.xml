@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_margin="10dp"
+        android:elevation="1dp"
         android:background="@drawable/attestation_bg_edittext"
         android:gravity="center_vertical">
         <ImageView
@@ -36,13 +37,13 @@
                     android:textSize="14sp" />
                 <TextView
                     android:id="@+id/tv_car_moren"
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/lijixufei_bg_button"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:text="默认车辆"/>
             </LinearLayout>
             <LinearLayout
@@ -74,8 +75,8 @@
 
                 <TextView
                     android:id="@+id/tv_car_color"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:background="@drawable/lijixufei_bg_button"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
@@ -117,14 +118,14 @@
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_car_use"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="80dp"
+                android:layout_height="23dp"
                 android:background="@drawable/lijixufei_bg_button"
                 android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="使用"/>
+                android:text="使  用"/>
         </LinearLayout>
 ?    </LinearLayout>
 </LinearLayout>

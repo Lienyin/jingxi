@@ -59,6 +59,34 @@ public class CarListAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
+        CarListEntity data = list.get(position);
+        holder.tv_car_paizhao.setText(data.carNum);
+        if (data.isDefault == 1){
+            holder.tv_car_moren.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_car_moren.setVisibility(View.GONE);
+        }
+        holder.tv_car_name.setText(data.brandName+"  "+data.typeName);
+        holder.tv_car_color_name.setText("颜色");
+
+        holder.tv_car_updata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //编辑
+            }
+        });
+        holder.tv_car_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //删除
+            }
+        });
+        holder.tv_car_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //使用
+            }
+        });
         return convertView;
     }
 

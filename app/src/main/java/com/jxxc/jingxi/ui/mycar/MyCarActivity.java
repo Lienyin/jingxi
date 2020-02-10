@@ -70,5 +70,7 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     @Override
     public void getCarListCallBack(List<CarListEntity> data) {
         list = data;
+        adapter.setData(list);
+        adapter.notifyDataSetChanged();
     }
 }

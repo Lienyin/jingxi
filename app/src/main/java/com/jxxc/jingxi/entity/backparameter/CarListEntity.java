@@ -10,6 +10,6 @@ public class CarListEntity implements Serializable {
     public String typeId;
     public String typeName;
     public String color;
-    public String isDefault;
+    public int isDefault;
     public String isNewEnergy;
 }
