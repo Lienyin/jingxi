@@ -10,10 +10,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.cartypeselect.CarTypeSelectActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.KeyboardUtil;
 
@@ -34,6 +37,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     TextView tv_title;
     @BindView(R.id.edit_text)
     EditText mEditText;
+    @BindView(R.id.ll_car_type)
+    LinearLayout ll_car_type;
     private KeyboardUtil keyboardUtil;
     @Override
     protected int layoutId() {
@@ -75,12 +80,15 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         });
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back,R.id.ll_car_type})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
+                break;
+            case R.id.ll_car_type://车型选择
+                ZzRouter.gotoActivity(this, CarTypeSelectActivity.class);
                 break;
             default:
         }
