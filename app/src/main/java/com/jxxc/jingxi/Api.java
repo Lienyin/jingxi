@@ -37,4 +37,10 @@ public class Api {
     public static final String GET_CAR_LIST = BASEURL + "/biz/car/getCarList";
     //15-获取所有车品牌车型
     public static final String GET_BAND_AND_TYPE = BASEURL + "/biz/car/getBandAndType";
+    //16-增加车辆
+    public static final String ADD_CAR = BASEURL + "/biz/car/add";
+    //17-修改车辆
+    public static final String EDIT_CAR = BASEURL + "/biz/car/edit";
+    //18-删除车辆
+    public static final String REMOVE_CAR = BASEURL + "/biz/car/remove";
 }

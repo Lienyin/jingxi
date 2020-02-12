@@ -16,4 +16,14 @@
     <color name="help_button_view">#ffcccccc</color>
     <color name="gray">#55757575</color>
     <color name="home_yellow">#FFD669</color>
+    <color name="car_type_color1">#556B2F</color>
+    <color name="car_type_color2">#28818A</color>
+    <color name="car_type_color3">#FF4500</color>
+    <color name="car_type_color4">#FFFF00</color>
+    <color name="car_type_color5">#FF0000</color>
+    <color name="car_type_color6">#000000</color>
+    <color name="car_type_color7">#808080</color>
+    <color name="car_type_color8">#FFFFFF</color>
+    <color name="car_type_color9">#800080</color>
+    <color name="car_type_color10">#8B4513</color>
 </resources>

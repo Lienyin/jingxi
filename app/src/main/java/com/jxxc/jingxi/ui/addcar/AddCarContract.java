@@ -14,9 +14,11 @@ import com.jxxc.jingxi.mvp.BaseView;
 public class AddCarContract {
     interface View extends BaseView {
         void queryAppVersionCallBack(ColorEntity data);
+        void addCarCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void queryAppVersion(String type);
+        void addCar(String carNum,String brandId,String typeId,String color,String isNewEnergy);
     }
 }

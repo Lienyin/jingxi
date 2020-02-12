@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -24,7 +25,9 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.cartypeselect.CarTypeSelectActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.KeyboardUtil;
+import com.wanjian.cockroach.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +55,12 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     LinearLayout ll_car_type;
     @BindView(R.id.gv_color_data)
     GridView gv_color_data;
+    @BindView(R.id.btn_add_car)
+    Button btn_add_car;
     private KeyboardUtil keyboardUtil;
     private String brandId;
     private String carTypeId;
+    private String colorId;
     private AddCarAdapter addCarAdapter;
     private List<ColorEntity.Color> list = new ArrayList<>();
     @Override
@@ -102,6 +108,14 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         addCarAdapter = new AddCarAdapter(this);
         addCarAdapter.setData(list);
         gv_color_data.setAdapter(addCarAdapter);
+        gv_color_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                addCarAdapter.setSelectPosition(i);
+                addCarAdapter.notifyDataSetChanged();
+                colorId = list.get(i).color+"";
+            }
+        });
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -116,7 +130,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         }
     };
 
-    @OnClick({R.id.tv_back,R.id.ll_car_type,R.id.tv_car_type})
+    @OnClick({R.id.tv_back,R.id.ll_car_type,R.id.tv_car_type,R.id.btn_add_car})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -126,6 +140,17 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             case R.id.ll_car_type://车型选择
             case R.id.tv_car_type://车型选择
                 ZzRouter.gotoActivity(this, CarTypeSelectActivity.class);
+                break;
+            case R.id.btn_add_car://添加车辆
+                if (AppUtils.isEmpty(mEditText.getText().toString())){
+                    toast(this,"请输入车牌");
+                }else if (AppUtils.isEmpty(brandId)){
+                    toast(this,"请选择车型");
+                }else if (AppUtils.isEmpty(colorId)){
+                    toast(this,"请选择车身颜色");
+                }else{
+                    mPresenter.addCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0");
+                }
                 break;
             default:
         }
@@ -155,5 +180,11 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         list = data.colors;
         addCarAdapter.setData(list);
         addCarAdapter.notifyDataSetChanged();
+    }
+
+    //添加车辆成功返回数据
+    @Override
+    public void addCarCallBack() {
+        finish();
     }
 }
