@@ -76,6 +76,7 @@
         android:paddingRight="30dp"
         android:gravity="center_vertical">
         <TextView
+            android:id="@+id/tv_car_type"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

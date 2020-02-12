@@ -35,4 +35,6 @@ public class Api {
     public static final String PRODUCT_INFO = BASEURL + "/biz/order/productInfo";
     //14-获取个人车辆列表
     public static final String GET_CAR_LIST = BASEURL + "/biz/car/getCarList";
+    //15-获取所有车品牌车型
+    public static final String GET_BAND_AND_TYPE = BASEURL + "/biz/car/getBandAndType";
 }

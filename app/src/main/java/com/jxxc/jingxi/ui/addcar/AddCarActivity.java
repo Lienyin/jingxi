@@ -1,6 +1,10 @@
 package com.jxxc.jingxi.ui.addcar;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,11 +39,15 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_car_type)
+    TextView tv_car_type;
     @BindView(R.id.edit_text)
     EditText mEditText;
     @BindView(R.id.ll_car_type)
     LinearLayout ll_car_type;
     private KeyboardUtil keyboardUtil;
+    private String brandId;
+    private String carTypeId;
     @Override
     protected int layoutId() {
         return R.layout.add_car_activity;
@@ -78,9 +86,23 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                 Log.i("字符变换中", s + "-" + "-" + start + "-" + before + "-" + count);
             }
         });
+
+        registerReceiver(receiver, new IntentFilter("car_type_choose_120021"));
     }
 
-    @OnClick({R.id.tv_back,R.id.ll_car_type})
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //接收到广播以后要做的事
+            brandId = intent.getStringExtra("brandId");
+            String brandName = intent.getStringExtra("brandName");
+            carTypeId = intent.getStringExtra("carTypeId");
+            String carTypeName = intent.getStringExtra("carTypeName");
+            tv_car_type.setText(brandName+"·"+carTypeName);
+        }
+    };
+
+    @OnClick({R.id.tv_back,R.id.ll_car_type,R.id.tv_car_type})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -88,6 +110,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                 finish();
                 break;
             case R.id.ll_car_type://车型选择
+            case R.id.tv_car_type://车型选择
                 ZzRouter.gotoActivity(this, CarTypeSelectActivity.class);
                 break;
             default:
@@ -104,5 +127,11 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

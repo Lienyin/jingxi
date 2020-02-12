@@ -101,8 +101,11 @@
         <!--周边技师-->
         <activity android:name=".ui.mapjingsi.MapJingSiActivity"
             android:screenOrientation="portrait"/>
-        <!--车型选择-->
+        <!--品牌选择-->
         <activity android:name=".ui.cartypeselect.CarTypeSelectActivity"
+            android:screenOrientation="portrait"/>
+        <!--车型选择-->
+        <activity android:name=".ui.cartypechoose.CarTypeChooseActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>
