@@ -159,9 +159,13 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (keyboardUtil.isShow()) {
-                keyboardUtil.hideKeyboard();
-            } else {
+            if (!AppUtils.isEmpty(keyboardUtil)){
+                if (keyboardUtil.isShow()) {
+                    keyboardUtil.hideKeyboard();
+                } else {
+                    finish();
+                }
+            }else{
                 finish();
             }
         }

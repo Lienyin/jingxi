@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/title"/>
@@ -123,7 +124,9 @@
                 android:id="@+id/btn_add_car"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_margin="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/shape_bg_button"
                 android:text="添加车辆"
                 android:textColor="@color/white"
