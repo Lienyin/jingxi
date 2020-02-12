@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.addcar;
 
 import android.content.Context;
 
+import com.jxxc.jingxi.entity.backparameter.ColorEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -12,10 +13,10 @@ import com.jxxc.jingxi.mvp.BaseView;
 
 public class AddCarContract {
     interface View extends BaseView {
-        
+        void queryAppVersionCallBack(ColorEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void queryAppVersion(String type);
     }
 }

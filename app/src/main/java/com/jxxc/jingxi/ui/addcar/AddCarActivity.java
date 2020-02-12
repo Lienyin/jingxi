@@ -14,15 +14,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.ColorEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.cartypeselect.CarTypeSelectActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.KeyboardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,9 +50,13 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     EditText mEditText;
     @BindView(R.id.ll_car_type)
     LinearLayout ll_car_type;
+    @BindView(R.id.gv_color_data)
+    GridView gv_color_data;
     private KeyboardUtil keyboardUtil;
     private String brandId;
     private String carTypeId;
+    private AddCarAdapter addCarAdapter;
+    private List<ColorEntity.Color> list = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.add_car_activity;
@@ -88,6 +97,11 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         });
 
         registerReceiver(receiver, new IntentFilter("car_type_choose_120021"));
+
+        mPresenter.queryAppVersion("3");
+        addCarAdapter = new AddCarAdapter(this);
+        addCarAdapter.setData(list);
+        gv_color_data.setAdapter(addCarAdapter);
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -133,5 +147,13 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(receiver);
+    }
+
+    //颜色返回数据
+    @Override
+    public void queryAppVersionCallBack(ColorEntity data) {
+        list = data.colors;
+        addCarAdapter.setData(list);
+        addCarAdapter.notifyDataSetChanged();
     }
 }
