@@ -20,5 +20,6 @@ public class AddCarContract {
     interface  Presenter extends BasePresenter<View> {
         void queryAppVersion(String type);
         void addCar(String carNum,String brandId,String typeId,String color,String isNewEnergy);
+        void editCar(String carNum,String brandId,String typeId,String color,String isNewEnergy,String isDefault);
     }
 }

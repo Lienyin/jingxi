@@ -74,4 +74,25 @@ public class AddCarPresenter extends BasePresenterImpl<AddCarContract.View> impl
                     }
                 });
     }
+
+    @Override
+    public void editCar(String carNum, String brandId, String typeId, String color, String isNewEnergy, String isDefault) {
+        OkGo.<HttpResult>post(Api.EDIT_CAR)
+                .params("carNum",carNum)
+                .params("brandId",brandId)
+                .params("typeId",typeId)
+                .params("color",color)
+                .params("isNewEnergy",isNewEnergy)
+                .params("isDefault",isDefault)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.addCarCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }

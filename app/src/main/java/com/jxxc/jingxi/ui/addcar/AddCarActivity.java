@@ -14,12 +14,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.ColorEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -57,12 +59,17 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     GridView gv_color_data;
     @BindView(R.id.btn_add_car)
     Button btn_add_car;
+    @BindView(R.id.ll_car_moren)
+    LinearLayout ll_car_moren;
+    @BindView(R.id.cb_car_moren)
+    CheckBox cb_car_moren;
     private KeyboardUtil keyboardUtil;
     private String brandId;
     private String carTypeId;
     private String colorId;
     private AddCarAdapter addCarAdapter;
     private List<ColorEntity.Color> list = new ArrayList<>();
+    private CarListEntity carData;
     @Override
     protected int layoutId() {
         return R.layout.add_car_activity;
@@ -70,7 +77,17 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
 
     @Override
     public void initData() {
-        tv_title.setText("添加车辆");
+        carData = (CarListEntity) getIntent().getSerializableExtra("carData");
+        if (!AppUtils.isEmpty(carData)){
+            tv_title.setText("修改车辆");
+            btn_add_car.setText("修改车辆");
+            ll_car_moren.setVisibility(View.VISIBLE);
+            mEditText.setFocusable(false);
+        }else{
+            tv_title.setText("添加车辆");
+            btn_add_car.setText("添加车辆");
+            ll_car_moren.setVisibility(View.GONE);
+        }
         mEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -141,7 +158,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             case R.id.tv_car_type://车型选择
                 ZzRouter.gotoActivity(this, CarTypeSelectActivity.class);
                 break;
-            case R.id.btn_add_car://添加车辆
+            case R.id.btn_add_car://添加/修改车辆
                 if (AppUtils.isEmpty(mEditText.getText().toString())){
                     toast(this,"请输入车牌");
                 }else if (AppUtils.isEmpty(brandId)){
@@ -149,7 +166,19 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                 }else if (AppUtils.isEmpty(colorId)){
                     toast(this,"请选择车身颜色");
                 }else{
-                    mPresenter.addCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0");
+                    if (!AppUtils.isEmpty(carData)){
+                        //修改车辆
+                        String isDefault ="";//是否默认车辆 1是0否
+                        if (cb_car_moren.isChecked()==true){
+                            isDefault ="1";
+                        }else{
+                            isDefault ="0";
+                        }
+                        mPresenter.editCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0",isDefault);
+                    }else{
+                        //添加车辆
+                        mPresenter.addCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0");
+                    }
                 }
                 break;
             default:
@@ -184,6 +213,22 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         list = data.colors;
         addCarAdapter.setData(list);
         addCarAdapter.notifyDataSetChanged();
+
+        if (!AppUtils.isEmpty(carData)){
+            //编辑车辆
+            brandId = carData.brandId;
+            carTypeId = carData.typeId;
+            colorId = carData.color+"";
+            mEditText.setText(carData.carNum);
+            tv_car_type.setText(carData.brandName+"·"+carData.typeName);
+            addCarAdapter.setSelectPosition(carData.color-1);
+            addCarAdapter.notifyDataSetChanged();
+            if (carData.isDefault==1){
+                cb_car_moren.setChecked(true);
+            }else{
+                cb_car_moren.setChecked(false);
+            }
+        }
     }
 
     //添加车辆成功返回数据

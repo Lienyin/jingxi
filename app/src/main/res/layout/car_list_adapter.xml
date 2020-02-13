@@ -24,7 +24,7 @@
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp">
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
@@ -47,7 +47,7 @@
                     android:text="默认车辆"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_marginTop="5dp">
@@ -84,7 +84,7 @@
                     android:textSize="12sp"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_marginTop="5dp">

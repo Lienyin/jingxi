@@ -1,6 +1,8 @@
 package com.jxxc.jingxi.ui.mycar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
+import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.addcar.AddCarActivity;
+import com.jxxc.jingxi.utils.GlideImgManager;
 
 import java.util.List;
 
@@ -59,7 +64,8 @@ public class CarListAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        CarListEntity data = list.get(position);
+        final CarListEntity data = list.get(position);
+        GlideImgManager.loadCircleImage(context, data.brandIcon, holder.iv_car_logo);
         holder.tv_car_paizhao.setText(data.carNum);
         if (data.isDefault == 1){
             holder.tv_car_moren.setVisibility(View.VISIBLE);
@@ -68,11 +74,37 @@ public class CarListAdapter extends BaseAdapter {
         }
         holder.tv_car_name.setText(data.brandName+"  "+data.typeName);
         holder.tv_car_color_name.setText("颜色");
+        if (data.color==1){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_1);
+        }else if (data.color==2){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_2);
+        }else if (data.color==3){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_3);
+        }else if (data.color==4){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_4);
+        }else if (data.color==5){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_5);
+        }else if (data.color==6){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_6);
+        }else if (data.color==7){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_7);
+        }else if (data.color==8){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+        }else if (data.color==9){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_9);
+        }else if (data.color==10){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_10);
+        }else{
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+        }
 
         holder.tv_car_updata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //编辑
+                Intent intent = new Intent((Activity) context, AddCarActivity.class);
+                intent.putExtra("carData",data);
+                context.startActivity(intent);
             }
         });
         holder.tv_car_delete.setOnClickListener(new View.OnClickListener() {

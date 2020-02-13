@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/car_type_color6" />
+    <corners android:radius="45dp" />
+    <size
+        android:width="45dp"
+        android:height="45dp" />
+
+</shape>

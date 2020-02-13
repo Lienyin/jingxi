@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AddCarAdapter extends BaseAdapter {
     private Context context;
-    private int defaultSelection=0;
+    private int defaultSelection=-1;
     private List<ColorEntity.Color> list;
 
     public AddCarAdapter(Context context){

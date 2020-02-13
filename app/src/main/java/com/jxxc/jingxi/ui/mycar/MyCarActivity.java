@@ -73,4 +73,10 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
         adapter.setData(list);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getCarList();
+    }
 }
