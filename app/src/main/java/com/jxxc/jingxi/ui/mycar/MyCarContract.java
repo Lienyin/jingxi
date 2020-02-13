@@ -16,9 +16,11 @@ import java.util.List;
 public class MyCarContract {
     interface View extends BaseView {
         void getCarListCallBack(List<CarListEntity> data);
+        void removeCarCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getCarList();
+        void removeCar(String carNum);
     }
 }

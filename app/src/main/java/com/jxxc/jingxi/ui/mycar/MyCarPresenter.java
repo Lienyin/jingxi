@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.mycar;
 
 import android.content.Context;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.http.EventCenter;
@@ -38,6 +39,26 @@ public class MyCarPresenter extends BasePresenterImpl<MyCarContract.View> implem
                         List<CarListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.getCarListCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 删除车辆
+     */
+    @Override
+    public void removeCar(String carNum) {
+        OkGo.<HttpResult>post(Api.REMOVE_CAR)
+                .params("carNum",carNum)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
+                        if (response.body().code==0){
+                            mView.removeCarCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }

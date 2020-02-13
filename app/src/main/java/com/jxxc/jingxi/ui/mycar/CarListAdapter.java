@@ -111,6 +111,7 @@ public class CarListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //删除
+                onFenxiangClickListener.onFenxiangClick(data.carNum);
             }
         });
         holder.tv_car_use.setOnClickListener(new View.OnClickListener() {
@@ -132,5 +133,15 @@ public class CarListAdapter extends BaseAdapter {
         TextView tv_car_updata;
         TextView tv_car_delete;
         TextView tv_car_use;
+    }
+
+    private OnFenxiangClickListener onFenxiangClickListener;
+
+    public void setOnFenxiangClickListener(OnFenxiangClickListener onFenxiangClickListener) {
+        this.onFenxiangClickListener = onFenxiangClickListener;
+    }
+
+    public interface OnFenxiangClickListener{
+        void onFenxiangClick(String carNum);
     }
 }

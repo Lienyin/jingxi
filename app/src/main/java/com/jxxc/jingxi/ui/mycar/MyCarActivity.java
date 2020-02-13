@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
@@ -50,6 +51,13 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
         adapter = new CarListAdapter(this);
         adapter.setData(list);
         lv_car.setAdapter(adapter);
+        adapter.setOnFenxiangClickListener(new CarListAdapter.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(String carNum) {
+                StyledDialog.buildLoading("正在删除").setActivity(MyCarActivity.this).show();
+                mPresenter.removeCar(carNum);
+            }
+        });
     }
 
     @OnClick({R.id.tv_back,R.id.btn_add_car})
@@ -72,6 +80,11 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
         list = data;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void removeCarCallBack() {
+        mPresenter.getCarList();
     }
 
     @Override
