@@ -23,16 +23,19 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
 
     }
 
+    /**
+     * 获取洗车组合套餐
+     */
     @Override
-    public void productInfo() {
-        OkGo.<HttpResult<List<ProductInfoEntity>>>post(Api.PRODUCT_INFO)
+    public void comboInfo() {
+        OkGo.<HttpResult<List<ProductInfoEntity>>>post(Api.COMBO_INFO)
                 .tag(this)
                 .execute(new JsonCallback<HttpResult<List<ProductInfoEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<ProductInfoEntity>>> response) {
                         List<ProductInfoEntity> d = response.body().data;
                         if (response.body().code==0){
-                            mView.productInfoCallBack(d);
+                            mView.comboInfoCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

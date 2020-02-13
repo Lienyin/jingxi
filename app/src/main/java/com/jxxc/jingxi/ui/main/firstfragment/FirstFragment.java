@@ -19,6 +19,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
@@ -26,6 +27,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private Context context;
     private TextView tv_map_jingsi;
     private GridView gv_home_data;
+    private HomeDataAdapter adapter;
+    private List<ProductInfoEntity> list = new ArrayList<>();
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -39,8 +42,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         gv_home_data = view.findViewById(R.id.gv_home_data);
 
         tv_map_jingsi.setOnClickListener(this);
-
-        mPresenter.productInfo();
+        adapter = new HomeDataAdapter(context);
+        adapter.setData(list);
+        gv_home_data.setAdapter(adapter);
+        mPresenter.comboInfo();
         return view;
     }
 
@@ -70,9 +75,11 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     }
 
-    //首页基本服务项展示返回数据
+    //获取洗车组合套餐返回数据
     @Override
-    public void productInfoCallBack(List<ProductInfoEntity> data) {
-
+    public void comboInfoCallBack(List<ProductInfoEntity> data) {
+        list = data;
+        adapter.setData(list);
+        adapter.notifyDataSetChanged();
     }
 }

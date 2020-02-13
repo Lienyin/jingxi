@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.mycar;
 
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
  *  邮箱 784787081@qq.com
  */
 
-public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPresenter> implements MyCarContract.View {
+public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPresenter> implements MyCarContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tv_back)
     TextView tv_back;
@@ -36,6 +37,8 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     Button btn_add_car;
     @BindView(R.id.lv_car)
     ListView lv_car;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
     private CarListAdapter adapter;
     private List<CarListEntity> list = new ArrayList<>();
 
@@ -47,6 +50,8 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     @Override
     public void initData() {
         tv_title.setText("我的车辆");
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         mPresenter.getCarList();
         adapter = new CarListAdapter(this);
         adapter.setData(list);
@@ -77,6 +82,7 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     //获取车辆列表
     @Override
     public void getCarListCallBack(List<CarListEntity> data) {
+        swipeLayout.setRefreshing(false);
         list = data;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
@@ -90,6 +96,11 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     @Override
     protected void onResume() {
         super.onResume();
+        mPresenter.getCarList();
+    }
+
+    @Override
+    public void onRefresh() {
         mPresenter.getCarList();
     }
 }

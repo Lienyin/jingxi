@@ -14,10 +14,10 @@ import java.util.List;
 
 public class FirseFramentContract {
     interface View extends BaseView {
-        void productInfoCallBack(List<ProductInfoEntity> data);
+        void comboInfoCallBack(List<ProductInfoEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void productInfo();
+        void comboInfo();
     }
 }

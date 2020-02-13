@@ -32,7 +32,7 @@ public class Api {
     //12-绑定微信
     public static final String AUTH_WECHAT = BASEURL + "/system/customer/auth_wechat";
     //13-首页基本服务项展示
-    public static final String PRODUCT_INFO = BASEURL + "/biz/order/productInfo";
+    //public static final String PRODUCT_INFO = BASEURL + "/biz/order/productInfo";
     //14-获取个人车辆列表
     public static final String GET_CAR_LIST = BASEURL + "/biz/car/getCarList";
     //15-获取所有车品牌车型
@@ -43,4 +43,6 @@ public class Api {
     public static final String EDIT_CAR = BASEURL + "/biz/car/edit";
     //18-删除车辆
     public static final String REMOVE_CAR = BASEURL + "/biz/car/remove";
+    //19-获取洗车组合套餐
+    public static final String COMBO_INFO = BASEURL + "/biz/order/comboInfo";
 }
