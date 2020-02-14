@@ -24,9 +24,8 @@ public class CommissionListPresenter extends BasePresenterImpl<CommissionListCon
     }
 
     @Override
-    public void CommissionDetail(String createTime, int pageNum, int pageSize) {
+    public void CommissionDetail(int pageNum, int pageSize) {
         OkGo.<HttpResult<List<CommissionListEntity>>>post(Api.COMMISSION_DETAIL)
-                .params("createTime",createTime)
                 .params("pageNum",pageNum)
                 .params("pageSize",pageSize)
                 .execute(new JsonCallback<HttpResult<List<CommissionListEntity>>>() {
@@ -43,9 +42,8 @@ public class CommissionListPresenter extends BasePresenterImpl<CommissionListCon
     }
 
     @Override
-    public void CommissionDetailMore(String createTime, int pageNum, int pageSize) {
+    public void CommissionDetailMore(int pageNum, int pageSize) {
         OkGo.<HttpResult<List<CommissionListEntity>>>post(Api.COMMISSION_DETAIL)
-                .params("createTime",createTime)
                 .params("pageNum",pageNum)
                 .params("pageSize",pageSize)
                 .execute(new JsonCallback<HttpResult<List<CommissionListEntity>>>() {

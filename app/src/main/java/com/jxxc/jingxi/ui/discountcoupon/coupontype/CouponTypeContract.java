@@ -15,13 +15,11 @@ import java.util.List;
 public class CouponTypeContract {
     interface View extends BaseView {
         void queryMyCouponCallback(List<MyCoupon> data);
-
-        void queryMyCouponMoreCallback(List<MyCoupon> data);
+        //void queryMyCouponMoreCallback(List<MyCoupon> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void queryMyCoupon(int status, int offset, int limit);
-
-        void queryMyCouponMore(int status, int offset, int limit);
+        void queryMyCoupon();
+        //void queryMyCouponMore(int status, int offset, int limit);
     }
 }

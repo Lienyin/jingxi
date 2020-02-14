@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.main.firstfragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,14 @@ import java.util.List;
 
 public class HomeDataAdapter extends BaseAdapter {
     private Context context;
-    private List<ProductInfoEntity> list;
+    private List<ProductInfoEntity.ProductInfo> list;
+    private int defaultSelection = -1;
 
     public HomeDataAdapter(Context context){
         this.context=context;
     }
 
-    public void setData(List<ProductInfoEntity> list){
+    public void setData(List<ProductInfoEntity.ProductInfo> list){
         this.list = list;
     }
 
@@ -53,14 +55,33 @@ public class HomeDataAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        ProductInfoEntity.ProductInfo data = list.get(0).productList.get(position);
+        ProductInfoEntity.ProductInfo data = list.get(position);
         holder.tv_home_fuwu_text.setText(data.productName);
-        GlideImgManager.loadCircleImage(context, data.imgUrl, holder.iv_home_fuwu);
+
+        if (position == defaultSelection) {// 选中时设置单纯颜色
+            GlideImgManager.loadImage(context, data.selectedImg, holder.iv_home_fuwu);
+        } else {// 未选中时设置selector
+            GlideImgManager.loadImage(context, data.imgUrl, holder.iv_home_fuwu);
+        }
         return convertView;
     }
 
     class ViewHolder{
         ImageView iv_home_fuwu;
         TextView tv_home_fuwu_text;
+    }
+
+    /**
+     * @param position
+     * 设置高亮状态的item
+     */
+    public void setSelectPosition(int position) {
+        if (!(position < 0 || position > list.size())) {
+            defaultSelection = position;
+            notifyDataSetChanged();
+        }else{
+            defaultSelection = -1;
+            notifyDataSetChanged();
+        }
     }
 }

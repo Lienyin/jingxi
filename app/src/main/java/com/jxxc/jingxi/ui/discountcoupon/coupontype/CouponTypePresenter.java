@@ -33,11 +33,9 @@ public class CouponTypePresenter extends BasePresenterImpl<CouponTypeContract.Vi
         view.setBackgroundColor(color);
     }
     @Override
-    public void queryMyCoupon(int status,int offset,int limit) {
+    public void queryMyCoupon() {
         OkGo.<HttpResult<List<MyCoupon>>>post(Api.COUPONS)
-                .params("status",status)
-                .params("offset",offset)
-                .params("limit",limit)
+                .tag(this)
                 .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {
@@ -45,7 +43,6 @@ public class CouponTypePresenter extends BasePresenterImpl<CouponTypeContract.Vi
                         if (!AppUtils.isEmpty(body)) {
                             List<MyCoupon> data = body.data;
                             if (!AppUtils.isEmpty(mView)) {
-
                                 mView.queryMyCouponCallback(data);
                             }
                         }
@@ -53,23 +50,23 @@ public class CouponTypePresenter extends BasePresenterImpl<CouponTypeContract.Vi
                 });
     }
 
-    @Override
-    public void queryMyCouponMore(int status,int offset,int limit) {
-        OkGo.<HttpResult<List<MyCoupon>>>post(Api.COUPONS)
-                .params("status",status)
-                .params("offset",offset)
-                .params("limit",limit)
-                .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
-                    @Override
-                    public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {
-                        HttpResult<List<MyCoupon>> body = response.body();
-                        if (!AppUtils.isEmpty(body)) {
-                            List<MyCoupon> data = body.data;
-                            if (!AppUtils.isEmpty(mView)) {
-                                mView.queryMyCouponMoreCallback(data);
-                            }
-                        }
-                    }
-                });
-    }
+//    @Override
+//    public void queryMyCouponMore(int status,int offset,int limit) {
+//        OkGo.<HttpResult<List<MyCoupon>>>post(Api.COUPONS)
+//                .params("status",status)
+//                .params("offset",offset)
+//                .params("limit",limit)
+//                .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
+//                    @Override
+//                    public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {
+//                        HttpResult<List<MyCoupon>> body = response.body();
+//                        if (!AppUtils.isEmpty(body)) {
+//                            List<MyCoupon> data = body.data;
+//                            if (!AppUtils.isEmpty(mView)) {
+//                                mView.queryMyCouponMoreCallback(data);
+//                            }
+//                        }
+//                    }
+//                });
+//    }
 }

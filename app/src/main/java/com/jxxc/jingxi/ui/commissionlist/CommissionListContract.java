@@ -18,7 +18,7 @@ public class CommissionListContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void CommissionDetail(String createTime, int pageNum, int pageSize);
-        void CommissionDetailMore(String createTime, int pageNum, int pageSize);
+        void CommissionDetail(int pageNum, int pageSize);
+        void CommissionDetailMore(int pageNum, int pageSize);
     }
 }

@@ -107,5 +107,8 @@
         <!--车型选择-->
         <activity android:name=".ui.cartypechoose.CarTypeChooseActivity"
             android:screenOrientation="portrait"/>
+        <!--充值中心-->
+        <activity android:name=".ui.recharge.RechargeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

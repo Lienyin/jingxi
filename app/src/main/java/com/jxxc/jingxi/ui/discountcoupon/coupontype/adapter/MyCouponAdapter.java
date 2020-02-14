@@ -24,14 +24,14 @@ public class MyCouponAdapter extends BaseQuickAdapter<MyCoupon, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, MyCoupon item) {
-        helper.setText(R.id.tv_name_coupon, (AppUtils.isEmpty(item.name)?"未知":item.name));
-        helper.setText(R.id.tv_date_coupon, AppUtils.isEmpty(item.beginTime)?"无说明":"有效期至："+item.beginTime+"~"+item.endTime);
-        helper.setText(R.id.tv_money_coupon, "￥"+item.price);
+        helper.setText(R.id.tv_name_coupon, (AppUtils.isEmpty(item.counponName)?"未知":item.counponName));
+        helper.setText(R.id.tv_date_coupon, "有效期至："+item.startTime+"~"+item.endTime);
+        helper.setText(R.id.tv_money_coupon, "￥"+item.money);
 
         if (item.status == 1 || item.status == 2){
             helper.setTextColor(R.id.tv_money_coupon,mContext.getResources().getColor(R.color.help_button_view));
         }else{
-            helper.setTextColor(R.id.tv_money_coupon,mContext.getResources().getColor(R.color.public_all));
+            helper.setTextColor(R.id.tv_money_coupon,mContext.getResources().getColor(R.color.white));
         }
     }
 }

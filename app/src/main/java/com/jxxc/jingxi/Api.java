@@ -14,9 +14,9 @@ public class Api {
     //3-个人信息
     public static final String INFO_USER = BASEURL + "/system/customer/info";
     //4-优惠券
-    public static final String COUPONS = BASEURL + "";
+    public static final String COUPONS = BASEURL + "/biz/coupon/list";
     //5-明细
-    public static final String COMMISSION_DETAIL = BASEURL + "";
+    public static final String COMMISSION_DETAIL = BASEURL + "/biz/customer_account/getAccount";
     //6-修改密码
     public static final String UPDATE_PASSWORD = BASEURL + "/system/customer/update_password";
     //7-查询版本
@@ -45,4 +45,8 @@ public class Api {
     public static final String REMOVE_CAR = BASEURL + "/biz/car/remove";
     //19-获取洗车组合套餐
     public static final String COMBO_INFO = BASEURL + "/biz/order/comboInfo";
+    //20-充值活动
+    public static final String RECHARGE_CONFIGURATION = BASEURL + "/biz/deposit_order/getGift";
+    //21-充值
+    public static final String RECHARGE = BASEURL + "";
 }

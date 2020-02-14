@@ -26,4 +26,5 @@
     <color name="car_type_color8">#FFFFFF</color>
     <color name="car_type_color9">#800080</color>
     <color name="car_type_color10">#8B4513</color>
+    <color name="md_grey_800">#424242</color>
 </resources>

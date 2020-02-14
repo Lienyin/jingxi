@@ -69,11 +69,11 @@ public class CouponTypeFragment extends MVPBaseFragment<CouponTypeContract.View,
 
     @Override
     public void onRefresh() {
-        mPresenter.queryMyCoupon(type,1,10);
+        mPresenter.queryMyCoupon();
     }
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.queryMyCouponMore(type,adapter.getData().size(),10);
+       // mPresenter.queryMyCouponMore(type,adapter.getData().size(),10);
     }
 
     @Override
@@ -84,16 +84,16 @@ public class CouponTypeFragment extends MVPBaseFragment<CouponTypeContract.View,
         adapter.disableLoadMoreIfNotFullPage();
     }
 
-    @Override
-    public void queryMyCouponMoreCallback(List<MyCoupon> data) {
-        swipeLayout.setRefreshing(false);
-        if (AppUtils.isEmpty(data)) {
-            adapter.loadMoreEnd();
-        }else {
-            adapter.addData(data);
-            adapter.loadMoreComplete();
-        }
-    }
+//    @Override
+//    public void queryMyCouponMoreCallback(List<MyCoupon> data) {
+//        swipeLayout.setRefreshing(false);
+//        if (AppUtils.isEmpty(data)) {
+//            adapter.loadMoreEnd();
+//        }else {
+//            adapter.addData(data);
+//            adapter.loadMoreComplete();
+//        }
+//    }
 
 
     @Override

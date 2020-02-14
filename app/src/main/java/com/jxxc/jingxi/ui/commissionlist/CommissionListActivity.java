@@ -94,12 +94,12 @@ public class CommissionListActivity extends MVPBaseActivity<CommissionListContra
     @Override
     public void onRefresh() {
         offset = 2;
-        mPresenter.CommissionDetail("",1,10);
+        mPresenter.CommissionDetail(1,10);
     }
 
     @Override
     public void onLoadMoreRequested() {
         swipeLayout.setRefreshing(false);
-        mPresenter.CommissionDetailMore("",offset,10);
+        mPresenter.CommissionDetailMore(offset,10);
     }
 }

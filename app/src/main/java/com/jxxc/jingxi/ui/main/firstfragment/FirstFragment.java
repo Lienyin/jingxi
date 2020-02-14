@@ -9,7 +9,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
@@ -28,7 +31,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private TextView tv_map_jingsi;
     private GridView gv_home_data;
     private HomeDataAdapter adapter;
-    private List<ProductInfoEntity> list = new ArrayList<>();
+    private RadioButton rb_work_order_all,rb_work_order_dai_jie;
+    private LinearLayout ll_dao_dian;
+    private List<ProductInfoEntity.ProductInfo> list = new ArrayList<>();
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -40,12 +45,25 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         View view = inflater.inflate(R.layout.first_fragment, container, false);
         tv_map_jingsi = view.findViewById(R.id.tv_map_jingsi);
         gv_home_data = view.findViewById(R.id.gv_home_data);
+        rb_work_order_all = view.findViewById(R.id.rb_work_order_all);
+        rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
+        ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
 
         tv_map_jingsi.setOnClickListener(this);
+        rb_work_order_all.setOnClickListener(this);
+        rb_work_order_dai_jie.setOnClickListener(this);
         adapter = new HomeDataAdapter(context);
         adapter.setData(list);
         gv_home_data.setAdapter(adapter);
         mPresenter.comboInfo();
+
+        gv_home_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                adapter.setSelectPosition(i);
+                adapter.notifyDataSetChanged();
+            }
+        });
         return view;
     }
 
@@ -63,8 +81,16 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void onClick(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-            case R.id.tv_map_jingsi://工单
+            case R.id.tv_map_jingsi://菁喜技师
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
+                break;
+            case R.id.rb_work_order_all://上门
+                gv_home_data.setVisibility(View.VISIBLE);
+                ll_dao_dian.setVisibility(View.GONE);
+                break;
+            case R.id.rb_work_order_dai_jie://到店
+                gv_home_data.setVisibility(View.GONE);
+                ll_dao_dian.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -78,7 +104,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //获取洗车组合套餐返回数据
     @Override
     public void comboInfoCallBack(List<ProductInfoEntity> data) {
-        list = data;
+        list = data.get(0).productList;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
     }

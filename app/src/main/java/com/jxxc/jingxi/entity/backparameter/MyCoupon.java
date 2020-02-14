@@ -8,15 +8,16 @@ import java.io.Serializable;
  */
 
 public class MyCoupon implements Serializable {
-    public int id;
-    public String name;
-    public String price;
-    public String picUrl;
-    public String createTime;
-    public String endTime;
-    public int type;
-    public String typeName;
+    public int counponId;
+    public String counponName;
+    public String couponRuleType;
     public int status;
     public String statusName;
-    public String beginTime;
+    public String money;
+    public String doorsillMoney;
+    public String discount;
+    public String startTime;
+    public String endTime;
+    public String useTime;
+    public String createTime;
 }

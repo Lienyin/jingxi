@@ -68,6 +68,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 android:background="@drawable/shape_round_yellow"
                 android:gravity="center_vertical">
 
@@ -89,6 +90,11 @@
                 android:background="@drawable/shape_round_rect_yellow"
                 android:gravity="center_vertical">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/home_guang_gao"/>
             </LinearLayout>
 
 <!--            服务-->
@@ -234,7 +240,24 @@
                     android:id="@+id/gv_home_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="visible"
                     android:numColumns="4"/>
+                <LinearLayout
+                    android:id="@+id/ll_dao_dian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="65dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/public_all"
+                        android:textColor="@color/white"
+                        android:text="尽 请\n期 待"/>
+                </LinearLayout>
             </LinearLayout>
 <!--            创富梦想，即刻出发-->
             <LinearLayout
