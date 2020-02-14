@@ -19,7 +19,7 @@ public class CouponTypeContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void queryMyCoupon();
+        void queryMyCoupon(int status);
         //void queryMyCouponMore(int status, int offset, int limit);
     }
 }

@@ -69,7 +69,7 @@ public class CouponTypeFragment extends MVPBaseFragment<CouponTypeContract.View,
 
     @Override
     public void onRefresh() {
-        mPresenter.queryMyCoupon();
+        mPresenter.queryMyCoupon(type);
     }
     @Override
     public void onLoadMoreRequested() {

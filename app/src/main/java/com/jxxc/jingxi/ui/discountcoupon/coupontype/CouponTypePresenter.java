@@ -33,9 +33,9 @@ public class CouponTypePresenter extends BasePresenterImpl<CouponTypeContract.Vi
         view.setBackgroundColor(color);
     }
     @Override
-    public void queryMyCoupon() {
+    public void queryMyCoupon(int status) {
         OkGo.<HttpResult<List<MyCoupon>>>post(Api.COUPONS)
-                .tag(this)
+                .params("status",status)
                 .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {

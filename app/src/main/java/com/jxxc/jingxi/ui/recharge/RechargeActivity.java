@@ -179,13 +179,13 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                 break;
             case R.id.scb_alipay:
             case R.id.ll_alipay:
-                type = 0;
+                type = 3;
                 scbAlipay.setChecked(true);
                 scbWxPay.setChecked(false);
                 break;
             case R.id.scb_wx_pay:
             case R.id.ll_wx_pay:
-                type = 1;
+                type = 2;
                 scbWxPay.setChecked(true);
                 scbAlipay.setChecked(false);
                 break;
