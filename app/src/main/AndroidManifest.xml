@@ -28,6 +28,13 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/MyAppTheme">
+        <!--百度地图-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Nhs4KBIslySuiWOjjkux4j2ZGBLc166i" />
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
         <!--微信支付设置-->
         <activity
             android:name="com.jxxc.jingxi.wxapi.WXPayEntryActivity"
