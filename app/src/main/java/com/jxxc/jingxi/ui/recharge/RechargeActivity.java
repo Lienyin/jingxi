@@ -32,6 +32,7 @@ import com.jxxc.jingxi.entity.backparameter.PayByWeChat;
 import com.jxxc.jingxi.entity.backparameter.RechargeSet;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.PayUtil;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.view.SmoothCheckBox;
@@ -156,7 +157,13 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                         }
                     }
                 }else{
-                    money = Double.parseDouble(etMoney.getText().toString());
+                    if (!AppUtils.isEmpty(etMoney.getText().toString())){
+                        for (RechargeSet oo : (List<RechargeSet>) adapter.getData()) {
+                            oo.isSelected = false;
+                        }
+                        adapter.notifyDataSetChanged();
+                        money = Double.parseDouble(etMoney.getText().toString());
+                    }
                 }
             }
         });
