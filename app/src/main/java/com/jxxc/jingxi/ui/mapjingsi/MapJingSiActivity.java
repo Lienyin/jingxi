@@ -37,6 +37,8 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_affirm)
+    TextView tv_affirm;
     @BindView(R.id.mv_jingsi)
     MapView mMapView;
     private BaiduMap mBaiduMap;
@@ -54,6 +56,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     public void initData() {
         tv_title.setText("附近技师");
         initMap();
+        tv_affirm.setVisibility(View.VISIBLE);
     }
 
     private void initMap(){
@@ -63,10 +66,10 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         mBaiduMap.setMyLocationEnabled(true);// 开启定位图层
         mMapView.showZoomControls(false);// 不显示地图缩放控件（+-按钮）
         //自定义地图定位图片
-        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_79);
-        MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL,
-                false, mCurrentMarker, 0, 0);
-        mBaiduMap.setMyLocationConfiguration(mLocationConfiguration);
+//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_79);
+//        MyLocationConfiguration mLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL,
+//                false, mCurrentMarker, 0, 0);
+       // mBaiduMap.setMyLocationConfiguration(mLocationConfiguration);
         //默认显示普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         // 开启定位图层
