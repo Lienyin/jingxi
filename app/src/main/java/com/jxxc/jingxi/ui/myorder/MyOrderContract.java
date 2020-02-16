@@ -1,7 +1,10 @@
 package com.jxxc.jingxi.ui.myorder;
 
+import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.mvp.BaseView;
 import com.jxxc.jingxi.mvp.BasePresenter;
+
+import java.util.List;
 
 /**
  * MVPPlugin
@@ -10,10 +13,12 @@ import com.jxxc.jingxi.mvp.BasePresenter;
 
 public class MyOrderContract {
     interface View extends BaseView {
-        
+        void myOrderCallBack(List<MyOrderEntity> data);
+        void myOrderMoreCallBack(List<MyOrderEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void myOrder(String status,int pageNum,int pageSize);
+        void myOrderMore(String status,int pageNum,int pageSize);
     }
 }

@@ -1,127 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_static"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="20dp"
-        android:src="@mipmap/jingxi_logo"/>
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/attestation_bg_edittext"
+        android:layout_margin="15dp"
         android:orientation="vertical">
-
-        <!--订单号-->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
-                android:text="订单号："/>
+                android:textStyle="bold"
+                android:text="订单："/>
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_order_id"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
-                android:text="AS12313212132211"/>
+                android:textStyle="bold"
+                android:text="XXXXXXXXX"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:text="合约期内"
-                android:textSize="10sp"
+                android:id="@+id/iv_order_static"
+                android:layout_width="60dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="12sp"
                 android:textColor="@color/white"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:background="@color/public_all"/>
+                android:background="@drawable/order_static"
+                android:text="XXX"/>
         </LinearLayout>
-        <!--车辆租期-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/set_bg"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="135dp">
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="4"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="车辆租期："/>
+                android:textSize="14sp"
+                android:textColor="@color/black999"
+                android:text="服务地址"/>
             <TextView
+                android:id="@+id/tv_fuwu_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="30天（2019-01-01~2019-01-31）"/>
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:text="XXXX"/>
         </LinearLayout>
-        <!--租金金额-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/set_bg"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="租金金额："/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="$499"/>
-        </LinearLayout>
-        <!--承租人-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="承  租  人："/>
-            <TextView
-                android:id="@+id/tv_czr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="18977323127"/>
-        </LinearLayout>
-        <!--订单生成时间-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="订单生成时间："/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#cccccc"
-                android:text="2019-01-01 11:11"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/call_jishi"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="联系技师"/>
+            </LinearLayout>
+<!--            评价-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/my_pingjia"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="我要评价"/>
+            </LinearLayout>
+<!--            取消订单-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/quxia_dingdan"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="取消订单"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="订单金额"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/order_money"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="￥0.00"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="20dp"
-        android:src="@mipmap/jiantou"/>
 </LinearLayout>

@@ -110,7 +110,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             //当前定位经纬度
             double lati = location.getLatitude();
             double longa = location.getLongitude();
-            tv_location_city.setText(location.getCity());
+            tv_location_city.setText(location.getCity());//当前定位城市
         }
     }
     @Override
