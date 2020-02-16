@@ -52,6 +52,7 @@
                     android:src="@mipmap/dingwei_back" />
 
                 <TextView
+                    android:id="@+id/tv_location_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"

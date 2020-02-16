@@ -18,6 +18,12 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.MapJingXiDialog;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -41,6 +47,8 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     TextView tv_title;
     @BindView(R.id.tv_affirm)
     TextView tv_affirm;
+    @BindView(R.id.tv_address)
+    TextView tv_address;
     @BindView(R.id.mv_jingsi)
     MapView mMapView;
     private BaiduMap mBaiduMap;
@@ -50,6 +58,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     private double locationLatitude = 0;//当前经度
     private double locationLongitude = 0;//当前纬度
     private MapJingXiDialog dialog;
+    private GeoCoder mCoder;
     @Override
     protected int layoutId() {
         return R.layout.map_jing_si_activity;
@@ -68,6 +77,31 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
             @Override
             public void onFenxiangClick(int radius) {
                 toast(MapJingSiActivity.this,"查询半径="+radius+".00km");
+            }
+        });
+        //大头针位置定位
+        mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
+            }
+
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus, int i) {
+
+            }
+
+            @Override
+            public void onMapStatusChange(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                //POI检索
+                mCoder = GeoCoder.newInstance();
+                mCoder.setOnGetGeoCodeResultListener(listener);
+                mCoder.reverseGeoCode(new ReverseGeoCodeOption()
+                        .location(new LatLng(mapStatus.target.latitude, mapStatus.target.longitude)));
             }
         });
     }
@@ -156,9 +190,32 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(16.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+
+                //POI检索
+                mCoder = GeoCoder.newInstance();
+                mCoder.setOnGetGeoCodeResultListener(listener);
+                mCoder.reverseGeoCode(new ReverseGeoCodeOption()
+                        .location(new LatLng(location.getLatitude(), location.getLongitude())));
             }
         }
     }
+
+    OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+        @Override
+        public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+
+        }
+
+        @Override
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+            if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                //没有找到检索结果
+                return;
+            } else {
+                tv_address.setText(reverseGeoCodeResult.getAddress()+""+reverseGeoCodeResult.getSematicDescription());
+            }
+        }
+    };
 
     @OnClick({R.id.tv_back,R.id.tv_affirm})
     public void onViewClicked(View view) {
