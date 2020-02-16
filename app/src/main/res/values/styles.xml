@@ -25,4 +25,13 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
+    <!--自定义seekbarstyle-->
+    <style name="CustomSeekbarStyle" >
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@color/public_all</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress_drawable</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:thumb">@mipmap/home_number_bg</item>
+    </style>
 </resources>

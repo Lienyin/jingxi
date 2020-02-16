@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.mapjingsi;
 
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.MapJingXiDialog;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
@@ -47,6 +49,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     private boolean isFirstLoc = true; // 是否首次定位
     private double locationLatitude = 0;//当前经度
     private double locationLongitude = 0;//当前纬度
+    private MapJingXiDialog dialog;
     @Override
     protected int layoutId() {
         return R.layout.map_jing_si_activity;
@@ -57,6 +60,16 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         tv_title.setText("附近技师");
         initMap();
         tv_affirm.setVisibility(View.VISIBLE);
+        Drawable img = this.getResources().getDrawable(R.mipmap.icon_54);
+        img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+        tv_affirm.setCompoundDrawables(img, null, null, null); //设置左图标
+        dialog = new MapJingXiDialog(this);
+        dialog.setOnFenxiangClickListener(new MapJingXiDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int radius) {
+                toast(MapJingSiActivity.this,"查询半径="+radius+".00km");
+            }
+        });
     }
 
     private void initMap(){
@@ -147,12 +160,15 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         }
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back,R.id.tv_affirm})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
+                break;
+            case R.id.tv_affirm://筛选
+                dialog.showShareDialog(true);
                 break;
             default:
         }
