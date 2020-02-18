@@ -83,10 +83,11 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical">
             <LinearLayout
+                android:id="@+id/ll_call_phone"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -102,10 +103,11 @@
             </LinearLayout>
 <!--            评价-->
             <LinearLayout
+                android:id="@+id/ll_evaluate"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -121,11 +123,12 @@
             </LinearLayout>
 <!--            取消订单-->
             <LinearLayout
+                android:id="@+id/ll_cancel_order"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:visibility="gone"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"

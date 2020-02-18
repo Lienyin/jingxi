@@ -32,25 +32,59 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
         if (item.status==0){
             //待支付
             helper.setText(R.id.iv_order_static,"待支付");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,true);
         }else if (item.status==1){
             //已支付待接单
             helper.setText(R.id.iv_order_static,"待接单");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,true);
         }else if (item.status==2){
             //已接单待服务
             helper.setText(R.id.iv_order_static,"待服务");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,true);
         }else if (item.status==3){
             //服务中
             helper.setText(R.id.iv_order_static,"服务中");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,false);
         }else if (item.status==4){
             //服务已完成
             helper.setText(R.id.iv_order_static,"已完成");
+            helper.setGone(R.id.ll_evaluate,true);
+            helper.setGone(R.id.ll_cancel_order,false);
         }else if (item.status==5){
             //取消订单
             helper.setText(R.id.iv_order_static,"取消订单");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,false);
         }else{
-            //
             helper.setText(R.id.iv_order_static,"订单异常");
+            helper.setGone(R.id.ll_evaluate,false);
+            helper.setGone(R.id.ll_cancel_order,false);
         }
+        helper.setOnClickListener(R.id.ll_call_phone, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //联系技师
+                onFenxiangClickListener.onFenxiangClick(1,item.technicianPhonenumber,item.orderId);
+            }
+        });
+        helper.setOnClickListener(R.id.ll_evaluate, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //评价
+                onFenxiangClickListener.onFenxiangClick(2,item.technicianPhonenumber,item.orderId);
+            }
+        });
+        helper.setOnClickListener(R.id.ll_cancel_order, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //取消订单
+                onFenxiangClickListener.onFenxiangClick(3,item.technicianPhonenumber,item.orderId);
+            }
+        });
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;
@@ -60,6 +94,6 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(String orderId, int type);
+        void onFenxiangClick(int type,String mobile,String orderId);
     }
 }

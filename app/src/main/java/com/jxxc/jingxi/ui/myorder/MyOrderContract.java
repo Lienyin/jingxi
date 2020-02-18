@@ -20,5 +20,7 @@ public class MyOrderContract {
     interface  Presenter extends BasePresenter<View> {
         void myOrder(String status,int pageNum,int pageSize);
         void myOrderMore(String status,int pageNum,int pageSize);
+
+        //void cancelOrder();
     }
 }

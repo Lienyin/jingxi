@@ -333,4 +333,17 @@ public class AppUtils {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
+
+    public static void callPhone(Context mContext, String tel) {
+        try {
+            //吊起来拨号界面不需要权限
+            Uri uri = Uri.parse("tel:" + tel);
+            Intent callHotPhone = new Intent(Intent.ACTION_DIAL);
+            callHotPhone.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            callHotPhone.setData(uri);
+            mContext.startActivity(callHotPhone);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

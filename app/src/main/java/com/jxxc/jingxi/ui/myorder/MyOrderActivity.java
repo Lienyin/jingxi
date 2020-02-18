@@ -13,11 +13,14 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.dialog.CancelOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity;
+import com.jxxc.jingxi.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,8 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     private BillAdapter adapter;
     private int offset = 2;
     private String orderType = "";
+    private CancelOrderDialog dialog;
+    private List<MyOrderEntity> list = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.activity_my_order;
@@ -65,6 +70,13 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         initAdapter();
         onRefresh();
         rb_order_all.setChecked(true);
+        dialog = new CancelOrderDialog(this);
+        dialog.setOnFenxiangClickListener(new CancelOrderDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick() {
+                //取消订单
+            }
+        });
     }
 
     private void initAdapter() {
@@ -75,6 +87,29 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         rvList.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, rvList);
         adapter.setEmptyView(R.layout.layout_nothing);
+        adapter.setOnFenxiangClickListener(new BillAdapter.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int type,String mobile, String orderId) {
+                if (type==1){//联系技师
+                    if (!AppUtils.isEmpty(mobile)){
+                        AppUtils.callPhone(MyOrderActivity.this,mobile);
+                    }else{
+                        toast(MyOrderActivity.this,"空号");
+                    }
+                }else if (type==2){
+                    //评价
+                }else{
+                    //取消订单
+                    dialog.showShareDialog(true);
+                }
+            }
+        });
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,list.get(position).orderId);
+            }
+        });
     }
 
     @OnClick({R.id.tv_back,R.id.rb_order_all,R.id.rb_order_daizhifu,R.id.rb_order_jignxz,R.id.rb_order_yiwc})
@@ -107,6 +142,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
 
     @Override
     public void myOrderCallBack(List<MyOrderEntity> data) {
+        list = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
         adapter.disableLoadMoreIfNotFullPage();
@@ -114,6 +150,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
 
     @Override
     public void myOrderMoreCallBack(List<MyOrderEntity> data) {
+        list.addAll(data);
         swipeLayout.setRefreshing(false);
         offset++;
         adapter.addData(data);
