@@ -53,4 +53,6 @@ public class Api {
     public static final String MY_ORDER = BASEURL + "/biz/order/myOrder";
     //23-订单详情
     public static final String GET_ORDER = BASEURL + "/biz/order/getOrder";
+    //24-消息列表
+    public static final String MESSAGE_LIST = BASEURL + "/biz/message/messageList";
 }
