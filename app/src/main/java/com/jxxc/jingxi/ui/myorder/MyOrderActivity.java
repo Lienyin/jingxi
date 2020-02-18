@@ -75,6 +75,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
             @Override
             public void onFenxiangClick() {
                 //取消订单
+                toast(MyOrderActivity.this,"待开发");
             }
         });
     }
@@ -107,7 +108,11 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,list.get(position).orderId);
+                //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),
+                // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+                if (list.get(position).status==4){
+                    ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,list.get(position).orderId);
+                }
             }
         });
     }
