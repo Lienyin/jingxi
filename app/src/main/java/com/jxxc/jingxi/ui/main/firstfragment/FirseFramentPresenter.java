@@ -28,12 +28,12 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
      */
     @Override
     public void comboInfo() {
-        OkGo.<HttpResult<List<ProductInfoEntity>>>post(Api.COMBO_INFO)
+        OkGo.<HttpResult<ProductInfoEntity>>post(Api.COMBO_INFO)
                 .tag(this)
-                .execute(new JsonCallback<HttpResult<List<ProductInfoEntity>>>() {
+                .execute(new JsonCallback<HttpResult<ProductInfoEntity>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<List<ProductInfoEntity>>> response) {
-                        List<ProductInfoEntity> d = response.body().data;
+                    public void onSuccess(Response<HttpResult<ProductInfoEntity>> response) {
+                        ProductInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.comboInfoCallBack(d);
                         }else{

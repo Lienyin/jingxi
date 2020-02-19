@@ -14,7 +14,7 @@ import java.util.List;
 
 public class FirseFramentContract {
     interface View extends BaseView {
-        void comboInfoCallBack(List<ProductInfoEntity> data);
+        void comboInfoCallBack(ProductInfoEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {

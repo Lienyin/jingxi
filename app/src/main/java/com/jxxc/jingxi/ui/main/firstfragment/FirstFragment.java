@@ -21,6 +21,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
@@ -38,9 +39,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private HomeDataAdapter adapter;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian;
-    private List<ProductInfoEntity.ProductInfo> list = new ArrayList<>();
+    private List<ProductInfoEntity.Combo.ProductInfo> list = new ArrayList<>();
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
+    private XiaOrderDialog dialog;
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -63,13 +65,15 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         adapter = new HomeDataAdapter(context);
         adapter.setData(list);
         gv_home_data.setAdapter(adapter);
-        mPresenter.comboInfo();
+        mPresenter.comboInfo();//获取洗车组合套餐
 
+        //点击服务选项
         gv_home_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter.setSelectPosition(i);
                 adapter.notifyDataSetChanged();
+                dialog.showShareDialog(true);
             }
         });
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -77,6 +81,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
         //开启定位
         mLocationClient.start();
+
+        dialog = new XiaOrderDialog(context);
         return view;
     }
 
@@ -139,8 +145,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     //获取洗车组合套餐返回数据
     @Override
-    public void comboInfoCallBack(List<ProductInfoEntity> data) {
-        list = data.get(0).productList;
+    public void comboInfoCallBack(ProductInfoEntity data) {
+        list = data.combo.get(0).productList;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
     }

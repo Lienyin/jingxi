@@ -17,14 +17,14 @@ import java.util.List;
 
 public class HomeDataAdapter extends BaseAdapter {
     private Context context;
-    private List<ProductInfoEntity.ProductInfo> list;
+    private List<ProductInfoEntity.Combo.ProductInfo> list;
     private int defaultSelection = -1;
 
     public HomeDataAdapter(Context context){
         this.context=context;
     }
 
-    public void setData(List<ProductInfoEntity.ProductInfo> list){
+    public void setData(List<ProductInfoEntity.Combo.ProductInfo> list){
         this.list = list;
     }
 
@@ -55,7 +55,7 @@ public class HomeDataAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        ProductInfoEntity.ProductInfo data = list.get(position);
+        ProductInfoEntity.Combo.ProductInfo data = list.get(position);
         holder.tv_home_fuwu_text.setText(data.productName);
 
         if (position == defaultSelection) {// 选中时设置单纯颜色
