@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,7 +20,9 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
+import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
+import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
@@ -91,6 +94,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     TextView tv_car_fuwu8;
     @BindView(R.id.tv_appointment_time)
     TextView tv_appointment_time;
+    @BindView(R.id.tv_create_order)
+    TextView tv_create_order;
     @BindView(R.id.iv_call_phone)
     ImageView iv_call_phone;
     @BindView(R.id.iv_address)
@@ -100,7 +105,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @BindView(R.id.lv_coupon_data)
     ListView lv_coupon_data;
     @BindView(R.id.et_car_address)
-    EditText et_car_address;
+    TextView et_car_address;
+    @BindView(R.id.et_phone_number)
+    EditText et_phone_number;
+    @BindView(R.id.et_car_memo)
+    EditText et_car_memo;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
@@ -109,6 +118,12 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private AddressEntity addressEntity = new AddressEntity();
     private String siteLat="";
     private String siteLng="";
+    private String comboTypeId="";
+    private int serviceType=0;
+    private String counponId="";
+    private String comboProductId="";
+    private String appointmentStartTime="";
+    private String appointmentEndTime="";
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -120,6 +135,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);
+        mPresenter.comboInfo();
         fuwu1 = getIntent().getIntExtra("fuwu1",0);
         fuwu2 = getIntent().getIntExtra("fuwu2",0);
         fuwu3 = getIntent().getIntExtra("fuwu3",0);
@@ -140,6 +156,15 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         adapter = new CouponAdapter(this);
         adapter.setData(list);
         lv_coupon_data.setAdapter(adapter);
+        lv_coupon_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //选择优惠券
+                adapter.setSelectPosition(i);
+                adapter.notifyDataSetChanged();
+                counponId = list.get(i).counponId+"";
+            }
+        });
 
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
     }
@@ -160,7 +185,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
             R.id.rb_zheng_che,R.id.tv_car_fuwu1,R.id.tv_car_fuwu2,R.id.tv_car_fuwu3,R.id.tv_car_fuwu4
             ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
-    ,R.id.iv_address,R.id.iv_time_date})
+    ,R.id.iv_address,R.id.iv_time_date,R.id.tv_create_order})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -170,10 +195,12 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             case R.id.rb_shangmen_service://上门
                 shang_men.setVisibility(View.VISIBLE);
                 dao_dian.setVisibility(View.GONE);
+                serviceType = 0;
                 break;
             case R.id.rb_daodian_service://到店
                 shang_men.setVisibility(View.GONE);
                 dao_dian.setVisibility(View.VISIBLE);
+                serviceType = 1;
                 break;
             case R.id.rb_wai_guan://外观清洗
                 ll_car_fuwu.setVisibility(View.VISIBLE);
@@ -223,6 +250,33 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             case R.id.iv_time_date://选择时间
                 getTime();
                 break;
+            case R.id.tv_create_order://立即下单
+                if (AppUtils.isEmpty(tv_car_number.getText().toString())){
+                    toast(this,"请添加车辆");
+                }else if (AppUtils.isEmpty(et_car_address.getText().toString())){
+                    toast(this,"请选择停车地点");
+                }else if (AppUtils.isEmpty(et_phone_number.getText().toString())){
+                    toast(this,"请输入联系方式");
+                }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
+                    toast(this,"请选择服务时间");
+                }else{
+                    StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                    mPresenter.createOrder(
+                            comboProductId,
+                            serviceType,
+                            counponId,
+                            comboTypeId,
+                            tv_car_number.getText().toString(),
+                            "",
+                            et_phone_number.getText().toString(),
+                            et_car_address.getText().toString(),
+                            siteLng,
+                            siteLat,
+                            appointmentStartTime,
+                            appointmentEndTime,
+                            et_car_memo.getText().toString());
+                }
+                break;
             default:
         }
     }
@@ -235,6 +289,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             ll_car_info.setVisibility(View.VISIBLE);
             tv_car_number.setText(data.get(0).carNum);
             tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
+            comboTypeId = data.get(0).typeId;
             if (data.get(0).color==1){
                 tv_car_color.setBackgroundResource(R.drawable.car_color_1);
             }else if (data.get(0).color==2){
@@ -272,6 +327,19 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         adapter.notifyDataSetChanged();
     }
 
+    //组合套餐数据
+    @Override
+    public void comboInfoCallBack(ProductInfoEntity data) {
+        comboTypeId = data.combo.get(0).comboTypeId;//套餐服务ID
+        comboProductId = data.combo.get(0).productList.get(0).comboProductId;
+    }
+
+    //下单返回数据
+    @Override
+    public void createOrderCallBack(CreateOrderEntity data) {
+        //支付订单
+    }
+
     //时间选择器
     private void getTime(){
         //获取当前时间日期格式
@@ -291,8 +359,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         picker.setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
             @Override
             public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
-                String appointmentStartTime = year + "-" + month + "-" + day+"  "+hour+":"+minute;
-                String appointmentEndTime = year + "-" + month + "-" + day+"  "+(Integer.valueOf(hour)+1)+":"+minute;
+                appointmentStartTime = year + "-" + month + "-" + day+"  "+hour+":"+minute;
+                appointmentEndTime = year + "-" + month + "-" + day+"  "+(Integer.valueOf(hour)+1)+":"+minute;
                 tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
             }
         });

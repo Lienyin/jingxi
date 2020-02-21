@@ -42,6 +42,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.wanjian.cockroach.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -323,8 +324,12 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
             mMapView.onDestroy();
             mMapView = null;
         }
-        mCoder.destroy();
-        mSuggestionSearch.destroy();
+        if (!AppUtils.isEmpty(mCoder)){
+            mCoder.destroy();
+        }
+        if (!AppUtils.isEmpty(mSuggestionSearch)){
+            mSuggestionSearch.destroy();
+        }
         super.onDestroy();
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CouponAdapter extends BaseAdapter {
     private Context context;
-    private int defaultSelection=0;
+    private int defaultSelection=-1;
     private List<MyCoupon> list;
 
     public CouponAdapter(Context context){
@@ -63,16 +63,11 @@ public class CouponAdapter extends BaseAdapter {
             holder.tv_coupon_memo.setText("");
         }
         final ViewHolder finalHolder = holder;
-        holder.iv_coupon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (finalHolder.iv_coupon.isSelected()==true){
-                    finalHolder.iv_coupon.setSelected(false);
-                }else{
-                    finalHolder.iv_coupon.setSelected(true);
-                }
-            }
-        });
+        if (position == defaultSelection) {// 选中时设置单纯颜色
+            holder.iv_coupon.setSelected(true);
+        } else {// 未选中时设置selector
+            holder.iv_coupon.setSelected(false);
+        }
         return convertView;
     }
 
@@ -80,5 +75,19 @@ public class CouponAdapter extends BaseAdapter {
         TextView tv_coupon_money;
         TextView tv_coupon_memo;
         ImageView iv_coupon;
+    }
+
+    /**
+     * @param position
+     * 设置高亮状态的item
+     */
+    public void setSelectPosition(int position) {
+        if (!(position < 0 || position > list.size())) {
+            defaultSelection = position;
+            notifyDataSetChanged();
+        }else{
+            defaultSelection = -1;
+            notifyDataSetChanged();
+        }
     }
 }
