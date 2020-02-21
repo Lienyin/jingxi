@@ -1,7 +1,12 @@
 package com.jxxc.jingxi.ui.submitorder;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,10 +16,14 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,13 +87,20 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     TextView tv_car_fuwu8;
     @BindView(R.id.iv_call_phone)
     ImageView iv_call_phone;
+    @BindView(R.id.iv_address)
+    ImageView iv_address;
     @BindView(R.id.lv_coupon_data)
     ListView lv_coupon_data;
+    @BindView(R.id.et_car_address)
+    EditText et_car_address;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
     private CouponAdapter adapter;
     private List<MyCoupon> list = new ArrayList<>();
+    private AddressEntity addressEntity = new AddressEntity();
+    private String siteLat="";
+    private String siteLng="";
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -116,11 +132,27 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         adapter = new CouponAdapter(this);
         adapter.setData(list);
         lv_coupon_data.setAdapter(adapter);
+
+        registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //接收到广播以后要做的事
+            addressEntity = (AddressEntity) intent.getSerializableExtra("addressEntity");
+            if (!AppUtils.isEmpty(addressEntity)){
+                et_car_address.setText(addressEntity.getAddress());
+                siteLat = addressEntity.getLat();
+                siteLng = addressEntity.getLng();
+            }
+        }
+    };
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
             R.id.rb_zheng_che,R.id.tv_car_fuwu1,R.id.tv_car_fuwu2,R.id.tv_car_fuwu3,R.id.tv_car_fuwu4
-            ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone})
+            ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
+    ,R.id.iv_address})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -177,6 +209,9 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     iv_call_phone.setSelected(true);
                 }
                 break;
+            case R.id.iv_address:
+                ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
+                break;
             default:
         }
     }
@@ -224,5 +259,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         list = data;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

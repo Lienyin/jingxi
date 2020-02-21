@@ -120,5 +120,8 @@
         <!--下单-->
         <activity android:name=".ui.submitorder.SubmitOrderActivity"
             android:screenOrientation="portrait"/>
+        <!--选择下单地址-->
+        <activity android:name=".ui.addressdetails.AddressDetailsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
