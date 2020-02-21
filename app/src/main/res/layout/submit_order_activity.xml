@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_shangmen_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="上门服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_daodian_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="到店服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+<!--    上门服务-->
+    <include
+        android:id="@+id/shang_men"
+        layout="@layout/shangmen_service"
+        android:visibility="visible"/>
+<!--    到店服务-->
+    <include
+        android:id="@+id/dao_dian"
+        layout="@layout/daodian_service"
+        android:visibility="gone"/>
+</LinearLayout>

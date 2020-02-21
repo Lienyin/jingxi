@@ -57,6 +57,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawablePadding="3dp"
+            android:visibility="gone"
             android:drawableTop="@drawable/tab_menu_xiche"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"

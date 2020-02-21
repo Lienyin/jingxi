@@ -1,5 +1,6 @@
 package com.jxxc.jingxi.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 
 
 /**
@@ -67,7 +70,7 @@ public class XiaOrderDialog implements View.OnClickListener{
                 cleanDialog();
                 break;
             case R.id.btn_xia_order://确认
-                onFenxiangClickListener.onFenxiangClick();
+                ZzRouter.gotoActivity((Activity) context, SubmitOrderActivity.class);
                 cleanDialog();
                 break;
         }

@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 
+/**
+ * 发现界面
+ */
 @SuppressLint("ValidFragment")
 public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, SecondFramentPresenter> implements View.OnClickListener, SecondFramentContract.View {
     private Context context;

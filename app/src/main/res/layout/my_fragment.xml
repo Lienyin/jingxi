@@ -61,11 +61,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingLeft="20dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/user_info"/>
+            android:src="@mipmap/icon_user3x_03"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -92,11 +93,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingLeft="20dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/user_info"/>
+            android:src="@mipmap/icon_user_05"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -123,11 +125,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingLeft="20dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/user_info"/>
+            android:src="@mipmap/icon_user_07"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -154,11 +157,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingLeft="20dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/user_info"/>
+            android:src="@mipmap/icon_user_09"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -185,11 +189,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingLeft="20dp"
+        android:background="@color/white"
         android:gravity="center_vertical">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/user_info"/>
+            android:src="@mipmap/icon_user_11"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"

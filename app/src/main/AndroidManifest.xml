@@ -117,5 +117,8 @@
         <!--充值中心-->
         <activity android:name=".ui.recharge.RechargeActivity"
             android:screenOrientation="portrait"/>
+        <!--下单-->
+        <activity android:name=".ui.submitorder.SubmitOrderActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
