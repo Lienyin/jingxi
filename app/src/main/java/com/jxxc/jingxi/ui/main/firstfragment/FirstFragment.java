@@ -35,7 +35,6 @@ import java.util.List;
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
     private Context context;
     private TextView tv_map_jingsi,tv_location_city;
-    private GridView gv_home_data;
     private HomeDataAdapter adapter;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian;
@@ -43,6 +42,11 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
     private XiaOrderDialog dialog;
+    private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
+            tv_car_fuwu7,tv_car_fuwu8;
+    private int num1=0;
+    private int num2=0;
+    private int num3=0;
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -53,29 +57,32 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_fragment, container, false);
         tv_map_jingsi = view.findViewById(R.id.tv_map_jingsi);
-        gv_home_data = view.findViewById(R.id.gv_home_data);
         rb_work_order_all = view.findViewById(R.id.rb_work_order_all);
         rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
         tv_location_city = view.findViewById(R.id.tv_location_city);
+        tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
+        tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
+        tv_car_fuwu3 = view.findViewById(R.id.tv_car_fuwu3);
+        tv_car_fuwu4 = view.findViewById(R.id.tv_car_fuwu4);
+        tv_car_fuwu5 = view.findViewById(R.id.tv_car_fuwu5);
+        tv_car_fuwu6 = view.findViewById(R.id.tv_car_fuwu6);
+        tv_car_fuwu7 = view.findViewById(R.id.tv_car_fuwu7);
+        tv_car_fuwu8 = view.findViewById(R.id.tv_car_fuwu8);
 
         tv_map_jingsi.setOnClickListener(this);
         rb_work_order_all.setOnClickListener(this);
         rb_work_order_dai_jie.setOnClickListener(this);
-        adapter = new HomeDataAdapter(context);
-        adapter.setData(list);
-        gv_home_data.setAdapter(adapter);
-        mPresenter.comboInfo();//获取洗车组合套餐
+        tv_car_fuwu1.setOnClickListener(this);
+        tv_car_fuwu2.setOnClickListener(this);
+        tv_car_fuwu3.setOnClickListener(this);
+        tv_car_fuwu4.setOnClickListener(this);
+        tv_car_fuwu5.setOnClickListener(this);
+        tv_car_fuwu6.setOnClickListener(this);
+        tv_car_fuwu7.setOnClickListener(this);
+        tv_car_fuwu8.setOnClickListener(this);
+        //mPresenter.comboInfo();//获取洗车组合套餐
 
-        //点击服务选项
-        gv_home_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter.setSelectPosition(i);
-                adapter.notifyDataSetChanged();
-                dialog.showShareDialog(true);
-            }
-        });
         mLocationClient = new LocationClient(context.getApplicationContext());
         initLocation();
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
@@ -127,12 +134,81 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
             case R.id.rb_work_order_all://上门
-                gv_home_data.setVisibility(View.VISIBLE);
                 ll_dao_dian.setVisibility(View.GONE);
                 break;
             case R.id.rb_work_order_dai_jie://到店
-                gv_home_data.setVisibility(View.GONE);
                 ll_dao_dian.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tv_car_fuwu1:
+            case R.id.tv_car_fuwu2:
+            case R.id.tv_car_fuwu3:
+            case R.id.tv_car_fuwu4:
+            case R.id.tv_car_fuwu5:
+                if (tv_car_fuwu1.isSelected()==true){
+                    tv_car_fuwu1.setSelected(false);
+                    tv_car_fuwu2.setSelected(false);
+                    tv_car_fuwu3.setSelected(false);
+                    tv_car_fuwu4.setSelected(false);
+                    tv_car_fuwu5.setSelected(false);
+                }else{
+                    tv_car_fuwu1.setSelected(true);
+                    tv_car_fuwu2.setSelected(true);
+                    tv_car_fuwu3.setSelected(true);
+                    tv_car_fuwu4.setSelected(true);
+                    tv_car_fuwu5.setSelected(true);
+                    dialog.showShareDialog(true,0,0,0);
+                }
+                break;
+            case R.id.tv_car_fuwu6:
+                if (tv_car_fuwu6.isSelected()==true){
+                    tv_car_fuwu6.setSelected(false);
+                    num1 = 0;
+                }else{
+                    tv_car_fuwu6.setSelected(true);
+                    num1=6;
+                    if (tv_car_fuwu1.isSelected()==false){
+                        tv_car_fuwu1.setSelected(true);
+                        tv_car_fuwu2.setSelected(true);
+                        tv_car_fuwu3.setSelected(true);
+                        tv_car_fuwu4.setSelected(true);
+                        tv_car_fuwu5.setSelected(true);
+                    }
+                    dialog.showShareDialog(true,num1,num2,num3);
+                }
+                break;
+            case R.id.tv_car_fuwu7:
+                if (tv_car_fuwu7.isSelected()==true){
+                    tv_car_fuwu7.setSelected(false);
+                    num2=0;
+                }else{
+                    tv_car_fuwu7.setSelected(true);
+                    num2=7;
+                    if (tv_car_fuwu1.isSelected()==false){
+                        tv_car_fuwu1.setSelected(true);
+                        tv_car_fuwu2.setSelected(true);
+                        tv_car_fuwu3.setSelected(true);
+                        tv_car_fuwu4.setSelected(true);
+                        tv_car_fuwu5.setSelected(true);
+                    }
+                    dialog.showShareDialog(true,num1,num2,num3);
+                }
+                break;
+            case R.id.tv_car_fuwu8:
+                if (tv_car_fuwu8.isSelected()==true){
+                    tv_car_fuwu8.setSelected(false);
+                    num3=0;
+                }else{
+                    tv_car_fuwu8.setSelected(true);
+                    num3=8;
+                    if (tv_car_fuwu1.isSelected()==false){
+                        tv_car_fuwu1.setSelected(true);
+                        tv_car_fuwu2.setSelected(true);
+                        tv_car_fuwu3.setSelected(true);
+                        tv_car_fuwu4.setSelected(true);
+                        tv_car_fuwu5.setSelected(true);
+                    }
+                    dialog.showShareDialog(true,num1,num2,num3);
+                }
                 break;
         }
     }

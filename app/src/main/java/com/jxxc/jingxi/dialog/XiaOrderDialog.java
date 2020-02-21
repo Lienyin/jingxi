@@ -28,6 +28,7 @@ public class XiaOrderDialog implements View.OnClickListener{
     private Dialog dialog;
     private View view;
     private ImageView iv_order_cancel;
+    private ImageView iv_car_01,iv_car_02,iv_car_03,iv_car_04,iv_car_05,iv_car_06,iv_car_07,iv_car_08;
     private Button btn_xia_order;
 
     public XiaOrderDialog(Context context){
@@ -48,13 +49,36 @@ public class XiaOrderDialog implements View.OnClickListener{
         dialog.setContentView(view, params);
 
         iv_order_cancel = (ImageView) view.findViewById(R.id.iv_order_cancel);
+        iv_car_01 = (ImageView) view.findViewById(R.id.iv_car_01);
+        iv_car_02 = (ImageView) view.findViewById(R.id.iv_car_02);
+        iv_car_03 = (ImageView) view.findViewById(R.id.iv_car_03);
+        iv_car_04 = (ImageView) view.findViewById(R.id.iv_car_04);
+        iv_car_05 = (ImageView) view.findViewById(R.id.iv_car_05);
+        iv_car_06 = (ImageView) view.findViewById(R.id.iv_car_06);
+        iv_car_07 = (ImageView) view.findViewById(R.id.iv_car_07);
+        iv_car_08 = (ImageView) view.findViewById(R.id.iv_car_08);
         btn_xia_order = (Button) view.findViewById(R.id.btn_xia_order);
         iv_order_cancel.setOnClickListener(this);
         btn_xia_order.setOnClickListener(this);
 
     }
 
-    public void showShareDialog(boolean outTouchCancel) {
+    public void showShareDialog(boolean outTouchCancel,int num1,int num2,int num3) {
+        if (num1==6){
+            iv_car_06.setVisibility(View.VISIBLE);
+        }else {
+            iv_car_06.setVisibility(View.GONE);
+        }
+        if (num2==7){
+            iv_car_07.setVisibility(View.VISIBLE);
+        }else {
+            iv_car_07.setVisibility(View.GONE);
+        }
+        if (num3==8){
+            iv_car_08.setVisibility(View.VISIBLE);
+        }else{
+            iv_car_08.setVisibility(View.GONE);
+        }
         dialog.setCanceledOnTouchOutside(outTouchCancel);
         dialog.show();
     }

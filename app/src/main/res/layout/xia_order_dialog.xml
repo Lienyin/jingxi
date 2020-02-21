@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="20dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
         android:background="@drawable/attestation_bg_edittext">
 
@@ -17,45 +17,72 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/car_08"/>
+                android:id="@+id/iv_car_01"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/car_07_yes"/>
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/car_09"/>
+                android:id="@+id/iv_car_02"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/car_01_yes"/>
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/car_10"/>
+                android:id="@+id/iv_car_03"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/car_11_yes"/>
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/car_11"/>
+                android:id="@+id/iv_car_04"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/car_03_yes"/>
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/car_12"/>
+                android:id="@+id/iv_car_05"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/car_06_yes"/>
+            <ImageView
+                android:id="@+id/iv_car_06"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/car_02_yes"/>
+            <ImageView
+                android:id="@+id/iv_car_07"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/car_05_yes"/>
+            <ImageView
+                android:id="@+id/iv_car_08"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/car_04_yes"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="@color/public_all"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="菁喜上门清洗服务"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_bg_button"
             android:text="立即下单"
