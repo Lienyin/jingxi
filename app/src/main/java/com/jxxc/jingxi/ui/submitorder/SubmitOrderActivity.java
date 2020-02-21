@@ -5,15 +5,18 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
+import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -75,9 +78,13 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     TextView tv_car_fuwu8;
     @BindView(R.id.iv_call_phone)
     ImageView iv_call_phone;
+    @BindView(R.id.lv_coupon_data)
+    ListView lv_coupon_data;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
+    private CouponAdapter adapter;
+    private List<MyCoupon> list = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -88,6 +95,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         tv_title.setText("菁喜洗车");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCarList();
+        mPresenter.queryMyCoupon(0);
         fuwu1 = getIntent().getIntExtra("fuwu1",0);
         fuwu2 = getIntent().getIntExtra("fuwu2",0);
         fuwu3 = getIntent().getIntExtra("fuwu3",0);
@@ -105,6 +113,9 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         if (fuwu3>0){
             tv_car_fuwu8.setSelected(true);
         }
+        adapter = new CouponAdapter(this);
+        adapter.setData(list);
+        lv_coupon_data.setAdapter(adapter);
     }
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
@@ -205,5 +216,13 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             ll_add_car.setVisibility(View.VISIBLE);
             ll_car_info.setVisibility(View.GONE);
         }
+    }
+
+    //优惠券返回数据
+    @Override
+    public void queryMyCouponCallback(List<MyCoupon> data) {
+        list = data;
+        adapter.setData(list);
+        adapter.notifyDataSetChanged();
     }
 }
