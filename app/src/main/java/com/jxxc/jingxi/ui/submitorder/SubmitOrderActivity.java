@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.submitorder;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,11 +26,14 @@ import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.DateTimePicker;
 
 
 /**
@@ -85,10 +89,14 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     TextView tv_car_fuwu7;
     @BindView(R.id.tv_car_fuwu8)
     TextView tv_car_fuwu8;
+    @BindView(R.id.tv_appointment_time)
+    TextView tv_appointment_time;
     @BindView(R.id.iv_call_phone)
     ImageView iv_call_phone;
     @BindView(R.id.iv_address)
     ImageView iv_address;
+    @BindView(R.id.iv_time_date)
+    ImageView iv_time_date;
     @BindView(R.id.lv_coupon_data)
     ListView lv_coupon_data;
     @BindView(R.id.et_car_address)
@@ -152,7 +160,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
             R.id.rb_zheng_che,R.id.tv_car_fuwu1,R.id.tv_car_fuwu2,R.id.tv_car_fuwu3,R.id.tv_car_fuwu4
             ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
-    ,R.id.iv_address})
+    ,R.id.iv_address,R.id.iv_time_date})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -209,8 +217,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     iv_call_phone.setSelected(true);
                 }
                 break;
-            case R.id.iv_address:
+            case R.id.iv_address://选择地址
                 ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
+                break;
+            case R.id.iv_time_date://选择时间
+                getTime();
                 break;
             default:
         }
@@ -259,6 +270,33 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         list = data;
         adapter.setData(list);
         adapter.notifyDataSetChanged();
+    }
+
+    //时间选择器
+    private void getTime(){
+        //获取当前时间日期格式
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        int year = Integer.valueOf(simpleDateFormat.format(date).substring(0,4));
+        int month = Integer.valueOf(simpleDateFormat.format(date).substring(5,7));
+        int day = Integer.valueOf(simpleDateFormat.format(date).substring(8,10));
+        int hour = Integer.valueOf(simpleDateFormat.format(date).substring(11,13));
+        int minute = Integer.valueOf(simpleDateFormat.format(date).substring(14,16));
+
+        @SuppressLint("WrongConstant")
+        DateTimePicker picker = new DateTimePicker(this, DateTimePicker.YEAR_MONTH_DAY);//年月日
+        picker.setDateRangeStart(year,month,day);//日期起点
+        picker.setTimeRangeStart(hour,minute);//时间漆店
+        picker.setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
+            @Override
+            public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                String appointmentStartTime = year + "-" + month + "-" + day+"  "+hour+":"+minute;
+                String appointmentEndTime = year + "-" + month + "-" + day+"  "+(Integer.valueOf(hour)+1)+":"+minute;
+                tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
+            }
+        });
+        picker.show();
     }
 
     @Override
