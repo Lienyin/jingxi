@@ -7,9 +7,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,6 +46,16 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     GridView gv_fuwu_data;
     @BindView(R.id.ll_fuwu_no_data)
     LinearLayout ll_fuwu_no_data;
+    @BindView(R.id.ll_add_car)
+    LinearLayout ll_add_car;
+    @BindView(R.id.ll_car_info)
+    LinearLayout ll_car_info;
+    @BindView(R.id.tv_car_number)
+    TextView tv_car_number;
+    @BindView(R.id.tv_car_type)
+    TextView tv_car_type;
+    @BindView(R.id.tv_car_color)
+    TextView tv_car_color;
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -50,6 +64,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @Override
     public void initData() {
         tv_title.setText("菁喜洗车");
+        StyledDialog.buildLoading("数据加载中").setActivity(this).show();
+        mPresenter.getCarList();
     }
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
@@ -77,6 +93,43 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 ll_fuwu_no_data.setVisibility(View.VISIBLE);
                 break;
             default:
+        }
+    }
+
+    //车辆信息
+    @Override
+    public void getCarListCallBack(List<CarListEntity> data) {
+        if (data.size()>0){//y有车
+            ll_add_car.setVisibility(View.GONE);
+            ll_car_info.setVisibility(View.VISIBLE);
+            tv_car_number.setText(data.get(0).carNum);
+            tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
+            if (data.get(0).color==1){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_1);
+            }else if (data.get(0).color==2){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_2);
+            }else if (data.get(0).color==3){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_3);
+            }else if (data.get(0).color==4){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_4);
+            }else if (data.get(0).color==5){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_5);
+            }else if (data.get(0).color==6){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_6);
+            }else if (data.get(0).color==7){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_7);
+            }else if (data.get(0).color==8){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+            }else if (data.get(0).color==9){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_9);
+            }else if (data.get(0).color==10){
+                tv_car_color.setBackgroundResource(R.drawable.car_color_10);
+            }else{
+                tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+            }
+        }else{
+            ll_add_car.setVisibility(View.VISIBLE);
+            ll_car_info.setVisibility(View.GONE);
         }
     }
 }
