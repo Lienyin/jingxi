@@ -3,6 +3,7 @@ package com.jxxc.jingxi.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class XiaOrderDialog implements View.OnClickListener{
     private ImageView iv_order_cancel;
     private ImageView iv_car_01,iv_car_02,iv_car_03,iv_car_04,iv_car_05,iv_car_06,iv_car_07,iv_car_08;
     private Button btn_xia_order;
+    private int fuwu1=0;
+    private int fuwu2=0;
+    private int fuwu3=0;
 
     public XiaOrderDialog(Context context){
         this(context,true);
@@ -64,6 +68,9 @@ public class XiaOrderDialog implements View.OnClickListener{
     }
 
     public void showShareDialog(boolean outTouchCancel,int num1,int num2,int num3) {
+        fuwu1 = num1;
+        fuwu2 = num2;
+        fuwu3 = num3;
         if (num1==6){
             iv_car_06.setVisibility(View.VISIBLE);
         }else {
@@ -94,7 +101,11 @@ public class XiaOrderDialog implements View.OnClickListener{
                 cleanDialog();
                 break;
             case R.id.btn_xia_order://确认
-                ZzRouter.gotoActivity((Activity) context, SubmitOrderActivity.class);
+                Intent intent = new Intent((Activity) context, SubmitOrderActivity.class);
+                intent.putExtra("fuwu1",fuwu1);
+                intent.putExtra("fuwu2",fuwu2);
+                intent.putExtra("fuwu3",fuwu3);
+                context.startActivity(intent);
                 cleanDialog();
                 break;
         }
