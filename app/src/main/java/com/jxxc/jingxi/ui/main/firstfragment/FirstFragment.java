@@ -6,12 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -21,6 +18,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
@@ -35,7 +33,6 @@ import java.util.List;
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
     private Context context;
     private TextView tv_map_jingsi,tv_location_city;
-    private HomeDataAdapter adapter;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian;
     private List<ProductInfoEntity.Combo.ProductInfo> list = new ArrayList<>();
@@ -223,7 +220,5 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     @Override
     public void comboInfoCallBack(ProductInfoEntity data) {
         list = data.combo.get(0).productList;
-        adapter.setData(list);
-        adapter.notifyDataSetChanged();
     }
 }

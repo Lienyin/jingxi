@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.payaccomplish;
 
 import android.content.Context;
 
+import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.mvp.BasePresenterImpl;
 
 /**
@@ -10,5 +11,9 @@ import com.jxxc.jingxi.mvp.BasePresenterImpl;
  */
 
 public class PayAccomplishPresenter extends BasePresenterImpl<PayAccomplishContract.View> implements PayAccomplishContract.Presenter{
-    
+
+    @Override
+    protected void onEventComing(EventCenter center) {
+
+    }
 }

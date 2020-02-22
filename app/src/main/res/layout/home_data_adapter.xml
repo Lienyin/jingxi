@@ -15,14 +15,5 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerInside" />
-
-        <TextView
-            android:id="@+id/tv_home_fuwu_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:layout_marginTop="3dp"
-            android:text="XXX"/>
     </LinearLayout>
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 
 public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder> {
 
+    HomeDataAdapter adapter;
+
     public BillAdapter(@LayoutRes int layoutResId, @Nullable List<MyOrderEntity> data) {
         super(layoutResId, data);
     }
@@ -27,6 +30,10 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
     protected void convert(BaseViewHolder helper, final MyOrderEntity item) {
         helper.setText(R.id.tv_order_id, item.orderId);
         helper.setText(R.id.tv_fuwu_address, item.address);
+        adapter = new HomeDataAdapter(mContext);
+        adapter.setData(item.products);
+        helper.setAdapter(R.id.gv_fuwu_data,adapter);
+
         //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),
         // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
         if (item.status==0){
