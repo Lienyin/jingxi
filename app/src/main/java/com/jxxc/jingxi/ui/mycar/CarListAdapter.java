@@ -21,9 +21,11 @@ import java.util.List;
 public class CarListAdapter extends BaseAdapter {
     private Context context;
     private List<CarListEntity> list;
+    private String type="";
 
-    public CarListAdapter(Context context){
+    public CarListAdapter(Context context,String type){
         this.context=context;
+        this.type=type;
     }
 
     public void setData(List<CarListEntity> list){
@@ -46,7 +48,7 @@ public class CarListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null){
             holder = new ViewHolder();
@@ -111,13 +113,19 @@ public class CarListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //删除
-                onFenxiangClickListener.onFenxiangClick(data.carNum);
+                onFenxiangClickListener.onFenxiangClick(data.carNum,null);
             }
         });
+        if ("1".equals(type)){
+            holder.tv_car_use.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_car_use.setVisibility(View.GONE);
+        }
         holder.tv_car_use.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //使用
+                onFenxiangClickListener.onFenxiangClick("",list.get(position));
             }
         });
         return convertView;
@@ -142,6 +150,6 @@ public class CarListAdapter extends BaseAdapter {
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(String carNum);
+        void onFenxiangClick(String carNum,CarListEntity data);
     }
 }

@@ -123,5 +123,8 @@
         <!--选择下单地址-->
         <activity android:name=".ui.addressdetails.AddressDetailsActivity"
             android:screenOrientation="portrait"/>
+        <!--订单支付-->
+        <activity android:name=".ui.payorder.PayOrderActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

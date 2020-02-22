@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.mycar;
 
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addcar.AddCarActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     SwipeRefreshLayout swipeLayout;
     private CarListAdapter adapter;
     private List<CarListEntity> list = new ArrayList<>();
+    private String type="0";
 
     @Override
     protected int layoutId() {
@@ -50,17 +53,26 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
     @Override
     public void initData() {
         tv_title.setText("我的车辆");
+        type = ZzRouter.getIntentData(this,String.class);//界面来源
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         mPresenter.getCarList();
-        adapter = new CarListAdapter(this);
+        adapter = new CarListAdapter(this,type);
         adapter.setData(list);
         lv_car.setAdapter(adapter);
         adapter.setOnFenxiangClickListener(new CarListAdapter.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(String carNum) {
-                StyledDialog.buildLoading("正在删除").setActivity(MyCarActivity.this).show();
-                mPresenter.removeCar(carNum);
+            public void onFenxiangClick(String carNum,CarListEntity data) {
+                if (!AppUtils.isEmpty(carNum)){
+                    StyledDialog.buildLoading("正在删除").setActivity(MyCarActivity.this).show();
+                    mPresenter.removeCar(carNum);
+                }else if (!AppUtils.isEmpty(data)){
+                    Intent intent = new Intent();
+                    intent.putExtra("carInfo",data);
+                    intent.setAction("jing_xi_my_car_info");
+                    sendOrderedBroadcast(intent,null);
+                    finish();
+                }
             }
         });
     }

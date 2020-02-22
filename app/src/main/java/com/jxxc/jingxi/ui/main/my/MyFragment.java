@@ -82,7 +82,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.ll_my_car://我的车辆
-                ZzRouter.gotoActivity((Activity) context, MyCarActivity.class);
+                ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"0");
                 break;
             case R.id.ll_my_order://我的订单
                 ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);

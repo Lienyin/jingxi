@@ -26,6 +26,8 @@ import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
+import com.jxxc.jingxi.ui.mycar.MyCarActivity;
+import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 
@@ -106,6 +108,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     ListView lv_coupon_data;
     @BindView(R.id.et_car_address)
     TextView et_car_address;
+    @BindView(R.id.tv_huan_car)
+    TextView tv_huan_car;
     @BindView(R.id.et_phone_number)
     EditText et_phone_number;
     @BindView(R.id.et_car_memo)
@@ -167,6 +171,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         });
 
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
+        registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -181,11 +186,21 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             }
         }
     };
+    private BroadcastReceiver receiverCarInfo = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //接收到广播以后要做的事
+            CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
+            tv_car_number.setText(carListEntity.carNum);
+            tv_car_type.setText(carListEntity.brandName+"  "+carListEntity.typeName);
+            comboTypeId = carListEntity.typeId;
+        }
+    };
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
             R.id.rb_zheng_che,R.id.tv_car_fuwu1,R.id.tv_car_fuwu2,R.id.tv_car_fuwu3,R.id.tv_car_fuwu4
             ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
-    ,R.id.iv_address,R.id.iv_time_date,R.id.tv_create_order})
+    ,R.id.iv_address,R.id.iv_time_date,R.id.tv_create_order,R.id.tv_huan_car})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -277,6 +292,9 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                             et_car_memo.getText().toString());
                 }
                 break;
+            case R.id.tv_huan_car://换辆车
+                ZzRouter.gotoActivity(this, MyCarActivity.class,"1");
+                break;
             default:
         }
     }
@@ -338,6 +356,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @Override
     public void createOrderCallBack(CreateOrderEntity data) {
         //支付订单
+        ZzRouter.gotoActivity(this, PayOrderActivity.class,data);
+        finish();
     }
 
     //时间选择器
@@ -370,6 +390,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);
+        if (!AppUtils.isEmpty(receiver)){
+            unregisterReceiver(receiver);
+        }
+        if (!AppUtils.isEmpty(receiverCarInfo)){
+            unregisterReceiver(receiverCarInfo);
+        }
     }
 }
