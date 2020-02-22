@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/view_bg"
     android:orientation="vertical">
 
     <include layout="@layout/title" />
@@ -74,8 +74,9 @@
                         android:gravity="center_vertical">
 
                         <TextView
+                            android:id="@+id/tv_details_pingjian"
                             android:layout_width="65dp"
-                            android:layout_height="20dp"
+                            android:layout_height="23dp"
                             android:layout_marginLeft="5dp"
                             android:background="@drawable/shape_bg_edittext"
                             android:gravity="center"
@@ -85,7 +86,7 @@
 
                         <TextView
                             android:layout_width="85dp"
-                            android:layout_height="20dp"
+                            android:layout_height="23dp"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/shape_bg_edittext"
                             android:gravity="center"
@@ -103,11 +104,13 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/iv_jishi_hand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/iv_head" />
 
                     <TextView
+                        android:id="@+id/tv_details_jishi_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -119,7 +122,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:elevation="1dp"
@@ -141,6 +144,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_details_order_id"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -150,15 +154,15 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_details_order_static"
+                        android:layout_width="60dp"
+                        android:layout_height="22dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/shape_bg_button"
+                        android:background="@drawable/order_static"
                         android:gravity="center"
                         android:text="XXX"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,6 +178,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_details_order_xia_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -197,6 +202,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_details_order_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -220,6 +226,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_details_order_memo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -238,11 +245,35 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="优  惠  券"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_order_coupon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:text="￥0.00"
+                        android:textColor="@color/public_all"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="订单金额"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_details_order_money"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -256,7 +287,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="170dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:elevation="1dp"
@@ -272,9 +303,10 @@
                     android:textSize="14sp" />
 
                 <GridView
+                    android:id="@+id/gv_fuwu_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:numColumns="5" />
+                    android:numColumns="4" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,6 +318,7 @@
                 android:paddingLeft="20dp">
 
                 <TextView
+                    android:id="@+id/tv_details_fuwu_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -298,7 +331,9 @@
                     android:layout_height="match_parent"
                     android:numColumns="5" />
             </LinearLayout>
+            <!--我的评价-->
             <LinearLayout
+                android:id="@+id/ll_my_pingjia"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_margin="10dp"
@@ -318,12 +353,14 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:id="@+id/iv_jibie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:src="@mipmap/logo_108"/>
+                        android:src="@mipmap/icon_user_23"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/tv_details_pingjia_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
@@ -336,6 +373,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical">
                     <TextView
+                        android:id="@+id/tv_details_pingjia_time"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"

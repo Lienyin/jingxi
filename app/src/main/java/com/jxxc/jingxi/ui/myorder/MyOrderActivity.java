@@ -16,6 +16,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.dialog.CancelOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -112,6 +113,8 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
                 if (list.get(position).status==4){
                     ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,list.get(position).orderId);
+                }else if (list.get(position).status==2){
+                    ZzRouter.gotoActivity(MyOrderActivity.this, OrderDetailsDaiFuWuActivity.class,list.get(position).orderId);
                 }
             }
         });

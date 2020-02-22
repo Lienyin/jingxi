@@ -75,7 +75,7 @@
         <!--我的订单-->
         <activity android:name=".ui.myorder.MyOrderActivity"
             android:screenOrientation="portrait"/>
-        <!--订单详情-->
+        <!--订单详情—已完成-->
         <activity android:name=".ui.orderdetails.OrderDetailsActivity"
             android:screenOrientation="portrait"/>
         <!--我的车辆-->

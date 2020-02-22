@@ -29,4 +29,5 @@
     <color name="car_type_color10">#8B4513</color>
     <color name="md_grey_800">#424242</color>
     <color name="blackf1">#f1f1f1</color>
+    <color name="view_bg">#FDFAFE</color>
 </resources>
