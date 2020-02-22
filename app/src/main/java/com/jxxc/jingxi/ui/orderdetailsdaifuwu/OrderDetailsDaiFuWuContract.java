@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.orderdetailsdaifuwu;
 
 import android.content.Context;
 
+import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -12,10 +13,10 @@ import com.jxxc.jingxi.mvp.BaseView;
 
 public class OrderDetailsDaiFuWuContract {
     interface View extends BaseView {
-        
+        void getOrderCallBack(OrderEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void getOrder(String orderId);
     }
 }
