@@ -73,7 +73,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_vertical">
-
+            <!--余额支付-->
+            <LinearLayout
+                android:id="@+id/ll_balance_pay"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/iv_yaojing_icon0"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@mipmap/logo_108"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="余额支付"/>
+                <ImageView
+                    android:id="@+id/iv_balance"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/icon_38_24"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blackccc"/>
+            <!--微信支付-->
             <LinearLayout
                 android:id="@+id/ll_wx_pay"
                 android:layout_width="match_parent"
@@ -104,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/blackccc"/>
+            <!--支付宝支付-->
             <LinearLayout
                 android:id="@+id/ll_zfb_pay"
                 android:layout_width="match_parent"
@@ -132,4 +164,16 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_order_pay"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg_button"
+        android:text="立即支付"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 </LinearLayout>

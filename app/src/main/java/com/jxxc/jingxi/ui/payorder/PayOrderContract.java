@@ -12,10 +12,10 @@ import com.jxxc.jingxi.mvp.BaseView;
 
 public class PayOrderContract {
     interface View extends BaseView {
-        
+        void BalancePayCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void BalancePay(String orderId);
     }
 }

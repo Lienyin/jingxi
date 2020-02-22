@@ -57,4 +57,6 @@ public class Api {
     public static final String MESSAGE_LIST = BASEURL + "/biz/message/messageList";
     //25-下单
     public static final String CREATE_ORDER = BASEURL + "/biz/order/create";
+    //26-余额支付
+    public static final String BALANCE_PAY = BASEURL + "/biz/order/balancePay";
 }
