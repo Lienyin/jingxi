@@ -9,6 +9,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 
 import butterknife.BindView;
@@ -32,7 +33,8 @@ public class PayAccomplishActivity extends MVPBaseActivity<PayAccomplishContract
     TextView tv_order_money;
     @BindView(R.id.btn_order_look)
     Button btn_order_look;
-    private CreateOrderEntity data;
+    private String orderPrice;
+    private String orderId;
     @Override
     protected int layoutId() {
         return R.layout.pay_accomplish_activity;
@@ -41,8 +43,9 @@ public class PayAccomplishActivity extends MVPBaseActivity<PayAccomplishContract
     @Override
     public void initData() {
         tv_title.setText("支付完成");
-        data = ZzRouter.getIntentData(this,CreateOrderEntity.class);
-        tv_order_money.setText("￥"+data.payPrice);
+        orderId = getIntent().getStringExtra("orderId");
+        orderPrice = getIntent().getStringExtra("orderPrice");
+        tv_order_money.setText("￥"+orderPrice);
     }
 
     @OnClick({R.id.tv_back,R.id.tv_back_home,R.id.btn_order_look})
@@ -54,7 +57,7 @@ public class PayAccomplishActivity extends MVPBaseActivity<PayAccomplishContract
                 finish();
                 break;
             case R.id.btn_order_look://查看订单
-                //finish();
+                ZzRouter.gotoActivity(this, OrderDetailsDaiFuWuActivity.class,orderId);
                 break;
             default:
         }

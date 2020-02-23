@@ -356,7 +356,10 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @Override
     public void createOrderCallBack(CreateOrderEntity data) {
         //支付订单
-        ZzRouter.gotoActivity(this, PayOrderActivity.class,data);
+        Intent intent = new Intent(this, PayOrderActivity.class);
+        intent.putExtra("orderId",data.orderId);
+        intent.putExtra("orderPrice",data.payPrice);
+        startActivity(intent);
         finish();
     }
 

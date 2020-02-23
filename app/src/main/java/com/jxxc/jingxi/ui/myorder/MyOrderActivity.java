@@ -92,7 +92,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         adapter.setEmptyView(R.layout.layout_nothing);
         adapter.setOnFenxiangClickListener(new BillAdapter.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(int type,String mobile, String orderId) {
+            public void onFenxiangClick(int type,String mobile, String orderId,String status) {
                 if (type==1){//联系技师
                     if (!AppUtils.isEmpty(mobile)){
                         AppUtils.callPhone(MyOrderActivity.this,mobile);
@@ -102,9 +102,15 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 }else if (type==2){
                     //评价
                     ZzRouter.gotoActivity(MyOrderActivity.this, EvaluateActivity.class,orderId);
-                }else{
+                }else if (type==3){
                     //取消订单
                     dialog.showShareDialog(true);
+                }else if (type==4){
+                    if ("4".equals(status)){
+                        ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,orderId);
+                    }else {
+                        ZzRouter.gotoActivity(MyOrderActivity.this, OrderDetailsDaiFuWuActivity.class,orderId);
+                    }
                 }
             }
         });
@@ -115,7 +121,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
                 if (list.get(position).status==4){
                     ZzRouter.gotoActivity(MyOrderActivity.this,OrderDetailsActivity.class,list.get(position).orderId);
-                }else if (list.get(position).status==2){
+                }else {
                     ZzRouter.gotoActivity(MyOrderActivity.this, OrderDetailsDaiFuWuActivity.class,list.get(position).orderId);
                 }
             }

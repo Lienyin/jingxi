@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.orderdetailsdaifuwu;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
+import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -44,7 +46,7 @@ import butterknife.OnClick;
 
 
 /**
- * MVPPlugin 已接单待服务
+ * MVPPlugin 已接单待服务，待支付
  *  邮箱 784787081@qq.com
  */
 
@@ -76,6 +78,12 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     TextView tv_details_order_coupon;
     @BindView(R.id.tv_details_order_money)
     TextView tv_details_order_money;
+    @BindView(R.id.tv_details_hint_tilt)
+    TextView tv_details_hint_tilt;
+    @BindView(R.id.tv_details_hint_text)
+    TextView tv_details_hint_text;
+    @BindView(R.id.tv_details_go_pay)
+    TextView tv_details_go_pay;
     @BindView(R.id.iv_jishi_hand)
     ImageView iv_jishi_hand;
     @BindView(R.id.gv_fuwu_data)
@@ -89,7 +97,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     private double locationLatitude = 0;//当前经度
     private double locationLongitude = 0;//当前纬度
     private OrderEntity orderEntity = new OrderEntity();
-    private String orderId;
+    private String orderId,orderPrice;
     private OrderDetailsDataAdapter adapter;
     private RoutePlanSearch mSearch;
     @Override
@@ -106,7 +114,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         initMap();
     }
 
-    @OnClick({R.id.tv_back,R.id.tv_details_call_phone,R.id.tv_details_cancel_order,R.id.tv_details_cui_order})
+    @OnClick({R.id.tv_back,R.id.tv_details_call_phone,R.id.tv_details_cancel_order,
+            R.id.tv_details_cui_order,R.id.tv_details_go_pay})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -124,7 +133,14 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 //
                 break;
             case R.id.tv_details_cui_order://催单
-                //
+                toast(this,"等待开发");
+                break;
+            case R.id.tv_details_go_pay://去支付
+                Intent intent = new Intent(this, PayOrderActivity.class);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("orderPrice",orderPrice);
+                startActivity(intent);
+                finish();
                 break;
             default:
         }
@@ -137,8 +153,30 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         adapter.setData(orderEntity.products);
         gv_fuwu_data.setAdapter(adapter);
 
+        //技师信息
         GlideImgManager.loadCircleImage(this, data.technicianAvatar, iv_jishi_hand);
         tv_details_jishi_name.setText(data.technicianRealName);
+        //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),
+        // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+        if (data.status==2){
+            tv_details_hint_tilt.setText("预计XX:XX到达");
+            tv_details_hint_text.setText("请耐心等待，技师已在路上");
+        }else if (data.status==0){
+            tv_details_hint_tilt.setText("等待支付订单");
+            tv_details_hint_text.setText("请先完成订单支付");
+            tv_details_go_pay.setVisibility(View.VISIBLE);
+        }else if (data.status==1){
+            tv_details_hint_tilt.setText("等待技师接单");
+            tv_details_hint_text.setText("请耐心等待技师接单");
+            tv_details_cui_order.setVisibility(View.VISIBLE);
+        }else if (data.status==3){
+            tv_details_hint_tilt.setText("技师正在洗车");
+            tv_details_hint_text.setText("技师正在洗车，请耐心等待");
+        }else if (data.status==5){
+            tv_details_hint_tilt.setText("订单已取消");
+            tv_details_hint_text.setText("订单已取消，请重新下单");
+        }
+        //订单信息
         tv_details_order_id.setText(data.orderId);
         tv_details_order_static.setText(data.statusName);
         tv_details_order_xia_time.setText(data.appointmentTime);
@@ -146,6 +184,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         tv_details_order_memo.setText(data.remark);
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
+        orderPrice = data.price;
     }
 
     private void initMap(){

@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.payorder;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,7 +50,9 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
     @BindView(R.id.btn_order_pay)
     Button btn_order_pay;
     private int payType=0;
-    private CreateOrderEntity data;
+    //private CreateOrderEntity data;
+    private String orderId;
+    private String orderPrice;
     @Override
     protected int layoutId() {
         return R.layout.pay_order_activity;
@@ -58,9 +61,10 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
     @Override
     public void initData() {
         tv_title.setText("订单支付");
-        data = ZzRouter.getIntentData(this,CreateOrderEntity.class);
-        tv_order_id.setText(data.orderId);
-        tv_order_money.setText("￥"+data.payPrice);
+        orderId = getIntent().getStringExtra("orderId");
+        orderPrice = getIntent().getStringExtra("orderPrice");
+        tv_order_id.setText(orderId);
+        tv_order_money.setText("￥"+orderPrice);
     }
 
     @OnClick({R.id.tv_back,R.id.ll_balance_pay,R.id.ll_wx_pay,R.id.ll_zfb_pay,R.id.btn_order_pay})
@@ -92,7 +96,7 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
                 if (payType == 1){
                     //余额支付
                     StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                    mPresenter.BalancePay(data.orderId);
+                    mPresenter.BalancePay(orderId);
                 }else if (payType==2){
                     //微信支付
                 }else if (payType==3){
@@ -109,6 +113,10 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
     @Override
     public void BalancePayCallBack() {
         toast(this,"支付成功");
-        ZzRouter.gotoActivity(this, PayAccomplishActivity.class,data);
+        Intent intent = new Intent(this, PayAccomplishActivity.class);
+        intent.putExtra("orderId",orderId);
+        intent.putExtra("orderPrice",orderPrice);
+        startActivity(intent);
+        finish();
     }
 }

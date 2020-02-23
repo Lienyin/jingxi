@@ -75,21 +75,28 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             @Override
             public void onClick(View view) {
                 //联系技师
-                onFenxiangClickListener.onFenxiangClick(1,item.technicianPhonenumber,item.orderId);
+                onFenxiangClickListener.onFenxiangClick(1,item.technicianPhonenumber,"","");
             }
         });
         helper.setOnClickListener(R.id.ll_evaluate, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //评价
-                onFenxiangClickListener.onFenxiangClick(2,item.technicianPhonenumber,item.orderId);
+                onFenxiangClickListener.onFenxiangClick(2,item.technicianPhonenumber,item.orderId,"");
             }
         });
         helper.setOnClickListener(R.id.ll_cancel_order, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //取消订单
-                onFenxiangClickListener.onFenxiangClick(3,item.technicianPhonenumber,item.orderId);
+                onFenxiangClickListener.onFenxiangClick(3,item.technicianPhonenumber,item.orderId,"");
+            }
+        });
+        helper.setOnClickListener(R.id.ll_gv_data, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //取消订单
+                onFenxiangClickListener.onFenxiangClick(4,"",item.orderId,item.status+"");
             }
         });
     }
@@ -101,6 +108,6 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(int type,String mobile,String orderId);
+        void onFenxiangClick(int type,String mobile,String orderId,String status);
     }
 }
