@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.yuyh.easyadapter:library:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.1.0.aar/a2938dd16d5ac25653ad9f168c428255/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.1.0.aar/a2938dd16d5ac25653ad9f168c428255/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e5ec5b46ed1349968bae6c1d2736fc9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e5ec5b46ed1349968bae6c1d2736fc9/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.yuyh.easyadapter/library/1.1.0/77822e3866130b76b8d0492fb2e63f7c9ab732f4/library-1.1.0-javadoc.jar!/" />

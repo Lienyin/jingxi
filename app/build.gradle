@@ -27,8 +27,8 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+        google()
         maven { url "https://jitpack.io" }
-        maven {url 'https://maven.google.com'}
     }
 }
 repositories{
@@ -66,7 +66,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     implementation files('libs/pinyin4j-2.5.0.jar')
     //implementation 'cn.qqtheme.framework:WheelPicker:1.4.5'
-    compile ('cn.qqtheme.framework:WheelPicker:1.5.1'){
+    implementation ('cn.qqtheme.framework:WheelPicker:1.5.1'){
         exclude group:'com.android.support'
     }
 }
