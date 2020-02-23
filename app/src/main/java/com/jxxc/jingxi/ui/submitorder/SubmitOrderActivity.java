@@ -242,7 +242,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 if (tv_car_fuwu7.isSelected()==true){
                     tv_car_fuwu7.setSelected(false);
                 }else{
-                    tv_car_fuwu8.setSelected(true);
+                    tv_car_fuwu7.setSelected(true);
                 }
                 break;
             case R.id.tv_car_fuwu8:

@@ -82,7 +82,7 @@ public abstract class MVPBaseFragment<V extends BaseView,T extends BasePresenter
         ConfigApplication.toast(message,type);
     }
 
-    public static void toast(String message) {
+    public static void toast(Context context, String message) {
         ConfigApplication.toast(message, TastyToast.DEFAULT);
     }
 

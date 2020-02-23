@@ -30,6 +30,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
     protected void convert(BaseViewHolder helper, final MyOrderEntity item) {
         helper.setText(R.id.tv_order_id, item.orderId);
         helper.setText(R.id.tv_fuwu_address, item.address);
+        helper.setText(R.id.tv_order_money, "￥"+item.price);
         adapter = new HomeDataAdapter(mContext);
         adapter.setData(item.products);
         helper.setAdapter(R.id.gv_fuwu_data,adapter);

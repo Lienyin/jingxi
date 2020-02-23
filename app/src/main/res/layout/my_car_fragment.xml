@@ -3,5 +3,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/title_head"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:background="@color/public_all">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:drawablePadding="10dp"
+            android:textSize="16dp"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="菁喜洗车"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_affirm"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_shangmen_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="上门服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_daodian_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="到店服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+    <!--    上门服务-->
+    <include
+        android:id="@+id/shang_men"
+        layout="@layout/shangmen_service"
+        android:visibility="visible"/>
+    <!--    到店服务-->
+    <include
+        android:id="@+id/dao_dian"
+        layout="@layout/daodian_service"
+        android:visibility="gone"/>
 </LinearLayout>
