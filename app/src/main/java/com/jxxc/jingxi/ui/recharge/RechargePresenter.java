@@ -26,6 +26,9 @@ public class RechargePresenter extends BasePresenterImpl<RechargeContract.View> 
 
     }
 
+    /**
+     * 充值活动
+     */
     @Override
     public void getRechargeConfiguration() {
         OkGo.<HttpResult<List<RechargeSet>>>post(Api.RECHARGE_CONFIGURATION)

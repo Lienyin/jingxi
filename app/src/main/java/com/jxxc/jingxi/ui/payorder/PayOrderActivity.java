@@ -10,11 +10,16 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.alipay.AliPay;
+import com.jxxc.jingxi.entity.backparameter.AliPayInfo;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
+import com.jxxc.jingxi.entity.backparameter.PayByWeChat;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.payaccomplish.PayAccomplishActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.PayUtil;
+import com.jxxc.jingxi.wxpay.WXSignBean;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,7 +30,7 @@ import butterknife.OnClick;
  *  邮箱 784787081@qq.com
  */
 
-public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, PayOrderPresenter> implements PayOrderContract.View {
+public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, PayOrderPresenter> implements PayOrderContract.View, AliPay.AliPayCallBack {
 
     @BindView(R.id.tv_back)
     TextView tv_back;
@@ -93,15 +98,18 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
                 payType = 3;
                 break;
             case R.id.btn_order_pay://立即支付
+                StyledDialog.buildLoading("正在支付").setActivity(this).show();
                 if (payType == 1){
                     //余额支付
-                    StyledDialog.buildLoading("正在支付").setActivity(this).show();
                     mPresenter.BalancePay(orderId);
                 }else if (payType==2){
                     //微信支付
+                    mPresenter.payByWeChat(orderId,payType);
                 }else if (payType==3){
                     //支付宝支付
+                    mPresenter.payByAliPay(orderId,payType);
                 }else{
+                    StyledDialog.dismissLoading();
                     toast(this,"请选择支付方式");
                 }
                 break;
@@ -118,5 +126,40 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
         intent.putExtra("orderPrice",orderPrice);
         startActivity(intent);
         finish();
+    }
+
+    //支付宝支付返回数据
+    @Override
+    public void payByAliPayCallBack(AliPayInfo data) {
+        PayUtil.payZhiFuBao(this, this, data.alipayParam);
+    }
+
+    //微信返回数据
+    @Override
+    public void payByWeChatCallBack(PayByWeChat data) {
+        WXSignBean wxSignBean = new WXSignBean();
+        wxSignBean.setappId(data.appid);
+        wxSignBean.setnonceStr(data.noncestr);
+        wxSignBean.setPackageX(data.packageX);
+        wxSignBean.setpartnerId(data.partnerid);
+        wxSignBean.setprepayId(data.prepayid);
+        wxSignBean.setSign(data.sign);
+        wxSignBean.settimeStamp(data.timestamp);
+        PayUtil.payWeiXin(this.getApplicationContext(), wxSignBean);
+    }
+
+    @Override
+    public void paySuccess() {
+        //支付宝支付成功回调
+    }
+
+    @Override
+    public void payFail() {
+        //支付宝支付失败回调
+    }
+
+    @Override
+    public void payConfirm() {
+        //支付宝支付确定回调
     }
 }
