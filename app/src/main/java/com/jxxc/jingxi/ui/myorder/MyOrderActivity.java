@@ -16,6 +16,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.dialog.CancelOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
@@ -100,6 +101,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                     }
                 }else if (type==2){
                     //评价
+                    ZzRouter.gotoActivity(MyOrderActivity.this, EvaluateActivity.class,orderId);
                 }else{
                     //取消订单
                     dialog.showShareDialog(true);

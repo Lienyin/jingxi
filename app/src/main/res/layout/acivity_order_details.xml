@@ -85,6 +85,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_again"
                             android:layout_width="85dp"
                             android:layout_height="23dp"
                             android:layout_marginLeft="10dp"
@@ -117,6 +118,11 @@
                         android:text="XXX"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_jishi_jibie"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_user_23"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -381,6 +387,7 @@
                         android:textSize="12sp"
                         android:text="XXXX-XX-XX XX:XX:XX"/>
                     <TextView
+                        android:id="@+id/tv_delete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"

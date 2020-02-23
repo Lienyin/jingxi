@@ -27,7 +27,7 @@ public class OrderEntity implements Serializable {
     public String price;
     public String statusName;
     public int technicianGrade;
-    public String starLevel;
+    public int starLevel;
     public String discountsPrice;
     public String lat;
     public String technicianLng;

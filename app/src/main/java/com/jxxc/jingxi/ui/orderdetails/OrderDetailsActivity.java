@@ -11,6 +11,9 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.adapter.OrderDetailsDataAdapter;
 import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
+import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
+import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -57,14 +60,20 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView tv_details_pingjia_time;
     @BindView(R.id.tv_details_order_coupon)
     TextView tv_details_order_coupon;
+    @BindView(R.id.tv_again)
+    TextView tv_again;
     @BindView(R.id.iv_jishi_hand)
     ImageView iv_jishi_hand;
     @BindView(R.id.iv_jibie)
     ImageView iv_jibie;
+    @BindView(R.id.iv_jishi_jibie)
+    ImageView iv_jishi_jibie;
     @BindView(R.id.gv_fuwu_data)
     GridView gv_fuwu_data;
     @BindView(R.id.ll_my_pingjia)
     LinearLayout ll_my_pingjia;
+    @BindView(R.id.tv_delete)
+    TextView tv_delete;
     private String OrderId;
     private OrderDetailsDataAdapter adapter;
     private OrderEntity orderEntity = new OrderEntity();
@@ -81,12 +90,25 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         mPresenter.getOrder(OrderId);
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back,R.id.tv_details_pingjian,R.id.tv_again,R.id.tv_delete})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back:
                 finish();
+                break;
+            case R.id.tv_details_pingjian://评价
+                if ("未评价".equals(tv_details_pingjian.getText().toString())){
+                    ZzRouter.gotoActivity(this, EvaluateActivity.class,OrderId);
+                }else{
+                    toast(this,"已评价");
+                }
+                break;
+            case R.id.tv_again://再来一单
+                ZzRouter.gotoActivity(this, SubmitOrderActivity.class);
+                break;
+            case R.id.tv_delete://删除评论
+                toast(this,"等待开发");
                 break;
             default:
         }
@@ -118,16 +140,28 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         GlideImgManager.loadCircleImage(this, data.technicianAvatar, iv_jishi_hand);
         tv_details_fuwu_time.setText("服务时长 "+data.duration+"分钟");
         //评价模块
-        if (data.technicianGrade>=0&&data.technicianGrade<1){
+        if (data.starLevel>=0&&data.starLevel<=1){
             iv_jibie.setImageResource(R.mipmap.icon_user_13);
-        }else if (data.technicianGrade>=1&&data.technicianGrade<2){
+        }else if (data.starLevel>1&&data.starLevel<=2){
             iv_jibie.setImageResource(R.mipmap.icon_user_21);
-        }else if (data.technicianGrade>=2&&data.technicianGrade<3){
+        }else if (data.starLevel>2&&data.starLevel<=3){
             iv_jibie.setImageResource(R.mipmap.icon_user_23);
-        }else if (data.technicianGrade>=3&&data.technicianGrade<4){
+        }else if (data.starLevel>3&&data.starLevel<=4){
             iv_jibie.setImageResource(R.mipmap.icon_user_25);
         }else{
             iv_jibie.setImageResource(R.mipmap.icon_user_27);
+        }
+        //技师星级
+        if (data.technicianGrade>=0&&data.technicianGrade<=1){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_13);
+        }else if (data.technicianGrade>1&&data.technicianGrade<=2){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_21);
+        }else if (data.technicianGrade>2&&data.technicianGrade<=3){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_23);
+        }else if (data.technicianGrade>3&&data.technicianGrade<=4){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_25);
+        }else{
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_27);
         }
         tv_details_pingjia_text.setText(data.commentContent);
         tv_details_pingjia_time.setText(data.customerCommentTime);

@@ -130,5 +130,8 @@
         <!--订单支付-->
         <activity android:name=".ui.payorder.PayOrderActivity"
             android:screenOrientation="portrait"/>
+        <!--评价-->
+        <activity android:name=".ui.evaluate.EvaluateActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
