@@ -18,6 +18,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
@@ -91,7 +92,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
                 ZzRouter.gotoActivity((Activity) context, MyWalletActivity.class);
                 break;
             case R.id.ll_msg://消息通知
-                ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);
+                ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
                 break;
             case R.id.ll_setting://系统设置
                 ZzRouter.gotoActivity((Activity) context, SetingActivity.class);

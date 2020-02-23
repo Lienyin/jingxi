@@ -97,8 +97,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     //个人信息返回接口
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
+        tv_ke_tixian_money.setText(data.balance);
 //        canWithdrawMoney = data.canWithdrawMoney;
-//        tv_ke_tixian_money.setText(data.canWithdrawMoney);
 //        tv_today_order.setText(data.todayFinishOrder);
 //        tv_tixian_money.setText(data.todayProjectedIncome);
 //        tv_zong_order.setText(data.orderNum);

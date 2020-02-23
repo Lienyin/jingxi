@@ -14,11 +14,9 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.MsgAdapter;
 import com.jxxc.jingxi.entity.backparameter.MessageListEntity;
-import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
-import com.jxxc.jingxi.ui.main.my.MyFragment;
-import com.jxxc.jingxi.ui.myorder.BillAdapter;
 import com.jxxc.jingxi.utils.AnimUtils;
 
 import java.util.ArrayList;
@@ -55,7 +53,7 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         rvList.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new MsgAdapter(R.layout.adapter_my_order, new ArrayList<MessageListEntity>());
+        adapter = new MsgAdapter(R.layout.msg_adapter, new ArrayList<MessageListEntity>());
         rvList.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, rvList);
         adapter.setEmptyView(R.layout.layout_nothing);

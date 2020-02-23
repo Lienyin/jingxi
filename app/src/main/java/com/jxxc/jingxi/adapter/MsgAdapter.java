@@ -1,4 +1,4 @@
-package com.jxxc.jingxi.ui.main.msg;
+package com.jxxc.jingxi.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;

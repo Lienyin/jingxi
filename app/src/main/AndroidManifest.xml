@@ -136,5 +136,8 @@
         <!--评价-->
         <activity android:name=".ui.evaluate.EvaluateActivity"
             android:screenOrientation="portrait"/>
+        <!--消息-->
+        <activity android:name=".ui.message.MessageActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
