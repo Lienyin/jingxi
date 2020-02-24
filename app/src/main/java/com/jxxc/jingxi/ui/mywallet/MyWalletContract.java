@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.mywallet;
 
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.WalletEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -12,9 +13,11 @@ import com.jxxc.jingxi.mvp.BaseView;
 public class MyWalletContract {
     interface View extends BaseView {
         void getUserInfoCallBack(UserInfoEntity data);
+        void walletCallBack(WalletEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getUserInfo();
+        void wallet();
     }
 }

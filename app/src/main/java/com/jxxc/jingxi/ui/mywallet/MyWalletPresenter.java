@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.mywallet;
 
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.WalletEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -34,6 +35,26 @@ public class MyWalletPresenter extends BasePresenterImpl<MyWalletContract.View> 
                         UserInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 我的钱包
+     */
+    @Override
+    public void wallet() {
+        OkGo.<HttpResult<WalletEntity>>post(Api.WALLET)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<WalletEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<WalletEntity>> response) {
+                        WalletEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.walletCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

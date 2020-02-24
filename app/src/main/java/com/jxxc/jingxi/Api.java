@@ -69,4 +69,6 @@ public class Api {
     public static final String HASTEN_ORDER = BASEURL + "/biz/order/hasten";
     //31-删除评论
     public static final String CLEAR_COMMENT = BASEURL + "/biz/order/clearComment";
+    //31-我的钱包
+    public static final String WALLET = BASEURL + "/system/customer/wallet";
 }

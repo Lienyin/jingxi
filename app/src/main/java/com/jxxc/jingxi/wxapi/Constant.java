@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Constant implements Serializable {
     //微信配置
     public static final String APP_ID = "wxda559f065b7b2478";
-    public static final String WECHAT_SECRET = "c6ddf9883b459483d9034dff4d46c138";
+    public static final String WECHAT_SECRET = "2d8f5984ad3944443de158527dcada0f";
     //支付宝配置
     /** 支付宝支付业务：入参app_id */
     public static final String ALIPAY_APPID = "2021001103654185";

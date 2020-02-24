@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.WalletEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.commissionlist.CommissionListActivity;
@@ -47,6 +48,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     TextView tv_tixian_money;
     @BindView(R.id.tv_zong_order)
     TextView tv_zong_order;
+    @BindView(R.id.tv_number)
+    TextView tv_number;
     @BindView(R.id.tv_zhanghu_number)
     TextView tv_zhanghu_number;
     @BindView(R.id.iv_tixian_zhanghu)
@@ -64,7 +67,8 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
         tv_title.setText("我的钱包");
         tv_affirm.setVisibility(View.VISIBLE);
         tv_affirm.setText("明细");
-        mPresenter.getUserInfo();
+        //mPresenter.getUserInfo();
+        mPresenter.wallet();
     }
 
     @OnClick({R.id.tv_back,R.id.ll_withdraw_deposit,R.id.ll_wei_binding,R.id.ll_comm_details,
@@ -97,34 +101,32 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     //个人信息返回接口
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
-        tv_ke_tixian_money.setText(data.balance);
 //        canWithdrawMoney = data.canWithdrawMoney;
 //        tv_today_order.setText(data.todayFinishOrder);
-//        tv_tixian_money.setText(data.todayProjectedIncome);
-//        tv_zong_order.setText(data.orderNum);
     }
 
-    //查询账户信息
-//    @Override
-//    public void getAccountInfoCallBack(AccountInfoEntity data) {
-//        if ("not_account".equals(data.step)){
+    //我的钱包返回数据
+    @Override
+    public void walletCallBack(WalletEntity data) {
+        tv_ke_tixian_money.setText(data.balance);
+        tv_tixian_money.setText(data.sumMonthPrice);
+        tv_zong_order.setText(data.sumPrice);
+        tv_number.setText(data.couponNum+"张");
+//        if (data.withdrawFlag==0){
 //            ll_wei_binding.setVisibility(View.VISIBLE);
 //            ll_withdraw_deposit.setVisibility(View.GONE);
 //        }else{
 //            ll_wei_binding.setVisibility(View.GONE);
 //            ll_withdraw_deposit.setVisibility(View.VISIBLE);
-//            if (!AppUtils.isEmpty(data.alipayAccount)){
-//                tv_zhanghu_number.setText("(支付宝)");
+//            if (data.withdrawFlag==1){
 //                iv_tixian_zhanghu.setImageResource(R.mipmap.ic_alipay);
-//            }else if (!AppUtils.isEmpty(data.openId)){
-//                tv_zhanghu_number.setText("(微信)");
+//            }else if (data.withdrawFlag==2){
 //                iv_tixian_zhanghu.setImageResource(R.mipmap.ex_share_wp);
 //            }else{
-//                iv_tixian_zhanghu.setVisibility(View.GONE);
-//                tv_zhanghu_number.setText("");
+//                iv_tixian_zhanghu.setImageResource(R.mipmap.logo_108);
 //            }
 //        }
-//    }
+    }
 
     @Override
     protected void onResume() {

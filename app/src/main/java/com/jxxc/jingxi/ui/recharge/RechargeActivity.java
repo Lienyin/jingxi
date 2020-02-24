@@ -194,21 +194,21 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                     toast(this,"充值金额要大于0");
                     return;
                 }
-                if (type == 0){
+                if (type == 3){
                     //支付宝
                     if (!isAvilible(this,"com.eg.android.AlipayGphone")){
                         toast(this,"目前您安装的支付宝版本过低或尚未安装");
                     }else{
                         StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByAliPay(money,0);
+                        mPresenter.payByAliPay(money,3);
                     }
-                }else if (type == 1){
+                }else if (type == 2){
                     //微信
                     if (!isAvilible(this,"com.tencent.mm")){
                         toast(this,"目前您安装的微信版本过低或尚未安装");
                     }else{
                         StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByWeChat(money,1);
+                        mPresenter.payByWeChat(money,2);
                     }
                 }
                 break;
