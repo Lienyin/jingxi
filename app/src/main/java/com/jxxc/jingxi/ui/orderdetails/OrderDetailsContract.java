@@ -12,9 +12,11 @@ import com.jxxc.jingxi.mvp.BasePresenter;
 public class OrderDetailsContract {
     interface View extends BaseView {
         void getOrderCallBack(OrderEntity data);
+        void clearCommentCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getOrder(String orderId);
+        void clearComment(String orderId);
     }
 }

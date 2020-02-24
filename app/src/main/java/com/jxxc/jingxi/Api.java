@@ -67,4 +67,6 @@ public class Api {
     public static final String CANCEL_ORDER = BASEURL + "/biz/order/cancel";
     //30-催单
     public static final String HASTEN_ORDER = BASEURL + "/biz/order/hasten";
+    //31-删除评论
+    public static final String CLEAR_COMMENT = BASEURL + "/biz/order/clearComment";
 }

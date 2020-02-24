@@ -108,7 +108,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 ZzRouter.gotoActivity(this, SubmitOrderActivity.class);
                 break;
             case R.id.tv_delete://删除评论
-                toast(this,"等待开发");
+                StyledDialog.buildLoading("数据加载中").setActivity(this).show();
+                mPresenter.clearComment(OrderId);
                 break;
             default:
         }
@@ -165,5 +166,10 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         }
         tv_details_pingjia_text.setText(data.commentContent);
         tv_details_pingjia_time.setText(data.customerCommentTime);
+    }
+
+    @Override
+    public void clearCommentCallBack() {
+        mPresenter.getOrder(OrderId);
     }
 }

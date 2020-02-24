@@ -43,4 +43,24 @@ public class OrderDetailsPresenter extends BasePresenterImpl<OrderDetailsContrac
                     }
                 });
     }
+
+    /**
+     * 删除评论
+     */
+    @Override
+    public void clearComment(String orderId) {
+        OkGo.<HttpResult>post(Api.CLEAR_COMMENT)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
+                        if (response.body().code==0){
+                            mView.clearCommentCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }
