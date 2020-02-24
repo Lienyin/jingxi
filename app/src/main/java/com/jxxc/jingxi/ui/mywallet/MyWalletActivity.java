@@ -131,6 +131,6 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getUserInfo();
+        mPresenter.wallet();
     }
 }

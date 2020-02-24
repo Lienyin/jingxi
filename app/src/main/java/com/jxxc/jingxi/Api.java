@@ -71,4 +71,6 @@ public class Api {
     public static final String CLEAR_COMMENT = BASEURL + "/biz/order/clearComment";
     //31-我的钱包
     public static final String WALLET = BASEURL + "/system/customer/wallet";
+    //32-查询附近洗车点
+    public static final String NEARBY_CONPANY = BASEURL + "/system/company/nearbyConpany";
 }

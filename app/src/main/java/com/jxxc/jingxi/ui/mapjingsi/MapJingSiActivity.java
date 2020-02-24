@@ -26,9 +26,12 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.MapJingXiDialog;
+import com.jxxc.jingxi.entity.backparameter.NearbyConpanyEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -152,6 +155,12 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         mLocationClient.setLocOption(option);
     }
 
+    //周边技师返回数据
+    @Override
+    public void nearbyConpanyCallBack(List<NearbyConpanyEntity> data) {
+
+    }
+
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
     public class MyLocationListener implements BDLocationListener {
         @Override
@@ -171,7 +180,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 locationLatitude = location.getLatitude();
                 locationLongitude = location.getLongitude();
-
+                mPresenter.nearbyConpany(500,locationLongitude,locationLatitude);
                 if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                     toast(MapJingSiActivity.this, "百度地图定位失败");
                 } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
