@@ -64,7 +64,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,false);
         }else if (item.status==5){
             //取消订单
-            helper.setText(R.id.iv_order_static,"取消订单");
+            helper.setText(R.id.iv_order_static,"已取消");
             helper.setGone(R.id.ll_evaluate,false);
             helper.setGone(R.id.ll_cancel_order,false);
         }else{

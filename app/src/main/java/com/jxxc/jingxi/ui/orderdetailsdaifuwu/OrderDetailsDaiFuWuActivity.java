@@ -30,11 +30,13 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.OrderDetailsDataAdapter;
+import com.jxxc.jingxi.dialog.CancelOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
+import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -100,6 +102,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     private String orderId,orderPrice;
     private OrderDetailsDataAdapter adapter;
     private RoutePlanSearch mSearch;
+    private CancelOrderDialog dialog;
     @Override
     protected int layoutId() {
         return R.layout.order_details_dai_fu_wu_activity;
@@ -112,6 +115,16 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getOrder(orderId);
         initMap();
+
+        dialog = new CancelOrderDialog(this);
+        dialog.setOnFenxiangClickListener(new CancelOrderDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick() {
+                //取消订单
+                StyledDialog.buildLoading("正在取消").setActivity(OrderDetailsDaiFuWuActivity.this).show();
+                mPresenter.cancelOrder(orderId);
+            }
+        });
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_call_phone,R.id.tv_details_cancel_order,
@@ -130,10 +143,10 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 }
                 break;
             case R.id.tv_details_cancel_order://取消订单
-                //
+                dialog.showShareDialog(true);
                 break;
             case R.id.tv_details_cui_order://催单
-                toast(this,"等待开发");
+                mPresenter.hasten(orderId);
                 break;
             case R.id.tv_details_go_pay://去支付
                 Intent intent = new Intent(this, PayOrderActivity.class);
@@ -160,21 +173,24 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
         if (data.status==2){
             tv_details_hint_tilt.setText("预计XX:XX到达");
-            tv_details_hint_text.setText("请耐心等待，技师已在路上");
+            tv_details_hint_text.setText("请耐心等待，技师已在路上。");
         }else if (data.status==0){
             tv_details_hint_tilt.setText("等待支付订单");
-            tv_details_hint_text.setText("请先完成订单支付");
+            tv_details_hint_text.setText("请先完成订单支付。");
             tv_details_go_pay.setVisibility(View.VISIBLE);
         }else if (data.status==1){
             tv_details_hint_tilt.setText("等待技师接单");
-            tv_details_hint_text.setText("请耐心等待技师接单");
+            tv_details_hint_text.setText("请耐心等待技师接单。");
             tv_details_cui_order.setVisibility(View.VISIBLE);
         }else if (data.status==3){
             tv_details_hint_tilt.setText("技师正在洗车");
-            tv_details_hint_text.setText("技师正在洗车，请耐心等待");
+            tv_details_hint_text.setText("技师正在洗车，请耐心等待。");
         }else if (data.status==5){
             tv_details_hint_tilt.setText("订单已取消");
-            tv_details_hint_text.setText("订单已取消，请重新下单");
+            tv_details_hint_text.setText("订单已取消，请重新下单。");
+            tv_details_cancel_order.setVisibility(View.GONE);
+            tv_details_go_pay.setVisibility(View.GONE);
+            tv_details_cui_order.setVisibility(View.GONE);
         }
         //订单信息
         tv_details_order_id.setText(data.orderId);
@@ -185,6 +201,18 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
         orderPrice = data.price;
+    }
+
+    //取消订单返回数据
+    @Override
+    public void cancelOrderCallBack() {
+        mPresenter.getOrder(orderId);
+    }
+
+    //催单返回数据
+    @Override
+    public void hastenCallBack() {
+        toast(this,"催单成功");
     }
 
     private void initMap(){

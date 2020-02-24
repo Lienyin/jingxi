@@ -14,9 +14,13 @@ import com.jxxc.jingxi.mvp.BaseView;
 public class OrderDetailsDaiFuWuContract {
     interface View extends BaseView {
         void getOrderCallBack(OrderEntity data);
+        void cancelOrderCallBack();
+        void hastenCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
         void getOrder(String orderId);
+        void cancelOrder(String orderId);
+        void hasten(String orderId);
     }
 }

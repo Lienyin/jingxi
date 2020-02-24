@@ -1,5 +1,6 @@
 package com.jxxc.jingxi.ui.myorder;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 import com.jxxc.jingxi.http.EventCenter;
@@ -54,6 +55,27 @@ public class MyOrderPresenter extends BasePresenterImpl<MyOrderContract.View> im
                         List<MyOrderEntity> d = response.body().data;
                         if (response.body().code == 0){
                             mView.myOrderMoreCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 取消订单
+     * @param orderId
+     */
+    @Override
+    public void cancelOrder(String orderId) {
+        OkGo.<HttpResult>post(Api.CANCEL_ORDER)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
+                        if (response.body().code==0){
+                            mView.cancelOrderCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }

@@ -45,4 +45,45 @@ public class OrderDetailsDaiFuWuPresenter extends BasePresenterImpl<OrderDetails
                     }
                 });
     }
+
+    /**
+     * 取消订单
+     * @param orderId
+     */
+    @Override
+    public void cancelOrder(String orderId) {
+        OkGo.<HttpResult>post(Api.CANCEL_ORDER)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
+                        if (response.body().code==0){
+                            mView.cancelOrderCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 催单
+     * @param orderId
+     */
+    @Override
+    public void hasten(String orderId) {
+        OkGo.<HttpResult>post(Api.HASTEN_ORDER)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        if (response.body().code==0){
+                            mView.hastenCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }

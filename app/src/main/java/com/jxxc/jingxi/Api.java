@@ -63,4 +63,8 @@ public class Api {
     public static final String COMMENT = BASEURL + "/biz/order/comment";
     //28-第三方支付
     public static final String ORDER_PAY = BASEURL + "/biz/order/orderPay";
+    //29-取消订单
+    public static final String CANCEL_ORDER = BASEURL + "/biz/order/cancel";
+    //30-催单
+    public static final String HASTEN_ORDER = BASEURL + "/biz/order/hasten";
 }

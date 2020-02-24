@@ -61,6 +61,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     private String orderType = "";
     private CancelOrderDialog dialog;
     private List<MyOrderEntity> list = new ArrayList<>();
+    private String OrderId;
     @Override
     protected int layoutId() {
         return R.layout.activity_my_order;
@@ -77,7 +78,8 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
             @Override
             public void onFenxiangClick() {
                 //取消订单
-                toast(MyOrderActivity.this,"待开发");
+                StyledDialog.buildLoading("正在取消").setActivity(MyOrderActivity.this).show();
+                mPresenter.cancelOrder(OrderId);
             }
         });
     }
@@ -104,6 +106,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                     ZzRouter.gotoActivity(MyOrderActivity.this, EvaluateActivity.class,orderId);
                 }else if (type==3){
                     //取消订单
+                    OrderId = orderId;
                     dialog.showShareDialog(true);
                 }else if (type==4){
                     if ("4".equals(status)){
@@ -174,6 +177,12 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         if (data.size() < 10) {
             adapter.loadMoreEnd();
         }
+    }
+
+    //取消订单
+    @Override
+    public void cancelOrderCallBack() {
+        onRefresh();
     }
 
     @Override
