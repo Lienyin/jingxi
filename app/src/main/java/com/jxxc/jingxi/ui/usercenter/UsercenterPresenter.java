@@ -99,7 +99,6 @@ public class UsercenterPresenter extends BasePresenterImpl<UsercenterContract.Vi
                         }
                         if (response.body().code == 0) {
                             updateInfo(d.fileName);
-                            toast(mContext,response.body().message);
                         }else{
                             toast(mContext,response.body().message);
                         }

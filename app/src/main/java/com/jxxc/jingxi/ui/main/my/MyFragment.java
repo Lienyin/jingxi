@@ -37,7 +37,8 @@ import com.jxxc.jingxi.utils.GlideImgManager;
 public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> implements MyContract.View, SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
 
     private Context context;
-    private LinearLayout ll_my_car,ll_my_order,ll_my_wallet,ll_msg,ll_setting;
+    private View view_my_invoice;
+    private LinearLayout ll_my_car,ll_my_order,ll_my_invoice,ll_my_wallet,ll_msg,ll_setting;
     private TextView tv_user_name,tv_phone_number;
     private ImageView iv_user_head;
     public MyFragment(Context context){
@@ -49,7 +50,9 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_fragment, container, false);
         ll_my_car = view.findViewById(R.id.ll_my_car);
+        view_my_invoice = view.findViewById(R.id.view_my_invoice);
         ll_my_order = view.findViewById(R.id.ll_my_order);
+        ll_my_invoice = view.findViewById(R.id.ll_my_invoice);
         ll_my_wallet = view.findViewById(R.id.ll_my_wallet);
         ll_msg = view.findViewById(R.id.ll_msg);
         ll_setting = view.findViewById(R.id.ll_setting);
@@ -88,6 +91,9 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
             case R.id.ll_my_order://我的订单
                 ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);
                 break;
+            case R.id.ll_my_invoice://发票管理
+                ZzRouter.gotoActivity((Activity) context, MyWalletActivity.class);
+                break;
             case R.id.ll_my_wallet://我的钱包
                 ZzRouter.gotoActivity((Activity) context, MyWalletActivity.class);
                 break;
@@ -115,5 +121,16 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
         GlideImgManager.loadCircleImage(context, data.avatar, iv_user_head);
         tv_user_name.setText(AppUtils.isEmpty(data.userName)?data.realName:data.userName);
         tv_phone_number.setText(data.phonenumber);
+        //帐号类型，0：个人帐号；1企业帐号
+        if (data.accountType==1){
+            ll_my_invoice.setVisibility(View.VISIBLE);
+            view_my_invoice.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.getUserInfo();
     }
 }

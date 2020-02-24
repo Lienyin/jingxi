@@ -35,15 +35,16 @@
 
         <ImageView
             android:id="@+id/iv_user_head"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:src="@mipmap/iv_head"/>
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:text="XXX"/>
         <TextView
@@ -107,6 +108,41 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             android:text="我的订单"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/jiantou"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/view_my_invoice"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"
+        android:background="@color/set_bg"/>
+    <!--发票管理-->
+    <LinearLayout
+        android:id="@+id/ll_my_invoice"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingLeft="20dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_user2x_03"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:text="发票管理"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
