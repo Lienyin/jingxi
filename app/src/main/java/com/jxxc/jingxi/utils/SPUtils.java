@@ -25,6 +25,7 @@ public class SPUtils {
     public static final String K_SESSION_TIMEOUT = "sessionTimeout";
     public static final String K_SESSION_MOBILE = "phonenumber";
     public static final String K_STATIC_URL = "staticUrl";//上传静态资源图片
+    public static final String K_ACTIVITY = "activity";//首页活动显示
     private static Context mContext;
 
     public static SharedPreferences init(Context context) {

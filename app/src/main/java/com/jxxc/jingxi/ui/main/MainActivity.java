@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
@@ -18,6 +19,7 @@ import com.jxxc.jingxi.ui.main.msg.MsgFragment;
 import com.jxxc.jingxi.ui.main.my.MyFragment;
 import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxi.utils.SPUtils;
 
 
 /**
@@ -44,6 +46,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
+    private ActivityDialog activityDialog;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -53,6 +56,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     public void initData() {
         bindView();
         mPresenter.queryAppVersion("3");//查询版本
+        activityDialog = new ActivityDialog(this);
+        boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
+        if (isfirstlogin){
+            SPUtils.put(this,"ACTIVITY", false);
+            activityDialog.showShareDialog(true);
+        }
     }
 
     //UI组件初始化与事件绑定
