@@ -34,7 +34,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private Context context;
     private TextView tv_map_jingsi,tv_location_city;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
-    private LinearLayout ll_dao_dian;
+    private LinearLayout ll_dao_dian,ll_shang_men;
     private List<ProductInfoEntity.Combo.ProductInfo> list = new ArrayList<>();
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -57,6 +57,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         rb_work_order_all = view.findViewById(R.id.rb_work_order_all);
         rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
+        ll_shang_men = view.findViewById(R.id.ll_shang_men);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -87,6 +88,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         mLocationClient.start();
 
         dialog = new XiaOrderDialog(context);
+        //mPresenter.comboInfo();//获取套餐
         return view;
     }
 
@@ -131,10 +133,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
             case R.id.rb_work_order_all://上门
+                ll_shang_men.setVisibility(View.VISIBLE);
                 ll_dao_dian.setVisibility(View.GONE);
                 break;
             case R.id.rb_work_order_dai_jie://到店
                 ll_dao_dian.setVisibility(View.VISIBLE);
+                ll_shang_men.setVisibility(View.GONE);
                 break;
             case R.id.tv_car_fuwu1:
             case R.id.tv_car_fuwu2:

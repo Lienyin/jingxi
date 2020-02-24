@@ -48,7 +48,7 @@ public class Api {
     //20-充值活动
     public static final String RECHARGE_CONFIGURATION = BASEURL + "/biz/deposit_order/getGift";
     //21-充值
-    public static final String RECHARGE = BASEURL + "";
+    public static final String RECHARGE = BASEURL + "/biz/deposit_order/pay";
     //22-我的订单
     public static final String MY_ORDER = BASEURL + "/biz/order/myOrder";
     //23-订单详情

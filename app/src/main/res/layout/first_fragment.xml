@@ -238,6 +238,7 @@
                 </LinearLayout>
                 <!--上门洗车-->
                 <LinearLayout
+                    android:id="@+id/ll_shang_men"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
