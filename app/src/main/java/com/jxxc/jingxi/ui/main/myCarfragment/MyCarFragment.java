@@ -33,6 +33,7 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.ui.submitorder.CouponAdapter;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.ListViewForScrollView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private ImageView iv_call_phone;
     private ImageView iv_address;
     private ImageView iv_time_date;
-    private ListView lv_coupon_data;
+    private ListViewForScrollView lv_coupon_data;
     private TextView et_car_address;
     private TextView tv_huan_car;
     private EditText et_phone_number;

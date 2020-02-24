@@ -58,7 +58,7 @@ public class CouponAdapter extends BaseAdapter {
         MyCoupon data = list.get(position);
         holder.tv_coupon_money.setText(data.money+"元优惠券");
         if (!AppUtils.isEmpty(data.doorsillMoney)){
-            holder.tv_coupon_memo.setText(data.doorsillMoney);
+            holder.tv_coupon_memo.setText("(满"+data.doorsillMoney+"元使用)");
         }else{
             holder.tv_coupon_memo.setText("");
         }

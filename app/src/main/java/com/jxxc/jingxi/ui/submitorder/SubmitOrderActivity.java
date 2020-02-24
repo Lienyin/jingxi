@@ -30,6 +30,7 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.ListViewForScrollView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @BindView(R.id.iv_time_date)
     ImageView iv_time_date;
     @BindView(R.id.lv_coupon_data)
-    ListView lv_coupon_data;
+    ListViewForScrollView lv_coupon_data;
     @BindView(R.id.et_car_address)
     TextView et_car_address;
     @BindView(R.id.tv_huan_car)

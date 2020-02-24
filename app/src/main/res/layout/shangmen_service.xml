@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/view_bg"
     android:orientation="vertical">
 
     <ScrollView
@@ -488,7 +489,7 @@
                 android:text="优惠券"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-            <ListView
+            <com.jxxc.jingxi.utils.ListViewForScrollView
                 android:id="@+id/lv_coupon_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
