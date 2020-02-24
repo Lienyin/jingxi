@@ -73,7 +73,7 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
     @BindView(R.id.btn_pay)
     Button btnPay;
     private RechargeAdapter adapter;
-    private int type = 1;
+    private int type = 2;
     private double money;
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
