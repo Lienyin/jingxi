@@ -195,6 +195,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             tv_car_number.setText(carListEntity.carNum);
             tv_car_type.setText(carListEntity.brandName+"  "+carListEntity.typeName);
             comboTypeId = carListEntity.typeId;
+            carColor(carListEntity.color);
         }
     };
 
@@ -309,32 +310,37 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             tv_car_number.setText(data.get(0).carNum);
             tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
             comboTypeId = data.get(0).typeId;
-            if (data.get(0).color==1){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_1);
-            }else if (data.get(0).color==2){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_2);
-            }else if (data.get(0).color==3){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_3);
-            }else if (data.get(0).color==4){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_4);
-            }else if (data.get(0).color==5){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_5);
-            }else if (data.get(0).color==6){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_6);
-            }else if (data.get(0).color==7){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_7);
-            }else if (data.get(0).color==8){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_8);
-            }else if (data.get(0).color==9){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_9);
-            }else if (data.get(0).color==10){
-                tv_car_color.setBackgroundResource(R.drawable.car_color_10);
-            }else{
-                tv_car_color.setBackgroundResource(R.drawable.car_color_8);
-            }
+            carColor(data.get(0).color);
         }else{
             ll_add_car.setVisibility(View.VISIBLE);
             ll_car_info.setVisibility(View.GONE);
+        }
+    }
+
+    //车辆颜色
+    private void carColor(int colorType){
+        if (colorType==1){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_1);
+        }else if (colorType==2){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_2);
+        }else if (colorType==3){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_3);
+        }else if (colorType==4){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_4);
+        }else if (colorType==5){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_5);
+        }else if (colorType==6){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_6);
+        }else if (colorType==7){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_7);
+        }else if (colorType==8){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+        }else if (colorType==9){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_9);
+        }else if (colorType==10){
+            tv_car_color.setBackgroundResource(R.drawable.car_color_10);
+        }else{
+            tv_car_color.setBackgroundResource(R.drawable.car_color_8);
         }
     }
 
