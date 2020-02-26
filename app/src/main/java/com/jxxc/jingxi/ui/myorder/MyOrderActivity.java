@@ -55,6 +55,12 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     RadioButton rb_order_jignxz;
     @BindView(R.id.rb_order_yiwc)
     RadioButton rb_order_yiwc;
+    @BindView(R.id.rb_order_daijiedan)
+    RadioButton rb_order_daijiedan;
+    @BindView(R.id.rb_order_daifuwu)
+    RadioButton rb_order_daifuwu;
+    @BindView(R.id.rb_order_cancel)
+    RadioButton rb_order_cancel;
 
     private BillAdapter adapter;
     private int offset = 2;
@@ -131,11 +137,13 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         });
     }
 
-    @OnClick({R.id.tv_back,R.id.rb_order_all,R.id.rb_order_daizhifu,R.id.rb_order_jignxz,R.id.rb_order_yiwc})
+    @OnClick({R.id.tv_back,R.id.rb_order_all,R.id.rb_order_daizhifu,R.id.rb_order_jignxz,R.id.rb_order_yiwc,
+    R.id.rb_order_daijiedan,R.id.rb_order_daifuwu,R.id.rb_order_cancel})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-            //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+            //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),
+            // ( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
             case R.id.tv_back:
                 finish();
                 break;
@@ -147,12 +155,24 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 orderType = "0";
                 mPresenter.myOrder(orderType,1,10);
                 break;
+            case R.id.rb_order_daijiedan://已支付待接单
+                orderType = "1";
+                mPresenter.myOrder(orderType,1,10);
+                break;
+            case R.id.rb_order_daifuwu://待服务
+                orderType = "2";
+                mPresenter.myOrder(orderType,1,10);
+                break;
             case R.id.rb_order_jignxz://进行中
                 orderType = "3";
                 mPresenter.myOrder(orderType,1,10);
                 break;
             case R.id.rb_order_yiwc://已完成
                 orderType = "4";
+                mPresenter.myOrder(orderType,1,10);
+                break;
+            case R.id.rb_order_cancel://已完成
+                orderType = "5";
                 mPresenter.myOrder(orderType,1,10);
                 break;
             default:

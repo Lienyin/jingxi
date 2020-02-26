@@ -35,17 +35,25 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="当前位置"/>
-            <TextView
-                android:id="@+id/tv_address"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:drawablePadding="2dp"
-                android:gravity="center_vertical"
-                android:drawableLeft="@mipmap/dingwei_back"
-                android:layout_marginTop="10dp"
-                android:text="XXXX"/>
+                android:layout_height="30dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/dingwei_back"/>
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="XXXX"/>
+            </LinearLayout>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"

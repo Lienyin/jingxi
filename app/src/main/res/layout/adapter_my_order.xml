@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="330dp"
         android:background="@drawable/attestation_bg_edittext"
         android:layout_margin="15dp"
         android:orientation="vertical">
@@ -76,6 +76,27 @@
                 android:textColor="@color/black"
                 android:text="XXXX"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black999"
+                android:text="服务类型"/>
+            <TextView
+                android:id="@+id/tv_fuwu_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:text="XXXX"/>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -97,7 +118,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
@@ -117,7 +138,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
@@ -138,7 +159,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black999"
                     android:textSize="14sp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
@@ -152,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black999"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:text="订单金额"/>

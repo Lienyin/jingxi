@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_pop_zhandian_battery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_pop_view_img_battery"
+            android:layout_width="40dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="6dp"
+            android:src="@mipmap/icon_72" />
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_battery_pop_num"-->
+<!--            android:layout_width="22dp"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:layout_marginLeft="28dp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@mipmap/pop_c">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_pop_num_battery"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:text="0"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="10dp" />-->
+<!--        </LinearLayout>-->
+    </RelativeLayout>
+    <!--离线-->
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_pop_view_img_no"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="47dp"-->
+<!--        android:layout_marginTop="6dp"-->
+<!--        android:visibility="gone"-->
+<!--        android:src="@mipmap/home_siteoff_bg" />-->
+</RelativeLayout>

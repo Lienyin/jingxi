@@ -2,7 +2,11 @@ package com.jxxc.jingxi.ui.mapjingsi;
 
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -15,8 +19,10 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -100,6 +106,8 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                //获取周边技师
+                mPresenter.nearbyConpany(1000,mapStatus.target.longitude,mapStatus.target.latitude);
                 //POI检索
                 mCoder = GeoCoder.newInstance();
                 mCoder.setOnGetGeoCodeResultListener(listener);
@@ -158,7 +166,23 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     //周边技师返回数据
     @Override
     public void nearbyConpanyCallBack(List<NearbyConpanyEntity> data) {
-
+        //定义Maker坐标点
+        mBaiduMap.clear();
+        for (NearbyConpanyEntity site : data) {
+            LatLng point = new LatLng(site.lat, site.lng);
+            View view = View.inflate(this, R.layout.site_pop_view_img, null);
+            ImageView ivView = (ImageView) view.findViewById(R.id.iv_pop_view_img_battery);
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(view);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("batSite", site);
+            OverlayOptions option = new MarkerOptions()
+                    .animateType(MarkerOptions.MarkerAnimateType.jump)
+                    .position(point)
+                    .extraInfo(bundle)
+                    .icon(bitmap);
+            //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(option);
+        }
     }
 
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
@@ -180,7 +204,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 locationLatitude = location.getLatitude();
                 locationLongitude = location.getLongitude();
-                mPresenter.nearbyConpany(500,locationLongitude,locationLatitude);
+                mPresenter.nearbyConpany(1000,locationLongitude,locationLatitude);
                 if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                     toast(MapJingSiActivity.this, "百度地图定位失败");
                 } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {

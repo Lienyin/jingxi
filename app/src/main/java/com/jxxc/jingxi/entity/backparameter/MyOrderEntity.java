@@ -11,6 +11,7 @@ public class MyOrderEntity implements Serializable {
     public String price;
     public String statusName;
     public int status;
+    public int serviceType;
     public List<MyOrder> products;
 
     public class MyOrder{

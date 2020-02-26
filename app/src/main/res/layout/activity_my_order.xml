@@ -40,6 +40,28 @@
                 android:textColor="@drawable/radio"
                 android:textSize="14sp" />
             <RadioButton
+                android:id="@+id/rb_order_daijiedan"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="待接单"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+            <RadioButton
+                android:id="@+id/rb_order_daifuwu"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="待服务"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+            <RadioButton
                 android:id="@+id/rb_order_jignxz"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
@@ -58,6 +80,17 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="已完成"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+            <RadioButton
+                android:id="@+id/rb_order_cancel"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="已取消"
                 android:drawableBottom="@drawable/radio_bg"
                 android:textColor="@drawable/radio"
                 android:textSize="14sp" />
