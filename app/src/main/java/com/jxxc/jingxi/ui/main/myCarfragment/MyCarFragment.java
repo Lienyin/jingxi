@@ -150,6 +150,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         iv_time_date.setOnClickListener(this);
         tv_huan_car.setOnClickListener(this);
         tv_create_order.setOnClickListener(this);
+        ll_add_car.setOnClickListener(this);
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);
         mPresenter.comboInfo();
@@ -189,6 +190,10 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         public void onReceive(Context context, Intent intent) {
             //换辆车
             CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
+            if (!AppUtils.isEmpty(carListEntity)){
+                ll_add_car.setVisibility(View.GONE);
+                ll_car_info.setVisibility(View.VISIBLE);
+            }
             tv_car_number.setText(carListEntity.carNum);
             tv_car_type.setText(carListEntity.brandName+"  "+carListEntity.typeName);
             comboTypeId = carListEntity.typeId;
@@ -272,6 +277,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 break;
             case R.id.iv_time_date://选择时间
                 getTime();
+                break;
+            case R.id.ll_add_car://添加 车辆信息
+                ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"1");
                 break;
             case R.id.tv_huan_car://换辆车
                 ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"1");
@@ -394,5 +402,13 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         intent.putExtra("orderId",data.orderId);
         intent.putExtra("orderPrice",data.payPrice);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.getCarList();
+        mPresenter.queryMyCoupon(0);
+        mPresenter.comboInfo();
     }
 }
