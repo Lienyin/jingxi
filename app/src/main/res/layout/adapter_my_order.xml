@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="350dp"
         android:background="@drawable/attestation_bg_edittext"
         android:layout_margin="15dp"
         android:orientation="vertical">
@@ -48,7 +48,7 @@
         <LinearLayout
             android:id="@+id/ll_gv_data"
             android:layout_width="match_parent"
-            android:layout_height="135dp">
+            android:layout_height="155dp">
             <GridView
                 android:id="@+id/gv_fuwu_data"
                 android:layout_width="wrap_content"

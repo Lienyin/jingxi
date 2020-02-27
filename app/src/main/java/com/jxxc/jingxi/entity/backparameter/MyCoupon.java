@@ -13,7 +13,7 @@ public class MyCoupon implements Serializable {
     public String couponRuleType;
     public int status;
     public String statusName;
-    public String money;
+    public double money;
     public String doorsillMoney;
     public String discount;
     public String startTime;

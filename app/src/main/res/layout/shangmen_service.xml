@@ -533,6 +533,7 @@
                         android:background="@color/transparent"
                         android:hint="请输入联系方式"
                         android:inputType="phone"
+                        android:maxLength="11"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
