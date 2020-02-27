@@ -307,10 +307,21 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         if (data.size()>0){//y有车
             ll_add_car.setVisibility(View.GONE);
             ll_car_info.setVisibility(View.VISIBLE);
-            tv_car_number.setText(data.get(0).carNum);
-            tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
-            comboTypeId = data.get(0).typeId;
-            carColor(data.get(0).color);
+            //展示默认车辆，没有默认车辆展示第一辆
+            //是否默认 1是0否
+            for (int i=0;i<data.size();i++){
+                if (data.get(i).isDefault==1){
+                    tv_car_number.setText(data.get(i).carNum);
+                    tv_car_type.setText(data.get(i).brandName+"  "+data.get(i).typeName);
+                    comboTypeId = data.get(i).typeId;
+                    carColor(data.get(i).color);
+                }else{
+                    tv_car_number.setText(data.get(0).carNum);
+                    tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
+                    comboTypeId = data.get(0).typeId;
+                    carColor(data.get(0).color);
+                }
+            }
         }else{
             ll_add_car.setVisibility(View.VISIBLE);
             ll_car_info.setVisibility(View.GONE);

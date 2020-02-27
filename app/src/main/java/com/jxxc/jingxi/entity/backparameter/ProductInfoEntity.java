@@ -15,7 +15,7 @@ public class ProductInfoEntity implements Serializable {
         public String activitiesName;
     }
     public List<Combo> combo;
-    public class Combo{
+    public static class Combo{
         public String comboTypeId;
         public String basicPrice;
         public String carTypeId;
@@ -26,7 +26,7 @@ public class ProductInfoEntity implements Serializable {
             public String selectedImg;
             public String comboProductId;
             public String isDefault;
-            public String productId;
+            public int productId;
             public String price;
             public String productName;
         }
