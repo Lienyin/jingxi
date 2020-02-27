@@ -71,7 +71,7 @@ public class CouponAdapter extends BaseAdapter {
             holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
         }else{
             holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.discount)+"折优惠券");
-            if (!AppUtils.isEmpty(data.doorsillMoney)){
+            if (data.doorsillMoney>0){
                 holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
             }else{
                 holder.tv_coupon_memo.setText("");
