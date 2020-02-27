@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
@@ -32,6 +33,7 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -111,6 +113,26 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     TextView et_car_address;
     @BindView(R.id.tv_huan_car)
     TextView tv_huan_car;
+    @BindView(R.id.tv_car_fuwu1_money)
+    TextView tv_car_fuwu1_money;
+    @BindView(R.id.tv_car_fuwu2_money)
+    TextView tv_car_fuwu2_money;
+    @BindView(R.id.tv_car_fuwu3_money)
+    TextView tv_car_fuwu3_money;
+    @BindView(R.id.tv_car_fuwu4_money)
+    TextView tv_car_fuwu4_money;
+    @BindView(R.id.tv_car_fuwu5_money)
+    TextView tv_car_fuwu5_money;
+    @BindView(R.id.tv_car_fuwu6_money)
+    TextView tv_car_fuwu6_money;
+    @BindView(R.id.tv_car_fuwu7_money)
+    TextView tv_car_fuwu7_money;
+    @BindView(R.id.tv_car_fuwu8_money)
+    TextView tv_car_fuwu8_money;
+    @BindView(R.id.tv_xia_order_money)
+    TextView tv_xia_order_money;
+    @BindView(R.id.tv_xia_order_discounts)
+    TextView tv_xia_order_discounts;
     @BindView(R.id.et_phone_number)
     EditText et_phone_number;
     @BindView(R.id.et_car_memo)
@@ -127,8 +149,18 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private int serviceType=0;
     private String counponId="";
     private String comboProductId="";
+    private String comboProductId6="";
+    private String comboProductId7="";
+    private String comboProductId8="";
     private String appointmentStartTime="";
     private String appointmentEndTime="";
+    private ProductInfoEntity.Combo comboData = new ProductInfoEntity.Combo();//车型套餐数据
+    private double comboMoney=0;//套餐金额
+    private double couponMoney=0;//优惠券金额
+    private double fuwuTypeMoney6=0;
+    private double fuwuTypeMoney7=0;
+    private double fuwuTypeMoney8=0;
+    private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -149,15 +181,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         tv_car_fuwu3.setSelected(true);
         tv_car_fuwu4.setSelected(true);
         tv_car_fuwu5.setSelected(true);
-        if (fuwu1>0){
-            tv_car_fuwu6.setSelected(true);
-        }
-        if (fuwu2>0){
-            tv_car_fuwu7.setSelected(true);
-        }
-        if (fuwu3>0){
-            tv_car_fuwu8.setSelected(true);
-        }
+
         adapter = new CouponAdapter(this);
         adapter.setData(list);
         lv_coupon_data.setAdapter(adapter);
@@ -165,9 +189,31 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //选择优惠券
-                adapter.setSelectPosition(i);
-                adapter.notifyDataSetChanged();
-                counponId = list.get(i).counponId+"";
+                if (list.get(i).isForbidden()==false){
+                    adapter.setSelectPosition(i);
+                    adapter.notifyDataSetChanged();
+                    counponId = list.get(i).counponId+"";
+                    tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                    //金额显示
+                    //优惠券类型 0无门槛减N 1满N减N 2折扣券
+                    if (list.get(i).couponRuleType==0){
+                        couponMoney = list.get(i).money;
+                        comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                        tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(list.get(i).money)+"元");
+                    }else if (list.get(i).couponRuleType==1){
+                        couponMoney = list.get(i).money;
+                        comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                        tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(list.get(i).money)+"元");
+                    }else{
+                        //折扣券
+                        comboMoney = (comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)*(list.get(i).discount/10);
+                        double zheMoney = (comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8) - comboMoney;
+                        tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(zheMoney)+"元");
+                    }
+                    tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                }else{
+                    Toast.makeText(SubmitOrderActivity.this,"优惠券不可用",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -190,18 +236,31 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private BroadcastReceiver receiverCarInfo = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //接收到广播以后要做的事
+            //换辆车
             CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
+            if (!AppUtils.isEmpty(carListEntity)){
+                ll_add_car.setVisibility(View.GONE);
+                ll_car_info.setVisibility(View.VISIBLE);
+            }
             tv_car_number.setText(carListEntity.carNum);
             tv_car_type.setText(carListEntity.brandName+"  "+carListEntity.typeName);
             comboTypeId = carListEntity.typeId;
+            setService(productInfoEntity);
             carColor(carListEntity.color);
+            tv_car_fuwu6.setSelected(false);
+            tv_car_fuwu7.setSelected(false);
+            tv_car_fuwu8.setSelected(false);
+            fuwuTypeMoney6 = 0;
+            comboProductId6="";
+            fuwuTypeMoney7 = 0;
+            comboProductId7="";
+            fuwuTypeMoney8 = 0;
+            comboProductId8="";
         }
     };
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
-            R.id.rb_zheng_che,R.id.tv_car_fuwu1,R.id.tv_car_fuwu2,R.id.tv_car_fuwu3,R.id.tv_car_fuwu4
-            ,R.id.tv_car_fuwu5,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
+            R.id.rb_zheng_che,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
     ,R.id.iv_address,R.id.iv_time_date,R.id.tv_create_order,R.id.tv_huan_car})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
@@ -227,32 +286,65 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 ll_car_fuwu.setVisibility(View.GONE);
                 ll_fuwu_no_data.setVisibility(View.VISIBLE);
                 break;
-            case R.id.tv_car_fuwu1:
-            case R.id.tv_car_fuwu2:
-            case R.id.tv_car_fuwu3:
-            case R.id.tv_car_fuwu4:
-            case R.id.tv_car_fuwu5:
-                break;
             case R.id.tv_car_fuwu6:
                 if (tv_car_fuwu6.isSelected()==true){
                     tv_car_fuwu6.setSelected(false);
+                    fuwuTypeMoney6 = 0;
+                    comboProductId6="";
                 }else{
                     tv_car_fuwu6.setSelected(true);
+                    comboProductId6=",6";
+                    for (int j=0;j<comboData.productList.size();j++){
+                        if (comboData.productList.get(j).productId==6){
+                            fuwuTypeMoney6 = comboData.productList.get(j).price;
+                        }
+                    }
                 }
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                adapter.setOrderMoney(comboMoney);//优惠券适配器使用
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.tv_car_fuwu7:
                 if (tv_car_fuwu7.isSelected()==true){
                     tv_car_fuwu7.setSelected(false);
+                    fuwuTypeMoney7 = 0;
+                    comboProductId7="";
                 }else{
+                    comboProductId7=",7";
                     tv_car_fuwu7.setSelected(true);
+                    for (int j=0;j<comboData.productList.size();j++){
+                        if (comboData.productList.get(j).productId==7){
+                            fuwuTypeMoney7 = comboData.productList.get(j).price;
+                        }
+                    }
                 }
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                adapter.setOrderMoney(comboMoney);//优惠券适配器使用
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.tv_car_fuwu8:
                 if (tv_car_fuwu8.isSelected()==true){
                     tv_car_fuwu8.setSelected(false);
+                    fuwuTypeMoney8 = 0;
+                    comboProductId8="";
                 }else{
+                    comboProductId8=",8";
                     tv_car_fuwu8.setSelected(true);
+                    for (int j=0;j<comboData.productList.size();j++){
+                        if (comboData.productList.get(j).productId==8){
+                            fuwuTypeMoney8 = comboData.productList.get(j).price;
+                        }
+                    }
                 }
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                adapter.setOrderMoney(comboMoney);//优惠券适配器使用
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.iv_call_phone:
                 if (iv_call_phone.isSelected()==true){
@@ -278,6 +370,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     toast(this,"请选择服务时间");
                 }else{
                     StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                    comboProductId = "1,2,3,4,5"+comboProductId6+comboProductId7+comboProductId8;
                     mPresenter.createOrder(
                             comboProductId,
                             serviceType,
@@ -309,18 +402,22 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             ll_car_info.setVisibility(View.VISIBLE);
             //展示默认车辆，没有默认车辆展示第一辆
             //是否默认 1是0否
+            int a=0;
             for (int i=0;i<data.size();i++){
                 if (data.get(i).isDefault==1){
+                    a++;
                     tv_car_number.setText(data.get(i).carNum);
                     tv_car_type.setText(data.get(i).brandName+"  "+data.get(i).typeName);
-                    comboTypeId = data.get(i).typeId;
+                    comboTypeId = data.get(i).typeId;//默认套餐组合套餐Id
                     carColor(data.get(i).color);
-                }else{
-                    tv_car_number.setText(data.get(0).carNum);
-                    tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
-                    comboTypeId = data.get(0).typeId;
-                    carColor(data.get(0).color);
                 }
+            }
+            //没有设置默认车辆
+            if (a==0){
+                tv_car_number.setText(data.get(0).carNum);
+                tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
+                comboTypeId = data.get(0).typeId;//套餐组合套餐Id
+                carColor(data.get(0).color);
             }
         }else{
             ll_add_car.setVisibility(View.VISIBLE);
@@ -365,9 +462,74 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
 
     //组合套餐数据
     @Override
-    public void comboInfoCallBack(ProductInfoEntity data) {
-        comboTypeId = data.combo.get(0).comboTypeId;//套餐服务ID
-        comboProductId = data.combo.get(0).productList.get(0).comboProductId;
+    public void comboInfoCallBack(ProductInfoEntity proData) {
+        productInfoEntity = proData;
+        setService(productInfoEntity);
+    }
+
+    //设置服务选项UI
+    private void setService(ProductInfoEntity data){
+        //默认拿 默认车型洗车组合套餐，如果没有默认车型拿第一个洗车组合套餐
+        //默认车型comboTypeId==1 SUV
+        int a =0;
+        for (int i=0;i<data.combo.size();i++){
+            if (comboTypeId.equals(data.combo.get(i).comboTypeId)){
+                a++;
+                //默认车型数据
+                comboData = data.combo.get(i);
+            }
+        }
+        if (a==0){
+            comboData = data.combo.get(0);
+        }
+        double morenXuanze6 = 0;//默认选择
+        double morenXuanze7 = 0;
+        double morenXuanze8 = 0;
+        for (int j=0;j<comboData.productList.size();j++){
+            if (comboData.productList.get(j).productId==1){
+                tv_car_fuwu1_money.setText("+￥"+comboData.productList.get(j).price);
+            }else if (comboData.productList.get(j).productId==2){
+                tv_car_fuwu2_money.setText("+￥"+comboData.productList.get(j).price);
+            }else if (comboData.productList.get(j).productId==3){
+                tv_car_fuwu3_money.setText("+￥"+comboData.productList.get(j).price);
+            }else if (comboData.productList.get(j).productId==4){
+                tv_car_fuwu4_money.setText("+￥"+comboData.productList.get(j).price);
+            }else if (comboData.productList.get(j).productId==5){
+                tv_car_fuwu5_money.setText("+￥"+comboData.productList.get(j).price);
+            }else if (comboData.productList.get(j).productId==6){
+                morenXuanze6= comboData.productList.get(j).price;
+                tv_car_fuwu6_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
+            }else if (comboData.productList.get(j).productId==7){
+                morenXuanze7= comboData.productList.get(j).price;
+                tv_car_fuwu7_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
+            }else if (comboData.productList.get(j).productId==8){
+                morenXuanze8= comboData.productList.get(j).price;
+                tv_car_fuwu8_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
+            }else{
+                tv_car_fuwu8_money.setText("外加服务");
+            }
+        }
+        //首页传过来默认选择
+        if (fuwu1>0){
+            tv_car_fuwu6.setSelected(true);
+            comboProductId6=",6";
+            fuwuTypeMoney6 = morenXuanze6;
+        }
+        if (fuwu2>0){
+            tv_car_fuwu7.setSelected(true);
+            comboProductId7=",7";
+            fuwuTypeMoney7 = morenXuanze7;
+        }
+        if (fuwu3>0){
+            tv_car_fuwu8.setSelected(true);
+            comboProductId8=",8";
+            fuwuTypeMoney8 = morenXuanze8;
+        }
+        comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+        tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+        rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+        adapter.setOrderMoney(comboMoney);//优惠券适配器使用
+        adapter.notifyDataSetChanged();
     }
 
     //下单返回数据

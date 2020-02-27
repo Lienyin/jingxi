@@ -351,6 +351,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -377,6 +378,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -403,6 +405,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
+                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -566,7 +569,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         if (a==0){
             comboData = data.combo.get(0);
         }
-        rb_wai_guan.setText("外观清洗("+new DecimalFormat("0.00").format(comboData.basicPrice)+"元)");//基础套餐价格
         for (int j=0;j<comboData.productList.size();j++){
             if (comboData.productList.get(j).productId==1){
                 tv_car_fuwu1_money.setText("+￥"+comboData.productList.get(j).price);
@@ -590,6 +592,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         }
         comboMoney = comboData.basicPrice;//获得基础套餐金额
         tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboData.basicPrice)+"元");
+        rb_wai_guan.setText("外观清洗("+new DecimalFormat("0.00").format(comboData.basicPrice)+"元)");//基础套餐价格
         adapter.setOrderMoney(comboMoney);//优惠券适配器使用
         adapter.notifyDataSetChanged();
     }
