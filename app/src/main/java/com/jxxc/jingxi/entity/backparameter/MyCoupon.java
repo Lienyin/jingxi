@@ -10,14 +10,24 @@ import java.io.Serializable;
 public class MyCoupon implements Serializable {
     public int counponId;
     public String counponName;
-    public String couponRuleType;
+    public int couponRuleType;
     public int status;
     public String statusName;
     public double money;
-    public String doorsillMoney;
-    public String discount;
+    public double doorsillMoney;
+    public double discount;
     public String startTime;
     public String endTime;
     public String useTime;
     public String createTime;
+
+    public boolean isForbidden;
+
+    public boolean isForbidden() {
+        return isForbidden;
+    }
+
+    public void setForbidden(boolean forbidden) {
+        isForbidden = forbidden;
+    }
 }
