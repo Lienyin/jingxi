@@ -18,11 +18,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a5ca23-686a-4d68-9ab2-9315ec7c5834" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/dialog/MapJingXiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/dialog/MapJingXiDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/map_jing_si_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_jing_si_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/map_jing_xi_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_jing_xi_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,33 +69,27 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="124" column="54" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/submitorder/SubmitOrderActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="51" column="32" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="217">
+              <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="269" column="39" selection-start-line="269" selection-start-column="39" selection-end-line="269" selection-end-column="39" />
-              <folding>
-                <element signature="e#2978#3195#0" expanded="true" />
-                <element signature="e#3194#3195#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="228">
+              <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="51" column="51" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -183,9 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/SPUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/my_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/mvp/MVPBaseFragment.java" />
@@ -234,6 +223,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/map_jing_xi_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/map_jing_si_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/mvp/MVPBaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java" />
       </list>
     </option>
   </component>
@@ -662,20 +654,6 @@
       <option name="presentableId" value="Default" />
       <updated>1550798933541</updated>
     </task>
-    <task id="LOCAL-00041" summary="添加">
-      <created>1581687017951</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1581687017951</updated>
-    </task>
-    <task id="LOCAL-00042" summary="添加">
-      <created>1581690113317</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1581690113317</updated>
-    </task>
     <task id="LOCAL-00043" summary="添加">
       <created>1581823907451</created>
       <option name="number" value="00043" />
@@ -1005,7 +983,21 @@
       <option name="project" value="LOCAL" />
       <updated>1582814406385</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="添加">
+      <created>1582815156208</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1582815156208</updated>
+    </task>
+    <task id="LOCAL-00091" summary="添加">
+      <created>1582815395264</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1582815395264</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1022,7 +1014,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.29490617" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.29490617" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -1074,13 +1066,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/recharge/RechargePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/recharge/RechargeAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1093,21 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="155" column="40" selection-start-line="155" selection-start-column="33" selection-end-line="155" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="51" column="51" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="50" column="30" lean-forward="true" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -1438,11 +1408,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/mvp/MVPBaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="124" column="54" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+        <state relative-caret-position="312">
+          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="53" column="48" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
+          <folding>
+            <element signature="e#2978#3195#0" expanded="true" />
+            <element signature="e#3194#3195#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1456,14 +1436,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mapjingsi/MapJingSiActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="269" column="39" selection-start-line="269" selection-start-column="39" selection-end-line="269" selection-end-column="39" />
-          <folding>
-            <element signature="e#2978#3195#0" expanded="true" />
-            <element signature="e#3194#3195#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="217">
+          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_center.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="51" column="51" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/usercenter/UsercenterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
         </state>
       </provider>
     </entry>

@@ -69,6 +69,7 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
     public void getUserInfoCallBack(UserInfoEntity data) {
         GlideImgManager.loadCircleImage(this, data.avatar, iv_user_head);
         tv_user_info_mobile.setText(data.phonenumber);
+        tv_user_authentication.setText(data.userName);
     }
 
     @OnClick({R.id.tv_back,R.id.iv_user_head})
