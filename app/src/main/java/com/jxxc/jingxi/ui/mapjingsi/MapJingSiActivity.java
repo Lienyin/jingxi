@@ -4,6 +4,7 @@ package com.jxxc.jingxi.ui.mapjingsi;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,7 +34,9 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.MapJingXiDialog;
 import com.jxxc.jingxi.entity.backparameter.NearbyConpanyEntity;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
 
@@ -60,6 +63,8 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     TextView tv_address;
     @BindView(R.id.mv_jingsi)
     MapView mMapView;
+    @BindView(R.id.btn_xi_car)
+    Button btn_xi_car;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -68,6 +73,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     private double locationLongitude = 0;//当前纬度
     private MapJingXiDialog dialog;
     private GeoCoder mCoder;
+    private int distance=1000;
     @Override
     protected int layoutId() {
         return R.layout.map_jing_si_activity;
@@ -85,7 +91,8 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         dialog.setOnFenxiangClickListener(new MapJingXiDialog.OnFenxiangClickListener() {
             @Override
             public void onFenxiangClick(int radius) {
-                toast(MapJingSiActivity.this,"查询半径="+radius+".00km");
+                distance = radius*1000;
+                mPresenter.nearbyConpany(distance,locationLongitude,locationLatitude);
             }
         });
         //大头针位置定位
@@ -107,7 +114,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 //获取周边技师
-                mPresenter.nearbyConpany(1000,mapStatus.target.longitude,mapStatus.target.latitude);
+                mPresenter.nearbyConpany(distance,mapStatus.target.longitude,mapStatus.target.latitude);
                 //POI检索
                 mCoder = GeoCoder.newInstance();
                 mCoder.setOnGetGeoCodeResultListener(listener);
@@ -204,7 +211,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 locationLatitude = location.getLatitude();
                 locationLongitude = location.getLongitude();
-                mPresenter.nearbyConpany(1000,locationLongitude,locationLatitude);
+                mPresenter.nearbyConpany(distance,locationLongitude,locationLatitude);
                 if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                     toast(MapJingSiActivity.this, "百度地图定位失败");
                 } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
@@ -250,7 +257,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         }
     };
 
-    @OnClick({R.id.tv_back,R.id.tv_affirm})
+    @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.btn_xi_car})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -259,6 +266,9 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 break;
             case R.id.tv_affirm://筛选
                 dialog.showShareDialog(true);
+                break;
+            case R.id.btn_xi_car://下单洗车
+                ZzRouter.gotoActivity(this, SubmitOrderActivity.class);
                 break;
             default:
         }

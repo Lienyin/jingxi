@@ -54,7 +54,7 @@ public class MapJingXiDialog implements View.OnClickListener{
         sb_radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.v("拖动过程中的值：", String.valueOf(progress) + ", " + String.valueOf(fromUser));
+                //Log.v("拖动过程中的值：", String.valueOf(progress) + ", " + String.valueOf(fromUser));
                 tv_radius_min.setText(String.valueOf(progress)+".00km");
                 tv_radius_hint.setText("菁喜服务半径"+String.valueOf(progress)+".00km");
             }
