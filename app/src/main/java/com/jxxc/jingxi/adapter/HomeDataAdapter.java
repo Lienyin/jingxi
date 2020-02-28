@@ -51,17 +51,20 @@ public class HomeDataAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.home_data_adapter,null);
             holder.iv_home_fuwu = convertView.findViewById(R.id.iv_home_fuwu);
+            holder.home_fuwu_name = convertView.findViewById(R.id.home_fuwu_name);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
         MyOrderEntity.MyOrder data = list.get(position);
         GlideImgManager.loadImage(context, data.imgUrl, holder.iv_home_fuwu);
+        holder.home_fuwu_name.setText(data.productName);
         return convertView;
     }
 
     class ViewHolder{
         ImageView iv_home_fuwu;
+        TextView home_fuwu_name;
     }
 
     /**

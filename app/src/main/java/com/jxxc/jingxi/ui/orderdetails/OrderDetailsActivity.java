@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.orderdetails;
 
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.adapter.OrderDetailsDataAdapter;
+import com.jxxc.jingxi.dialog.ImgDialog;
 import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
@@ -19,6 +21,9 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -74,9 +79,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     LinearLayout ll_my_pingjia;
     @BindView(R.id.tv_delete)
     TextView tv_delete;
+    @BindView(R.id.gv_img_data)
+    GridView gv_img_data;
     private String OrderId;
     private OrderDetailsDataAdapter adapter;
     private OrderEntity orderEntity = new OrderEntity();
+    private ImgAdapter imgAdapter;
+    private List<String> imgList = new ArrayList<>();
+    private ImgDialog imgDialog;
     @Override
     protected int layoutId() {
         return R.layout.acivity_order_details;
@@ -88,6 +98,16 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         OrderId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getOrder(OrderId);
+        imgAdapter = new ImgAdapter(this);
+        imgAdapter.setData(imgList);
+        gv_img_data.setAdapter(imgAdapter);
+        gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                imgDialog.showShareDialog(true,imgList.get(i));
+            }
+        });
+        imgDialog = new ImgDialog(this);
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_pingjian,R.id.tv_again,R.id.tv_delete})
@@ -122,6 +142,13 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         adapter = new OrderDetailsDataAdapter(this);
         adapter.setData(orderEntity.products);
         gv_fuwu_data.setAdapter(adapter);
+        //技师端上传的图片
+        String[] split = data.technicianCommentImgs.split(",");
+        for (int i=0;i<split.length;i++){
+            imgList.add(split[i]);
+        }
+        imgAdapter.setData(imgList);
+        imgAdapter.notifyDataSetChanged();
 
         tv_details_order_id.setText(data.orderId);
         tv_details_order_static.setText(data.statusName);

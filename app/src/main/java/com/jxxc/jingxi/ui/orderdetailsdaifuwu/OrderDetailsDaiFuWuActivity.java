@@ -185,6 +185,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         }else if (data.status==3){
             tv_details_hint_tilt.setText("技师正在洗车");
             tv_details_hint_text.setText("技师正在洗车，请耐心等待。");
+            tv_details_cancel_order.setVisibility(View.GONE);//服务中不让取消订单
         }else if (data.status==5){
             tv_details_hint_tilt.setText("订单已取消");
             tv_details_hint_text.setText("订单已取消，请重新下单。");
