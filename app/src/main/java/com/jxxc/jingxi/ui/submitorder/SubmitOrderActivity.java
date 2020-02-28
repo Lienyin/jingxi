@@ -168,7 +168,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
 
     @Override
     public void initData() {
-        tv_title.setText("菁喜洗车");
+        tv_title.setText("菁喜");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);

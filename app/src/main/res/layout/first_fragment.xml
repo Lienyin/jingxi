@@ -34,7 +34,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="菁喜洗车"
+                    android:text="菁喜"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
