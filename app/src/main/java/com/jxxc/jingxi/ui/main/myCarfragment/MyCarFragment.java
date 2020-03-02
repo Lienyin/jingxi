@@ -33,6 +33,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
+import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.CouponAdapter;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -55,8 +56,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private RadioButton rb_daodian_service;
     private RadioButton rb_wai_guan;
     private RadioButton rb_zheng_che;
-    private View shang_men;
-    private View dao_dian;
     private LinearLayout ll_car_fuwu;
     private LinearLayout ll_fuwu_no_data;
     private LinearLayout ll_add_car;
@@ -92,6 +91,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private TextView tv_huan_car;
     private EditText et_phone_number;
     private EditText et_car_memo;
+    private LinearLayout ll_daodian,ll_address,ll_shop_site;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
@@ -131,13 +131,14 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         rb_daodian_service = view.findViewById(R.id.rb_daodian_service);
         rb_wai_guan = view.findViewById(R.id.rb_wai_guan);
         rb_zheng_che = view.findViewById(R.id.rb_zheng_che);
-        shang_men = view.findViewById(R.id.shang_men);
-        dao_dian = view.findViewById(R.id.dao_dian);
         ll_car_fuwu = view.findViewById(R.id.ll_car_fuwu);
+        ll_shop_site = view.findViewById(R.id.ll_shop_site);
         ll_fuwu_no_data = view.findViewById(R.id.ll_fuwu_no_data);
         ll_add_car = view.findViewById(R.id.ll_add_car);
         ll_car_info = view.findViewById(R.id.ll_car_info);
         tv_car_number = view.findViewById(R.id.tv_car_number);
+        ll_daodian = view.findViewById(R.id.ll_daodian);
+        ll_address = view.findViewById(R.id.ll_address);
         tv_car_type = view.findViewById(R.id.tv_car_type);
         tv_car_color = view.findViewById(R.id.tv_car_color);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
@@ -188,6 +189,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_huan_car.setOnClickListener(this);
         tv_create_order.setOnClickListener(this);
         ll_add_car.setOnClickListener(this);
+        ll_shop_site.setOnClickListener(this);
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);
         mPresenter.comboInfo();
@@ -292,14 +294,17 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         AnimUtils.clickAnimator(view);
         switch (view.getId()){
             case R.id.rb_shangmen_service://上门
-                shang_men.setVisibility(View.VISIBLE);
-                dao_dian.setVisibility(View.GONE);
+                ll_daodian.setVisibility(View.GONE);
+                ll_address.setVisibility(View.VISIBLE);
                 serviceType = 0;
                 break;
             case R.id.rb_daodian_service://到店
-                shang_men.setVisibility(View.GONE);
-                dao_dian.setVisibility(View.VISIBLE);
+                ll_daodian.setVisibility(View.VISIBLE);
+                ll_address.setVisibility(View.GONE);
                 serviceType = 1;
+                break;
+            case R.id.ll_shop_site://门店列表
+                ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
             case R.id.rb_wai_guan://外观清洗
                 ll_car_fuwu.setVisibility(View.VISIBLE);

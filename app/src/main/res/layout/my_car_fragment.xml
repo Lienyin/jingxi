@@ -79,14 +79,8 @@
                 android:textSize="14sp" />
         </RadioGroup>
     </LinearLayout>
-    <!--    上门服务-->
     <include
         android:id="@+id/shang_men"
         layout="@layout/shangmen_service"
         android:visibility="visible"/>
-    <!--    到店服务-->
-    <include
-        android:id="@+id/dao_dian"
-        layout="@layout/daodian_service"
-        android:visibility="gone"/>
 </LinearLayout>
