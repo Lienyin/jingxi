@@ -25,6 +25,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             //当前定位经纬度
             double lati = location.getLatitude();
             double longa = location.getLongitude();
+            SPUtils.put(SPUtils.K_CITY,location.getCity());
             tv_location_city.setText(location.getCity());//当前定位城市
         }
     }

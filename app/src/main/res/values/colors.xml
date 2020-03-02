@@ -17,6 +17,7 @@
     <color name="help_button_view">#ffcccccc</color>
     <color name="gray">#55757575</color>
     <color name="home_yellow">#FFD669</color>
+    <color name="home_yellow_m">#FF9E02</color>
     <color name="car_type_color1">#556B2F</color>
     <color name="car_type_color2">#28818A</color>
     <color name="car_type_color3">#FF4500</color>

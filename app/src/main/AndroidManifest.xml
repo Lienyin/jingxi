@@ -142,5 +142,8 @@
         <!--门店列表-->
         <activity android:name=".ui.shoplist.ShopListActivity"
             android:screenOrientation="portrait"/>
+        <!--门店列表详情-->
+        <activity android:name=".ui.shopdetails.ShopDetailsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
