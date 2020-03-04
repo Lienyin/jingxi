@@ -14,7 +14,7 @@ import com.jxxc.jingxi.R;
 
 public class PopFiltrateOne extends PopupWindow {
     private View conentView;
-    private TextView tv_pai_1,tv_pai_2,tv_pai_3,tv_pai_4;
+    private TextView tv_pai_1,tv_pai_2,tv_pai_3,tv_pai_4,tv_pai_5;
     private Context mContext;
 
     public PopFiltrateOne(final Activity context) {
@@ -48,10 +48,38 @@ public class PopFiltrateOne extends PopupWindow {
 
     private void initView(){
         tv_pai_1 = conentView.findViewById(R.id.tv_pai_1);
+        tv_pai_2 = conentView.findViewById(R.id.tv_pai_2);
+        tv_pai_3 = conentView.findViewById(R.id.tv_pai_3);
+        tv_pai_4 = conentView.findViewById(R.id.tv_pai_4);
+        tv_pai_5 = conentView.findViewById(R.id.tv_pai_5);
         tv_pai_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onFenxiangClickListener.onFenxiangClick(1);
+                onFenxiangClickListener.onFenxiangClick("");
+            }
+        });
+        tv_pai_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFenxiangClickListener.onFenxiangClick("1");
+            }
+        });
+        tv_pai_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFenxiangClickListener.onFenxiangClick("2");
+            }
+        });
+        tv_pai_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFenxiangClickListener.onFenxiangClick("3");
+            }
+        });
+        tv_pai_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFenxiangClickListener.onFenxiangClick("4");
             }
         });
     }
@@ -70,6 +98,6 @@ public class PopFiltrateOne extends PopupWindow {
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(int type);
+        void onFenxiangClick(String type);
     }
 }

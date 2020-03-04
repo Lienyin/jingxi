@@ -13,10 +13,10 @@
         android:gravity="right">
         <TextView
             android:id="@+id/tv_pai_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
-            android:gravity="center"
+            android:gravity="center|right"
             android:paddingRight="50dp"
             android:textColor="@color/black"
             android:text="全    部"/>
@@ -26,10 +26,10 @@
             android:background="@color/set_bg"/>
         <TextView
             android:id="@+id/tv_pai_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
-            android:gravity="center"
+            android:gravity="center|right"
             android:paddingRight="50dp"
             android:textColor="@color/black"
             android:text="直营店"/>
@@ -39,10 +39,10 @@
             android:background="@color/set_bg"/>
         <TextView
             android:id="@+id/tv_pai_3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
-            android:gravity="center"
+            android:gravity="center|right"
             android:paddingRight="50dp"
             android:textColor="@color/black"
             android:text="加盟店"/>
@@ -52,13 +52,26 @@
             android:background="@color/set_bg"/>
         <TextView
             android:id="@+id/tv_pai_4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
-            android:gravity="center"
+            android:gravity="center|right"
             android:paddingRight="50dp"
             android:textColor="@color/black"
             android:text="合作店"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/set_bg"/>
+        <TextView
+            android:id="@+id/tv_pai_5"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="14sp"
+            android:gravity="center|right"
+            android:paddingRight="50dp"
+            android:textColor="@color/black"
+            android:text="营业中"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

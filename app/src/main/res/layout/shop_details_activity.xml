@@ -20,6 +20,7 @@
                 android:layout_height="200dp">
 
                 <ImageView
+                    android:id="@+id/iv_details_shop_mendian"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@mipmap/zhan_weitu" />
@@ -36,6 +37,7 @@
                     android:layout_height="30dp"
                     android:gravity="center_vertical">
                     <TextView
+                        android:id="@+id/tv_details_shop_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -43,8 +45,9 @@
                         android:textStyle="bold"
                         android:text="XXX"/>
                     <TextView
+                        android:id="@+id/tv_details_shop_yy"
                         android:layout_width="55dp"
-                        android:layout_height="30dp"
+                        android:layout_height="20dp"
                         android:textSize="14sp"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
@@ -52,8 +55,9 @@
                         android:textColor="@color/white"
                         android:text="营业中"/>
                     <TextView
+                        android:id="@+id/tv_details_shop_jm"
                         android:layout_width="55dp"
-                        android:layout_height="30dp"
+                        android:layout_height="20dp"
                         android:textSize="14sp"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
@@ -73,14 +77,16 @@
                         android:gravity="center_vertical"
                         android:textColor="@color/black999"
                         android:text="总评分"/>
+
                     <TextView
+                        android:id="@+id/tv_details_shop_pf"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical"
                         android:layout_marginLeft="3dp"
+                        android:gravity="center_vertical"
+                        android:text="0"
                         android:textColor="@color/home_yellow_m"
-                        android:text="0"/>
+                        android:textSize="14sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -90,6 +96,7 @@
                         android:textColor="@color/black999"
                         android:text="总订单"/>
                     <TextView
+                        android:id="@+id/tv_details_shop_dd"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:textSize="14sp"
@@ -106,6 +113,7 @@
                         android:textColor="@color/black999"
                         android:text="技师数"/>
                     <TextView
+                        android:id="@+id/tv_details_shop_js"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:textSize="14sp"
@@ -120,6 +128,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical">
                     <TextView
+                        android:id="@+id/tv_details_shop_address"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:textSize="14sp"
@@ -138,6 +147,7 @@
                         android:layout_height="30dp"
                         android:src="@mipmap/call_jishi" />
                     <TextView
+                        android:id="@+id/tv_details_shop_call"
                         android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
@@ -146,6 +156,7 @@
                         android:textColor="@color/black999"
                         android:text="联系门店"/>
                     <TextView
+                        android:id="@+id/tv_details_shop_call_number"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
@@ -162,7 +173,7 @@
                 android:background="@color/set_bg"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="210dp"
                 android:orientation="vertical"
                 android:padding="20dp">
                 <TextView
@@ -171,6 +182,12 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:text="门店技师"/>
+                <GridView
+                    android:id="@+id/gv_technician_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:numColumns="3"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

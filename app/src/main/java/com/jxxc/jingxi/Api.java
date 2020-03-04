@@ -73,4 +73,10 @@ public class Api {
     public static final String WALLET = BASEURL + "/system/customer/wallet";
     //32-查询附近洗车点
     public static final String NEARBY_CONPANY = BASEURL + "/system/company/nearbyConpany";
+    //33-加盟商列表
+    public static final String COMPANY_LIST = BASEURL + "/system/company/companyList";
+    //34-加盟商详细
+    public static final String GET_COMPANY = BASEURL + "/system/company/getCompany";
+    //35-加盟商预约时间列表
+    public static final String APPOINTMENT_LIST = BASEURL + "/system/company/appointmentList";
 }

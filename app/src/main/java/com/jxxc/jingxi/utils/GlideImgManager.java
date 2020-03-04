@@ -190,8 +190,8 @@ public class GlideImgManager {
     public static void loadRectangleImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.jingxi_logo)
-                .error(R.mipmap.jingxi_logo)
+                .placeholder(R.mipmap.zhan_weitu)
+                .error(R.mipmap.zhan_weitu)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override
@@ -213,8 +213,8 @@ public class GlideImgManager {
     public static void loadRectangleSiteImage(final Context context, String url, final ImageView iv) {
 
         Glide.with(context).load(url).asBitmap().centerCrop()
-                .placeholder(R.mipmap.jingxi_logo)
-                .error(R.mipmap.jingxi_logo)
+                .placeholder(R.mipmap.zhan_weitu)
+                .error(R.mipmap.zhan_weitu)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(new BitmapImageViewTarget(iv) {
             @Override
