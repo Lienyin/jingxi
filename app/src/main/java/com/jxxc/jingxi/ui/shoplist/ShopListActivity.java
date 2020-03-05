@@ -21,7 +21,11 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.PopFiltrate;
 import com.jxxc.jingxi.dialog.PopFiltrateCity;
 import com.jxxc.jingxi.dialog.PopFiltrateOne;
+import com.jxxc.jingxi.entity.backparameter.AreaListEntity;
+import com.jxxc.jingxi.entity.backparameter.CityEntity;
 import com.jxxc.jingxi.entity.backparameter.CommissionListEntity;
+import com.jxxc.jingxi.entity.backparameter.DistrictEntity;
+import com.jxxc.jingxi.entity.backparameter.ProvinceEntity;
 import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -74,6 +78,8 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     private String sort="";
     private String cityId="";
     private List<companyListEntity> list = new ArrayList<>();
+    private List<AreaListEntity> allData = new ArrayList<>();//省市区总数据
+    private List<ProvinceEntity> provinceEntityList = new ArrayList<>();//省份
     @Override
     protected int layoutId() {
         return R.layout.shop_list_activity;
@@ -87,6 +93,7 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         popFiltrateOne = new PopFiltrateOne(this);
         popFiltrateCity = new PopFiltrateCity(this);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
+        mPresenter.areaList();
         mLocationClient = new LocationClient(getApplicationContext());
         initLocation();
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
@@ -108,6 +115,16 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
                 queryFlag = type;
                 mPresenter.companyList(lng,lat,queryFlag,sort,cityId,1,10);
                 popFiltrateOne.dismiss();
+            }
+        });
+        //城市
+        popFiltrateCity.setOnFenxiangClickListener(new PopFiltrateCity.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(String type,String cityName) {
+                cityId = type;
+                tv_location_city.setText(cityName);
+                mPresenter.companyList(lng,lat,queryFlag,sort,cityId,1,10);
+                popFiltrateCity.dismiss();
             }
         });
     }
@@ -163,7 +180,7 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
                 finish();
                 break;
             case R.id.ll_city_filtrate://城市筛选
-                popFiltrateCity.showPopupWindow(ll_city_filtrate);
+                popFiltrateCity.showPopupWindow(ll_city_filtrate,allData,provinceEntityList);
                 break;
             case R.id.ll_paixu_filtrate://排序筛选
                 popFiltrate.showPopupWindow(ll_paixu_filtrate);
@@ -173,6 +190,18 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
                 break;
             default:
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        offset = 2;
+        mPresenter.companyList(lng,lat,queryFlag,sort,cityId,1,10);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        swipeLayout.setRefreshing(false);
+        mPresenter.companyListMore(lng,lat,queryFlag,sort,cityId,offset,10);
     }
 
     @Override
@@ -195,15 +224,21 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         }
     }
 
+    //加盟商的省市区返回数据
     @Override
-    public void onRefresh() {
-        offset = 2;
-        mPresenter.companyList(lng,lat,queryFlag,sort,cityId,1,10);
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        swipeLayout.setRefreshing(false);
-        mPresenter.companyListMore(lng,lat,queryFlag,sort,cityId,offset,10);
+    public void areaListCallBack(List<AreaListEntity> data) {
+        if (data.size()>0){
+            allData = data;
+            //循环添加省份
+            for (int i=0;i<data.size();i++){
+                if (data.get(i).areaLevel==1){//添加省份
+                    ProvinceEntity provinceEntity = new ProvinceEntity();
+                    provinceEntity.setName(data.get(i).areaName);
+                    provinceEntity.setAreaId(data.get(i).areaId);
+                    provinceEntity.setAreaCode(data.get(i).areaCode);
+                    provinceEntityList.add(provinceEntity);
+                }
+            }
+        }
     }
 }
