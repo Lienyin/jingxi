@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Address;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
+import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
@@ -89,6 +91,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private ListViewForScrollView lv_coupon_data;
     private TextView et_car_address;
     private TextView tv_huan_car;
+    private TextView et_car_address_daodian;
     private EditText et_phone_number;
     private EditText et_car_memo;
     private LinearLayout ll_daodian,ll_address,ll_shop_site;
@@ -117,6 +120,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private double fuwuTypeMoney8=0;
     private int HuanCar=0;
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
+    private String timeStr,companyId,address;
 
     public MyCarFragment(Context context){
         this.context = context;
@@ -169,6 +173,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         et_phone_number = view.findViewById(R.id.et_phone_number);
         et_car_memo = view.findViewById(R.id.et_car_memo);
         tv_xia_order_discounts = view.findViewById(R.id.tv_xia_order_discounts);
+        et_car_address_daodian = view.findViewById(R.id.et_car_address_daodian);
 
         rb_shangmen_service.setOnClickListener(this);
         rb_daodian_service.setOnClickListener(this);
@@ -231,6 +236,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
 
         context.registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         context.registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
+        context.registerReceiver(appointmentListReceiver, new IntentFilter("shop_daodian_19830_fuwu_110"));
 
         //默认选择前5想基础套餐
         tv_car_fuwu1.setSelected(true);
@@ -276,6 +282,19 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             comboProductId7="";
             fuwuTypeMoney8 = 0;
             comboProductId8="";
+        }
+    };
+
+    private BroadcastReceiver appointmentListReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //接收到广播以后要做的事
+            appointmentStartTime = intent.getStringExtra("timeStart");
+            appointmentEndTime = intent.getStringExtra("timeEnd");
+            companyId = intent.getStringExtra("companyId");
+            address = intent.getStringExtra("address");
+            et_car_address_daodian.setText(address);
+            tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
         }
     };
 
@@ -419,7 +438,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 ZzRouter.gotoActivity((Activity) context, AddressDetailsActivity.class);
                 break;
             case R.id.iv_time_date://选择时间
-                getTime();
+                if (ll_daodian.getVisibility()==View.VISIBLE){
+                    //
+                }else{
+                    getTime();
+                }
                 break;
             case R.id.ll_add_car://添加 车辆信息
                 ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"1");
@@ -480,7 +503,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
                 appointmentStartTime = year + "-" + month + "-" + day+"  "+hour+":"+minute;
                 appointmentEndTime = year + "-" + month + "-" + day+"  "+(Integer.valueOf(hour)+1)+":"+minute;
-                tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
+                tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
             }
         });
         picker.show();
@@ -620,6 +643,20 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             mPresenter.getCarList();
             mPresenter.queryMyCoupon(0);
             mPresenter.comboInfo();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!AppUtils.isEmpty(appointmentListReceiver)){
+            context.unregisterReceiver(appointmentListReceiver);
+        }
+        if (!AppUtils.isEmpty(receiverCarInfo)){
+            context.unregisterReceiver(receiverCarInfo);
+        }
+        if (!AppUtils.isEmpty(receiver)){
+            context.unregisterReceiver(receiver);
         }
     }
 }

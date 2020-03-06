@@ -27,6 +27,7 @@ import com.jxxc.jingxi.entity.backparameter.CommissionListEntity;
 import com.jxxc.jingxi.entity.backparameter.DistrictEntity;
 import com.jxxc.jingxi.entity.backparameter.ProvinceEntity;
 import com.jxxc.jingxi.entity.backparameter.companyListEntity;
+import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.commissionlist.CommissionAdapter;
@@ -34,6 +35,10 @@ import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +97,7 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         popFiltrate = new PopFiltrate(this);
         popFiltrateOne = new PopFiltrateOne(this);
         popFiltrateCity = new PopFiltrateCity(this);
+        EventBus.getDefault().register(this);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.areaList();
         mLocationClient = new LocationClient(getApplicationContext());
@@ -240,5 +246,16 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
                 }
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(ExitLogin exitLogin) {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }
