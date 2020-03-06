@@ -2,12 +2,14 @@ package com.jxxc.jingxi.ui.shopdetails;
 
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -15,7 +17,9 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,9 +59,13 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     TextView tv_details_shop_call;
     @BindView(R.id.gv_technician_data)
     GridView gv_technician_data;
+    @BindView(R.id.gv_time_data)
+    GridView gv_time_data;
     private String cId;
     private String phonenumber="";
     private TechnicianAdapter technicianAdapter;
+    private TimeAdapter timeAdapter;
+    private List<AppointmentListEntity> list = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.shop_details_activity;
@@ -69,6 +77,23 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("正在发送").setActivity(this).show();
         mPresenter.getCompany(cId);
+
+
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String queryDate = formatter.format(date);
+        mPresenter.appointmentList(cId,queryDate);
+
+        gv_time_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (list.get(position).isForbidden()){
+                    toast(ShopDetailsActivity.this,"当前时间段已预约满");
+                }else{
+                    timeAdapter.setSelectPosition(position);
+                }
+            }
+        });
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_shop_call})
@@ -116,5 +141,14 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         tv_details_shop_address.setText(data.company.address);
         phonenumber = data.company.phonenumber;
         tv_details_shop_call_number.setText(data.company.phonenumber);
+    }
+
+    //预约时间返回数据
+    @Override
+    public void appointmentListCallBack(List<AppointmentListEntity> data) {
+        list = data;
+        timeAdapter = new TimeAdapter(this);
+        timeAdapter.setData(data);
+        gv_time_data.setAdapter(timeAdapter);
     }
 }
