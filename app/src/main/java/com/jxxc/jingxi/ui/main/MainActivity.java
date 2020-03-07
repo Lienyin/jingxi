@@ -4,6 +4,7 @@ package com.jxxc.jingxi.ui.main;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +21,8 @@ import com.jxxc.jingxi.ui.main.my.MyFragment;
 import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
 import com.jxxc.jingxi.utils.SPUtils;
+
+import cn.jpush.android.api.JPushInterface;
 
 
 /**
@@ -62,6 +65,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             SPUtils.put(this,"ACTIVITY", false);
             activityDialog.showShareDialog(true);
         }
+
+        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
+        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
     }
 
     //UI组件初始化与事件绑定

@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical">
 
             <TextView
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_bg_button"
             android:text="登录"
@@ -80,6 +80,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/qiye_btn_bg"
             android:text="企业用户"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="14sp" />
 

@@ -155,6 +155,8 @@
     <orderEntry type="library" name="Gradle: top.zibin:Luban:1.1.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: cn.qqtheme.framework:WheelPicker:1.5.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: cn.qqtheme.framework:Common:1.5.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: cn.jiguang.sdk:jpush:3.0.9@aar" level="project" />
+    <orderEntry type="library" name="Gradle: cn.jiguang.sdk:jcore:1.1.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: :alipaySdk-15.6.8-20191021122455-noUtdid:@aar" level="project" />
   </component>
 </module>
