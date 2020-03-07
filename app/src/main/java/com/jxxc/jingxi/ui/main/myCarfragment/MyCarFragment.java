@@ -120,7 +120,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private double fuwuTypeMoney8=0;
     private int HuanCar=0;
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
-    private String timeStr,companyId,address;
+    private String companyId="";
+    private String address="";
 
     public MyCarFragment(Context context){
         this.context = context;
@@ -454,7 +455,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             case R.id.tv_create_order://立即下单
                 if (AppUtils.isEmpty(tv_car_number.getText().toString())){
                     Toast.makeText(context,"请添加车辆",Toast.LENGTH_SHORT).show();
-                }else if (AppUtils.isEmpty(et_car_address.getText().toString())){
+                }else if (AppUtils.isEmpty(et_car_address.getText().toString())&&serviceType==0){
                     Toast.makeText(context,"请选择停车地点",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(et_phone_number.getText().toString())){
                     Toast.makeText(context,"请输入联系方式",Toast.LENGTH_SHORT).show();
@@ -476,7 +477,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                             siteLat,
                             appointmentStartTime,
                             appointmentEndTime,
-                            et_car_memo.getText().toString());
+                            et_car_memo.getText().toString(),
+                            companyId);
                 }
                 break;
         }

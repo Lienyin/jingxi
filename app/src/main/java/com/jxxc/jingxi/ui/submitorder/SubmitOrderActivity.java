@@ -63,10 +63,6 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     RadioButton rb_wai_guan;
     @BindView(R.id.rb_zheng_che)
     RadioButton rb_zheng_che;
-    @BindView(R.id.shang_men)
-    View shang_men;
-    @BindView(R.id.dao_dian)
-    View dao_dian;
     @BindView(R.id.ll_car_fuwu)
     LinearLayout ll_car_fuwu;
     @BindView(R.id.ll_fuwu_no_data)
@@ -137,6 +133,12 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     EditText et_phone_number;
     @BindView(R.id.et_car_memo)
     EditText et_car_memo;
+    @BindView(R.id.ll_daodian)
+    LinearLayout ll_daodian;
+    @BindView(R.id.ll_address)
+    LinearLayout ll_address;
+    @BindView(R.id.et_car_address_daodian)
+    TextView et_car_address_daodian;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
@@ -161,6 +163,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
+    private String companyId="";
+    private String address="";
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -219,6 +223,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
 
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
+        registerReceiver(appointmentListReceiver, new IntentFilter("shop_daodian_19830_fuwu_110"));
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -258,6 +263,18 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             comboProductId8="";
         }
     };
+    private BroadcastReceiver appointmentListReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //接收到广播以后要做的事
+            appointmentStartTime = intent.getStringExtra("timeStart");
+            appointmentEndTime = intent.getStringExtra("timeEnd");
+            companyId = intent.getStringExtra("companyId");
+            address = intent.getStringExtra("address");
+            et_car_address_daodian.setText(address);
+            tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+        }
+    };
 
     @OnClick({R.id.tv_back,R.id.rb_shangmen_service,R.id.rb_daodian_service,R.id.rb_wai_guan,
             R.id.rb_zheng_che,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.iv_call_phone
@@ -269,13 +286,13 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 finish();
                 break;
             case R.id.rb_shangmen_service://上门
-                shang_men.setVisibility(View.VISIBLE);
-                dao_dian.setVisibility(View.GONE);
+                ll_daodian.setVisibility(View.GONE);
+                ll_address.setVisibility(View.VISIBLE);
                 serviceType = 0;
                 break;
             case R.id.rb_daodian_service://到店
-                shang_men.setVisibility(View.GONE);
-                dao_dian.setVisibility(View.VISIBLE);
+                ll_daodian.setVisibility(View.VISIBLE);
+                ll_address.setVisibility(View.GONE);
                 serviceType = 1;
                 break;
             case R.id.rb_wai_guan://外观清洗
@@ -362,7 +379,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             case R.id.tv_create_order://立即下单
                 if (AppUtils.isEmpty(tv_car_number.getText().toString())){
                     toast(this,"请添加车辆");
-                }else if (AppUtils.isEmpty(et_car_address.getText().toString())){
+                }else if (AppUtils.isEmpty(et_car_address.getText().toString())&&serviceType==0){
                     toast(this,"请选择停车地点");
                 }else if (AppUtils.isEmpty(et_phone_number.getText().toString())){
                     toast(this,"请输入联系方式");
@@ -384,7 +401,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                             siteLat,
                             appointmentStartTime,
                             appointmentEndTime,
-                            et_car_memo.getText().toString());
+                            et_car_memo.getText().toString(),
+                            companyId);
                 }
                 break;
             case R.id.tv_huan_car://换辆车
@@ -578,6 +596,9 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         }
         if (!AppUtils.isEmpty(receiverCarInfo)){
             unregisterReceiver(receiverCarInfo);
+        }
+        if (!AppUtils.isEmpty(appointmentListReceiver)){
+            unregisterReceiver(appointmentListReceiver);
         }
     }
 }

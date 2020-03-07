@@ -104,11 +104,13 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
      * @param appointmentStartTime
      * @param appointmentEndTime
      * @param remark
+     * @param companyId
      */
     @Override
     public void createOrder(String comboProductIds, int serviceType, String counponId, String comboTypeId,
                             String carNum, String carNums, String phonenumber, String address, String lng,
-                            String lat, String appointmentStartTime, String appointmentEndTime, String remark) {
+                            String lat, String appointmentStartTime, String appointmentEndTime,
+                            String remark,String companyId) {
         OkGo.<HttpResult<CreateOrderEntity>>post(Api.CREATE_ORDER)
                 .params("comboProductIds",comboProductIds)
                 .params("serviceType",serviceType)
@@ -123,6 +125,7 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                 .params("appointmentStartTime",appointmentStartTime)
                 .params("appointmentEndTime",appointmentEndTime)
                 .params("remark",remark)
+                .params("companyId",companyId)
                 .execute(new JsonCallback<HttpResult<CreateOrderEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<CreateOrderEntity>> response) {

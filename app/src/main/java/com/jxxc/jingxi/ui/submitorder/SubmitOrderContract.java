@@ -31,6 +31,6 @@ public class SubmitOrderContract {
         void createOrder(String comboProductIds,int serviceType,String counponId,String comboTypeId,
                          String carNum,String carNums,String phonenumber,String address,
                          String lng,String lat,String appointmentStartTime,String appointmentEndTime,
-                         String remark);
+                         String remark,String companyId);
     }
 }
