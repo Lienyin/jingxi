@@ -18,6 +18,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
@@ -89,7 +90,7 @@ public class MyFragment extends MVPBaseFragment<MyContract.View, MyPresenter> im
                 ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"0");
                 break;
             case R.id.ll_my_order://我的订单
-                ZzRouter.gotoActivity((Activity) context, MyOrderActivity.class);
+                ZzRouter.gotoActivity((Activity) context, MapTestActivity.class);
                 break;
             case R.id.ll_my_invoice://发票管理
                 ZzRouter.gotoActivity((Activity) context, MyWalletActivity.class);

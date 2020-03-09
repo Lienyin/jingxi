@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
+import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
@@ -42,8 +44,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static vi.com.gdi.bgl.android.java.EnvDrawText.bmp;
-
 @SuppressLint("ValidFragment")
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
     private Context context;
@@ -51,8 +51,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian,ll_shang_men;
     private List<ProductInfoEntity.Combo.ProductInfo> list = new ArrayList<>();
-    private LocationClient mLocationClient = null;
-    public BDLocationListener myListener = new MyLocationListener();
+    private LocationClient mLocationClient;
+    private BDLocationListener mBDLocationListener;
     private XiaOrderDialog dialog;
     private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
             tv_car_fuwu7,tv_car_fuwu8;
@@ -101,11 +101,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu8.setOnClickListener(this);
         //mPresenter.comboInfo();//获取洗车组合套餐
 
+        // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
+        mBDLocationListener = new MyBDLocationListener();
         initLocation();
-        mLocationClient.registerLocationListener(myListener);    //注册监听函数
-        //开启定位
-        mLocationClient.start();
+        // 注册监听  
+        mLocationClient.registerLocationListener(mBDLocationListener);
 
         dialog = new XiaOrderDialog(context);
         //mPresenter.comboInfo();//获取套餐
@@ -135,27 +136,34 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     }
 
     private void initLocation() {
+        // 声明定位参数  
         LocationClientOption option = new LocationClientOption();
-        //就是这个方法设置为true，才能获取当前的位置信息
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
-        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系
-        //int span = 1000;
-        //option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式 高精度  
+        option.setCoorType("bd09ll");// 设置返回定位结果是百度经纬度 默认gcj02  
+        option.setScanSpan(5000);// 设置发起定位请求的时间间隔 单位ms  
+        option.setIsNeedAddress(true);// 设置定位结果包含地址信息  
+        option.setNeedDeviceDirect(true);// 设置定位结果包含手机机头 的方向  
+        // 设置定位参数  
         mLocationClient.setLocOption(option);
+        // 启动定位  
+        mLocationClient.start();
     }
-    public class MyLocationListener implements BDLocationListener {
+    private class MyBDLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            //Receive Location
-            //当前定位经纬度
-            double lati = location.getLatitude();
-            double longa = location.getLongitude();
-            SPUtils.put(SPUtils.K_CITY,location.getCity());
-            tv_location_city.setText(location.getCity());//当前定位城市
+            // 非空判断  
+            if (location != null) {
+                // 根据BDLocation 对象获得经纬度以及详细地址信息  
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                Log.i("TAG","latitude=="+latitude+" longitude=="+longitude);
+                String address = location.getAddrStr();
+                if (mLocationClient.isStarted()) {
+                    // 获得位置之后停止定位  
+                    mLocationClient.stop();
+                }
+            }
         }
     }
     @Override
@@ -262,19 +270,29 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //广告滚动数据
     @Override
     public void bannerCallBack(List<BannerEntity> data) {
-        listViews = new ArrayList<View>();
-        for (int i = 0; i < data.size(); i++) {
-            MyImageView imageView = new MyImageView (context);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {// 设置图片点击事件
+        if (data.size()>0){
+            listViews = new ArrayList<View>();
+            for (int i = 0; i < data.size(); i++) {
+                MyImageView imageView = new MyImageView (context);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {// 设置图片点击事件
 //                    Toast.makeText(context,
 //                            "点击了:" + myPager.getCurIndex(), Toast.LENGTH_SHORT)
 //                            .show();
-                }
-            });
-            imageView.setImageURL(data.get(i).imgUrl);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            listViews.add(imageView);
+                    }
+                });
+                imageView.setImageURL(data.get(i).imgUrl);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                listViews.add(imageView);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mLocationClient != null) {
+            mLocationClient.unRegisterLocationListener(mBDLocationListener);
         }
     }
 }

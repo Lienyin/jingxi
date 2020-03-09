@@ -51,7 +51,6 @@
             </intent-filter>
         </receiver>
         <!--极光推送结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--百度地图-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="p40zH3P2pVjcCdiPD1lpaEuc3Zk7uUss" />
@@ -169,6 +168,9 @@
             android:screenOrientation="portrait"/>
         <!--发现详情-->
         <activity android:name=".ui.finddetails.FindDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <!--地图测试-->
+        <activity android:name=".ui.maptest.MapTestActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>
