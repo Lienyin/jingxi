@@ -6,15 +6,20 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -24,15 +29,20 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
+import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static vi.com.gdi.bgl.android.java.EnvDrawText.bmp;
 
 @SuppressLint("ValidFragment")
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
@@ -49,6 +59,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private int num1=0;
     private int num2=0;
     private int num3=0;
+    private MyImgScroll myPager; // 图片容器
+    private LinearLayout ovalLayout; // 圆点容器
+    private List<View> listViews; // 图片组
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -58,6 +71,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_fragment, container, false);
+        myPager = (MyImgScroll) view.findViewById(R.id.myvp);
+        ovalLayout = (LinearLayout) view.findViewById(R.id.vb);
         tv_map_jingsi = view.findViewById(R.id.tv_map_jingsi);
         rb_work_order_all = view.findViewById(R.id.rb_work_order_all);
         rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
@@ -94,7 +109,19 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
         dialog = new XiaOrderDialog(context);
         //mPresenter.comboInfo();//获取套餐
+        InitViewPager();//初始化图片
+        //开始滚动
+        myPager.start((Activity) context, listViews, 4000, ovalLayout,
+                R.layout.ad_bottom_item, R.id.ad_item_v,
+                R.mipmap.dot_focused, R.mipmap.dot_normal);
         return view;
+    }
+
+    /**
+     * 初始化图片
+     */
+    private void InitViewPager() {
+        mPresenter.banner();
     }
 
     @Override
@@ -230,5 +257,24 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     @Override
     public void comboInfoCallBack(ProductInfoEntity data) {
         list = data.combo.get(0).productList;
+    }
+
+    //广告滚动数据
+    @Override
+    public void bannerCallBack(List<BannerEntity> data) {
+        listViews = new ArrayList<View>();
+        for (int i = 0; i < data.size(); i++) {
+            MyImageView imageView = new MyImageView (context);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {// 设置图片点击事件
+//                    Toast.makeText(context,
+//                            "点击了:" + myPager.getCurIndex(), Toast.LENGTH_SHORT)
+//                            .show();
+                }
+            });
+            imageView.setImageURL(data.get(i).imgUrl);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            listViews.add(imageView);
+        }
     }
 }

@@ -69,9 +69,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:visibility="gone"
                 android:background="@drawable/shape_round_yellow"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -82,23 +82,33 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/attestation_bg_edittext"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/shape_round_rect_yellow"
-                android:gravity="center_vertical">
-
-                <ImageView
+                android:gravity="center_vertical"
+                android:padding="3dp"
+                android:orientation="vertical">
+                <com.jxxc.jingxi.ui.main.firstfragment.MyImgScroll
+                    android:id="@+id/myvp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/home_guang_gao"/>
-            </LinearLayout>
+                    android:layout_height="match_parent" />
 
-<!--            服务-->
+                <LinearLayout
+                    android:id="@+id/vb"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="3dip"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <!-- 服务-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -193,19 +203,20 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-<!--            洗车-->
+            <!--            洗车-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:orientation="vertical"
-                android:background="@drawable/attestation_bg_edittext">
+                android:background="@drawable/attestation_bg_edittext"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
+
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -218,8 +229,8 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:button="@null"
-                            android:gravity="center"
                             android:checked="true"
+                            android:gravity="center"
                             android:text="菁喜上门洗车"
                             android:textColor="@drawable/radio"
                             android:textSize="14sp" />
@@ -242,6 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -256,9 +268,10 @@
                             android:background="@drawable/tab_menu_bg"
                             android:drawableTop="@drawable/tab_home_car7"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="外观清洗"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="外观清洗"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu2"
                             android:layout_width="0dp"
@@ -267,34 +280,37 @@
                             android:background="@drawable/tab_menu_bg"
                             android:drawableTop="@drawable/tab_home_car1"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="内饰清洗"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="内饰清洗"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu3"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car8"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="塑料件护理"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="塑料件护理"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car3"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="漆面封体"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="漆面封体"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -307,48 +323,51 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car6"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="轮毂清洗"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="轮毂清洗"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu6"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car2"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="蜡品护理"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="蜡品护理"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu7"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car5"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="发动机舱护理"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="发动机舱护理"/>
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tv_car_fuwu8"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/tab_menu_bg"
-                            android:drawablePadding="3dp"
                             android:drawableTop="@drawable/tab_home_car4"
+                            android:drawablePadding="3dp"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:text="内饰SPA"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:text="内饰SPA"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
                 <!--到店洗车-->
@@ -356,20 +375,21 @@
                     android:id="@+id/ll_dao_dian"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="85dp"
                         android:layout_height="65dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:gravity="center"
                         android:background="@color/public_all"
+                        android:gravity="center"
+                        android:text="敬 请\n期 待"
                         android:textColor="@color/white"
-                        android:text="敬 请\n期 待"/>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-<!--            创富梦想，即刻出发-->
+            <!--            创富梦想，即刻出发-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -380,15 +400,16 @@
                 android:gravity="center_vertical">
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_map_jingsi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="查看周边的菁喜技师 >"
                 android:textColor="@color/black999"
-                android:text="查看周边的菁喜技师 >"/>
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
