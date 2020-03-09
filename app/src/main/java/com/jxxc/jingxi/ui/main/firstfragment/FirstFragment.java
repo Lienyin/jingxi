@@ -159,6 +159,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 double longitude = location.getLongitude();
                 Log.i("TAG","latitude=="+latitude+" longitude=="+longitude);
                 String address = location.getAddrStr();
+                tv_location_city.setText(location.getCity());
                 if (mLocationClient.isStarted()) {
                     // 获得位置之后停止定位  
                     mLocationClient.stop();
@@ -282,7 +283,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                     }
                 });
                 imageView.setImageURL(data.get(i).imgUrl);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 listViews.add(imageView);
             }
         }

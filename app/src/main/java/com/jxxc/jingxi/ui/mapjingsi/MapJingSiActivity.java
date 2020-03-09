@@ -17,13 +17,16 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -189,6 +192,15 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                     .icon(bitmap);
             //在地图上添加Marker，并显示
             mBaiduMap.addOverlay(option);
+
+            //构造CircleOptions对象
+            CircleOptions mCircleOptions = new CircleOptions().center(point)
+                    .radius(site.serviceRadius)
+                    .fillColor(0xAA00B487) //填充颜色
+                    .stroke(new Stroke(5, 0xAA00ff00)); //边框宽和边框颜色
+            //在地图上显示圆
+            Overlay mCircle = mBaiduMap.addOverlay(mCircleOptions);
+
         }
     }
 
