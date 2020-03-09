@@ -19,6 +19,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".ConfigApplication"
@@ -50,7 +54,7 @@
         <!--百度地图-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Nhs4KBIslySuiWOjjkux4j2ZGBLc166i" />
+            android:value="p40zH3P2pVjcCdiPD1lpaEuc3Zk7uUss" />
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"/>
@@ -82,7 +86,7 @@
             </intent-filter>
         </activity>
         <!--主界面-->
-        <activity android:name=".ui.main.MainActivity"
+        <activity android:name="com.jxxc.jingxi.ui.main.MainActivity"
         android:screenOrientation="portrait"
         android:launchMode="singleTop"/>
         <!--登录界面-->
@@ -95,10 +99,10 @@
         <activity android:name=".ui.myorder.MyOrderActivity"
             android:screenOrientation="portrait"/>
         <!--订单详情—已完成-->
-        <activity android:name=".ui.orderdetails.OrderDetailsActivity"
+        <activity android:name="com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity"
             android:screenOrientation="portrait"/>
         <!--订单详情—待服务-->
-        <activity android:name=".ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity"
+        <activity android:name="com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity"
             android:screenOrientation="portrait"/>
         <!--我的车辆-->
         <activity android:name=".ui.mycar.MyCarActivity"
@@ -162,6 +166,9 @@
             android:screenOrientation="portrait"/>
         <!--门店列表详情-->
         <activity android:name=".ui.shopdetails.ShopDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <!--发现详情-->
+        <activity android:name=".ui.finddetails.FindDetailsActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>

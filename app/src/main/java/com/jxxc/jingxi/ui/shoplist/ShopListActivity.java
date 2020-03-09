@@ -93,7 +93,6 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     @Override
     public void initData() {
         tv_title.setText("门店列表");
-        tv_location_city.setText(SPUtils.get(SPUtils.K_CITY,"选择城市"));
         popFiltrate = new PopFiltrate(this);
         popFiltrateOne = new PopFiltrateOne(this);
         popFiltrateCity = new PopFiltrateCity(this);
@@ -155,7 +154,8 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
             //当前定位经纬度
             lat = location.getLatitude();
             lng = location.getLongitude();
-            //tv_location_city.setText(location.getCity());//当前定位城市
+            tv_location_city.setText(location.getCity());//当前定位城市
+            Log.i("TAG","location===="+location);
             initAdapter();
             onRefresh();
         }
@@ -215,7 +215,10 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         list  = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
+        //adapter.disableLoadMoreIfNotFullPage();
+        if (data.size() < 10) {
+            adapter.loadMoreEnd();
+        }
     }
 
     @Override

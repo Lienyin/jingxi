@@ -81,4 +81,12 @@ public class Api {
     public static final String APPOINTMENT_LIST = BASEURL + "/system/company/appointmentList";
     //36-获取全国存在加盟商的省市区
     public static final String AREA_LIST = BASEURL + "/system/company/areaList";
+    //37-发现列表
+    public static final String FIND_LIST = BASEURL + "/system/find/list";
+    //38-发现详情
+    public static final String FIND_DETAILS = BASEURL + "/system/find/findDetails";
+    //39-点赞接口
+    public static final String APPRECIATE = BASEURL + "/system/find/appreciate";
+    //40-首页广告
+    public static final String BANNER_LIST = BASEURL + "/system/banner/list";
 }

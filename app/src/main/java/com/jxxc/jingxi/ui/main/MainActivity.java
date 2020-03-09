@@ -66,8 +66,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             activityDialog.showShareDialog(true);
         }
 
-        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
-        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
+//        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
+//        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
     }
 
     //UI组件初始化与事件绑定
