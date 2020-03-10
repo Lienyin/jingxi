@@ -107,6 +107,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private int serviceType=0;
     private String counponId="";
     private String comboProductId="";
+    private String comboProductId0="";
     private String comboProductId6="";
     private String comboProductId7="";
     private String comboProductId8="";
@@ -359,7 +360,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     fuwuTypeMoney6 = 0;
                     comboProductId6="";
                 }else{
-                    comboProductId6=",6";
                     tv_car_fuwu6.setSelected(true);
                     if (tv_car_fuwu1.isSelected()==false){
                         tv_car_fuwu1.setSelected(true);
@@ -371,6 +371,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==6){
                             fuwuTypeMoney6 = comboData.productList.get(j).price;
+                            comboProductId6=comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -386,7 +387,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     fuwuTypeMoney7 = 0;
                     comboProductId7="";
                 }else{
-                    comboProductId7=",7";
                     tv_car_fuwu7.setSelected(true);
                     if (tv_car_fuwu1.isSelected()==false){
                         tv_car_fuwu1.setSelected(true);
@@ -398,6 +398,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==7){
                             fuwuTypeMoney7 = comboData.productList.get(j).price;
+                            comboProductId7=comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -413,7 +414,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     fuwuTypeMoney8 = 0;
                     comboProductId8="";
                 }else{
-                    comboProductId8=",8";
                     tv_car_fuwu8.setSelected(true);
                     if (tv_car_fuwu1.isSelected()==false){
                         tv_car_fuwu1.setSelected(true);
@@ -425,6 +425,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==8){
                             fuwuTypeMoney8 = comboData.productList.get(j).price;
+                            comboProductId8=comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -463,9 +464,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     Toast.makeText(context,"请选择服务时间",Toast.LENGTH_SHORT).show();
                 }else{
                     StyledDialog.buildLoading("正在下单").setActivity((Activity) context).show();
-                    comboProductId = "1,2,3,4,5"+comboProductId6+comboProductId7+comboProductId8;
+                    comboProductId = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
                     mPresenter.createOrder(
-                            comboProductId,
+                            comboProductId.substring(0,comboProductId.length()-1),
                             serviceType,
                             counponId,
                             comboTypeId,
@@ -598,6 +599,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         }
         if (a==0){
             comboData = data.combo.get(0);
+        }
+        //拿前五项基本套餐
+        comboProductId0="";
+        for (int i=0;i<5;i++){
+            comboProductId0 += comboData.productList.get(i).comboProductId+",";
         }
         for (int j=0;j<comboData.productList.size();j++){
             if (comboData.productList.get(j).productId==1){

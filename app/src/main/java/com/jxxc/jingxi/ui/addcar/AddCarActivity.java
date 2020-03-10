@@ -81,12 +81,10 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         if (!AppUtils.isEmpty(carData)){
             tv_title.setText("修改车辆");
             btn_add_car.setText("修改车辆");
-            ll_car_moren.setVisibility(View.VISIBLE);
             mEditText.setFocusable(false);
         }else{
             tv_title.setText("添加车辆");
             btn_add_car.setText("添加车辆");
-            ll_car_moren.setVisibility(View.GONE);
         }
         mEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override

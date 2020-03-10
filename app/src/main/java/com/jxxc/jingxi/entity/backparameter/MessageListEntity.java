@@ -8,4 +8,5 @@ public class MessageListEntity implements Serializable {
     public String messageId;
     public String content;
     public String sendTime;
+    public int orderStatus;
 }

@@ -152,6 +152,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private int serviceType=0;
     private String counponId="";
     private String comboProductId="";
+    private String comboProductId0="";
     private String comboProductId6="";
     private String comboProductId7="";
     private String comboProductId8="";
@@ -339,10 +340,10 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     comboProductId6="";
                 }else{
                     tv_car_fuwu6.setSelected(true);
-                    comboProductId6=",6";
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==6){
                             fuwuTypeMoney6 = comboData.productList.get(j).price;
+                            comboProductId6= comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -358,11 +359,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     fuwuTypeMoney7 = 0;
                     comboProductId7="";
                 }else{
-                    comboProductId7=",7";
                     tv_car_fuwu7.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==7){
                             fuwuTypeMoney7 = comboData.productList.get(j).price;
+                            comboProductId7= comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -378,11 +379,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     fuwuTypeMoney8 = 0;
                     comboProductId8="";
                 }else{
-                    comboProductId8=",8";
                     tv_car_fuwu8.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==8){
                             fuwuTypeMoney8 = comboData.productList.get(j).price;
+                            comboProductId8= comboData.productList.get(j).comboProductId+",";
                         }
                     }
                 }
@@ -416,7 +417,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     toast(this,"请选择服务时间");
                 }else{
                     StyledDialog.buildLoading("正在下单").setActivity(this).show();
-                    comboProductId = "1,2,3,4,5"+comboProductId6+comboProductId7+comboProductId8;
+                    comboProductId = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
                     mPresenter.createOrder(
                             comboProductId,
                             serviceType,
@@ -528,6 +529,11 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         }
         if (a==0){
             comboData = data.combo.get(0);
+        }
+        //拿前五项基本套餐
+        comboProductId0="";
+        for (int i=0;i<5;i++){
+            comboProductId0 += comboData.productList.get(i).comboProductId+",";
         }
         double morenXuanze6 = 0;//默认选择
         double morenXuanze7 = 0;

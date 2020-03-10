@@ -27,6 +27,14 @@ public class MsgAdapter extends BaseQuickAdapter<MessageListEntity, BaseViewHold
         helper.setText(R.id.tv_msg_name, item.messageTopic);
         helper.setText(R.id.tv_msg_time, item.sendTime);
         helper.setText(R.id.tv_msg_text, item.content);
+        //订单状态可能为空 0 待支付 1 已支付 2 待接单 3 已接单待服务 4 服务中 5 服务已完成 6取消订单
+        if (item.orderStatus==5){
+            helper.setBackgroundRes(R.id.tv_msg_icon,R.mipmap.icon_user_29);
+        }else if (item.orderStatus==6){
+            helper.setBackgroundRes(R.id.tv_msg_icon,R.mipmap.icon_user_33);
+        }else{
+            helper.setBackgroundRes(R.id.tv_msg_icon,R.mipmap.icon_user_31);
+        }
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;
