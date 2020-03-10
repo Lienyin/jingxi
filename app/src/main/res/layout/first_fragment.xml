@@ -64,8 +64,9 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_static"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
@@ -74,12 +75,18 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="XXX"
+                    android:text="您有一个正在进行中的订单！"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/gengduo"/>
             </LinearLayout>
 
             <RelativeLayout

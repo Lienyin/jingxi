@@ -66,7 +66,11 @@ public class TimeAdapter extends BaseAdapter {
         if (data.isFull==1){//是否以预约满 1是0否
             data.setForbidden(true);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.set_bg));
-            holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">已预约满</font>"));
+            if (data.num>0){
+                holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">时间已过</font>"));
+            }else{
+                holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">已预约满</font>"));
+            }
         }else {
             data.setForbidden(false);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.black));

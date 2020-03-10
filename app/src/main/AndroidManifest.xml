@@ -100,7 +100,7 @@
         <!--订单详情—已完成-->
         <activity android:name="com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity"
             android:screenOrientation="portrait"/>
-        <!--订单详情—待服务-->
+        <!--订单详情—其他-->
         <activity android:name="com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity"
             android:screenOrientation="portrait"/>
         <!--我的车辆-->

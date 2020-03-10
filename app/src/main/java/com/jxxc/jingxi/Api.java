@@ -93,4 +93,6 @@ public class Api {
     public static final String RECOMMEND_COMBO_INFO = BASEURL + "/biz/order/recommendComboInfo";
     //42-推荐加盟商列表
     public static final String RECOMMEND_COMPANY_LIST = BASEURL + "/system/company/recommendCompanyList";
+    //43-推荐加盟商列表
+    public static final String GET_STATE = BASEURL + "/system/customer/getState";
 }

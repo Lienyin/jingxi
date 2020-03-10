@@ -104,7 +104,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (list.get(position).isForbidden()){
-                    toast(ShopDetailsActivity.this,"当前时间段已预约满");
+                    toast(ShopDetailsActivity.this,"时间已过或已预约满");
                 }else{
                     timeAdapter.setSelectPosition(position);
                     timeStr = list.get(position).title;//时间

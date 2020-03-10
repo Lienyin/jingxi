@@ -39,6 +39,7 @@ import com.jxxc.jingxi.adapter.ShopRecommendAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
+import com.jxxc.jingxi.entity.backparameter.GetStateEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
@@ -46,6 +47,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
+import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
@@ -64,7 +66,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private Context context;
     private TextView tv_map_jingsi,tv_location_city;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
-    private LinearLayout ll_dao_dian,ll_shang_men;
+    private LinearLayout ll_dao_dian,ll_shang_men,ll_static;
     private ListViewForScrollView lv_set_meal_data;
     private HorizontalListView lv_men_data;
     private List<RecommendComboInfoEntity> recommendComboInfoEntity = new ArrayList<>();
@@ -80,6 +82,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private LinearLayout ovalLayout; // 圆点容器
     private List<View> listViews; // 图片组
     private boolean isFirstLoc = true; // 是否首次定位
+    private double locationLatitude=0;
+    private double locationLongitude=0;
+    private String orderId="";
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -98,6 +103,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
         lv_men_data = view.findViewById(R.id.lv_men_data);
+        ll_static = view.findViewById(R.id.ll_static);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -119,6 +125,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu6.setOnClickListener(this);
         tv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
+        ll_static.setOnClickListener(this);
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -127,9 +134,15 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         // 注册监听  
         mLocationClient.registerLocationListener(mBDLocationListener);
 
+        mPresenter.getState();//获取用户状态
         mPresenter.recommendComboInfo();//获取推荐套餐
+        mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
+        //开始滚动(默认添加一张图片)
+        myPager.start((Activity) context, listViews, 4000, ovalLayout,
+                R.layout.ad_bottom_item, R.id.ad_item_v,
+                R.mipmap.dot_focused, R.mipmap.dot_normal);
         return view;
     }
 
@@ -138,10 +151,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
      */
     private void InitViewPager() {
         mPresenter.banner();
-        //开始滚动
-        myPager.start((Activity) context, listViews, 4000, ovalLayout,
-                R.layout.ad_bottom_item, R.id.ad_item_v,
-                R.mipmap.dot_focused, R.mipmap.dot_normal);
     }
 
     @Override
@@ -180,9 +189,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 }
                 if (isFirstLoc) {
                     isFirstLoc = false;
-                    double locationLatitude = location.getLatitude();
-                    double locationLongitude = location.getLongitude();
-                    mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
+                    locationLatitude = location.getLatitude();
+                    locationLongitude = location.getLongitude();
                     if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                         toast(context, "百度地图定位失败");
                     } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
@@ -292,6 +300,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                     dialog.showShareDialog(true,num1,num2,num3);
                 }
                 break;
+            case R.id.ll_static:
+                ZzRouter.gotoActivity((Activity) context, OrderDetailsDaiFuWuActivity.class,orderId);
+                break;
         }
     }
 
@@ -332,11 +343,22 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         });
     }
 
+    //获取用户状态返回数据
+    @Override
+    public void getStateCallBack(GetStateEntity data) {
+        if (data.isUnfinished==1){
+            orderId = data.orderId;
+            ll_static.setVisibility(View.VISIBLE);
+        }else{
+            ll_static.setVisibility(View.GONE);
+        }
+    }
+
     //广告滚动数据
     @Override
     public void bannerCallBack(List<BannerEntity> data) {
         if (data.size()>0){
-            listViews = new ArrayList<View>();
+            listViews = new ArrayList<View>(); // 图片组
             for (int i = 0; i < data.size(); i++) {
                 MyImageView imageView = new MyImageView (context);
                 imageView.setOnClickListener(new View.OnClickListener() {
@@ -359,5 +381,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         if (mLocationClient != null) {
             mLocationClient.unRegisterLocationListener(mBDLocationListener);
         }
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("TAG","我执行了");
+        super.onResume();
+        mPresenter.getState();
     }
 }

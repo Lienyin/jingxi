@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.main.firstfragment;
 
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
+import com.jxxc.jingxi.entity.backparameter.GetStateEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
@@ -62,6 +63,26 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
                         List<RecommendCompanyListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.recommendCompanyListCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取用户状态
+     */
+    @Override
+    public void getState() {
+        OkGo.<HttpResult<GetStateEntity>>post(Api.GET_STATE)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<GetStateEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<GetStateEntity>> response) {
+                        GetStateEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getStateCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
