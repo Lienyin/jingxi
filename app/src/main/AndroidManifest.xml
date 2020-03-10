@@ -157,8 +157,11 @@
         <!--评价-->
         <activity android:name=".ui.evaluate.EvaluateActivity"
             android:screenOrientation="portrait"/>
-        <!--消息-->
+        <!--消息列表-->
         <activity android:name=".ui.message.MessageActivity"
+            android:screenOrientation="portrait"/>
+        <!--消息详情-->
+        <activity android:name=".ui.messagedeatils.MessageDeatilsActivity"
             android:screenOrientation="portrait"/>
         <!--门店列表-->
         <activity android:name=".ui.shoplist.ShopListActivity"

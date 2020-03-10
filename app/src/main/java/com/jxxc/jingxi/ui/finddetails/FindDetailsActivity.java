@@ -142,6 +142,6 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     //点赞返回数据
     @Override
     public void appreciateCallBack(AppreciateEntity data) {
-        tv_num_data.setText(data.num);
+        tv_num_data.setText(data.appreciateNum);
     }
 }

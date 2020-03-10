@@ -12,7 +12,9 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.MsgAdapter;
 import com.jxxc.jingxi.entity.backparameter.MessageListEntity;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.messagedeatils.MessageDeatilsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
     RecyclerView rvList;
     private MsgAdapter adapter;
     private int offset = 2;
+    private List<MessageListEntity> list = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.message_activity;
@@ -60,6 +63,12 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
         rvList.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, rvList);
         adapter.setEmptyView(R.layout.layout_nothing);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ZzRouter.gotoActivity(MessageActivity.this, MessageDeatilsActivity.class,list.get(position));
+            }
+        });
     }
 
     @OnClick({R.id.tv_back})
@@ -75,13 +84,19 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
 
     @Override
     public void messageList(List<MessageListEntity> data) {
+        list = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
+        if (data.size() < 10) {
+            adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
+        }
     }
 
     @Override
     public void messageListMore(List<MessageListEntity> data) {
+        list.addAll(data);
         swipeLayout.setRefreshing(false);
         offset++;
         adapter.addData(data);
