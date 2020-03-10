@@ -337,7 +337,6 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
