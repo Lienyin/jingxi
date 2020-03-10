@@ -68,7 +68,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:text="进行中"
+                android:text="服务中"
                 android:drawableBottom="@drawable/radio_bg"
                 android:textColor="@drawable/radio"
                 android:textSize="14sp" />

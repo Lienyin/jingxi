@@ -161,18 +161,13 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         public void onReceiveLocation(BDLocation location) {
             // 非空判断  
             if (location != null) {
+                if (!AppUtils.isEmpty(location.getCity())){
+                    tv_location_city.setText(location.getCity());
+                }else{
+                    tv_location_city.setText("当前位置");
+                }
                 if (isFirstLoc) {
                     isFirstLoc = false;
-                    if (!AppUtils.isEmpty(location.getCity())){
-                        tv_location_city.setText(location.getCity());
-                    }else{
-                        tv_location_city.setText("当前位置");
-                    }
-                    if (mLocationClient.isStarted()) {
-                        // 获得位置之后停止定位  
-                        mLocationClient.stop();
-                    }
-
                     double locationLatitude = location.getLatitude();
                     double locationLongitude = location.getLongitude();
                     if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
@@ -189,6 +184,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                         //保存经纬度
                         SPUtils.put("lat", location.getLatitude());
                         SPUtils.put("lng", location.getLongitude());
+                    }
+                    if (mLocationClient.isStarted()) {
+                        // 获得位置之后停止定位  
+                        mLocationClient.stop();
                     }
                 }
             }
