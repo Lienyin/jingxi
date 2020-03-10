@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.main.secondfragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -76,7 +77,12 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ZzRouter.gotoActivity((Activity) context, FindDetailsActivity.class,findEntityList.get(position).findId);
+                Intent intent = new Intent((Activity) context, FindDetailsActivity.class);
+                intent.putExtra("findContent",findEntityList.get(position).content);
+                intent.putExtra("appreciateNum",findEntityList.get(position).appreciateNum);
+                intent.putExtra("findId",findEntityList.get(position).noticeId);
+                intent.putExtra("type",findEntityList.get(position).type);
+                startActivity(intent);
             }
         });
     }

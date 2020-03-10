@@ -82,11 +82,11 @@ public class Api {
     //36-获取全国存在加盟商的省市区
     public static final String AREA_LIST = BASEURL + "/system/company/areaList";
     //37-发现列表
-    public static final String FIND_LIST = BASEURL + "/system/find/list";
+    public static final String FIND_LIST = BASEURL + "/system/notice/list";
     //38-发现详情
     public static final String FIND_DETAILS = BASEURL + "/system/find/findDetails";
     //39-点赞接口
-    public static final String APPRECIATE = BASEURL + "/system/find/appreciate";
+    public static final String APPRECIATE = BASEURL + "/system/notice/appreciate";
     //40-首页广告
     public static final String BANNER_LIST = BASEURL + "/system/banner/list";
     //41-获取推荐洗车组合套餐
