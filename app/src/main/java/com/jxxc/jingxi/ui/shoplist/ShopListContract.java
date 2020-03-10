@@ -23,8 +23,8 @@ public class ShopListContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void companyList(double lng,double lat,String queryFlag,String sort,String cityId,int pageNum,int pageSize);
-        void companyListMore(double lng,double lat,String queryFlag,String sort,String cityId,int pageNum,int pageSize);
+        void companyList(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
+        void companyListMore(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
 
         void areaList();
     }

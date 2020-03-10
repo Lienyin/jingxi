@@ -28,13 +28,13 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
     }
 
     @Override
-    public void companyList(double lng, double lat, String queryFlag, String sort, String cityId, int pageNum, int pageSize) {
+    public void companyList(double lng, double lat, String queryFlag, String sort, String areaId, int pageNum, int pageSize) {
         OkGo.<HttpResult<List<companyListEntity>>>post(Api.COMPANY_LIST)
                 .params("lng",lng)
                 .params("lat",lat)
                 .params("queryFlag",queryFlag)
                 .params("sort",sort)
-                .params("cityId",cityId)
+                .params("areaId",areaId)
                 .params("pageNum",pageNum)
                 .params("pageSize",pageSize)
                 .execute(new JsonCallback<HttpResult<List<companyListEntity>>>() {
@@ -52,13 +52,13 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
     }
 
     @Override
-    public void companyListMore(double lng, double lat, String queryFlag, String sort, String cityId, int pageNum, int pageSize) {
+    public void companyListMore(double lng, double lat, String queryFlag, String sort, String areaId, int pageNum, int pageSize) {
         OkGo.<HttpResult<List<companyListEntity>>>post(Api.COMPANY_LIST)
                 .params("lng",lng)
                 .params("lat",lat)
                 .params("queryFlag",queryFlag)
                 .params("sort",sort)
-                .params("cityId",cityId)
+                .params("areaId",areaId)
                 .params("pageNum",pageNum)
                 .params("pageSize",pageSize)
                 .execute(new JsonCallback<HttpResult<List<companyListEntity>>>() {

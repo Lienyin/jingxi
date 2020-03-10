@@ -32,8 +32,10 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.commissionlist.CommissionAdapter;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
+import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -75,8 +77,8 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     private PopFiltrate popFiltrate;
     private PopFiltrateOne popFiltrateOne;
     private PopFiltrateCity popFiltrateCity;
-    private LocationClient mLocationClient = null;
-    public BDLocationListener myListener = new MyLocationListener();
+    private LocationClient mLocationClient;
+    private BDLocationListener mBDLocationListener;
     private double lat;
     private double lng;
     private String queryFlag="";
@@ -85,6 +87,8 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     private List<companyListEntity> list = new ArrayList<>();
     private List<AreaListEntity> allData = new ArrayList<>();//省市区总数据
     private List<ProvinceEntity> provinceEntityList = new ArrayList<>();//省份
+    private boolean isFirstLoc = true; // 是否首次定位
+
     @Override
     protected int layoutId() {
         return R.layout.shop_list_activity;
@@ -98,12 +102,14 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         popFiltrateCity = new PopFiltrateCity(this);
         EventBus.getDefault().register(this);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
-        mPresenter.areaList();
+        mPresenter.areaList();//获取开通城市的省市区
+
+        // 声明LocationClient类  
         mLocationClient = new LocationClient(getApplicationContext());
+        mBDLocationListener = new MyBDLocationListener();
         initLocation();
-        mLocationClient.registerLocationListener(myListener);    //注册监听函数
-        //开启定位
-        mLocationClient.start();
+        // 注册监听  
+        mLocationClient.registerLocationListener(mBDLocationListener);
         //默认排序
         popFiltrate.setOnFenxiangClickListener(new PopFiltrate.OnFenxiangClickListener() {
             @Override
@@ -125,39 +131,55 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         //城市
         popFiltrateCity.setOnFenxiangClickListener(new PopFiltrateCity.OnFenxiangClickListener() {
             @Override
-            public void onFenxiangClick(String type,String cityName) {
-                cityId = type;
+            public void onFenxiangClick(String areaId,String cityName,int level) {
+                cityId = areaId;
                 tv_location_city.setText(cityName);
                 mPresenter.companyList(lng,lat,queryFlag,sort,cityId,1,10);
-                popFiltrateCity.dismiss();
+                if (level==3){
+                    popFiltrateCity.dismiss();
+                }
             }
         });
     }
 
     private void initLocation() {
+        // 声明定位参数  
         LocationClientOption option = new LocationClientOption();
-        //就是这个方法设置为true，才能获取当前的位置信息
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
-        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setCoorType("gcj02");//可选，默认gcj02，设置返回的定位结果坐标系
-        //int span = 1000;
-        //option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式 高精度  
+        option.setCoorType("bd09ll");// 设置返回定位结果是百度经纬度 默认gcj02  
+        option.setScanSpan(5000);// 设置发起定位请求的时间间隔 单位ms  
+        option.setIsNeedAddress(true);// 设置定位结果包含地址信息  
+        option.setNeedDeviceDirect(true);// 设置定位结果包含手机机头 的方向  
+        // 设置定位参数  
         mLocationClient.setLocOption(option);
+        // 启动定位  
+        mLocationClient.start();
     }
-    public class MyLocationListener implements BDLocationListener {
+    private class MyBDLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            //Receive Location
-            //当前定位经纬度
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            tv_location_city.setText(location.getCity());//当前定位城市
-            Log.i("TAG","location===="+location);
-            initAdapter();
-            onRefresh();
+            // 非空判断  
+            if (location != null) {
+                if (isFirstLoc) {
+                    isFirstLoc = false;
+                    if (!AppUtils.isEmpty(location.getCity())){
+                        tv_location_city.setText(location.getCity());
+                    }else{
+                        tv_location_city.setText("当前位置");
+                    }
+
+                    //当前定位经纬度
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                    initAdapter();
+                    onRefresh();
+                    if (mLocationClient.isStarted()) {
+                        // 获得位置之后停止定位  
+                        mLocationClient.stop();
+                    }
+                }
+            }
         }
     }
 
@@ -215,9 +237,10 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         list  = data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        //adapter.disableLoadMoreIfNotFullPage();
         if (data.size() < 10) {
             adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
         }
     }
 
@@ -260,5 +283,9 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+        // 取消监听函数  
+        if (mLocationClient != null) {
+            mLocationClient.unRegisterLocationListener(mBDLocationListener);
+        }
     }
 }

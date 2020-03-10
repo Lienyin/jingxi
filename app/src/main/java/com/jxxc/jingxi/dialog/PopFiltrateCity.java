@@ -97,6 +97,8 @@ public class PopFiltrateCity extends PopupWindow {
                 }
                 districtAdapter.setData(districtEntityList);
                 districtAdapter.notifyDataSetChanged();
+                onFenxiangClickListener.onFenxiangClick(provinceEntityList.get(position).areaId,
+                        provinceEntityList.get(position).name,1);
             }
         });
         lv_filtrate_city2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,13 +118,15 @@ public class PopFiltrateCity extends PopupWindow {
                 }
                 cityAdapter.setData(cityEntityList);
                 cityAdapter.notifyDataSetChanged();
+                onFenxiangClickListener.onFenxiangClick(districtEntityList.get(position).areaId,
+                        districtEntityList.get(position).name,2);
             }
         });
         lv_filtrate_city3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 onFenxiangClickListener.onFenxiangClick(cityEntityList.get(position).areaId,
-                        cityEntityList.get(position).name);
+                        cityEntityList.get(position).name,3);
             }
         });
     }
@@ -149,6 +153,6 @@ public class PopFiltrateCity extends PopupWindow {
     }
 
     public interface OnFenxiangClickListener{
-        void onFenxiangClick(String type,String cityName);
+        void onFenxiangClick(String areaId,String cityName,int level);
     }
 }
