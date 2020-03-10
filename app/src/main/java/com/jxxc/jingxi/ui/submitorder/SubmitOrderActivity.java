@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -349,7 +350,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -369,7 +370,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -389,7 +390,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 }
                 comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
                 tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -580,7 +581,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         }
         comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
         tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-        rb_wai_guan.setText("外观清洗("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)");
+        rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
         adapter.setOrderMoney(comboMoney);//优惠券适配器使用
         adapter.notifyDataSetChanged();
     }
