@@ -7,7 +7,7 @@ public class OrderEntity implements Serializable {
     public String serviceType;
     public String isComment;
     public String address;
-    public String lng;
+    public double lng;
     public String technicianPhonenumber;
     public String technicianLat;
     public String orderId;
@@ -29,7 +29,7 @@ public class OrderEntity implements Serializable {
     public int technicianGrade;
     public int starLevel;
     public String discountsPrice;
-    public String lat;
+    public double lat;
     public String technicianLng;
     public int status;
     public String technicianCommentImgs;

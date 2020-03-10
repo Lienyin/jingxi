@@ -2,9 +2,12 @@ package com.jxxc.jingxi.ui.orderdetailsdaifuwu;
 
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -12,10 +15,14 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
@@ -92,6 +99,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     GridView gv_fuwu_data;
     @BindView(R.id.mv_map)
     MapView mMapView;
+    @BindView(R.id.mScrollView)
+    ScrollView mScrollView;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -114,7 +123,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         orderId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getOrder(orderId);
-        //initMap();
+        initMap();
 
         dialog = new CancelOrderDialog(this);
         dialog.setOnFenxiangClickListener(new CancelOrderDialog.OnFenxiangClickListener() {
@@ -123,6 +132,21 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 //取消订单
                 StyledDialog.buildLoading("正在取消").setActivity(OrderDetailsDaiFuWuActivity.this).show();
                 mPresenter.cancelOrder(orderId);
+            }
+        });
+
+        //解决地图和ScrollView冲突
+        mMapView.getChildAt(0).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP){
+                    //允许ScrollView截断点击事件，ScrollView可滑动
+                    mScrollView.requestDisallowInterceptTouchEvent(false);
+                }else{
+                    //不允许ScrollView截断点击事件，点击事件由子View处理
+                    mScrollView.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
             }
         });
     }
@@ -202,6 +226,21 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
         orderPrice = data.price;
+
+        //技师位置
+        LatLng point = new LatLng(data.lat, data.lng);
+        View view = View.inflate(this, R.layout.site_pop_view_img, null);
+        ImageView ivView = (ImageView) view.findViewById(R.id.iv_pop_view_img_battery);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(view);
+        Bundle bundle = new Bundle();
+        //bundle.putSerializable("batSite", site);
+        OverlayOptions option = new MarkerOptions()
+                .animateType(MarkerOptions.MarkerAnimateType.jump)
+                .position(point)
+                .extraInfo(bundle)
+                .icon(bitmap);
+        //在地图上添加Marker，并显示
+        mBaiduMap.addOverlay(option);
     }
 
     //取消订单返回数据
@@ -222,14 +261,14 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);//普通地图
         mBaiduMap.setMyLocationEnabled(true);// 开启定位图层
         mMapView.showZoomControls(false);// 不显示地图缩放控件（+-按钮）
-//自定义地图定位图片
+        //自定义地图定位图片
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
-//配置定位SDK参数
+        //配置定位SDK参数
         initLocation();
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
-//开启定位
+        //开启定位
         mLocationClient.start();
-//图片点击事件，回到定位点
+        //图片点击事件，回到定位点
         mLocationClient.requestLocation();
     };
     //配置定位SDK参数
@@ -316,6 +355,6 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapView.onDestroy();
-        //mLocationClient.stop();
+        mLocationClient.stop();
     }
 }

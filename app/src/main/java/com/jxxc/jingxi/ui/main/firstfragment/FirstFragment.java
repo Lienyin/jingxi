@@ -26,6 +26,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
@@ -37,6 +42,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 
@@ -62,6 +68,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private MyImgScroll myPager; // 图片容器
     private LinearLayout ovalLayout; // 圆点容器
     private List<View> listViews; // 图片组
+    private boolean isFirstLoc = true; // 是否首次定位
 
     public FirstFragment(Context context) {
         this.context = context;
@@ -154,15 +161,35 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         public void onReceiveLocation(BDLocation location) {
             // 非空判断  
             if (location != null) {
-                // 根据BDLocation 对象获得经纬度以及详细地址信息  
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                Log.i("TAG","latitude=="+latitude+" longitude=="+longitude);
-                String address = location.getAddrStr();
-                tv_location_city.setText(location.getCity());
-                if (mLocationClient.isStarted()) {
-                    // 获得位置之后停止定位  
-                    mLocationClient.stop();
+                if (isFirstLoc) {
+                    isFirstLoc = false;
+                    if (!AppUtils.isEmpty(location.getCity())){
+                        tv_location_city.setText(location.getCity());
+                    }else{
+                        tv_location_city.setText("当前位置");
+                    }
+                    if (mLocationClient.isStarted()) {
+                        // 获得位置之后停止定位  
+                        mLocationClient.stop();
+                    }
+
+                    double locationLatitude = location.getLatitude();
+                    double locationLongitude = location.getLongitude();
+                    if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
+                        toast(context, "百度地图定位失败");
+                    } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
+                        toast(context, "百度地图定位失败");
+                    } else {
+                        String lat = SPUtils.get(context, "lat", "");
+                        String lng = SPUtils.get(context, "lng", "");
+                        if (!"".equals(lat) && !"".equals(lng)) {
+                            SPUtils.remove(context, lat);
+                            SPUtils.remove(context, lng);
+                        }
+                        //保存经纬度
+                        SPUtils.put("lat", location.getLatitude());
+                        SPUtils.put("lng", location.getLongitude());
+                    }
                 }
             }
         }
