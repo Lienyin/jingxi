@@ -14,16 +14,23 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/tv_time_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:text="尚余0个"/>
+        <TextView
             android:id="@+id/tv_time_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:text="xx:xx-xx:xx"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
             android:src="@mipmap/time_yuyue"/>
     </LinearLayout>
 </LinearLayout>

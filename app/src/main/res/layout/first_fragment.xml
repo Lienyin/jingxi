@@ -87,11 +87,12 @@
                 android:layout_height="180dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/attestation_bg_edittext"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/attestation_bg_edittext"
                 android:gravity="center_vertical"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
+
                 <com.jxxc.jingxi.ui.main.firstfragment.MyImgScroll
                     android:id="@+id/myvp"
                     android:layout_width="match_parent"
@@ -101,10 +102,10 @@
                     android:id="@+id/vb"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="3dip"
-                    android:gravity="center"
-                    android:layout_marginBottom="5dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginTop="3dip"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
                     android:orientation="horizontal" />
             </RelativeLayout>
 
@@ -203,7 +204,7 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-            <!--            洗车-->
+            <!--第一版洗车-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
@@ -211,7 +212,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/attestation_bg_edittext"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -389,7 +391,56 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-            <!--            创富梦想，即刻出发-->
+            <!--第二版洗车-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/attestation_bg_edittext"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="推荐套餐"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <com.jxxc.jingxi.utils.ListViewForScrollView
+                    android:id="@+id/lv_set_meal_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <!--门店推荐-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/attestation_bg_edittext"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="门店推荐"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <com.jxxc.jingxi.utils.HorizontalListView
+                    android:id="@+id/lv_men_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+            </LinearLayout>
+
+            <!--创富梦想，即刻出发-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

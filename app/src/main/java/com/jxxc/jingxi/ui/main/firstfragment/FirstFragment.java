@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -33,16 +34,24 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
+import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
+import com.jxxc.jingxi.adapter.ShopRecommendAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
+import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
+import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.HorizontalListView;
+import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 
@@ -56,7 +65,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private TextView tv_map_jingsi,tv_location_city;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian,ll_shang_men;
-    private List<ProductInfoEntity.Combo.ProductInfo> list = new ArrayList<>();
+    private ListViewForScrollView lv_set_meal_data;
+    private HorizontalListView lv_men_data;
+    private List<RecommendComboInfoEntity> recommendComboInfoEntity = new ArrayList<>();
     private LocationClient mLocationClient;
     private BDLocationListener mBDLocationListener;
     private XiaOrderDialog dialog;
@@ -81,10 +92,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         myPager = (MyImgScroll) view.findViewById(R.id.myvp);
         ovalLayout = (LinearLayout) view.findViewById(R.id.vb);
         tv_map_jingsi = view.findViewById(R.id.tv_map_jingsi);
+        lv_set_meal_data = view.findViewById(R.id.lv_set_meal_data);
         rb_work_order_all = view.findViewById(R.id.rb_work_order_all);
         rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
+        lv_men_data = view.findViewById(R.id.lv_men_data);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -106,7 +119,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu6.setOnClickListener(this);
         tv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
-        //mPresenter.comboInfo();//获取洗车组合套餐
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -115,13 +127,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         // 注册监听  
         mLocationClient.registerLocationListener(mBDLocationListener);
 
+        mPresenter.recommendComboInfo();//获取推荐套餐
         dialog = new XiaOrderDialog(context);
-        //mPresenter.comboInfo();//获取套餐
         InitViewPager();//初始化图片
-        //开始滚动
-        myPager.start((Activity) context, listViews, 4000, ovalLayout,
-                R.layout.ad_bottom_item, R.id.ad_item_v,
-                R.mipmap.dot_focused, R.mipmap.dot_normal);
         return view;
     }
 
@@ -130,6 +138,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
      */
     private void InitViewPager() {
         mPresenter.banner();
+        //开始滚动
+        myPager.start((Activity) context, listViews, 4000, ovalLayout,
+                R.layout.ad_bottom_item, R.id.ad_item_v,
+                R.mipmap.dot_focused, R.mipmap.dot_normal);
     }
 
     @Override
@@ -170,6 +182,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                     isFirstLoc = false;
                     double locationLatitude = location.getLatitude();
                     double locationLongitude = location.getLongitude();
+                    mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
                     if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                         toast(context, "百度地图定位失败");
                     } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
@@ -288,10 +301,35 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     }
 
-    //获取洗车组合套餐返回数据
+    //获取推荐洗车组合套餐返回数据
     @Override
-    public void comboInfoCallBack(ProductInfoEntity data) {
-        list = data.combo.get(0).productList;
+    public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
+        recommendComboInfoEntity = data;
+        RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
+        recommendSetMealAdapter.setData(data);
+        lv_set_meal_data.setAdapter(recommendSetMealAdapter);
+        lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent((Activity) context, SubmitOrderActivity.class);
+                intent.putExtra("recommendComboInfoEntity",data.get(i));
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    //推荐门店返回数据
+    @Override
+    public void recommendCompanyListCallBack(final List<RecommendCompanyListEntity> data) {
+        ShopRecommendAdapter shopRecommendAdapter = new ShopRecommendAdapter(context);
+        shopRecommendAdapter.setData(data);
+        lv_men_data.setAdapter(shopRecommendAdapter);
+        lv_men_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ZzRouter.gotoActivity((Activity) context, ShopDetailsActivity.class,data.get(i).companyId);
+            }
+        });
     }
 
     //广告滚动数据

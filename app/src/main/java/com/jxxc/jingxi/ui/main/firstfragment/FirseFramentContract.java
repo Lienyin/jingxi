@@ -3,6 +3,8 @@ package com.jxxc.jingxi.ui.main.firstfragment;
 
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -15,12 +17,14 @@ import java.util.List;
 
 public class FirseFramentContract {
     interface View extends BaseView {
-        void comboInfoCallBack(ProductInfoEntity data);
         void bannerCallBack(List<BannerEntity> data);
+        void recommendComboInfoCallBack(List<RecommendComboInfoEntity> data);
+        void recommendCompanyListCallBack(List<RecommendCompanyListEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void comboInfo();
         void banner();
+        void recommendComboInfo();
+        void recommendCompanyList(double lat,double lng);
     }
 }

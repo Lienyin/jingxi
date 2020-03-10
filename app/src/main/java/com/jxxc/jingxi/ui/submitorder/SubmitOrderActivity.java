@@ -24,6 +24,7 @@ import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
@@ -165,6 +166,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
     private String companyId="";
     private String address="";
+    private RecommendComboInfoEntity recommendComboInfoEntity = new RecommendComboInfoEntity();
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -180,11 +182,38 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         fuwu1 = getIntent().getIntExtra("fuwu1",0);
         fuwu2 = getIntent().getIntExtra("fuwu2",0);
         fuwu3 = getIntent().getIntExtra("fuwu3",0);
-        tv_car_fuwu1.setSelected(true);
-        tv_car_fuwu2.setSelected(true);
-        tv_car_fuwu3.setSelected(true);
-        tv_car_fuwu4.setSelected(true);
-        tv_car_fuwu5.setSelected(true);
+        //推荐套餐过来选择
+        recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
+        if (!AppUtils.isEmpty(recommendComboInfoEntity)){
+            for (int i=0;i<recommendComboInfoEntity.productList.size();i++){
+                if (recommendComboInfoEntity.productList.get(i).comboProductId==1){
+                    tv_car_fuwu1.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==2){
+                    tv_car_fuwu2.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==3){
+                    tv_car_fuwu3.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==4){
+                    tv_car_fuwu4.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==5){
+                    tv_car_fuwu5.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==6){
+                    tv_car_fuwu6.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==7){
+                    tv_car_fuwu7.setSelected(true);
+                }else if (recommendComboInfoEntity.productList.get(i).comboProductId==8){
+                    tv_car_fuwu8.setSelected(true);
+                }else{
+                    //
+                }
+            }
+        }else{
+            //默认选择前5项套餐
+            tv_car_fuwu1.setSelected(true);
+            tv_car_fuwu2.setSelected(true);
+            tv_car_fuwu3.setSelected(true);
+            tv_car_fuwu4.setSelected(true);
+            tv_car_fuwu5.setSelected(true);
+        }
 
         adapter = new CouponAdapter(this);
         adapter.setData(list);

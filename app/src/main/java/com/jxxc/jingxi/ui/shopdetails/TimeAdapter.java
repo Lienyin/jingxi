@@ -1,6 +1,8 @@
 package com.jxxc.jingxi.ui.shopdetails;
 
 import android.content.Context;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
 import com.jxxc.jingxi.utils.GlideImgManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TimeAdapter extends BaseAdapter {
@@ -50,6 +54,7 @@ public class TimeAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.time_adapter,null);
+            holder.tv_time_num = convertView.findViewById(R.id.tv_time_num);
             holder.tv_time_name = convertView.findViewById(R.id.tv_time_name);
             holder.ll_time_bg = convertView.findViewById(R.id.ll_time_bg);
             convertView.setTag(holder);
@@ -61,11 +66,11 @@ public class TimeAdapter extends BaseAdapter {
         if (data.isFull==1){//是否以预约满 1是0否
             data.setForbidden(true);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.set_bg));
-            //holder.ll_time_bg.setBackgroundResource(R.drawable.green_bian_no_jin);
+            holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">已预约满</font>"));
         }else {
             data.setForbidden(false);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.black));
-            //holder.ll_time_bg.setBackgroundResource(R.drawable.green_bian_no);
+            holder.tv_time_num.setText(Html.fromHtml("尚余<font color=\"#00B487\">"+data.num+"</font>个"));
         }
         if (position == defaultSelection) {// 选中时设置单纯颜色
             holder.ll_time_bg.setSelected(true);
@@ -76,6 +81,7 @@ public class TimeAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
+        TextView tv_time_num;
         TextView tv_time_name;
         LinearLayout ll_time_bg;
     }

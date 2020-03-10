@@ -89,4 +89,8 @@ public class Api {
     public static final String APPRECIATE = BASEURL + "/system/find/appreciate";
     //40-首页广告
     public static final String BANNER_LIST = BASEURL + "/system/banner/list";
+    //41-获取推荐洗车组合套餐
+    public static final String RECOMMEND_COMBO_INFO = BASEURL + "/biz/order/recommendComboInfo";
+    //42-推荐加盟商列表
+    public static final String RECOMMEND_COMPANY_LIST = BASEURL + "/system/company/recommendCompanyList";
 }

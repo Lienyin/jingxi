@@ -4,6 +4,8 @@ package com.jxxc.jingxi.ui.main.firstfragment;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -25,18 +27,41 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
     }
 
     /**
-     * 获取洗车组合套餐
+     * 获取推荐洗车套餐
      */
     @Override
-    public void comboInfo() {
-        OkGo.<HttpResult<ProductInfoEntity>>post(Api.COMBO_INFO)
+    public void recommendComboInfo() {
+        OkGo.<HttpResult<List<RecommendComboInfoEntity>>>post(Api.RECOMMEND_COMBO_INFO)
                 .tag(this)
-                .execute(new JsonCallback<HttpResult<ProductInfoEntity>>() {
+                .execute(new JsonCallback<HttpResult<List<RecommendComboInfoEntity>>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<ProductInfoEntity>> response) {
-                        ProductInfoEntity d = response.body().data;
+                    public void onSuccess(Response<HttpResult<List<RecommendComboInfoEntity>>> response) {
+                        List<RecommendComboInfoEntity> d = response.body().data;
                         if (response.body().code==0){
-                            mView.comboInfoCallBack(d);
+                            mView.recommendComboInfoCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 推荐加盟商列表
+     * @param lat
+     * @param lng
+     */
+    @Override
+    public void recommendCompanyList(double lat, double lng) {
+        OkGo.<HttpResult<List<RecommendCompanyListEntity>>>post(Api.RECOMMEND_COMPANY_LIST)
+                .params("lat",lat)
+                .params("lng",lng)
+                .execute(new JsonCallback<HttpResult<List<RecommendCompanyListEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<RecommendCompanyListEntity>>> response) {
+                        List<RecommendCompanyListEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.recommendCompanyListCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
