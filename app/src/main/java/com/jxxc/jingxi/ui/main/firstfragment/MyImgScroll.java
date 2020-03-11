@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.jxxc.jingxi.adapter.MyPagerAdapter;
+import com.jxxc.jingxi.utils.AppUtils;
 
 import java.util.List;
 import java.util.Timer;
@@ -84,9 +85,10 @@ public class MyImgScroll extends ViewPager {
                                final int ovalLayoutItemId, final int focusedId, final int normalId) {
         if (ovalLayout != null) {
             LayoutInflater inflater=LayoutInflater.from(mActivity);
-            for (int i = 0; i < mListViews.size(); i++) {
-                ovalLayout.addView(inflater.inflate(ovalLayoutId, null));
-
+            if (!AppUtils.isEmpty(mListViews)){
+                for (int i = 0; i < mListViews.size(); i++) {
+                    ovalLayout.addView(inflater.inflate(ovalLayoutId, null));
+                }
             }
             //选中第一个
             ovalLayout.getChildAt(0).findViewById(ovalLayoutItemId)

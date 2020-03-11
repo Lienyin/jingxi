@@ -9,7 +9,7 @@ public class RecommendComboInfoEntity implements Serializable {
     public String salesVolume;
     public String comboName;
     public String totalPrice;
-    public String carTypeId;
+    public int carTypeId;
     public List<ProductList> productList;
     public class ProductList implements Serializable{
         public int comboProductId;

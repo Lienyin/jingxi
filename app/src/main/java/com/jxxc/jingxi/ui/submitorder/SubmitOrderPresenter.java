@@ -62,6 +62,7 @@ public class SubmitOrderPresenter extends BasePresenterImpl<SubmitOrderContract.
                 .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {
+                        StyledDialog.dismissLoading();
                         HttpResult<List<MyCoupon>> body = response.body();
                         if (!AppUtils.isEmpty(body)) {
                             List<MyCoupon> data = body.data;
