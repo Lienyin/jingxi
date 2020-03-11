@@ -6,7 +6,7 @@ public class FindEntity implements Serializable {
     public String mediaUrl;
     public String appreciateNum;
     public String createTime;
-    public String isTop;
+    public int isTop;
     public String updateTime;
     public String title;
     public String type;

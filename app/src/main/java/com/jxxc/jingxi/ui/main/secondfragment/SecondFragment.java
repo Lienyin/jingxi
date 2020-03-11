@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.commissionlist.CommissionAdapter;
 import com.jxxc.jingxi.ui.finddetails.FindDetailsActivity;
+import com.jxxc.jingxi.utils.GlideImgManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +37,13 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
     private Context context;
     private RadioButton rb_fa_all,rb_fa_guandian,rb_fa_yang,rb_fa_jiao;
     private SwipeRefreshLayout swipeLayout;
+    private ImageView iv_dingzhi_icon;
     private RecyclerView rvList;
     private FindListAdapter adapter;
     private int offset = 2;
     private String type="";
     private List<FindEntity> findEntityList = new ArrayList<>();
+    private FindEntity findEntity = new FindEntity();
 
     public SecondFragment(Context context){
         this.context = context;
@@ -55,11 +59,13 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
         rb_fa_jiao = (RadioButton)view.findViewById(R.id.rb_fa_jiao);
         swipeLayout = view.findViewById(R.id.swipeLayout);
         rvList = view.findViewById(R.id.rv_list);
+        iv_dingzhi_icon = view.findViewById(R.id.iv_dingzhi_icon);
 
         rb_fa_all.setOnClickListener(this);
         rb_fa_guandian.setOnClickListener(this);
         rb_fa_yang.setOnClickListener(this);
         rb_fa_jiao.setOnClickListener(this);
+        iv_dingzhi_icon.setOnClickListener(this);
 
         initAdapter();
         onRefresh();
@@ -77,12 +83,7 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent((Activity) context, FindDetailsActivity.class);
-                intent.putExtra("findContent",findEntityList.get(position).content);
-                intent.putExtra("appreciateNum",findEntityList.get(position).appreciateNum);
-                intent.putExtra("findId",findEntityList.get(position).noticeId);
-                intent.putExtra("type",findEntityList.get(position).type);
-                startActivity(intent);
+                ZzRouter.gotoActivity((Activity) context,FindDetailsActivity.class,findEntityList.get(position));
             }
         });
     }
@@ -116,6 +117,9 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
                 type = "3";
                 mPresenter.find(type,1,10);
                 break;
+            case R.id.iv_dingzhi_icon:
+                ZzRouter.gotoActivity((Activity) context,FindDetailsActivity.class,findEntity);
+                break;
         }
     }
 
@@ -124,9 +128,17 @@ public class SecondFragment extends MVPBaseFragment<SecondFramentContract.View, 
         findEntityList= data;
         swipeLayout.setRefreshing(false);
         adapter.setNewData(data);
-        // adapter.disableLoadMoreIfNotFullPage();
         if (data.size() < 10) {
             adapter.loadMoreEnd();
+        }else{
+            adapter.disableLoadMoreIfNotFullPage();
+        }
+        //显示置顶图片
+        for (int i=0;i<data.size();i++){
+            if (data.get(i).isTop==1){
+                GlideImgManager.loadRectangleImage(context, data.get(i).mediaUrl, iv_dingzhi_icon);
+                findEntity = data.get(i);
+            }
         }
     }
 

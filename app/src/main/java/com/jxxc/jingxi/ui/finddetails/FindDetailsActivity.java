@@ -15,10 +15,13 @@ import android.support.annotation.RequiresApi;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.AppreciateEntity;
+import com.jxxc.jingxi.entity.backparameter.FindEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
@@ -47,35 +50,20 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.find_details_context)
-    TextView find_details_context;
+    WebView find_details_context;
     @BindView(R.id.tv_num_data)
     TextView tv_num_data;
     @BindView(R.id.tv_type)
     TextView tv_type;
+    @BindView(R.id.tv_title_faxian)
+    TextView tv_title_faxian;
+    @BindView(R.id.tv_time_faxian)
+    TextView tv_time_faxian;
     private String findId = "";
-    private String findContent = "";
+    private String findContent="";
     private String appreciateNum = "";
     private String type = "";
-    private LevelListDrawable mDrawable = new LevelListDrawable();
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1123) {
-                Bitmap bitmap = (Bitmap)msg.obj;
-                if (!AppUtils.isEmpty(bitmap)){
-                    BitmapDrawable drawable = new BitmapDrawable(null, bitmap);
-                    mDrawable.addLevel(1, 1, drawable);
-                    mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                    mDrawable.setLevel(1);
-                }
-
-                CharSequence charSequence = find_details_context.getText();
-                find_details_context.setText(charSequence);
-                find_details_context.invalidate();
-            }
-        }
-    };
+    private FindEntity findEntity;
 
     @Override
     protected int layoutId() {
@@ -86,34 +74,23 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @Override
     public void initData() {
         tv_title.setText("详情");
-        findId = getIntent().getStringExtra("findId");
-        findContent = getIntent().getStringExtra("findContent");
-        appreciateNum = getIntent().getStringExtra("appreciateNum");
-        type = getIntent().getStringExtra("type");
-        tv_num_data.setText(appreciateNum);//点赞数
-        find_details_context.setText(Html.fromHtml(findContent, Html.FROM_HTML_MODE_COMPACT, new Html.ImageGetter() {
-            @Override
-            public Drawable getDrawable(final String source) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDrawable.addLevel(0, 0, getResources().getDrawable(R.mipmap.logo_108));
-                        mDrawable.setBounds(0, 0, 200, 200);
-                        Bitmap bitmap;
-                        try {
-                            bitmap = BitmapFactory.decodeStream(new URL(source).openStream());
-                            Message msg = handler.obtainMessage();
-                            msg.what = 1123;
-                            msg.obj = bitmap;
-                            handler.sendMessage(msg);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-                return mDrawable;
-            }
-        }, null));
+        findEntity = ZzRouter.getIntentData(this,FindEntity.class);
+        findId = findEntity.noticeId;
+        findContent = findEntity.content;
+        type = findEntity.type;
+        tv_num_data.setText(findEntity.appreciateNum);//点赞数
+        tv_title_faxian.setText(findEntity.title);
+        tv_time_faxian.setText(findEntity.createTime);
+
+        find_details_context.getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = find_details_context.getSettings();
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        settings.setUseWideViewPort(true);
+//        settings.setLoadWithOverviewMode(true);
+
+        find_details_context.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
+        find_details_context.loadData(findContent.replace("\\",""),"text/html;charset=UTF-8", null);
+
         if ("1".equals(type)){
             tv_type.setText("文章标签：经验/观点");
         }else if ("2".equals(type)){

@@ -89,28 +89,28 @@ public class MyImgScroll extends ViewPager {
                 for (int i = 0; i < mListViews.size(); i++) {
                     ovalLayout.addView(inflater.inflate(ovalLayoutId, null));
                 }
+                //选中第一个
+                ovalLayout.getChildAt(0).findViewById(ovalLayoutItemId)
+                        .setBackgroundResource(focusedId);
+                this.setOnPageChangeListener(new OnPageChangeListener() {
+                    public void onPageSelected(int i) {
+                        curIndex = i % mListViews.size();
+                        //取消圆点选中
+                        ovalLayout.getChildAt(oldIndex).findViewById(ovalLayoutItemId)
+                                .setBackgroundResource(normalId);
+                        //圆点选中
+                        ovalLayout.getChildAt(curIndex).findViewById(ovalLayoutItemId)
+                                .setBackgroundResource(focusedId);
+                        oldIndex = curIndex;
+                    }
+
+                    public void onPageScrolled(int arg0, float arg1, int arg2) {
+                    }
+
+                    public void onPageScrollStateChanged(int arg0) {
+                    }
+                });
             }
-            //选中第一个
-            ovalLayout.getChildAt(0).findViewById(ovalLayoutItemId)
-                    .setBackgroundResource(focusedId);
-            this.setOnPageChangeListener(new OnPageChangeListener() {
-                public void onPageSelected(int i) {
-                    curIndex = i % mListViews.size();
-                    //取消圆点选中
-                    ovalLayout.getChildAt(oldIndex).findViewById(ovalLayoutItemId)
-                            .setBackgroundResource(normalId);
-                    //圆点选中
-                    ovalLayout.getChildAt(curIndex).findViewById(ovalLayoutItemId)
-                            .setBackgroundResource(focusedId);
-                    oldIndex = curIndex;
-                }
-
-                public void onPageScrolled(int arg0, float arg1, int arg2) {
-                }
-
-                public void onPageScrollStateChanged(int arg0) {
-                }
-            });
         }
     }
     /**
