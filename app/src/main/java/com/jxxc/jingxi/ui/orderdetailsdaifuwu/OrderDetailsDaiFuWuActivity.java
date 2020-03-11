@@ -19,9 +19,11 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -35,6 +37,7 @@ import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.OrderDetailsDataAdapter;
@@ -126,10 +129,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     public void initData() {
         tv_title.setText("订单详情");
         orderId = ZzRouter.getIntentData(this,String.class);
-        StyledDialog.buildLoading("数据加载中").setActivity(this).show();
-        mPresenter.getOrder(orderId);
         initMap();
-
+        StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         dialog = new CancelOrderDialog(this);
         dialog.setOnFenxiangClickListener(new CancelOrderDialog.OnFenxiangClickListener() {
             @Override
@@ -251,7 +252,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         orderPrice = data.price;
 
         //技师位置
-        LatLng point = new LatLng(data.lat, data.lng);
+        LatLng point = new LatLng(data.technicianLat, data.technicianLng);
         View view = View.inflate(this, R.layout.site_pop_view_img, null);
         ImageView ivView = (ImageView) view.findViewById(R.id.iv_pop_view_img_battery);
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(view);
@@ -264,6 +265,47 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 .icon(bitmap);
         //在地图上添加Marker，并显示
         mBaiduMap.addOverlay(option);
+        if (data.technicianLat>0){//大于0才有技师信息
+            //设置地图中心点显示在屏幕中间
+            //地图缩放等级
+            int zoomLevel[] = {2000000, 1000000, 500000, 200000, 100000, 50000,
+                    25000, 20000, 10000, 5000, 2000, 1000, 500, 100, 50, 20, 0};
+            double midlat = (locationLatitude+data.technicianLat)/2;
+            double midlon = (locationLongitude+data.technicianLng)/2;
+            LatLng pointStart = new LatLng(locationLatitude, locationLongitude);//用户当前位置
+            LatLng pointEndt = new LatLng(data.technicianLat, data.technicianLng);//技师文职
+            LatLng pointMiddle = new LatLng(midlat, midlon);// 中点
+            setUserMapCenter(midlat,midlon);
+            // 计算两点之间的距离，重新设定缩放值，让全部marker显示在屏幕中。
+            int jl = (int) DistanceUtil.getDistance(pointStart, pointEndt);
+            int i;
+            for (i = 0; i < 17; i++) {
+                if (zoomLevel[i] < jl) {
+                    break;
+                }
+            }
+            //根据起点和终点的坐标点计算出距离来对比缩放等级获取最佳的缩放值，用来得到最佳的显示折线图的缩放等级
+            float zoom = i + 5;
+            // 设置当前位置显示在地图中心
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(pointMiddle, zoom);// 设置缩放比例
+            mBaiduMap.animateMapStatus(u);
+        }
+    }
+
+    /**
+     * 设置中心点(及定位当前位置)
+     */
+    private void setUserMapCenter(double lat, double lon) {
+        LatLng cenpt = new LatLng(lat, lon);
+        //定义地图状态
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(cenpt)
+                .zoom(18)
+                .build();
+        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        //改变地图状态
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
     }
 
     //取消订单返回数据
@@ -300,7 +342,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
-        option.setScanSpan(1000);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setScanSpan(0);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
         option.setOpenGps(true);//可选，默认false,设置是否使用gps
         option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
@@ -331,6 +373,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
             //mBaiduMap.setMyLocationEnabled(false);
             if (isFirstLoc) {
                 isFirstLoc = false;
+                mPresenter.getOrder(orderId);//获取订单详情
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 locationLatitude = location.getLatitude();//当前经纬度
                 locationLongitude = location.getLongitude();

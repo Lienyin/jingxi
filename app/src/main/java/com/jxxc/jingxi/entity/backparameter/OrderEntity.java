@@ -8,8 +8,10 @@ public class OrderEntity implements Serializable {
     public String isComment;
     public String address;
     public double lng;
+    public double lat;
+    public double technicianLng;
+    public double technicianLat;
     public String technicianPhonenumber;
-    public String technicianLat;
     public String orderId;
     public String arriveDate;
     public String remark;
@@ -29,8 +31,6 @@ public class OrderEntity implements Serializable {
     public int technicianGrade;
     public int starLevel;
     public String discountsPrice;
-    public double lat;
-    public String technicianLng;
     public int status;
     public String technicianCommentImgs;
     public String technicianAvatar;
