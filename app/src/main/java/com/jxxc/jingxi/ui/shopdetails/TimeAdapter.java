@@ -23,10 +23,12 @@ import java.util.List;
 public class TimeAdapter extends BaseAdapter {
     private Context context;
     private int defaultSelection=-1;
+    private int serveType = 0;//0上门 1到店
     private List<AppointmentListEntity> list;
 
-    public TimeAdapter(Context context){
+    public TimeAdapter(Context context,int serveType){
         this.context=context;
+        this.serveType=serveType;
     }
 
     public void setData(List<AppointmentListEntity> list){
@@ -66,15 +68,23 @@ public class TimeAdapter extends BaseAdapter {
         if (data.isFull==1){//是否以预约满 1是0否
             data.setForbidden(true);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.set_bg));
-            if (data.num>0){
-                holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">时间已过</font>"));
+            if (serveType == 1){
+                if (data.num>0){
+                    holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">时间已过</font>"));
+                }else{
+                    holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">已预约满</font>"));
+                }
             }else{
-                holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">已预约满</font>"));
+                holder.tv_time_num.setText(Html.fromHtml("<font color=\"#cccccc\">时间已过</font>"));
             }
         }else {
             data.setForbidden(false);
             holder.tv_time_name.setTextColor(context.getResources().getColor(R.color.black));
-            holder.tv_time_num.setText(Html.fromHtml("尚余<font color=\"#00B487\">"+data.num+"</font>个"));
+            if (serveType == 1){
+                holder.tv_time_num.setText(Html.fromHtml("尚余<font color=\"#00B487\">"+data.num+"</font>个"));
+            }else{
+                holder.tv_time_num.setText(Html.fromHtml("可预约"));
+            }
         }
         if (position == defaultSelection) {// 选中时设置单纯颜色
             holder.ll_time_bg.setSelected(true);

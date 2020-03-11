@@ -243,7 +243,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     @Override
     public void appointmentListCallBack(List<AppointmentListEntity> data) {
         list = data;
-        timeAdapter = new TimeAdapter(this);
+        timeAdapter = new TimeAdapter(this,1);
         timeAdapter.setData(data);
         gv_time_data.setAdapter(timeAdapter);
     }

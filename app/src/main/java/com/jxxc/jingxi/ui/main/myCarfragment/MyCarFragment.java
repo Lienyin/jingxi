@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.TimeDialog;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
@@ -124,6 +125,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
     private String companyId="";
     private String address="";
+    private TimeDialog timeDialog;
 
     public MyCarFragment(Context context){
         this.context = context;
@@ -201,6 +203,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);
         mPresenter.comboInfo();
+        //获取当前日期
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String queryDate = formatter.format(date);//今天日期
+        mPresenter.appointmentList("",queryDate);
 
         adapter = new CouponAdapter(context);
         adapter.setData(list);
@@ -247,6 +254,23 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_car_fuwu3.setSelected(true);
         tv_car_fuwu4.setSelected(true);
         tv_car_fuwu5.setSelected(true);
+
+        timeDialog = new TimeDialog(context);
+        timeDialog.setOnFenxiangClickListener(new TimeDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(String time,String startTime,String endTime,int type) {
+                if (type==0){
+                    //刷新时间段
+                    mPresenter.appointmentList("",time);
+                }else{
+                    //获得时间段
+                    appointmentStartTime = startTime;
+                    appointmentEndTime = endTime;
+                    tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+                    timeDialog.cleanDialog();
+                }
+            }
+        });
         return view;
     }
 
@@ -444,7 +468,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 if (ll_daodian.getVisibility()==View.VISIBLE){
                     //
                 }else{
-                    getTime();
+                    //getTime();
+                    timeDialog.showShareDialog(true);
                 }
                 break;
             case R.id.ll_add_car://添加 车辆信息
@@ -641,6 +666,12 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         intent.putExtra("orderId",data.orderId);
         intent.putExtra("orderPrice",data.payPrice);
         startActivity(intent);
+    }
+
+    //查询预约时间返回
+    @Override
+    public void appointmentListCallBack(List<AppointmentListEntity> data) {
+        timeDialog.updateTimeAdapter(data);
     }
 
     @Override
