@@ -88,8 +88,8 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
 //        settings.setUseWideViewPort(true);
 //        settings.setLoadWithOverviewMode(true);
 
-        find_details_context.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
-        find_details_context.loadData(findContent.replace("\\",""),"text/html;charset=UTF-8", null);
+        //find_details_context.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
+        find_details_context.loadData(findContent.replace("\\",""),"text/html", "UTF-8");
 
         if ("1".equals(type)){
             tv_type.setText("文章标签：经验/观点");

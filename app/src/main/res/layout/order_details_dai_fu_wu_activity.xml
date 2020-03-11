@@ -80,6 +80,7 @@
                             android:background="@drawable/shape_bg_edittext"
                             android:gravity="center"
                             android:text="联系技师"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
@@ -119,11 +120,14 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!--技师信息-->
                 <LinearLayout
+                    android:id="@+id/jishi_info"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <ImageView
@@ -140,6 +144,11 @@
                         android:text="XXX"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_jishi_jibie"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_user_23"/>
                 </LinearLayout>
             </LinearLayout>
             <!--订单模块-->

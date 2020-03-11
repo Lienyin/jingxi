@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -95,12 +96,16 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     TextView tv_details_go_pay;
     @BindView(R.id.iv_jishi_hand)
     ImageView iv_jishi_hand;
+    @BindView(R.id.iv_jishi_jibie)
+    ImageView iv_jishi_jibie;
     @BindView(R.id.gv_fuwu_data)
     GridView gv_fuwu_data;
     @BindView(R.id.mv_map)
     MapView mMapView;
     @BindView(R.id.mScrollView)
     ScrollView mScrollView;
+    @BindView(R.id.jishi_info)
+    LinearLayout jishi_info;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -190,33 +195,51 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         adapter.setData(orderEntity.products);
         gv_fuwu_data.setAdapter(adapter);
 
-        //技师信息
+        //技师头像
         GlideImgManager.loadCircleImage(this, data.technicianAvatar, iv_jishi_hand);
         tv_details_jishi_name.setText(data.technicianRealName);
         //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),
         // ( 2, “已接单待服务”),( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
-        if (data.status==2){
-            tv_details_hint_tilt.setText("预计XX:XX到达");
-            tv_details_hint_text.setText("请耐心等待，技师已在路上。");
-        }else if (data.status==0){
+        if (data.status==0){
             tv_details_hint_tilt.setText("等待支付订单");
             tv_details_hint_text.setText("请先完成订单支付。");
             tv_details_go_pay.setVisibility(View.VISIBLE);
         }else if (data.status==1){
             tv_details_hint_tilt.setText("等待技师接单");
             tv_details_hint_text.setText("请耐心等待技师接单。");
+            tv_details_cui_order.setVisibility(View.GONE);
+        }else if (data.status==2){
+            tv_details_hint_tilt.setText("预计"+data.arriveDate+"分钟后到达");
+            tv_details_hint_text.setText("请耐心等待，技师已在路上。");
             tv_details_cui_order.setVisibility(View.VISIBLE);
+            jishi_info.setVisibility(View.VISIBLE);
+            tv_details_call_phone.setVisibility(View.VISIBLE);
         }else if (data.status==3){
             tv_details_hint_tilt.setText("技师正在洗车");
             tv_details_hint_text.setText("技师正在洗车，请耐心等待。");
             tv_details_cancel_order.setVisibility(View.GONE);//服务中不让取消订单
+            jishi_info.setVisibility(View.VISIBLE);
+            tv_details_call_phone.setVisibility(View.VISIBLE);
         }else if (data.status==5){
             tv_details_hint_tilt.setText("订单已取消");
             tv_details_hint_text.setText("订单已取消，请重新下单。");
             tv_details_cancel_order.setVisibility(View.GONE);
-            tv_details_go_pay.setVisibility(View.GONE);
-            tv_details_cui_order.setVisibility(View.GONE);
+            jishi_info.setVisibility(View.VISIBLE);
+            tv_details_call_phone.setVisibility(View.VISIBLE);
         }
+        //技师星级
+        if (data.technicianGrade>=0&&data.technicianGrade<=1){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_13);
+        }else if (data.technicianGrade>1&&data.technicianGrade<=2){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_21);
+        }else if (data.technicianGrade>2&&data.technicianGrade<=3){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_23);
+        }else if (data.technicianGrade>3&&data.technicianGrade<=4){
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_25);
+        }else{
+            iv_jishi_jibie.setImageResource(R.mipmap.icon_user_27);
+        }
+
         //订单信息
         tv_details_order_id.setText(data.orderId);
         tv_details_order_static.setText(data.statusName);
