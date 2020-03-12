@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jxxc.jingxi.utils.AppUtils;
+
 import java.util.List;
 
 // 适配器
@@ -19,8 +21,10 @@ public  class  MyPagerAdapter  extends PagerAdapter {
         this.mListViews=mListViews;
     }
     public int getCount() {
-        if (mListViews.size() == 1) {// 一张图片时不用流动
-            return mListViews.size();
+        if (!AppUtils.isEmpty(mListViews)){
+            if (mListViews.size() == 1) {// 一张图片时不用流动
+                return mListViews.size();
+            }
         }
         return Integer.MAX_VALUE;
     }

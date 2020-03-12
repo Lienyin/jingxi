@@ -59,7 +59,7 @@ public class CarChooseAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         BandAndTypeEntity.CarType data = list.get(position);
-        GlideImgManager.loadImage(context, data.carTypeIcon, holder.iv_car_type_icon);
+        GlideImgManager.loadImageFitCenter(context, data.carTypeIcon, holder.iv_car_type_icon);
         holder.tv_car_type_name.setText(data.carTypeName);
 
         if (position == defaultSelection) {// 选中时设置单纯颜色

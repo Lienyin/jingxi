@@ -90,6 +90,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     private List<ColorEntity.Color> list = new ArrayList<>();
     private CarListEntity carData;
     private String key = "";
+    private int isNewEnergy;//是否新能源 1是0否
     @Override
     protected int layoutId() {
         return R.layout.add_car_activity;
@@ -101,43 +102,60 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         if (!AppUtils.isEmpty(carData)){
             tv_title.setText("修改车辆");
             btn_add_car.setText("修改车辆");
-            mEditText.setFocusable(false);
             ll_car_moren.setVisibility(View.VISIBLE);
+            mEditText.setFocusable(false);
+            tv_new.setClickable(false);
         }else{
             tv_title.setText("添加车辆");
             btn_add_car.setText("添加车辆");
             ll_car_moren.setVisibility(View.GONE);
-        }
-        mEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if (keyboardUtil == null) {
-                    keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
-                    keyboardUtil.hideSoftInputMethod();
-                    keyboardUtil.showKeyboard();
-                } else {
-                    keyboardUtil.showKeyboard();
+//            mEditText.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent event) {
+//
+//                    return false;
+//                }
+//            });
+            keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
+            keyboardUtil.hideSoftInputMethod();
+            keyboardUtil.hideKeyboard();
+            mEditText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (keyboardUtil.isShow()){
+                        keyboardUtil.hideKeyboard();
+                    }else{
+                        keyboardUtil.showKeyboard();
+                    }
                 }
-                return false;
-            }
-        });
+            });
+        }
         mEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.i("字符变换后", "afterTextChanged");
+                //Log.i("字符变换后", "afterTextChanged");
                 key = s.toString();
                 setKey();
+                if (mEditText.getText().toString().length()==7&&t8.getVisibility()==View.GONE){
+                    if (keyboardUtil == null) {
+                        keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
+                        keyboardUtil.hideSoftInputMethod();
+                        keyboardUtil.hideKeyboard();
+                    } else {
+                        keyboardUtil.hideKeyboard();
+                    }
+                }
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.i("字符变换前", s + "-" + start + "-" + count + "-" + after);
+                //Log.i("字符变换前", s + "-" + start + "-" + count + "-" + after);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.i("字符变换中", s + "-" + "-" + start + "-" + before + "-" + count);
+                //Log.i("字符变换中", s + "-" + "-" + start + "-" + before + "-" + count);
             }
         });
 
@@ -216,11 +234,21 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             case R.id.btn_add_car://添加/修改车辆
                 if (AppUtils.isEmpty(mEditText.getText().toString())){
                     toast(this,"请输入车牌");
+                }else if (mEditText.getText().toString().length()<7){
+                    toast(this,"请输入正确车牌");
                 }else if (AppUtils.isEmpty(brandId)){
                     toast(this,"请选择车型");
                 }else if (AppUtils.isEmpty(colorId)){
                     toast(this,"请选择车身颜色");
                 }else{
+                    String carNum = "";
+                    if (t8.getVisibility()==View.VISIBLE){
+                        isNewEnergy=1;//新能源
+                        carNum = mEditText.getText().toString();
+                    }else{
+                        isNewEnergy=0;//普车
+                        carNum = mEditText.getText().toString().substring(0,7);
+                    }
                     if (!AppUtils.isEmpty(carData)){
                         //修改车辆
                         String isDefault ="";//是否默认车辆 1是0否
@@ -229,10 +257,10 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                         }else{
                             isDefault ="0";
                         }
-                        mPresenter.editCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0",isDefault);
+                        mPresenter.editCar(carNum,brandId,carTypeId,colorId,isNewEnergy+"",isDefault);
                     }else{
                         //添加车辆
-                        mPresenter.addCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0");
+                        mPresenter.addCar(carNum,brandId,carTypeId,colorId,isNewEnergy+"");
                     }
                 }
                 break;
@@ -248,9 +276,11 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                 }
                 break;
             case R.id.t8://第8位
-                tv_new.setVisibility(View.VISIBLE);
-                t8.setVisibility(View.GONE);
-                keyboardUtil.hideKeyboard();
+                if (AppUtils.isEmpty(carData)){
+                    tv_new.setVisibility(View.VISIBLE);
+                    t8.setVisibility(View.GONE);
+                    keyboardUtil.hideKeyboard();
+                }
                 break;
             default:
         }
@@ -306,6 +336,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             }else{
                 cb_car_moren.setChecked(false);
             }
+
         }
     }
 
