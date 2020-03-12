@@ -9,149 +9,155 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@mipmap/car_pai_bg"
-        android:gravity="center">
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="20dp"
-        android:text="车牌号码"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:hint="请输入车牌号"
-            android:inputType="text"
-            android:maxLength="10"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="20sp" />
-
-        <android.inputmethodservice.KeyboardView
-            android:id="@+id/keyboard_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#DCDCDC"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:keyBackground="@drawable/selector_key"
-            android:keyTextColor="#000"
-            android:keyTextSize="18sp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:shadowColor="#FFFFFF"
-            android:shadowRadius="0.0"
-            android:visibility="gone" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="车型选择"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <LinearLayout
-        android:id="@+id/ll_car_type"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="30dp">
-
-        <TextView
-            android:id="@+id/tv_car_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="请选择车型"
-            android:inputType="text"
-            android:textColor="#000"
-            android:textSize="20sp" />
-
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint=">"
-            android:inputType="text"
-            android:textColor="#000"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/black999" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="车身颜色"
-        android:textColor="@color/black"
-        android:textSize="14sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/home_bg"
-        android:gravity="center_vertical">
-
-        <GridView
-            android:id="@+id/gv_color_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="6" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_car_moren"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="车牌号码"
             android:textColor="@color/black"
-            android:text="是否设置为默认车辆"/>
-        <CheckBox
-            android:id="@+id/cb_car_moren"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/car_number"/>
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="85dp"
+                android:layout_marginTop="25dp"
+                android:background="@color/transparent"
+                android:inputType="text"
+                android:maxLength="10"
+                android:text=""
+                android:cursorVisible="false"
+                android:textColor="@color/transparent"
+                android:textSize="20sp" />
+
+            <android.inputmethodservice.KeyboardView
+                android:id="@+id/keyboard_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#DCDCDC"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:keyBackground="@drawable/selector_key"
+                android:keyTextColor="#000"
+                android:keyTextSize="18sp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:shadowColor="#FFFFFF"
+                android:shadowRadius="0.0"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="车型选择"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_car_type"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="30dp">
+
+            <TextView
+                android:id="@+id/tv_car_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请选择车型"
+                android:inputType="text"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=">"
+                android:inputType="text"
+                android:textColor="#000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black999" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="车身颜色"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/home_bg"
+            android:gravity="center_vertical">
+
+            <com.jxxc.jingxi.utils.MyGridView
+                android:id="@+id/gv_color_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_car_moren"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:visibility="gone"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="是否设置为默认车辆"/>
+            <CheckBox
+                android:id="@+id/cb_car_moren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_add_car"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_bg_button"
         android:text="添加车辆"

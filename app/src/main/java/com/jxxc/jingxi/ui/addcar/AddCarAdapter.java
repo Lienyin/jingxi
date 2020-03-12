@@ -49,33 +49,45 @@ public class AddCarAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.add_car_adapter,null);
             holder.view_bg = convertView.findViewById(R.id.view_bg);
             holder.ll_car_type = convertView.findViewById(R.id.ll_car_type);
+            holder.color_name = convertView.findViewById(R.id.color_name);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
         ColorEntity.Color data = list.get(position);
         if (data.color==1){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color1));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_1);
+            holder.color_name.setText("绿色");
         }else if (data.color==2){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color2));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_2);
+            holder.color_name.setText("蓝色");
         }else if (data.color==3){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color3));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_3);
+            holder.color_name.setText("橙色");
         }else if (data.color==4){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color4));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_4);
+            holder.color_name.setText("黄色");
         }else if (data.color==5){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color5));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_5);
+            holder.color_name.setText("红色");
         }else if (data.color==6){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color6));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_6);
+            holder.color_name.setText("黑色");
         }else if (data.color==7){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color7));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_7);
+            holder.color_name.setText("灰色");
         }else if (data.color==8){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color8));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_8);
+            holder.color_name.setText("白色");
         }else if (data.color==9){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color9));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_9);
+            holder.color_name.setText("紫色");
         }else if (data.color==10){
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.car_type_color10));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_10);
+            holder.color_name.setText("棕色");
         }else{
-            holder.view_bg.setBackgroundColor(context.getResources().getColor(R.color.public_all));
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_8);
+            holder.color_name.setText("其他");
         }
 
         if (position == defaultSelection) {// 选中时设置单纯颜色
@@ -89,6 +101,7 @@ public class AddCarAdapter extends BaseAdapter {
     class ViewHolder{
         View view_bg;
         LinearLayout ll_car_type;
+        TextView color_name;
     }
 
     /**

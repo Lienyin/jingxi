@@ -29,6 +29,7 @@ import com.jxxc.jingxi.ui.cartypeselect.CarTypeSelectActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.KeyboardUtil;
+import com.jxxc.jingxi.utils.MyGridView;
 import com.wanjian.cockroach.App;
 
 import java.util.ArrayList;
@@ -56,13 +57,31 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     @BindView(R.id.ll_car_type)
     LinearLayout ll_car_type;
     @BindView(R.id.gv_color_data)
-    GridView gv_color_data;
+    MyGridView gv_color_data;
     @BindView(R.id.btn_add_car)
     Button btn_add_car;
     @BindView(R.id.ll_car_moren)
     LinearLayout ll_car_moren;
     @BindView(R.id.cb_car_moren)
     CheckBox cb_car_moren;
+    @BindView(R.id.t1)
+    TextView t1;
+    @BindView(R.id.t2)
+    TextView t2;
+    @BindView(R.id.t3)
+    TextView t3;
+    @BindView(R.id.t4)
+    TextView t4;
+    @BindView(R.id.t5)
+    TextView t5;
+    @BindView(R.id.t6)
+    TextView t6;
+    @BindView(R.id.t7)
+    TextView t7;
+    @BindView(R.id.t8)
+    TextView t8;
+    @BindView(R.id.tv_new)
+    TextView tv_new;
     private KeyboardUtil keyboardUtil;
     private String brandId;
     private String carTypeId;
@@ -70,6 +89,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
     private AddCarAdapter addCarAdapter;
     private List<ColorEntity.Color> list = new ArrayList<>();
     private CarListEntity carData;
+    private String key = "";
     @Override
     protected int layoutId() {
         return R.layout.add_car_activity;
@@ -82,9 +102,11 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             tv_title.setText("修改车辆");
             btn_add_car.setText("修改车辆");
             mEditText.setFocusable(false);
+            ll_car_moren.setVisibility(View.VISIBLE);
         }else{
             tv_title.setText("添加车辆");
             btn_add_car.setText("添加车辆");
+            ll_car_moren.setVisibility(View.GONE);
         }
         mEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -104,6 +126,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             @Override
             public void afterTextChanged(Editable s) {
                 Log.i("字符变换后", "afterTextChanged");
+                key = s.toString();
+                setKey();
             }
 
             @Override
@@ -133,6 +157,39 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         });
     }
 
+    private void setKey() {
+        char[] arr = key.toCharArray();
+        t1.setText("");
+        t2.setText("");
+        t3.setText("");
+        t4.setText("");
+        t5.setText("");
+        t6.setText("");
+        t7.setText("");
+        t8.setText("");
+        for (int i = 0; i < arr.length; i++) {
+            if (i == 0) {
+                t1.setText(String.valueOf(arr[0]));
+            } else if (i == 1) {
+                t2.setText(String.valueOf(arr[1]));
+            }else if (i == 2) {
+                t3.setText(String.valueOf(arr[2]));
+            } else if (i == 3) {
+                t4.setText(String.valueOf(arr[3]));
+            } else if (i == 4) {
+                t5.setText(String.valueOf(arr[4]));
+            } else if (i == 5) {
+                t6.setText(String.valueOf(arr[5]));
+            } else if (i == 6) {
+                t7.setText(String.valueOf(arr[6]));
+            } else if (i == 7) {
+                if (t8.getVisibility()==View.VISIBLE){
+                    t8.setText(String.valueOf(arr[7]));
+                }
+            }
+        }
+    }
+
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -145,7 +202,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
         }
     };
 
-    @OnClick({R.id.tv_back,R.id.ll_car_type,R.id.tv_car_type,R.id.btn_add_car})
+    @OnClick({R.id.tv_back,R.id.ll_car_type,R.id.tv_car_type,R.id.btn_add_car,R.id.tv_new,R.id.t8})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -178,6 +235,22 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                         mPresenter.addCar(mEditText.getText().toString(),brandId,carTypeId,colorId,"0");
                     }
                 }
+                break;
+            case R.id.tv_new://新能源
+                tv_new.setVisibility(View.GONE);
+                t8.setVisibility(View.VISIBLE);
+                if (keyboardUtil == null) {
+                    keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
+                    keyboardUtil.hideSoftInputMethod();
+                    keyboardUtil.showKeyboard();
+                } else {
+                    keyboardUtil.showKeyboard();
+                }
+                break;
+            case R.id.t8://第8位
+                tv_new.setVisibility(View.VISIBLE);
+                t8.setVisibility(View.GONE);
+                keyboardUtil.hideKeyboard();
                 break;
             default:
         }
@@ -217,7 +290,14 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             brandId = carData.brandId;
             carTypeId = carData.typeId;
             colorId = carData.color+"";
-            mEditText.setText(carData.carNum);
+            if (carData.carNum.length()>7){
+                //新能源车牌
+                tv_new.setVisibility(View.GONE);
+                t8.setVisibility(View.VISIBLE);
+                mEditText.setText(carData.carNum);
+            }else{
+                mEditText.setText(carData.carNum);
+            }
             tv_car_type.setText(carData.brandName+"·"+carData.typeName);
             addCarAdapter.setSelectPosition(carData.color-1);
             addCarAdapter.notifyDataSetChanged();

@@ -18,16 +18,18 @@
     <color name="gray">#55757575</color>
     <color name="home_yellow">#FFD669</color>
     <color name="home_yellow_m">#FF9E02</color>
-    <color name="car_type_color1">#556B2F</color>
-    <color name="car_type_color2">#28818A</color>
-    <color name="car_type_color3">#FF4500</color>
-    <color name="car_type_color4">#FFFF00</color>
-    <color name="car_type_color5">#FF0000</color>
+
+    <color name="car_type_color1">#02A211</color>
+    <color name="car_type_color2">#016CFF</color>
+    <color name="car_type_color3">#FF6D02</color>
+    <color name="car_type_color4">#FFD400</color>
+    <color name="car_type_color5">#FB0400</color>
     <color name="car_type_color6">#000000</color>
-    <color name="car_type_color7">#808080</color>
+    <color name="car_type_color7">#D6D3D6</color>
     <color name="car_type_color8">#FFFFFF</color>
-    <color name="car_type_color9">#800080</color>
-    <color name="car_type_color10">#8B4513</color>
+    <color name="car_type_color9">#9000B7</color>
+    <color name="car_type_color10">#8C4D03</color>
+
     <color name="md_grey_800">#424242</color>
     <color name="blackf1">#f1f1f1</color>
     <color name="view_bg">#FDFAFE</color>
