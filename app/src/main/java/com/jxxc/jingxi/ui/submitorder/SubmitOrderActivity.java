@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.TimeDialog;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
+import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
@@ -166,6 +168,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     private String companyId="";
     private String address="";
     private RecommendComboInfoEntity recommendComboInfoEntity = new RecommendComboInfoEntity();
+    private TimeDialog timeDialog;
+
     @Override
     protected int layoutId() {
         return R.layout.submit_order_activity;
@@ -263,6 +267,12 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         mPresenter.getCarList();//车型查询
         mPresenter.comboInfo();//套餐查询
 
+        //获取当前日期
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String queryDate = formatter.format(date);//今天日期
+        mPresenter.appointmentList("",queryDate);
+
         //优惠券查询
         adapter = new CouponAdapter(this);
         adapter.setData(list);
@@ -302,6 +312,23 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
         registerReceiver(appointmentListReceiver, new IntentFilter("shop_daodian_19830_fuwu_110"));
+
+        timeDialog = new TimeDialog(this);
+        timeDialog.setOnFenxiangClickListener(new TimeDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(String time,String startTime,String endTime,int type) {
+                if (type==0){
+                    //刷新时间段
+                    mPresenter.appointmentList("",time);
+                }else{
+                    //获得时间段
+                    appointmentStartTime = startTime;
+                    appointmentEndTime = endTime;
+                    tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+                    timeDialog.cleanDialog();
+                }
+            }
+        });
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -452,7 +479,8 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                 ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
                 break;
             case R.id.iv_time_date://选择时间
-                getTime();
+                //getTime();
+                timeDialog.showShareDialog(true);
                 break;
             case R.id.tv_create_order://立即下单
                 if (AppUtils.isEmpty(tv_car_number.getText().toString())){
@@ -678,6 +706,12 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             }
         });
         picker.show();
+    }
+
+    //查询预约时间返回
+    @Override
+    public void appointmentListCallBack(List<AppointmentListEntity> data) {
+        timeDialog.updateTimeAdapter(data);
     }
 
     @Override

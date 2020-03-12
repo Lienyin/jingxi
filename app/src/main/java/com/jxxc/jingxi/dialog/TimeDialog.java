@@ -44,7 +44,6 @@ public class TimeDialog implements View.OnClickListener{
     private WeekOfAdapter weekOfAdapter;
     private List<AppointmentListEntity> appointmentListEntityList = new ArrayList<>();
     private String dateStr ="";
-    private  String year;
 
     public TimeDialog(Context context){
         this(context,true);
@@ -69,15 +68,20 @@ public class TimeDialog implements View.OnClickListener{
         weekOfAdapter = new WeekOfAdapter(context);
         weekOfAdapter.setData(test(7));
         gv_weekOf_date.setAdapter(weekOfAdapter);
-        Calendar date = Calendar.getInstance();
-        year = String.valueOf(date.get(Calendar.YEAR));
-        dateStr = year;
+
+        //获取当前日期
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String queryDate = formatter.format(date);//今天日期
+        dateStr = queryDate;//默认日期
+
         //获取周几
         gv_weekOf_date.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 weekOfAdapter.setSelectPosition(position);
-
+                Calendar date = Calendar.getInstance();
+                String year = String.valueOf(date.get(Calendar.YEAR));
                 dateStr = year+"-"+test(7).get(position).toString().substring(0,5);
                 onFenxiangClickListener.onFenxiangClick(dateStr,"","",0);
             }

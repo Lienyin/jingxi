@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.submitorder;
 
 import android.content.Context;
 
+import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
@@ -22,6 +23,7 @@ public class SubmitOrderContract {
         void queryMyCouponCallback(List<MyCoupon> data);
         void comboInfoCallBack(ProductInfoEntity data);
         void createOrderCallBack(CreateOrderEntity data);
+        void appointmentListCallBack(List<AppointmentListEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -32,5 +34,6 @@ public class SubmitOrderContract {
                          String carNum,String carNums,String phonenumber,String address,
                          String lng,String lat,String appointmentStartTime,String appointmentEndTime,
                          String remark,String companyId);
+        void appointmentList(String companyId,String queryDate);
     }
 }

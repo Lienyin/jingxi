@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
+import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
@@ -137,6 +138,30 @@ public class SubmitOrderPresenter extends BasePresenterImpl<SubmitOrderContract.
                         CreateOrderEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.createOrderCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 查询预约时间
+     * @param companyId
+     * @param queryDate
+     */
+    @Override
+    public void appointmentList(String companyId, String queryDate) {
+        OkGo.<HttpResult<List<AppointmentListEntity>>>post(Api.APPOINTMENT_LIST)
+                .params("companyId",companyId)
+                .params("queryDate",queryDate)
+                .execute(new JsonCallback<HttpResult<List<AppointmentListEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<AppointmentListEntity>>> response) {
+                        StyledDialog.dismissLoading();
+                        List<AppointmentListEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.appointmentListCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
