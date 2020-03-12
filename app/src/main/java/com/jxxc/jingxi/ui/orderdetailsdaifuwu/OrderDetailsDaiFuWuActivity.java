@@ -270,10 +270,10 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
             //地图缩放等级
             int zoomLevel[] = {2000000, 1000000, 500000, 200000, 100000, 50000,
                     25000, 20000, 10000, 5000, 2000, 1000, 500, 100, 50, 20, 0};
-            double midlat = (locationLatitude+data.technicianLat)/2;
-            double midlon = (locationLongitude+data.technicianLng)/2;
-            LatLng pointStart = new LatLng(locationLatitude, locationLongitude);//用户当前位置
-            LatLng pointEndt = new LatLng(data.technicianLat, data.technicianLng);//技师文职
+            double midlat = (data.lat+data.technicianLat)/2;
+            double midlon = (data.lng+data.technicianLng)/2;
+            LatLng pointStart = new LatLng(data.lat, data.lng);//下单位置
+            LatLng pointEndt = new LatLng(data.technicianLat, data.technicianLng);//技师位置
             LatLng pointMiddle = new LatLng(midlat, midlon);// 中点
             setUserMapCenter(midlat,midlon);
             // 计算两点之间的距离，重新设定缩放值，让全部marker显示在屏幕中。
