@@ -16,13 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:orientation="vertical"
+            android:background="@color/white"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_title_faxian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:textColor="@color/black"
                 android:text="XXX"/>
             <TextView
@@ -42,7 +45,8 @@
             <WebView
                 android:id="@+id/find_details_context"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scrollbars="none"/>
         </LinearLayout>
 
         <LinearLayout

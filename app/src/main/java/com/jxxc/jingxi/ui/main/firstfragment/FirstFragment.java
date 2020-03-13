@@ -48,6 +48,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
+import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
@@ -69,7 +70,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private LinearLayout ll_dao_dian,ll_shang_men,ll_static;
     private ListViewForScrollView lv_set_meal_data;
     private HorizontalListView lv_men_data;
-    private List<RecommendComboInfoEntity> recommendComboInfoEntity = new ArrayList<>();
     private LocationClient mLocationClient;
     private BDLocationListener mBDLocationListener;
     private XiaOrderDialog dialog;
@@ -135,7 +135,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         mLocationClient.registerLocationListener(mBDLocationListener);
 
         mPresenter.getState();//获取用户状态
-        mPresenter.recommendComboInfo();//获取推荐套餐
+        mPresenter.recommendComboInfo("0","");//获取推荐套餐
         mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
@@ -314,33 +314,34 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     //获取推荐洗车组合套餐返回数据
     @Override
-    public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
-        recommendComboInfoEntity = data;
-        RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-        recommendSetMealAdapter.setData(data);
-        lv_set_meal_data.setAdapter(recommendSetMealAdapter);
-        lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent((Activity) context, SubmitOrderActivity.class);
-                intent.putExtra("recommendComboInfoEntity",data.get(i));
-                context.startActivity(intent);
-            }
-        });
+    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
+        if (data.combo.size()>0){
+            RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
+            recommendSetMealAdapter.setData(data.combo,1);//只显示前面两条
+            lv_set_meal_data.setAdapter(recommendSetMealAdapter);
+            lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    ZzRouter.gotoActivity((Activity) context, SetMealPayActivity.class,data.combo.get(i));
+                }
+            });
+        }
     }
 
     //推荐门店返回数据
     @Override
     public void recommendCompanyListCallBack(final List<RecommendCompanyListEntity> data) {
-        ShopRecommendAdapter shopRecommendAdapter = new ShopRecommendAdapter(context);
-        shopRecommendAdapter.setData(data);
-        lv_men_data.setAdapter(shopRecommendAdapter);
-        lv_men_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ZzRouter.gotoActivity((Activity) context, ShopDetailsActivity.class,data.get(i).companyId);
-            }
-        });
+        if (data.size()>0){
+            ShopRecommendAdapter shopRecommendAdapter = new ShopRecommendAdapter(context);
+            shopRecommendAdapter.setData(data);
+            lv_men_data.setAdapter(shopRecommendAdapter);
+            lv_men_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    ZzRouter.gotoActivity((Activity) context, ShopDetailsActivity.class,data.get(i).companyId);
+                }
+            });
+        }
     }
 
     //获取用户状态返回数据

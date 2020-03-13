@@ -46,11 +46,22 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawablePadding="3dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:drawableTop="@drawable/tab_menu_xiche"
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="我要洗车"/>
+        <TextView
+            android:id="@+id/txt_deal4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/tab_menu_xiche"
+            android:gravity="center"
+            android:visibility="visible"
+            android:textColor="@drawable/tab_menu_deal_text"
+            android:text="洗车"/>
         <TextView
             android:id="@+id/txt_deal2"
             android:layout_width="0dp"
@@ -62,17 +73,6 @@
             android:gravity="center"
             android:textColor="@drawable/tab_menu_deal_text"
             android:text="发现"/>
-        <TextView
-            android:id="@+id/txt_deal4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_xiaoxi"
-            android:gravity="center"
-            android:visibility="gone"
-            android:textColor="@drawable/tab_menu_deal_text"
-            android:text="消息"/>
         <TextView
             android:id="@+id/txt_deal5"
             android:layout_width="0dp"

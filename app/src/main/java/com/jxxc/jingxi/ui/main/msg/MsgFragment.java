@@ -11,11 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.MsgAdapter;
+import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.entity.backparameter.MessageListEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.utils.AnimUtils;
 
@@ -28,13 +31,12 @@ import java.util.List;
  */
 
 @SuppressLint("ValidFragment")
-public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter> implements MsgContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener,View.OnClickListener {
+public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter> implements MsgContract.View, SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
 
     private Context context;
     private SwipeRefreshLayout swipeLayout;
-    private RecyclerView rvList;
+    private ListView lv_set_meal_data;
     private MsgAdapter adapter;
-    private int offset = 2;
     public MsgFragment(Context context){
         this.context=context;
     }
@@ -44,19 +46,12 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.msg_fragment, container, false);
         swipeLayout = view.findViewById(R.id.swipeLayout);
-        rvList = view.findViewById(R.id.rv_list);
-        initAdapter();
-        return view;
-    }
+        lv_set_meal_data = view.findViewById(R.id.lv_set_meal_data);
+        onRefresh();
 
-    private void initAdapter() {
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
-        rvList.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new MsgAdapter(R.layout.msg_adapter, new ArrayList<MessageListEntity>());
-        rvList.setAdapter(adapter);
-        adapter.setOnLoadMoreListener(this, rvList);
-        adapter.setEmptyView(R.layout.layout_nothing);
+        return view;
     }
 
     @Override
@@ -79,34 +74,16 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
         }
     }
 
-    //刷新
     @Override
     public void onRefresh() {
-        offset = 2;
-        mPresenter.messageList(1,10);
+        mPresenter.recommendComboInfo("0","");
     }
 
     @Override
-    public void onLoadMoreRequested() {
+    public void recommendComboInfoCallBack(RecommendComboInfoEntity data) {
         swipeLayout.setRefreshing(false);
-        mPresenter.messageListMore(offset,10);
-    }
-
-    @Override
-    public void messageList(List<MessageListEntity> data) {
-        swipeLayout.setRefreshing(false);
-        adapter.setNewData(data);
-        adapter.disableLoadMoreIfNotFullPage();
-    }
-
-    @Override
-    public void messageListMore(List<MessageListEntity> data) {
-        swipeLayout.setRefreshing(false);
-        offset++;
-        adapter.addData(data);
-        adapter.loadMoreComplete();
-        if (data.size() < 10) {
-            adapter.loadMoreEnd();
-        }
+        RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
+        recommendSetMealAdapter.setData(data.combo,2);
+        lv_set_meal_data.setAdapter(recommendSetMealAdapter);
     }
 }

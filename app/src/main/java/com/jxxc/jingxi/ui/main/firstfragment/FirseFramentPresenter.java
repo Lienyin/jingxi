@@ -31,13 +31,14 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
      * 获取推荐洗车套餐
      */
     @Override
-    public void recommendComboInfo() {
-        OkGo.<HttpResult<List<RecommendComboInfoEntity>>>post(Api.RECOMMEND_COMBO_INFO)
-                .tag(this)
-                .execute(new JsonCallback<HttpResult<List<RecommendComboInfoEntity>>>() {
+    public void recommendComboInfo(String serviceType,String companyId) {
+        OkGo.<HttpResult<RecommendComboInfoEntity>>post(Api.RECOMMEND_COMBO_INFO)
+                .params("serviceType",serviceType)
+                .params("companyId",companyId)
+                .execute(new JsonCallback<HttpResult<RecommendComboInfoEntity>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<List<RecommendComboInfoEntity>>> response) {
-                        List<RecommendComboInfoEntity> d = response.body().data;
+                    public void onSuccess(Response<HttpResult<RecommendComboInfoEntity>> response) {
+                        RecommendComboInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.recommendComboInfoCallBack(d);
                         }else{

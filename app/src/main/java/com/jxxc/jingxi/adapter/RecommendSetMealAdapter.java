@@ -17,19 +17,27 @@ import java.util.List;
 public class RecommendSetMealAdapter extends BaseAdapter {
     private Context context;
     private int defaultSelection=0;
-    private List<RecommendComboInfoEntity> list;
+    private List<RecommendComboInfoEntity.RecommendCombo> list;
+    private int type;
 
     public RecommendSetMealAdapter(Context context){
         this.context=context;
     }
 
-    public void setData(List<RecommendComboInfoEntity> list){
+    public void setData(List<RecommendComboInfoEntity.RecommendCombo> list,int type){
         this.list = list;
+        this.type = type;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        int num;
+        if (type==1){
+            num = 2;
+        }else{
+            num = list.size();
+        }
+        return num;
     }
 
     @Override
@@ -57,14 +65,10 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        RecommendComboInfoEntity data = list.get(position);
+        RecommendComboInfoEntity.RecommendCombo data = list.get(position);
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
         holder.tv_recommend_name.setText(data.comboName);
-        String str = "";
-        for (int i=0;i<data.productList.size();i++){
-            str = str+","+data.productList.get(i).productName;
-        }
-        holder.tv_recommend_context.setText("包含"+data.productList.size()+"项"+str);
+        holder.tv_recommend_context.setText(data.comboComment);
         holder.tv_recommend_money.setText("￥"+data.totalPrice);
         holder.tv_recommend_num.setText("已售"+data.salesVolume);
         return convertView;

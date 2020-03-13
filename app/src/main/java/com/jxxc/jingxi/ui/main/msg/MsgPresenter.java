@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.MessageListEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -25,35 +26,20 @@ public class MsgPresenter extends BasePresenterImpl<MsgContract.View> implements
 
     }
 
+    /**
+     * 获取洗车套餐
+     */
     @Override
-    public void messageList(int pageNum, int pageSize) {
-        OkGo.<HttpResult<List<MessageListEntity>>>post(Api.MESSAGE_LIST)
-                .params("pageNum",pageNum)
-                .params("pageSize",pageSize)
-                .execute(new JsonCallback<HttpResult<List<MessageListEntity>>>() {
+    public void recommendComboInfo(String serviceType,String companyId) {
+        OkGo.<HttpResult<RecommendComboInfoEntity>>post(Api.RECOMMEND_COMBO_INFO)
+                .params("serviceType",serviceType)
+                .params("companyId",companyId)
+                .execute(new JsonCallback<HttpResult<RecommendComboInfoEntity>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<List<MessageListEntity>>> response) {
-                        List<MessageListEntity> d = response.body().data;
+                    public void onSuccess(Response<HttpResult<RecommendComboInfoEntity>> response) {
+                        RecommendComboInfoEntity d = response.body().data;
                         if (response.body().code==0){
-                            mView.messageList(d);
-                        }else{
-                            toast(mContext,response.body().message);
-                        }
-                    }
-                });
-    }
-
-    @Override
-    public void messageListMore(int pageNum, int pageSize) {
-        OkGo.<HttpResult<List<MessageListEntity>>>post(Api.MESSAGE_LIST)
-                .params("pageNum",pageNum)
-                .params("pageSize",pageSize)
-                .execute(new JsonCallback<HttpResult<List<MessageListEntity>>>() {
-                    @Override
-                    public void onSuccess(Response<HttpResult<List<MessageListEntity>>> response) {
-                        List<MessageListEntity> d = response.body().data;
-                        if (response.body().code==0){
-                            mView.messageListMore(d);
+                            mView.recommendComboInfoCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
