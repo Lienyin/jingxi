@@ -1,4 +1,4 @@
-package com.jxxc.jingxi.ui.submitorder;
+package com.jxxc.jingxi.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -56,42 +56,57 @@ public class CouponAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.coupon_adapter,null);
             holder.tv_coupon_money = convertView.findViewById(R.id.tv_coupon_money);
             holder.tv_coupon_memo = convertView.findViewById(R.id.tv_coupon_memo);
+            holder.tv_coupon_time = convertView.findViewById(R.id.tv_coupon_time);
             holder.iv_coupon = convertView.findViewById(R.id.iv_coupon);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
         MyCoupon data = list.get(position);
-        //优惠券类型 0无门槛减N 1满N减N 2折扣券
-        if (data.couponRuleType==0){
-            holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.money)+"元优惠券");
-            holder.tv_coupon_memo.setText("");
-        }else if (data.couponRuleType == 1){
-            holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.money)+"元优惠券");
-            holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
-        }else{
-            holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.discount)+"折优惠券");
-            if (data.doorsillMoney>0){
-                holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
-            }else{
-                holder.tv_coupon_memo.setText("");
-            }
-        }
-        //如果订单金额大于门槛金额
-        if (orderMoney>=data.doorsillMoney){
-            holder.tv_coupon_money.setTextColor(context.getResources().getColor(R.color.public_all));
-            holder.tv_coupon_memo.setTextColor(context.getResources().getColor(R.color.black555));
-            final ViewHolder finalHolder = holder;
+        if ("不使用优惠券".equals(data.counponName)){
+            holder.tv_coupon_money.setText(data.counponName);
+            holder.tv_coupon_time.setVisibility(View.GONE);
+            holder.tv_coupon_memo.setVisibility(View.GONE);
             if (position == defaultSelection) {// 选中时设置单纯颜色
                 holder.iv_coupon.setSelected(true);
             } else {// 未选中时设置selector
                 holder.iv_coupon.setSelected(false);
             }
-            data.setForbidden(false);
         }else{
-            holder.tv_coupon_money.setTextColor(context.getResources().getColor(R.color.black999));
-            holder.tv_coupon_memo.setTextColor(context.getResources().getColor(R.color.black999));
-            data.setForbidden(true);
+            holder.tv_coupon_time.setVisibility(View.VISIBLE);
+            holder.tv_coupon_memo.setVisibility(View.VISIBLE);
+            holder.tv_coupon_time.setText("到期时间："+data.endTime);
+            //优惠券类型 0无门槛减N 1满N减N 2折扣券
+            if (data.couponRuleType==0){
+                holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.money)+"元优惠券");
+                holder.tv_coupon_memo.setText("");
+            }else if (data.couponRuleType == 1){
+                holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.money)+"元优惠券");
+                holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
+            }else{
+                holder.tv_coupon_money.setText(new DecimalFormat("0.00").format(data.discount)+"折优惠券");
+                if (data.doorsillMoney>0){
+                    holder.tv_coupon_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
+                }else{
+                    holder.tv_coupon_memo.setText("");
+                }
+            }
+            //如果订单金额大于门槛金额
+            if (orderMoney>=data.doorsillMoney){
+                holder.tv_coupon_money.setTextColor(context.getResources().getColor(R.color.public_all));
+                holder.tv_coupon_memo.setTextColor(context.getResources().getColor(R.color.black555));
+                final ViewHolder finalHolder = holder;
+                if (position == defaultSelection) {// 选中时设置单纯颜色
+                    holder.iv_coupon.setSelected(true);
+                } else {// 未选中时设置selector
+                    holder.iv_coupon.setSelected(false);
+                }
+                data.setForbidden(false);
+            }else{
+                holder.tv_coupon_money.setTextColor(context.getResources().getColor(R.color.black999));
+                holder.tv_coupon_memo.setTextColor(context.getResources().getColor(R.color.black999));
+                data.setForbidden(true);
+            }
         }
         return convertView;
     }
@@ -99,6 +114,7 @@ public class CouponAdapter extends BaseAdapter {
     class ViewHolder{
         TextView tv_coupon_money;
         TextView tv_coupon_memo;
+        TextView tv_coupon_time;
         ImageView iv_coupon;
     }
 

@@ -30,4 +30,12 @@ public class MyCoupon implements Serializable {
     public void setForbidden(boolean forbidden) {
         isForbidden = forbidden;
     }
+
+    public String getCounponName() {
+        return counponName;
+    }
+
+    public void setCounponName(String counponName) {
+        this.counponName = counponName;
+    }
 }

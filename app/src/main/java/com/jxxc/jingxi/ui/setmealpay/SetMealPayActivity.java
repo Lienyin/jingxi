@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.setmealpay;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,6 +52,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
     LinearLayout ll_pay_set_meal;
     private List<View> listViews; // 图片组
     private RecommendComboInfoEntity.RecommendCombo recommendComboInfoEntity;
+    private String serviceType="";
     @Override
     protected int layoutId() {
         return R.layout.set_meal_pay_activity;
@@ -59,7 +61,8 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
     @Override
     public void initData() {
         tv_title.setText("套餐详情");
-        recommendComboInfoEntity = ZzRouter.getIntentData(this,RecommendComboInfoEntity.RecommendCombo.class);
+        recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
+        serviceType = getIntent().getStringExtra("serviceType");
         if (!AppUtils.isEmpty(recommendComboInfoEntity)){
             tv_pay_set_meal_name.setText(recommendComboInfoEntity.comboName);
             tv_pay_set_meal_num.setText("已售 "+recommendComboInfoEntity.salesVolume);
@@ -99,7 +102,10 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
                 finish();
                 break;
             case R.id.ll_pay_set_meal://我要预约下单
-                ZzRouter.gotoActivity(this, SetMealPayInfoActivity.class,recommendComboInfoEntity);
+                Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+                intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity);
+                intent.putExtra("serviceType","0");
+                startActivity(intent);
                 break;
             default:
         }

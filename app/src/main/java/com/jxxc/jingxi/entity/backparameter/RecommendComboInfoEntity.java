@@ -7,7 +7,7 @@ public class RecommendComboInfoEntity implements Serializable {
 
     public List<RecommendCombo> combo;
 
-    public class RecommendCombo{
+    public class RecommendCombo implements Serializable{
         public String imgUrl;
         public String comboComment;
         public String salesVolume;
@@ -23,7 +23,7 @@ public class RecommendComboInfoEntity implements Serializable {
     }
 
     public List<Activitie> activities;
-    public class Activitie{
+    public class Activitie implements Serializable{
         public String money;
         public String doorsillMoney;
         public String startTime;

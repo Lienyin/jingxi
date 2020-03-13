@@ -272,6 +272,7 @@
                     android:background="@color/set_bg"/>
                 <!--停车地址-->
                 <LinearLayout
+                    android:id="@+id/ll_discount_coupon"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:paddingLeft="10dp"
@@ -304,8 +305,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/set_bg"/>
-                <!--停车地址-->
+                <!--备注信息-->
                 <LinearLayout
+                    android:id="@+id/ll_remark"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:paddingLeft="10dp"

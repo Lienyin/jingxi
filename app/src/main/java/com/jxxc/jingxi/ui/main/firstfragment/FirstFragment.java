@@ -322,7 +322,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    ZzRouter.gotoActivity((Activity) context, SetMealPayActivity.class,data.combo.get(i));
+                    Intent intent = new Intent((Activity) context, SetMealPayActivity.class);
+                    intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                    intent.putExtra("serviceType","0");
+                    context.startActivity(intent);
                 }
             });
         }

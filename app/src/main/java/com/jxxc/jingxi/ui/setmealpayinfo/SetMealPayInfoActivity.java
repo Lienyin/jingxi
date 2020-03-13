@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.setmealpayinfo;
 
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,23 +10,31 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.dialog.DiscountCouponDialog;
 import com.jxxc.jingxi.dialog.TimeDialog;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
+import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
+import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
+import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
+import com.jxxc.jingxi.ui.remark.RemarkActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.SPUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,13 +77,30 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_car_info;
     @BindView(R.id.ll_yuyue_time)
     LinearLayout ll_yuyue_time;
+    @BindView(R.id.ll_discount_coupon)
+    LinearLayout ll_discount_coupon;
+    @BindView(R.id.tv_submit_order)
+    TextView tv_submit_order;
+    @BindView(R.id.tv_order_money)
+    TextView tv_order_money;
+    @BindView(R.id.tv_coupons_money_num)
+    TextView tv_coupons_money_num;
+    @BindView(R.id.ll_remark)
+    LinearLayout ll_remark;
     private String siteLat="";
     private String siteLng="";
     private TimeDialog timeDialog;
     private String appointmentStartTime="";
     private String appointmentEndTime="";
-
+    private DiscountCouponDialog discountCouponDialog;//优惠券对话框
+    private List<MyCoupon> myCouponList = new ArrayList<>();
     private RecommendComboInfoEntity.RecommendCombo recommendComboInfoEntity;
+    private String serviceType="";
+    private String counponId="";
+    private String comboId="";
+    private String carNum="";
+    private String companyId="";//运营商ID 进店类型必传 上门不用传
+    private String remark="";
 
     @Override
     protected int layoutId() {
@@ -84,8 +110,11 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     @Override
     public void initData() {
         tv_title.setText("填写信息");
-        recommendComboInfoEntity = ZzRouter.getIntentData(this,RecommendComboInfoEntity.RecommendCombo.class);
+        recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
+        serviceType = getIntent().getStringExtra("serviceType");
+
         //套餐信息
+        comboId = recommendComboInfoEntity.comboId+"";
         GlideImgManager.loadRectangleImage(this, recommendComboInfoEntity.imgUrl, iv_recommend_icon);
         tv_recommend_name.setText(recommendComboInfoEntity.comboName);
         tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
@@ -101,6 +130,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList("",queryDate);
+        mPresenter.queryMyCoupon(0);
 
         timeDialog = new TimeDialog(this);
         timeDialog.setOnFenxiangClickListener(new TimeDialog.OnFenxiangClickListener() {
@@ -116,6 +146,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
                     timeDialog.cleanDialog();
                 }
+            }
+        });
+        discountCouponDialog = new DiscountCouponDialog(this);
+        discountCouponDialog.setOnFenxiangClickListener(new DiscountCouponDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(MyCoupon coupon) {
+                //优惠券
+                counponId = coupon.counponId+"";
             }
         });
     }
@@ -139,10 +177,12 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             //换辆车
             CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
             tv_car_info.setText(carListEntity.carNum+"  "+carListEntity.brandName+"  "+carListEntity.typeName);
+            carNum = carListEntity.carNum;
         }
     };
 
-    @OnClick({R.id.tv_back,R.id.ll_stop_car_address,R.id.ll_car_info,R.id.ll_yuyue_time})
+    @OnClick({R.id.tv_back,R.id.ll_stop_car_address,R.id.ll_car_info,R.id.ll_yuyue_time,
+    R.id.ll_discount_coupon,R.id.tv_submit_order,R.id.ll_remark})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -157,6 +197,37 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 break;
             case R.id.ll_yuyue_time://服务时间
                 timeDialog.showShareDialog(true);
+                break;
+            case R.id.ll_discount_coupon://优惠券
+                discountCouponDialog.showShareDialog(true,myCouponList);
+                break;
+            case R.id.ll_remark://备注
+                ZzRouter.gotoActivity(this, RemarkActivity.class);
+                break;
+            case R.id.tv_submit_order://提交订单
+                if (AppUtils.isEmpty(tv_car_info.getText().toString())){
+                    toast(this,"请添加车辆");
+                }else if (AppUtils.isEmpty(tv_car_address.getText().toString())){
+                    toast(this,"请选择停车地点");
+                }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
+                    toast(this,"请选择服务时间");
+                }else{
+                    StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                    mPresenter.createOrder(
+                            serviceType,
+                            counponId,
+                            comboId,
+                            carNum,
+                            "",
+                            tv_phone_number.getText().toString(),
+                            tv_car_address.getText().toString(),
+                            siteLng,
+                            siteLat,
+                            appointmentStartTime,
+                            appointmentEndTime,
+                            remark,
+                            companyId);
+                }
                 break;
             default:
         }
@@ -176,8 +247,48 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         }
     }
 
+    //车辆列表返回数据
+    @Override
+    public void getCarListCallBack(List<CarListEntity> data) {
+        if (data.size()>0){//y有车
+            //展示默认车辆，没有默认车辆展示第一辆
+            //是否默认 1是0否
+            int a=0;
+            for (int i=0;i<data.size();i++){
+                if (data.get(i).isDefault==1){
+                    a++;
+                    carNum = data.get(i).carNum;
+                    tv_car_info.setText(data.get(i).carNum+"  "+data.get(i).brandName+"  "+data.get(i).typeName);
+                }
+            }
+            //没有设置默认车辆
+            if (a==0){
+                carNum = data.get(0).carNum;
+                tv_car_info.setText(data.get(0).carNum+"  "+data.get(0).brandName+"  "+data.get(0).typeName);
+            }
+        }
+    }
+
     @Override
     public void appointmentListCallBack(List<AppointmentListEntity> data) {
         timeDialog.updateTimeAdapter(data);
+    }
+
+    //优惠券返回数据
+    @Override
+    public void queryMyCouponCallback(List<MyCoupon> data) {
+        if (data.size()>0){
+            myCouponList = data;
+        }
+    }
+
+    //提交订单返回数据
+    @Override
+    public void createOrderCallBack(CreateOrderEntity data) {
+        //支付订单
+        Intent intent = new Intent(this, PayOrderActivity.class);
+        intent.putExtra("orderId",data.orderId);
+        intent.putExtra("orderPrice",data.payPrice);
+        startActivity(intent);
     }
 }
