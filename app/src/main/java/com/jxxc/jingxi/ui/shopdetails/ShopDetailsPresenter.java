@@ -6,6 +6,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -57,6 +58,27 @@ public class ShopDetailsPresenter extends BasePresenterImpl<ShopDetailsContract.
                         List<AppointmentListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.appointmentListCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取洗车套餐
+     */
+    @Override
+    public void recommendComboInfo(String serviceType,String companyId) {
+        OkGo.<HttpResult<RecommendComboInfoEntity>>post(Api.RECOMMEND_COMBO_INFO)
+                .params("serviceType",serviceType)
+                .params("companyId",companyId)
+                .execute(new JsonCallback<HttpResult<RecommendComboInfoEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<RecommendComboInfoEntity>> response) {
+                        RecommendComboInfoEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.recommendComboInfoCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

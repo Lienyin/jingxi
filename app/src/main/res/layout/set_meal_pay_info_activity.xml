@@ -97,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
                     <TextView
+                        android:id="@+id/tv_hint1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -106,12 +107,13 @@
                         android:textColor="@color/black"
                         android:text="上门"/>
                     <TextView
+                        android:id="@+id/tv_hint2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
-                        android:background="#FCF9FC"
+                        android:background="@color/qqq"
                         android:textColor="@color/black"
                         android:text="到店"/>
                 </LinearLayout>

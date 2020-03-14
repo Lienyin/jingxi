@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.shopdetails;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -8,15 +9,19 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
+import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -72,6 +77,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     GridView gv_weekOf_date;
     @BindView(R.id.btn_subscribe_time)
     Button btn_subscribe_time;
+    @BindView(R.id.lv_set_meal_data)
+    ListView lv_set_meal_data;
     private String cId;
     private String phonenumber="";
     private String address="";
@@ -92,6 +99,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCompany(cId);
+        mPresenter.recommendComboInfo("1",cId);
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -246,5 +254,23 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         timeAdapter = new TimeAdapter(this,1);
         timeAdapter.setData(data);
         gv_time_data.setAdapter(timeAdapter);
+    }
+
+    //洗车套餐列表数据
+    @Override
+    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
+        RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(this);
+        recommendSetMealAdapter.setData(data.combo,2);
+        lv_set_meal_data.setAdapter(recommendSetMealAdapter);
+        lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayActivity.class);
+                intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                intent.putExtra("serviceType","1");
+                intent.putExtra("companyId",cId);
+                startActivity(intent);
+            }
+        });
     }
 }

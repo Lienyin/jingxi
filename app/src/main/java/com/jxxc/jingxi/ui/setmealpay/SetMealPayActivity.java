@@ -55,6 +55,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
     private List<View> listViews; // 图片组
     private RecommendComboInfoEntity.RecommendCombo recommendComboInfoEntity;
     private String serviceType="";
+    private String companyId="";
     @Override
     protected int layoutId() {
         return R.layout.set_meal_pay_activity;
@@ -66,6 +67,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
         tv_title.setText("套餐详情");
         recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
         serviceType = getIntent().getStringExtra("serviceType");
+        companyId = getIntent().getStringExtra("companyId");
         if (!AppUtils.isEmpty(recommendComboInfoEntity)){
             tv_pay_set_meal_name.setText(recommendComboInfoEntity.comboName);
             tv_pay_set_meal_num.setText("已售 "+recommendComboInfoEntity.salesVolume);
@@ -96,7 +98,8 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
             case R.id.ll_pay_set_meal://我要预约下单
                 Intent intent = new Intent(this, SetMealPayInfoActivity.class);
                 intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity);
-                intent.putExtra("serviceType","0");
+                intent.putExtra("serviceType",serviceType);
+                intent.putExtra("companyId",companyId);
                 startActivity(intent);
                 finish();
                 break;

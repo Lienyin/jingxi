@@ -4,6 +4,7 @@ package com.jxxc.jingxi.ui.main.msg;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
@@ -25,6 +27,7 @@ import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
@@ -145,11 +148,20 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
 
     //套餐数据
     @Override
-    public void recommendComboInfoCallBack(RecommendComboInfoEntity data) {
+    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
         swipeLayout_sm.setRefreshing(false);
         RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
         recommendSetMealAdapter.setData(data.combo,2);
         lv_set_meal_data.setAdapter(recommendSetMealAdapter);
+        lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent((Activity) context, SetMealPayActivity.class);
+                intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                intent.putExtra("serviceType","0");
+                context.startActivity(intent);
+            }
+        });
     }
 
     //门店数据上拉

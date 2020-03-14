@@ -86,6 +86,10 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     TextView tv_xia_order_money;
     @BindView(R.id.tv_xia_order_discounts)
     TextView tv_xia_order_discounts;
+    @BindView(R.id.tv_hint1)
+    TextView tv_hint1;
+    @BindView(R.id.tv_hint2)
+    TextView tv_hint2;
     @BindView(R.id.tv_user_remark)
     TextView tv_user_remark;
     @BindView(R.id.ll_remark)
@@ -115,8 +119,17 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     @Override
     public void initData() {
         tv_title.setText("填写信息");
+        StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
         serviceType = getIntent().getStringExtra("serviceType");
+        companyId = getIntent().getStringExtra("companyId");
+        if (!AppUtils.isEmpty(companyId)){
+            tv_hint1.setBackgroundColor(getResources().getColor(R.color.qqq));
+            tv_hint2.setBackgroundColor(getResources().getColor(R.color.white));
+        }else{
+            tv_hint1.setBackgroundColor(getResources().getColor(R.color.white));
+            tv_hint2.setBackgroundColor(getResources().getColor(R.color.qqq));
+        }
 
         //套餐信息
         comboId = recommendComboInfoEntity.comboId+"";
@@ -138,6 +151,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList("",queryDate);
         mPresenter.queryMyCoupon(0);
+        mPresenter.getCarList();
 
         timeDialog = new TimeDialog(this);
         timeDialog.setOnFenxiangClickListener(new TimeDialog.OnFenxiangClickListener() {
