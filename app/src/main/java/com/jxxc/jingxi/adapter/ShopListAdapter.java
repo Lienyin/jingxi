@@ -1,4 +1,4 @@
-package com.jxxc.jingxi.ui.shoplist;
+package com.jxxc.jingxi.adapter;
 
 import android.content.Intent;
 import android.net.Uri;

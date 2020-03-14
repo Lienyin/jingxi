@@ -19,6 +19,7 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.MyImageView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
             tv_pay_set_meal_name.setText(recommendComboInfoEntity.comboName);
             tv_pay_set_meal_num.setText("已售 "+recommendComboInfoEntity.salesVolume);
             tv_pay_set_meal_con.setText(recommendComboInfoEntity.comboComment);
-            tv_pay_set_meal_money.setText("￥"+recommendComboInfoEntity.totalPrice);
+            tv_pay_set_meal_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
             if (recommendComboInfoEntity.imgUrls.length > 0){
                 listViews = new ArrayList<View>(); // 图片组
                 for (int i = 0; i < recommendComboInfoEntity.imgUrls.length; i++) {

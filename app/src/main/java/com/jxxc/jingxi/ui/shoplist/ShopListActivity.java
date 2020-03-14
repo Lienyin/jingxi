@@ -1,12 +1,9 @@
 package com.jxxc.jingxi.ui.shoplist;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,25 +15,19 @@ import com.baidu.location.LocationClientOption;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.ShopListAdapter;
 import com.jxxc.jingxi.dialog.PopFiltrate;
 import com.jxxc.jingxi.dialog.PopFiltrateCity;
 import com.jxxc.jingxi.dialog.PopFiltrateOne;
 import com.jxxc.jingxi.entity.backparameter.AreaListEntity;
-import com.jxxc.jingxi.entity.backparameter.CityEntity;
-import com.jxxc.jingxi.entity.backparameter.CommissionListEntity;
-import com.jxxc.jingxi.entity.backparameter.DistrictEntity;
 import com.jxxc.jingxi.entity.backparameter.ProvinceEntity;
 import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
-import com.jxxc.jingxi.ui.commissionlist.CommissionAdapter;
-import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
-import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
-import com.jxxc.jingxi.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

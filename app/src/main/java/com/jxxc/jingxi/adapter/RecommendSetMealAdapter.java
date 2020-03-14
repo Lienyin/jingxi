@@ -12,6 +12,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.utils.GlideImgManager;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class RecommendSetMealAdapter extends BaseAdapter {
@@ -69,7 +70,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
         holder.tv_recommend_name.setText(data.comboName);
         holder.tv_recommend_context.setText(data.comboComment);
-        holder.tv_recommend_money.setText("￥"+data.totalPrice);
+        holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.totalPrice));
         holder.tv_recommend_num.setText("已售"+data.salesVolume);
         return convertView;
     }

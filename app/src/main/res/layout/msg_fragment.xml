@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -20,16 +19,50 @@
             android:textStyle="bold"
             android:text="菁喜套餐"/>
     </LinearLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="60dp"
+        android:background="@color/white">
 
-       <ListView
-           android:id="@+id/lv_set_meal_data"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_shangmen_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="上门服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_daodian_service"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="到店服务"
+                android:textColor="@drawable/radio_main"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <!--上门服务-->
+    <include
+        android:id="@+id/view_shangmen_fuwu"
+        layout="@layout/shangmen_fuwu_new"
+        android:visibility="visible"/>
+    <!--到店服务-->
+    <include
+        android:id="@+id/view_daodian_fuwu"
+        layout="@layout/daodian_fuwu_new"
+        android:visibility="gone"/>
 </LinearLayout>

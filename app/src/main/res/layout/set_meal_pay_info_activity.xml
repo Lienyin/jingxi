@@ -321,11 +321,13 @@
                         android:textColor="@color/black555"
                         android:text="备注信息"/>
                     <TextView
+                        android:id="@+id/tv_user_remark"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        android:maxLength="12"
                         android:gravity="center_vertical|right"
                         android:textColor="@color/black"
                         android:hint="添加备注信息"
@@ -341,59 +343,45 @@
     </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_height="55dp"
         android:background="@color/white"
-        android:visibility="visible">
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
 
             <TextView
+                android:id="@+id/tv_xia_order_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="合计金额"
-                android:textColor="@color/black555"
-                android:textSize="14sp" />
+                android:text="订单金额：0.00元"
+                android:textColor="@color/order_money"
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_coupons_money_num"
+                android:id="@+id/tv_xia_order_discounts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp"
-                android:visibility="gone" />
+                android:text="已优惠：0.00元"
+                android:visibility="gone"
+                android:textColor="@color/order_money"
+                android:textSize="10sp" />
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="￥"
-            android:textColor="@color/order_money"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/tv_order_money"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            android:textColor="@color/order_money"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/tv_submit_order"
-            android:layout_width="120dp"
+            android:id="@+id/tv_create_order"
+            android:layout_width="160dp"
             android:layout_height="match_parent"
             android:background="@color/public_all"
             android:gravity="center"
-            android:text="提交订单"
+            android:text="立即下单"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

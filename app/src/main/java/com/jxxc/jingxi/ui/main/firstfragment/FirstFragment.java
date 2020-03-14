@@ -50,6 +50,7 @@ import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
+import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -75,6 +76,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private XiaOrderDialog dialog;
     private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
             tv_car_fuwu7,tv_car_fuwu8;
+    private TextView tv_more;
     private int num1=0;
     private int num2=0;
     private int num3=0;
@@ -104,6 +106,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
         lv_men_data = view.findViewById(R.id.lv_men_data);
         ll_static = view.findViewById(R.id.ll_static);
+        tv_more = view.findViewById(R.id.tv_more);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -126,6 +129,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
         ll_static.setOnClickListener(this);
+        tv_more.setOnClickListener(this);
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -302,6 +306,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 break;
             case R.id.ll_static:
                 ZzRouter.gotoActivity((Activity) context, OrderDetailsDaiFuWuActivity.class,orderId);
+                break;
+            case R.id.tv_more://推荐店铺更多
+                ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
         }
     }

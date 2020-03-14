@@ -12,7 +12,7 @@ public class RecommendComboInfoEntity implements Serializable {
         public String comboComment;
         public String salesVolume;
         public String comboName;
-        public String totalPrice;
+        public double totalPrice;
         public int comboId;
         public String imgUrls[];
         public List<ProductList> carTypePrices;

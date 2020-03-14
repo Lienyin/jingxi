@@ -62,7 +62,7 @@ public class DiscountCouponDialog implements View.OnClickListener {
 
     }
 
-    public void showShareDialog(boolean outTouchCancel, final List<MyCoupon> list) {
+    public void showShareDialog(boolean outTouchCancel, final List<MyCoupon> list,double orderMoney) {
 
         for (int i=0;i<list.size();i++){
             if ("不使用优惠券".equals(list.get(i).getCounponName())){
@@ -76,6 +76,7 @@ public class DiscountCouponDialog implements View.OnClickListener {
         myCouponList = list;
         adapter = new CouponAdapter(context);
         adapter.setData(list);
+        adapter.setOrderMoney(orderMoney);
         lv_discount_coupon.setAdapter(adapter);
         lv_discount_coupon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

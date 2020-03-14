@@ -33,6 +33,7 @@ import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.SPUtils;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,12 +80,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_yuyue_time;
     @BindView(R.id.ll_discount_coupon)
     LinearLayout ll_discount_coupon;
-    @BindView(R.id.tv_submit_order)
-    TextView tv_submit_order;
-    @BindView(R.id.tv_order_money)
-    TextView tv_order_money;
-    @BindView(R.id.tv_coupons_money_num)
-    TextView tv_coupons_money_num;
+    @BindView(R.id.tv_create_order)
+    TextView tv_create_order;
+    @BindView(R.id.tv_xia_order_money)
+    TextView tv_xia_order_money;
+    @BindView(R.id.tv_xia_order_discounts)
+    TextView tv_xia_order_discounts;
+    @BindView(R.id.tv_user_remark)
+    TextView tv_user_remark;
     @BindView(R.id.ll_remark)
     LinearLayout ll_remark;
     private String siteLat="";
@@ -101,6 +104,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String carNum="";
     private String companyId="";//运营商ID 进店类型必传 上门不用传
     private String remark="";
+    private double comboMoney=0;//套餐金额
+    private double couponMoney=0;//优惠券金额
 
     @Override
     protected int layoutId() {
@@ -118,12 +123,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         GlideImgManager.loadRectangleImage(this, recommendComboInfoEntity.imgUrl, iv_recommend_icon);
         tv_recommend_name.setText(recommendComboInfoEntity.comboName);
         tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
-        tv_recommend_money.setText("￥"+recommendComboInfoEntity.totalPrice);
+        tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
         tv_recommend_num.setText("已售"+recommendComboInfoEntity.salesVolume);
         tv_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice)+"元");
 
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
+        registerReceiver(receiverRemark, new IntentFilter("jingxi_user_remark_209344"));
 
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
@@ -154,6 +161,23 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             public void onFenxiangClick(MyCoupon coupon) {
                 //优惠券
                 counponId = coupon.counponId+"";
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                //优惠券类型 0无门槛减N 1满N减N 2折扣券
+                if (coupon.couponRuleType==0){
+                    couponMoney = coupon.money;
+                    comboMoney = recommendComboInfoEntity.totalPrice-couponMoney;//套餐金额=基础套餐金额-优惠券金额
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(coupon.money)+"元");
+                }else if (coupon.couponRuleType==1){
+                    couponMoney = coupon.money;
+                    comboMoney = recommendComboInfoEntity.totalPrice-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(coupon.money)+"元");
+                }else{
+                    //折扣券
+                    comboMoney = (recommendComboInfoEntity.totalPrice)*(coupon.discount/10);
+                    double zheMoney = (recommendComboInfoEntity.totalPrice) - comboMoney;
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(zheMoney)+"元");
+                }
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
             }
         });
     }
@@ -180,9 +204,17 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             carNum = carListEntity.carNum;
         }
     };
+    private BroadcastReceiver receiverRemark = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //评价
+            remark = intent.getStringExtra("remark");
+            tv_user_remark.setText(remark);
+        }
+    };
 
     @OnClick({R.id.tv_back,R.id.ll_stop_car_address,R.id.ll_car_info,R.id.ll_yuyue_time,
-    R.id.ll_discount_coupon,R.id.tv_submit_order,R.id.ll_remark})
+    R.id.ll_discount_coupon,R.id.tv_create_order,R.id.ll_remark})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -199,12 +231,12 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 timeDialog.showShareDialog(true);
                 break;
             case R.id.ll_discount_coupon://优惠券
-                discountCouponDialog.showShareDialog(true,myCouponList);
+                discountCouponDialog.showShareDialog(true,myCouponList,recommendComboInfoEntity.totalPrice);
                 break;
             case R.id.ll_remark://备注
                 ZzRouter.gotoActivity(this, RemarkActivity.class);
                 break;
-            case R.id.tv_submit_order://提交订单
+            case R.id.tv_create_order://提交订单
                 if (AppUtils.isEmpty(tv_car_info.getText().toString())){
                     toast(this,"请添加车辆");
                 }else if (AppUtils.isEmpty(tv_car_address.getText().toString())){
@@ -239,11 +271,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 //        if (!AppUtils.isEmpty(appointmentListReceiver)){
 //            unregisterReceiver(appointmentListReceiver);
 //        }
-//        if (!AppUtils.isEmpty(receiverCarInfo)){
-//            unregisterReceiver(receiverCarInfo);
-//        }
+        if (!AppUtils.isEmpty(receiverCarInfo)){
+            unregisterReceiver(receiverCarInfo);
+        }
         if (!AppUtils.isEmpty(receiver)){
             unregisterReceiver(receiver);
+        }
+        if (!AppUtils.isEmpty(receiverRemark)){
+            unregisterReceiver(receiverRemark);
         }
     }
 
