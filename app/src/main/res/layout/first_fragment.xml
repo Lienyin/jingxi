@@ -410,13 +410,29 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="推荐套餐"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="推荐套餐"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/tv_more_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="更多 >"
+                        android:textColor="@color/black555"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <com.jxxc.jingxi.utils.ListViewForScrollView
                     android:id="@+id/lv_set_meal_data"
@@ -471,6 +487,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 android:background="@mipmap/icon_115"
                 android:gravity="center_vertical">
 
@@ -484,6 +501,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="查看周边的菁喜技师 >"
+                android:visibility="gone"
                 android:textColor="@color/black999"
                 android:textSize="14sp" />
         </LinearLayout>

@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.mapjingsi;
 
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.utils.SpatialRelationUtil;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.MapJingXiDialog;
 import com.jxxc.jingxi.entity.backparameter.NearbyConpanyEntity;
@@ -74,9 +76,14 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     private boolean isFirstLoc = true; // 是否首次定位
     private double locationLatitude = 0;//当前经度
     private double locationLongitude = 0;//当前纬度
+    private double datouzhenLatitude = 0;//大头针经度
+    private double datouzhenLongitude = 0;//大头针纬度
+    private String datouzhenAddress = "";//大头针地址
     private MapJingXiDialog dialog;
     private GeoCoder mCoder;
     private int distance=1000;
+    private List<NearbyConpanyEntity> nearbyConpanyEntityList;
+    private int isFuwu=0;//是否在服务范围内 0否 1是
     @Override
     protected int layoutId() {
         return R.layout.map_jing_si_activity;
@@ -116,13 +123,27 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                datouzhenLatitude = mapStatus.target.latitude;
+                datouzhenLongitude = mapStatus.target.longitude;
                 //获取周边技师
                 mPresenter.nearbyConpany(distance,mapStatus.target.longitude,mapStatus.target.latitude);
+
+                boolean a = false;
+                for (NearbyConpanyEntity site : nearbyConpanyEntityList) {
+                    LatLng point = new LatLng(site.lat, site.lng);
+                    a = SpatialRelationUtil.isCircleContainsPoint(point,site.serviceRadius,new LatLng(datouzhenLatitude, datouzhenLongitude));
+                    if (a == true){ break;}
+                }
                 //POI检索
                 mCoder = GeoCoder.newInstance();
                 mCoder.setOnGetGeoCodeResultListener(listener);
                 mCoder.reverseGeoCode(new ReverseGeoCodeOption()
                         .location(new LatLng(mapStatus.target.latitude, mapStatus.target.longitude)));
+                if (a==true){
+                    isFuwu = 1;
+                }else{
+                    isFuwu = 0;
+                }
             }
         });
     }
@@ -178,6 +199,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     public void nearbyConpanyCallBack(List<NearbyConpanyEntity> data) {
         //定义Maker坐标点
         mBaiduMap.clear();
+        nearbyConpanyEntityList = data;
         for (NearbyConpanyEntity site : data) {
             LatLng point = new LatLng(site.lat, site.lng);
             View view = View.inflate(this, R.layout.site_pop_view_img, null);
@@ -264,6 +286,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 //没有找到检索结果
                 return;
             } else {
+                datouzhenAddress = reverseGeoCodeResult.getAddress()+""+reverseGeoCodeResult.getSematicDescription();
                 tv_address.setText(reverseGeoCodeResult.getAddress()+""+reverseGeoCodeResult.getSematicDescription());
             }
         }
@@ -280,7 +303,17 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
                 dialog.showShareDialog(true);
                 break;
             case R.id.btn_xi_car://下单洗车
-                ZzRouter.gotoActivity(this, SubmitOrderActivity.class);
+                if (isFuwu==1){
+                    Intent intent = new Intent();
+                    intent.setAction("jingxi_car_addres_12002");
+                    intent.putExtra("datouzhenLatitude",datouzhenLatitude+"");
+                    intent.putExtra("datouzhenLongitude",datouzhenLongitude+"");
+                    intent.putExtra("datouzhenAddress",datouzhenAddress+"");
+                    sendOrderedBroadcast(intent,null);
+                    finish();
+                }else{
+                    toast(this,"不在服务范围内");
+                }
                 break;
             default:
         }

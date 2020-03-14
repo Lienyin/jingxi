@@ -45,6 +45,7 @@ import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.main.MainActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
@@ -77,7 +78,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private XiaOrderDialog dialog;
     private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
             tv_car_fuwu7,tv_car_fuwu8;
-    private TextView tv_more;
+    private TextView tv_more,tv_more_set;
     private int num1=0;
     private int num2=0;
     private int num3=0;
@@ -108,6 +109,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         lv_men_data = view.findViewById(R.id.lv_men_data);
         ll_static = view.findViewById(R.id.ll_static);
         tv_more = view.findViewById(R.id.tv_more);
+        tv_more_set = view.findViewById(R.id.tv_more_set);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -131,6 +133,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu8.setOnClickListener(this);
         ll_static.setOnClickListener(this);
         tv_more.setOnClickListener(this);
+        tv_more_set.setOnClickListener(this);
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -309,7 +312,24 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             case R.id.tv_more://推荐店铺更多
                 ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
+            case R.id.tv_more_set://推荐套餐更多
+                if(onButtonClick!=null){
+                    onButtonClick.onClick(tv_more_set);
+                }
+                break;
         }
+    }
+
+    private OnButtonClick onButtonClick;
+
+    public OnButtonClick getOnButtonClick() {
+        return onButtonClick;
+    }
+    public void setOnButtonClick(OnButtonClick onButtonClick) {
+        this.onButtonClick = onButtonClick;
+    }
+    public interface OnButtonClick{
+        public void onClick(View view);
     }
 
     //刷新

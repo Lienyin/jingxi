@@ -27,6 +27,7 @@ import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
+import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.ui.remark.RemarkActivity;
@@ -227,12 +228,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         @Override
         public void onReceive(Context context, Intent intent) {
             //停车地点
-            AddressEntity addressEntity = (AddressEntity) intent.getSerializableExtra("addressEntity");
-            if (!AppUtils.isEmpty(addressEntity)){
-                tv_car_address.setText(addressEntity.getAddress());
-                siteLat = addressEntity.getLat();
-                siteLng = addressEntity.getLng();
-            }
+            tv_car_address.setText(intent.getStringExtra("datouzhenAddress"));
+            siteLat = intent.getStringExtra("datouzhenLatitude");
+            siteLng = intent.getStringExtra("datouzhenLongitude");
         }
     };
 
@@ -263,7 +261,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 finish();
                 break;
             case R.id.ll_stop_car_address://停车地址
-                ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
+                ZzRouter.gotoActivity(this, MapJingSiActivity.class);
                 break;
             case R.id.ll_car_info://爱车信息
                 ZzRouter.gotoActivity(this, MyCarActivity.class,"1");

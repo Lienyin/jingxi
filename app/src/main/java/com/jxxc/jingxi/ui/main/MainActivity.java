@@ -68,6 +68,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
 //        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
 //        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
+        f1.setOnButtonClick(new FirstFragment.OnButtonClick() {
+            @Override
+            public void onClick(View view) {
+                txt_deal4.performClick();//自动触发首页按钮
+            }
+        });
     }
 
     //UI组件初始化与事件绑定
