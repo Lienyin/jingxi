@@ -33,13 +33,13 @@ public class MsgPresenter extends BasePresenterImpl<MsgContract.View> implements
      */
     @Override
     public void recommendComboInfo(String serviceType,String companyId) {
-        OkGo.<HttpResult<RecommendComboInfoEntity>>post(Api.RECOMMEND_COMBO_INFO)
+        OkGo.<HttpResult<List<RecommendComboInfoEntity>>>post(Api.RECOMMEND_COMBO_INFO)
                 .params("serviceType",serviceType)
                 .params("companyId",companyId)
-                .execute(new JsonCallback<HttpResult<RecommendComboInfoEntity>>() {
+                .execute(new JsonCallback<HttpResult<List<RecommendComboInfoEntity>>>() {
                     @Override
-                    public void onSuccess(Response<HttpResult<RecommendComboInfoEntity>> response) {
-                        RecommendComboInfoEntity d = response.body().data;
+                    public void onSuccess(Response<HttpResult<List<RecommendComboInfoEntity>>> response) {
+                        List<RecommendComboInfoEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.recommendComboInfoCallBack(d);
                         }else{

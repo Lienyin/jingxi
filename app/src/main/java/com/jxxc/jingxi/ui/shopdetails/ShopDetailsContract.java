@@ -20,7 +20,7 @@ public class ShopDetailsContract {
         void getCompanyCallBack(CompanyDetailsEntity data);
         void appointmentListCallBack(List<AppointmentListEntity> data);
 
-        void recommendComboInfoCallBack(RecommendComboInfoEntity data);
+        void recommendComboInfoCallBack(List<RecommendComboInfoEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {

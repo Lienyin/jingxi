@@ -181,7 +181,7 @@
         <!--填写信息-->
         <activity android:name=".ui.setmealpayinfo.SetMealPayInfoActivity"
             android:screenOrientation="portrait"/>
-        <!--填写信息-->
+        <!--备注-->
         <activity android:name=".ui.remark.RemarkActivity"
             android:screenOrientation="portrait"/>
     </application>

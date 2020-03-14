@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MsgContract {
     interface View extends BaseView {
-        void recommendComboInfoCallBack(RecommendComboInfoEntity data);
+        void recommendComboInfoCallBack(List<RecommendComboInfoEntity> data);
 
         void companyListCallBack(List<companyListEntity> data);
         void companyListCallBackMore(List<companyListEntity> data);

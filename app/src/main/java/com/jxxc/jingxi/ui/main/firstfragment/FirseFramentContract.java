@@ -19,7 +19,7 @@ import java.util.List;
 public class FirseFramentContract {
     interface View extends BaseView {
         void bannerCallBack(List<BannerEntity> data);
-        void recommendComboInfoCallBack(RecommendComboInfoEntity data);
+        void recommendComboInfoCallBack(List<RecommendComboInfoEntity> data);
         void recommendCompanyListCallBack(List<RecommendCompanyListEntity> data);
         void getStateCallBack(GetStateEntity data);
     }

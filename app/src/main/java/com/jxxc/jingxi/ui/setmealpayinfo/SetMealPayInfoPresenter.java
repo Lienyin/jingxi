@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
+import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
@@ -139,6 +140,26 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                         CreateOrderEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.createOrderCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取活动
+     */
+    @Override
+    public void getActivities() {
+        OkGo.<HttpResult<List<ActivitiesEntity>>>post(Api.GET_ACTIVITIES)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<List<ActivitiesEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<ActivitiesEntity>>> response) {
+                        List<ActivitiesEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getActivitiesCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

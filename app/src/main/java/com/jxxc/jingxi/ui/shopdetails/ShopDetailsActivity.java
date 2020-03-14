@@ -258,15 +258,15 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
 
     //洗车套餐列表数据
     @Override
-    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
+    public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
         RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(this);
-        recommendSetMealAdapter.setData(data.combo,2);
+        recommendSetMealAdapter.setData(data,2);
         lv_set_meal_data.setAdapter(recommendSetMealAdapter);
         lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayActivity.class);
-                intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                intent.putExtra("recommendComboInfoEntity",data.get(i));
                 intent.putExtra("serviceType","1");
                 intent.putExtra("companyId",cId);
                 startActivity(intent);

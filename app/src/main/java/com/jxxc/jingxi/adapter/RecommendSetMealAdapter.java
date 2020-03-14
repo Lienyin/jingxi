@@ -18,14 +18,14 @@ import java.util.List;
 public class RecommendSetMealAdapter extends BaseAdapter {
     private Context context;
     private int defaultSelection=0;
-    private List<RecommendComboInfoEntity.RecommendCombo> list;
+    private List<RecommendComboInfoEntity> list;
     private int type;
 
     public RecommendSetMealAdapter(Context context){
         this.context=context;
     }
 
-    public void setData(List<RecommendComboInfoEntity.RecommendCombo> list,int type){
+    public void setData(List<RecommendComboInfoEntity> list,int type){
         this.list = list;
         this.type = type;
     }
@@ -66,7 +66,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        RecommendComboInfoEntity.RecommendCombo data = list.get(position);
+        RecommendComboInfoEntity data = list.get(position);
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
         holder.tv_recommend_name.setText(data.comboName);
         holder.tv_recommend_context.setText(data.comboComment);

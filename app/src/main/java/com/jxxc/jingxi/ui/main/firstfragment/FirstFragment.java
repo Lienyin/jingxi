@@ -45,6 +45,7 @@ import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
@@ -144,9 +145,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
         //开始滚动(默认添加一张图片)
-        myPager.start((Activity) context, listViews, 4000, ovalLayout,
-                R.layout.ad_bottom_item, R.id.ad_item_v,
-                R.mipmap.dot_focused, R.mipmap.dot_normal);
+        myPager.start((Activity) context, listViews, 4000, ovalLayout);
         return view;
     }
 
@@ -321,16 +320,16 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     //获取推荐洗车组合套餐返回数据
     @Override
-    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
-        if (data.combo.size()>0){
+    public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
+        if (data.size()>0){
             RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-            recommendSetMealAdapter.setData(data.combo,1);//只显示前面两条
+            recommendSetMealAdapter.setData(data,1);//只显示前面两条
             lv_set_meal_data.setAdapter(recommendSetMealAdapter);
             lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent((Activity) context, SetMealPayActivity.class);
-                    intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                    intent.putExtra("recommendComboInfoEntity",data.get(i));
                     intent.putExtra("serviceType","0");
                     context.startActivity(intent);
                 }

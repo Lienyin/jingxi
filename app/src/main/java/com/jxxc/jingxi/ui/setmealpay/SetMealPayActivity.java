@@ -53,7 +53,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
     @BindView(R.id.ll_pay_set_meal)
     LinearLayout ll_pay_set_meal;
     private List<View> listViews; // 图片组
-    private RecommendComboInfoEntity.RecommendCombo recommendComboInfoEntity;
+    private RecommendComboInfoEntity recommendComboInfoEntity;
     private String serviceType="";
     private String companyId="";
     @Override
@@ -65,7 +65,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
     public void initData() {
         myPager.removeAllViews();
         tv_title.setText("套餐详情");
-        recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
+        recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
         serviceType = getIntent().getStringExtra("serviceType");
         companyId = getIntent().getStringExtra("companyId");
         if (!AppUtils.isEmpty(recommendComboInfoEntity)){

@@ -148,16 +148,16 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
 
     //套餐数据
     @Override
-    public void recommendComboInfoCallBack(final RecommendComboInfoEntity data) {
+    public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
         swipeLayout_sm.setRefreshing(false);
         RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-        recommendSetMealAdapter.setData(data.combo,2);
+        recommendSetMealAdapter.setData(data,2);
         lv_set_meal_data.setAdapter(recommendSetMealAdapter);
         lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent((Activity) context, SetMealPayActivity.class);
-                intent.putExtra("recommendComboInfoEntity",data.combo.get(i));
+                intent.putExtra("recommendComboInfoEntity",data.get(i));
                 intent.putExtra("serviceType","0");
                 context.startActivity(intent);
             }

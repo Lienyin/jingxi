@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.setmealpayinfo;
 
 import android.content.Context;
 
+import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
@@ -22,6 +23,7 @@ public class SetMealPayInfoContract {
         void appointmentListCallBack(List<AppointmentListEntity> data);
         void queryMyCouponCallback(List<MyCoupon> data);
         void createOrderCallBack(CreateOrderEntity data);
+        void getActivitiesCallBack(List<ActivitiesEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -32,5 +34,6 @@ public class SetMealPayInfoContract {
                          String carNum,String carNums,String phonenumber,String address,
                          String lng,String lat,String appointmentStartTime,String appointmentEndTime,
                          String remark,String companyId);
+        void getActivities();
     }
 }
