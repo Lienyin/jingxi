@@ -33,10 +33,10 @@ public  class  MyPagerAdapter  extends PagerAdapter {
      */
     public Object instantiateItem(View v, int i) {
         if (((ViewPager) v).getChildCount() == mListViews.size()) {
-            ((ViewPager) v)
-                    .removeView(mListViews.get(i % mListViews.size()));
+            ((ViewPager) v).removeView(mListViews.get(i % mListViews.size()));
+        }else {
+            ((ViewPager) v).addView(mListViews.get(i % mListViews.size()), 0);
         }
-        ((ViewPager) v).addView(mListViews.get(i % mListViews.size()), 0);
         return mListViews.get(i % mListViews.size());
     }
 

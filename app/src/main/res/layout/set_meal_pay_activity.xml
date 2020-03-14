@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:padding="3dp">
 
-            <com.jxxc.jingxi.ui.main.firstfragment.MyImgScroll
+            <com.jxxc.jingxi.ui.setmealpay.roll.MyImgScroll
                 android:id="@+id/myvp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

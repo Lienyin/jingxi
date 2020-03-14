@@ -9,10 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.MyPagerAdapter;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
-import com.jxxc.jingxi.ui.main.firstfragment.MyImgScroll;
+import com.jxxc.jingxi.ui.setmealpay.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -60,6 +61,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
 
     @Override
     public void initData() {
+        myPager.removeAllViews();
         tv_title.setText("套餐详情");
         recommendComboInfoEntity = (RecommendComboInfoEntity.RecommendCombo) getIntent().getSerializableExtra("recommendComboInfoEntity");
         serviceType = getIntent().getStringExtra("serviceType");
@@ -68,30 +70,19 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
             tv_pay_set_meal_num.setText("已售 "+recommendComboInfoEntity.salesVolume);
             tv_pay_set_meal_con.setText(recommendComboInfoEntity.comboComment);
             tv_pay_set_meal_money.setText("￥"+recommendComboInfoEntity.totalPrice);
-
-
-//            if (recommendComboInfoEntity.imgUrls.length > 0){
-//                //开始滚动(默认添加一张图片)
-//                myPager.start(this, listViews, 4000, ovalLayout,
-//                        R.layout.ad_bottom_item, R.id.ad_item_v,
-//                        R.mipmap.dot_focused, R.mipmap.dot_normal);
-//
-//                listViews = new ArrayList<View>(); // 图片组
-//                for (int i = 0; i < recommendComboInfoEntity.imgUrls.length; i++) {
-//                    MyImageView imageView = new MyImageView (this);
-//                    imageView.setOnClickListener(new View.OnClickListener() {
-//                        public void onClick(View v) {// 设置图片点击事件
-////                    Toast.makeText(context,
-////                            "点击了:" + myPager.getCurIndex(), Toast.LENGTH_SHORT)
-////                            .show();
-//                        }
-//                    });
-//                    imageView.setImageURL(recommendComboInfoEntity.imgUrls[i]);
-//                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//                    listViews.add(imageView);
-//                }
-//            }
+            if (recommendComboInfoEntity.imgUrls.length > 0){
+                listViews = new ArrayList<View>(); // 图片组
+                for (int i = 0; i < recommendComboInfoEntity.imgUrls.length; i++) {
+                    MyImageView imageView = new MyImageView (this);
+                    imageView.setImageURL(recommendComboInfoEntity.imgUrls[i]);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    listViews.add(imageView);
+                }
+            }
         }
+
+        //开始滚动
+        myPager.start(this,listViews,4000,ovalLayout);
     }
 
     @OnClick({R.id.tv_back,R.id.ll_pay_set_meal})
@@ -106,6 +97,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
                 intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity);
                 intent.putExtra("serviceType","0");
                 startActivity(intent);
+                finish();
                 break;
             default:
         }
