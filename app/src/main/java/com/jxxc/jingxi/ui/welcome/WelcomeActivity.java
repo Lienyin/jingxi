@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.widget.Button;
 
-import com.jxxc.jingxi.ui.start.StartActivity;
-import com.jxxc.jingxi.utils.AppUtils;
-import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.start.StartActivity;
+import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.SPUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -30,18 +31,18 @@ public class WelcomeActivity extends MVPBaseActivity<WelcomeContract.View, Welco
 
     @Override
     protected int layoutId() {
-        isCheckToken = false;
         return R.layout.activity_welcome;
     }
+
     @Override
     public void initData() {
         //控制是否显示系统状态栏，默认显示(可不写)
         mPresenter.querySetting();
-        boolean isfirstlogin =  SPUtils.get(this,"ISFIRSTLOGIN", true);
-        if (isfirstlogin){
-            SPUtils.put(this,"ISFIRSTLOGIN", false);
-            mPresenter.isShowViewPager(viewPager,isfirstlogin);
-        }else{
+        boolean isfirstlogin = SPUtils.get(this, "ISFIRSTLOGIN", true);
+        if (isfirstlogin) {
+            SPUtils.put(this, "ISFIRSTLOGIN", false);
+            mPresenter.isShowViewPager(viewPager, isfirstlogin);
+        } else {
             Intent intent = new Intent(this, StartActivity.class);
             startActivity(intent);
             finish();
@@ -50,13 +51,13 @@ public class WelcomeActivity extends MVPBaseActivity<WelcomeContract.View, Welco
 
     @OnClick(R.id.btn_enter)
     public void onViewClicked() {
-//        AnimUtils.clickAnimator(button);
+        AnimUtils.clickAnimator(button);
         gotoMainNow();
     }
 
     @Override
     public void gotoMainNow() {
-        SPUtils.put(this,"ISFIRSTLOGIN", false);
+        SPUtils.put(this, "ISFIRSTLOGIN", false);
         Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);
         finish();
@@ -71,14 +72,5 @@ public class WelcomeActivity extends MVPBaseActivity<WelcomeContract.View, Welco
         }
         super.onDestroy();
 
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 }

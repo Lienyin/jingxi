@@ -74,15 +74,16 @@
             android:name=".wxapi.WXEntryActivity"/>
         <!--欢迎界面-->
         <activity android:name=".ui.welcome.WelcomeActivity">
-        </activity>
-        <!--启动界面-->
-        <activity android:name=".ui.start.StartActivity"
-            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <!--启动界面-->
+        <activity android:name=".ui.start.StartActivity"
+            android:screenOrientation="portrait">
+
         </activity>
         <!--主界面-->
         <activity android:name="com.jxxc.jingxi.ui.main.MainActivity"

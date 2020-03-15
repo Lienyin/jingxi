@@ -22,7 +22,7 @@
         android:visibility="gone"
         android:layout_marginLeft="150pt"
         android:layout_marginRight="150pt"
-        android:background="@drawable/shape_round_rect_teal"
+        android:background="@drawable/shape_bg_button"
         />
 </RelativeLayout>
 

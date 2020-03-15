@@ -2,8 +2,9 @@ package com.jxxc.jingxi.ui.welcome;
 
 import android.support.v4.view.ViewPager;
 
-import com.jxxc.jingxi.mvp.BaseView;
 import com.jxxc.jingxi.mvp.BasePresenter;
+import com.jxxc.jingxi.mvp.BaseView;
+
 
 /**
  * MVPPlugin
