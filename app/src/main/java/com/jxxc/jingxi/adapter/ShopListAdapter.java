@@ -20,6 +20,7 @@ import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -42,6 +43,15 @@ public class ShopListAdapter extends BaseQuickAdapter<companyListEntity, BaseVie
         helper.setText(R.id.tv_shop_list_dd, item.orderNum);
         helper.setText(R.id.tv_shop_list_js, item.technicianNum);
         helper.setText(R.id.tv_shop_list_address, item.address);
+        //计算距离distance
+        String showDistance = "?? m";
+        if (item.distance > 1000) {
+            showDistance = new DecimalFormat("0.00").format(item.distance / 1000d) + " km";
+        } else {
+            showDistance = new DecimalFormat("0").format(item.distance) + " m";
+        }
+        helper.setText(R.id.tv_shop_jilu, showDistance);
+
         if (item.isBusiness==1){
             helper.setText(R.id.tv_shop_list_yy, "营业中");
         }else{

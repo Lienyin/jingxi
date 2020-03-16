@@ -142,7 +142,7 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
             mPresenter.recommendComboInfo("0","");
         }else{
             offset=2;
-            mPresenter.companyList(Double.valueOf(lat),Double.valueOf(lng),queryFlag,sort,cityId,1,10);
+            mPresenter.companyList(Double.valueOf(lng),Double.valueOf(lat),queryFlag,sort,cityId,1,10);
         }
     }
 

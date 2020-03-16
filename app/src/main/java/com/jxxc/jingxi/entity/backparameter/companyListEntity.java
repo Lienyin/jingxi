@@ -33,7 +33,7 @@ public class companyListEntity implements Serializable {
     public String hourServiceOrderNum;
     public String officeTime;
     public String closingTime;
-    public String distance;
+    public double distance;
     public String companyName;
     public String address;
     public String phonenumber;
