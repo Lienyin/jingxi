@@ -168,7 +168,7 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
     @Override
     public void onLoadMoreRequested() {
         swipeLayout.setRefreshing(false);
-        mPresenter.companyListMore(Double.valueOf(lat),Double.valueOf(lng),queryFlag,sort,cityId,offset,10);
+        mPresenter.companyListMore(Double.valueOf(lng),Double.valueOf(lat),queryFlag,sort,cityId,offset,10);
     }
 
     //门店数据
