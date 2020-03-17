@@ -16,6 +16,7 @@
             android:id="@+id/lv_set_meal_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
             android:divider="@color/transparent"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

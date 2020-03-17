@@ -34,7 +34,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:text="上门服务"
+                android:text="上  门"
                 android:textColor="@drawable/radio_main"
                 android:textSize="14sp" />
 
@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:text="到店服务"
+                android:text="到  店"
                 android:textColor="@drawable/radio_main"
                 android:textSize="14sp" />
         </RadioGroup>
