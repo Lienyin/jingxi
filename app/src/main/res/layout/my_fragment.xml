@@ -55,6 +55,12 @@
             android:layout_marginTop="5dp"
             android:text="XXX-XXXX-XXXX"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/set_bg"/>
     <!--车辆管理-->
     <LinearLayout
         android:id="@+id/ll_my_car"

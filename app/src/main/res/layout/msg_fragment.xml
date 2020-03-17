@@ -21,7 +21,7 @@
         android:background="@color/set_bg"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:background="@color/white">
 
         <RadioGroup
@@ -39,6 +39,7 @@
                 android:checked="true"
                 android:gravity="center"
                 android:text="上  门"
+                android:drawableBottom="@drawable/radio_main_bg"
                 android:textColor="@drawable/radio_main"
                 android:textSize="14sp" />
 
@@ -50,6 +51,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="到  店"
+                android:drawableBottom="@drawable/radio_main_bg"
                 android:textColor="@drawable/radio_main"
                 android:textSize="14sp" />
         </RadioGroup>
