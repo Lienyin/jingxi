@@ -44,6 +44,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.List;
 
@@ -91,6 +92,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("附近技师");
         initMap();
         tv_affirm.setVisibility(View.VISIBLE);

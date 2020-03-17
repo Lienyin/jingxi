@@ -11,6 +11,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,6 +43,7 @@ public class PayAccomplishActivity extends MVPBaseActivity<PayAccomplishContract
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("支付完成");
         orderId = getIntent().getStringExtra("orderId");
         orderPrice = getIntent().getStringExtra("orderPrice");

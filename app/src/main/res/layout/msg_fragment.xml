@@ -5,19 +5,15 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:paddingLeft="20dp"
-        android:orientation="horizontal"
+        android:layout_height="55dp"
+        android:gravity="center"
         android:background="@color/public_all">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"
-            android:textStyle="bold"
-            android:text="菁喜套餐"/>
+            android:text="菁喜洗车"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

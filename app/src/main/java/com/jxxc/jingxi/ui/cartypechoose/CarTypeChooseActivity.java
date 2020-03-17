@@ -16,6 +16,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -54,6 +55,7 @@ public class CarTypeChooseActivity extends MVPBaseActivity<CarTypeChooseContract
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("车型选择");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getBandAndType();

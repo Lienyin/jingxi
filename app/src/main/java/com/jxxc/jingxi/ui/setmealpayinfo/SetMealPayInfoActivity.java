@@ -36,6 +36,7 @@ import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -129,6 +130,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("填写信息");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");

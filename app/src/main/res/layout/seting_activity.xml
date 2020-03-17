@@ -5,75 +5,86 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/title"/>
-    <!--安全设置-->
+    <include layout="@layout/title" />
+
     <LinearLayout
-        android:id="@+id/ll_setting_update_password"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="visible"
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="18dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="修改密码"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+        <!--安全设置-->
+        <LinearLayout
+            android:id="@+id/ll_setting_update_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:visibility="visible">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/jiantou" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="修改密码"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/jiantou" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eee" />
+        <!--关于我们-->
+        <LinearLayout
+            android:id="@+id/ll_my_guanyu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="关于我们"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/jiantou" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eee" />
+        <!--登录按钮-->
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#eee"/>
-    <!--关于我们-->
-    <LinearLayout
-        android:id="@+id/ll_my_guanyu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="visible"
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="18dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="关于我们"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/jiantou" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#eee"/>
-    <!--登录按钮-->
     <Button
         android:id="@+id/btn_out_login"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/shape_bg_button"
         android:text="退出登录"
         android:textColor="@color/white"

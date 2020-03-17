@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.main;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +26,7 @@ import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,6 +133,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_deal1:
+                StatusBarUtil.setStatusBarMode(this, true, R.color.white);
                 selected();
                 txt_deal1.setSelected(true);
                 if(f1==null){
@@ -142,6 +145,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 break;
 
             case R.id.txt_deal2:
+                StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);
                 selected();
                 txt_deal2.setSelected(true);
                 if(f2==null){
@@ -152,6 +156,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal3:
+                StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);
                 selected();
                 txt_deal3.setSelected(true);
                 if(f3==null){
@@ -162,6 +167,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal4:
+                StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);
                 selected();
                 txt_deal4.setSelected(true);
                 if(f4==null){
@@ -172,6 +178,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal5:
+                StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);
                 selected();
                 txt_deal5.setSelected(true);
                 if(f5==null){

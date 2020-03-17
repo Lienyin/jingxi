@@ -35,6 +35,7 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.PayUtil;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.jxxc.jingxi.view.SmoothCheckBox;
 import com.jxxc.jingxi.wxpay.WXSignBean;
 
@@ -85,6 +86,7 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("充值");
         initAdapter();
         mPresenter.getRechargeConfiguration();

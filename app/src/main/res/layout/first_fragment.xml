@@ -68,10 +68,7 @@
                 android:id="@+id/ll_static"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_round_yellow"
+                android:background="@color/home_yellow"
                 android:gravity="center_vertical"
                 android:visibility="gone">
 
@@ -93,13 +90,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/attestation_bg_edittext"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
 
                 <com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll
                     android:id="@+id/myvp"
@@ -121,10 +114,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/attestation_bg_edittext"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -403,10 +393,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/attestation_bg_edittext"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -443,10 +431,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/attestation_bg_edittext"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -477,7 +463,7 @@
                 <com.jxxc.jingxi.utils.HorizontalListView
                     android:id="@+id/lv_men_data"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp" />
+                    android:layout_height="140dp" />
             </LinearLayout>
 
             <!--创富梦想，即刻出发-->

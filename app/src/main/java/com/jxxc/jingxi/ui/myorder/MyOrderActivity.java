@@ -23,6 +23,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("我的订单");
         initAdapter();
         onRefresh();

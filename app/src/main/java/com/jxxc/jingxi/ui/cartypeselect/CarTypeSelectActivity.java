@@ -13,6 +13,7 @@ import com.jxxc.jingxi.entity.backparameter.BandAndTypeEntity;
 import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,6 +59,7 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("品牌选择");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getBandAndType();

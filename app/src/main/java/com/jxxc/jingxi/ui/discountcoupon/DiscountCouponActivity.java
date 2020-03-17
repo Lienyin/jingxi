@@ -15,6 +15,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.discountcoupon.coupontype.CouponTypeFragment;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class DiscountCouponActivity extends MVPBaseActivity<DiscountCouponContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tvTitle.setText("优惠券");
         tvBack.setVisibility(View.VISIBLE);
         contentBeans.add("未使用");

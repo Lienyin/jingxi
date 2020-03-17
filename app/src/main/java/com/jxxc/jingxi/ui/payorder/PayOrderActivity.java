@@ -19,6 +19,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.payaccomplish.PayAccomplishActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.PayUtil;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.jxxc.jingxi.wxpay.WXSignBean;
 
 import butterknife.BindView;
@@ -65,6 +66,7 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("订单支付");
         orderId = getIntent().getStringExtra("orderId");
         orderPrice = getIntent().getStringExtra("orderPrice");

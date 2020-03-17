@@ -26,6 +26,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,6 +53,7 @@ public class MapTestActivity extends MVPBaseActivity<MapTestContract.View, MapTe
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("地图");
 
         // 声明LocationClient类  

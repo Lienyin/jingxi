@@ -9,6 +9,7 @@ import com.jxxc.jingxi.entity.backparameter.MessageListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,6 +36,7 @@ public class MessageDeatilsActivity extends MVPBaseActivity<MessageDeatilsContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("消息详情");
         messageListEntity = ZzRouter.getIntentData(this,MessageListEntity.class);
         tv_message_content.setText(messageListEntity.content);

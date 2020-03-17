@@ -32,6 +32,7 @@ import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;

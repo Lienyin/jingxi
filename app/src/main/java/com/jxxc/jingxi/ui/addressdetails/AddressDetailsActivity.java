@@ -42,6 +42,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.wanjian.cockroach.App;
 
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("详细地址");
         initMap();
         adapter = new AddressDetailsAdapter(this);

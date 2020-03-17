@@ -16,8 +16,7 @@
             android:layout_height="180dp"
             android:background="@drawable/attestation_bg_edittext"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="3dp">
+            android:orientation="vertical">
 
             <com.jxxc.jingxi.ui.setmealpay.roll.MyImgScroll
                 android:id="@+id/myvp"

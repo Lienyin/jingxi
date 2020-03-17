@@ -26,6 +26,7 @@ import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -75,6 +76,7 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("详情");
         linkId = getIntent().getStringExtra("linkId");
         if (!AppUtils.isEmpty(linkId)){

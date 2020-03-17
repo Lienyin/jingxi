@@ -21,6 +21,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("订单详情");
         OrderId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();

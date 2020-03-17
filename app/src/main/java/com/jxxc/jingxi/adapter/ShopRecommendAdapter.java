@@ -15,12 +15,13 @@ import com.jxxc.jingxi.utils.GlideImgManager;
 import java.util.List;
 
 public class ShopRecommendAdapter extends BaseAdapter {
-    private Context context;
-    private int defaultSelection=0;
     private List<RecommendCompanyListEntity> list;
+    private Context mContext;
+    private LayoutInflater mInflater;
 
     public ShopRecommendAdapter(Context context){
-        this.context=context;
+        this.mContext = context;
+        mInflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//LayoutInflater.from(mContext);
     }
 
     public void setData(List<RecommendCompanyListEntity> list){
@@ -31,7 +32,6 @@ public class ShopRecommendAdapter extends BaseAdapter {
     public int getCount() {
         return list.size();
     }
-
     @Override
     public Object getItem(int position) {
         return list.get(position);
@@ -44,10 +44,11 @@ public class ShopRecommendAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         ViewHolder holder = null;
         if (convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.shop_recommend_adapter,null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.shop_recommend_adapter,null);
             holder.iv_shop_icon = convertView.findViewById(R.id.iv_shop_icon);
             holder.tv_shop_name = convertView.findViewById(R.id.tv_shop_name);
             convertView.setTag(holder);
@@ -55,27 +56,14 @@ public class ShopRecommendAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         RecommendCompanyListEntity data = list.get(position);
-        GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_shop_icon);
+        GlideImgManager.loadRectangleImage(mContext, data.imgUrl, holder.iv_shop_icon);
         holder.tv_shop_name.setText(data.companyName);
+
         return convertView;
     }
 
     class ViewHolder{
         ImageView iv_shop_icon;
         TextView tv_shop_name;
-    }
-
-/**
-     * @param position
-     * ���ø���״̬��item
-     */
-    public void setSelectPosition(int position) {
-        if (!(position < 0 || position > list.size())) {
-            defaultSelection = position;
-            notifyDataSetChanged();
-        }else{
-            defaultSelection = -1;
-            notifyDataSetChanged();
-        }
     }
 }

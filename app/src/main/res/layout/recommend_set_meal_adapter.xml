@@ -5,15 +5,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@drawable/attestation_bg_edittext"
-        android:layout_margin="10dp"
-        android:padding="10dp">
+        android:background="@color/white"
+        android:padding="20dp">
         <ImageView
             android:id="@+id/iv_recommend_icon"
-            android:layout_width="120dp"
+            android:layout_width="130dp"
             android:layout_height="90dp"
             android:scaleType="fitXY"
             android:src="@mipmap/zhan_weitu"/>

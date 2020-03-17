@@ -14,6 +14,7 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -53,6 +54,7 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("个人资料");
         mPresenter.initImageSelecter();
         mPresenter.getUserInfo();

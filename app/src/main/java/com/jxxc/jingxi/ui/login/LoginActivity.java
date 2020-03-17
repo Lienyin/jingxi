@@ -22,6 +22,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.SPUtils;
+import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.jxxc.jingxi.wxapi.Constant;
 import com.jxxc.jingxi.wxapi.WeiXin;
 import com.lzy.okgo.OkGo;
@@ -96,6 +97,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         api = WXAPIFactory.createWXAPI(this, Constant.APP_ID,true);
         api.registerApp(Constant.APP_ID);
         EventBus.getDefault().register(this);
