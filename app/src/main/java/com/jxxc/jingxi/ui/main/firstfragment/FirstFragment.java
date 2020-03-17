@@ -45,6 +45,7 @@ import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
+import com.jxxc.jingxi.ui.finddetails.FindDetailsActivity;
 import com.jxxc.jingxi.ui.main.MainActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
@@ -386,7 +387,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     //广告滚动数据
     @Override
-    public void bannerCallBack(List<BannerEntity> data) {
+    public void bannerCallBack(final List<BannerEntity> data) {
         if (data.size()>0){
             listViews = new ArrayList<View>(); // 图片组
             for (int i = 0; i < data.size(); i++) {
@@ -396,6 +397,14 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 //                    Toast.makeText(context,
 //                            "点击了:" + myPager.getCurIndex(), Toast.LENGTH_SHORT)
 //                            .show();
+                    if (data.get(myPager.getCurIndex()).linkType==1){
+                        //跳转类型 1发现文章；2活动
+                        Intent intent = new Intent(context, FindDetailsActivity.class);
+                        intent.putExtra("linkId",data.get(myPager.getCurIndex()).linkId);
+                        context.startActivity(intent);
+                     }else{
+                        toast(context,"暂无标签");
+                    }
                     }
                 });
                 imageView.setImageURL(data.get(i).imgUrl);

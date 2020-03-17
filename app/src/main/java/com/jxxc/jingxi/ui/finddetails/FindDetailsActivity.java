@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -63,6 +64,7 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     private String findContent="";
     private String appreciateNum = "";
     private String type = "";
+    private String linkId = "";
     private FindEntity findEntity;
 
     @Override
@@ -74,21 +76,27 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @Override
     public void initData() {
         tv_title.setText("详情");
-        findEntity = ZzRouter.getIntentData(this,FindEntity.class);
-        findId = findEntity.noticeId;
-        findContent = findEntity.content;
-        type = findEntity.type;
-        tv_num_data.setText(findEntity.appreciateNum);//点赞数
-        tv_title_faxian.setText(findEntity.title);
-        tv_time_faxian.setText(findEntity.createTime);
+        linkId = getIntent().getStringExtra("linkId");
+        if (!AppUtils.isEmpty(linkId)){
+            mPresenter.notice(linkId);
+        }else{
+            findEntity = ZzRouter.getIntentData(this,FindEntity.class);
+            setView(findEntity);
+        }
+
+    }
+
+    private void setView(FindEntity data){
+        findId = data.noticeId;
+        findContent = data.content;
+        type = data.type;
+        tv_num_data.setText(data.appreciateNum);//点赞数
+        tv_title_faxian.setText(data.title);
+        tv_time_faxian.setText(data.createTime);
 
         find_details_context.getSettings().setJavaScriptEnabled(true);
         WebSettings settings = find_details_context.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        settings.setUseWideViewPort(true);
-//        settings.setLoadWithOverviewMode(true);
-
-        //find_details_context.getSettings().setDefaultTextEncodingName("UTF-8");//设置默认为utf-8
         find_details_context.loadData(findContent.replace("\\",""),"text/html", "UTF-8");
 
         if ("1".equals(type)){
@@ -120,5 +128,11 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @Override
     public void appreciateCallBack(AppreciateEntity data) {
         tv_num_data.setText(data.appreciateNum);
+    }
+
+    //发现返回数据
+    @Override
+    public void noticeCallBack(List<FindEntity> data) {
+        setView(data.get(0));
     }
 }
