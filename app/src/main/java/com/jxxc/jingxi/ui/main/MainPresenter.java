@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.main;
 import android.content.Context;
 
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.LatestVersionEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.utils.SPUtils;
@@ -17,6 +18,7 @@ import com.jxxc.jingxi.http.JsonCallback;
 import com.jxxc.jingxi.mvp.BasePresenterImpl;
 import com.jxxc.jingxi.utils.AppUtils;
 import java.io.File;
+import java.util.List;
 
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -86,6 +88,26 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
 //                                }
 //                            }
                             //mView.latestVersionCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 广告
+     */
+    @Override
+    public void banner() {
+        OkGo.<HttpResult<List<BannerEntity>>>post(Api.BANNER_LIST)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<List<BannerEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<BannerEntity>>> response) {
+                        List<BannerEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.bannerCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

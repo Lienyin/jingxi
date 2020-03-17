@@ -97,7 +97,7 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
         find_details_context.getSettings().setJavaScriptEnabled(true);
         WebSettings settings = find_details_context.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        find_details_context.loadData(findContent.replace("\\",""),"text/html", "UTF-8");
+        find_details_context.loadData(findContent.replace("\\",""),"text/html; charset=UTF-8", null);
 
         if ("1".equals(type)){
             tv_type.setText("文章标签：经验/观点");

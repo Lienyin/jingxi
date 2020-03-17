@@ -87,7 +87,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> implements Serializ
             int code = o.code;
             if (code == 0 || code == 5 || code == 6|| code == 2|| code == 1) {
                 return (T) o;
-            }else if (code == 3) {
+            }else if (code == 3||code==4) {
                 EventBus.getDefault().post(new EventCenter<String>(EventCenter.TOKEN_INVALID, "登陆超时"));
                 SPUtils.put(ConfigApplication.getContext(), "token", "");
                 SPUtils.put(ConfigApplication.getContext(), SPUtils.K_SESSION_TIMEOUT, true);

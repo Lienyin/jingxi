@@ -91,8 +91,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private double locationLongitude=0;
     private String orderId="";
 
-    public FirstFragment(Context context) {
+    public FirstFragment(Context context,List<View> listViews) {
         this.context = context;
+        this.listViews = listViews;
     }
 
     @Nullable
@@ -157,7 +158,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
      * 初始化图片
      */
     private void InitViewPager() {
-        mPresenter.banner();
+        //mPresenter.banner();
     }
 
     @Override
@@ -394,9 +395,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 MyImageView imageView = new MyImageView (context);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {// 设置图片点击事件
-//                    Toast.makeText(context,
-//                            "点击了:" + myPager.getCurIndex(), Toast.LENGTH_SHORT)
-//                            .show();
                     if (data.get(myPager.getCurIndex()).linkType==1){
                         //跳转类型 1发现文章；2活动
                         Intent intent = new Intent(context, FindDetailsActivity.class);

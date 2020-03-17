@@ -8,19 +8,26 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
+import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.finddetails.FindDetailsActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxi.ui.main.msg.MsgFragment;
 import com.jxxc.jingxi.ui.main.my.MyFragment;
 import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -50,6 +57,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private long exitTime = 0;
     public static String registrationId;
     private ActivityDialog activityDialog;
+    private List<View> listViews; // 图片组
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -57,7 +65,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     @Override
     public void initData() {
-        bindView();
+        mPresenter.banner();//先请求广告数据，在加载界面
         mPresenter.queryAppVersion("3");//查询版本
         activityDialog = new ActivityDialog(this);
         boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
@@ -66,14 +74,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             activityDialog.showShareDialog(true);
         }
 
+        //极光推送id
 //        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
 //        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
-        f1.setOnButtonClick(new FirstFragment.OnButtonClick() {
-            @Override
-            public void onClick(View view) {
-                txt_deal4.performClick();//自动触发首页按钮
-            }
-        });
     }
 
     //UI组件初始化与事件绑定
@@ -131,7 +134,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 selected();
                 txt_deal1.setSelected(true);
                 if(f1==null){
-                    f1 = new FirstFragment(this);
+                    f1 = new FirstFragment(this,listViews);
                     transaction.add(R.id.fragment_container,f1);
                 }else{
                     transaction.show(f1);
@@ -215,5 +218,39 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
 
+    }
+
+    @Override
+    public void bannerCallBack(final List<BannerEntity> data) {
+        if (data.size()>0){
+            listViews = new ArrayList<View>(); // 图片组
+            for (int i = 0; i < data.size(); i++) {
+                MyImageView imageView = new MyImageView (this);
+                final int finalI = i;
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {// 设置图片点击事件
+                        if (data.get(finalI).linkType==1){
+                            //跳转类型 1发现文章；2活动
+                            Intent intent = new Intent(MainActivity.this, FindDetailsActivity.class);
+                            intent.putExtra("linkId",data.get(finalI).linkId);
+                            startActivity(intent);
+                        }else{
+                            toast(MainActivity.this,"暂无标签");
+                        }
+                    }
+                });
+                imageView.setImageURL(data.get(i).imgUrl);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                listViews.add(imageView);
+            }
+        }
+        bindView();
+        //推荐套餐更多
+        f1.setOnButtonClick(new FirstFragment.OnButtonClick() {
+            @Override
+            public void onClick(View view) {
+                txt_deal4.performClick();//自动触发首页按钮
+            }
+        });
     }
 }
