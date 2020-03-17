@@ -189,7 +189,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/logo_108" />
+            android:src="@mipmap/jx_logo" />
 
         <TextView
             android:id="@+id/tv_zhanghu_number"
