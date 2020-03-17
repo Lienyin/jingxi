@@ -40,7 +40,6 @@ public class DiscountCouponActivity extends MVPBaseActivity<DiscountCouponContra
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tvTitle.setText("优惠券");
         tvBack.setVisibility(View.VISIBLE);
         contentBeans.add("未使用");

@@ -45,7 +45,6 @@ public class SetingActivity extends MVPBaseActivity<SetingContract.View, SetingP
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("安全设置");
     }
 

@@ -76,7 +76,6 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("详情");
         linkId = getIntent().getStringExtra("linkId");
         if (!AppUtils.isEmpty(linkId)){

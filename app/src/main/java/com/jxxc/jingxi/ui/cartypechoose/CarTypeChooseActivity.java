@@ -55,7 +55,6 @@ public class CarTypeChooseActivity extends MVPBaseActivity<CarTypeChooseContract
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("车型选择");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getBandAndType();

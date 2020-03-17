@@ -88,7 +88,6 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("门店列表");
         popFiltrate = new PopFiltrate(this);
         popFiltrateOne = new PopFiltrateOne(this);

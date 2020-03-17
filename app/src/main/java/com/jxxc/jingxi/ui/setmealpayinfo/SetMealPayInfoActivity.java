@@ -130,7 +130,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         tv_title.setText("填写信息");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");

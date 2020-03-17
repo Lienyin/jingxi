@@ -99,7 +99,6 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, true, R.color.public_all);//状态栏颜色
         carData = (CarListEntity) getIntent().getSerializableExtra("carData");
         if (!AppUtils.isEmpty(carData)){
             tv_title.setText("修改车辆");
