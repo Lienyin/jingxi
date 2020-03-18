@@ -76,8 +76,8 @@
     </Row>
 
     <Row >
-        <Key android:codes="-1"
-            android:keyEdgeFlags="left" android:keyLabel="收起"
+        <Key android:codes="-4"
+            android:keyEdgeFlags="left" android:keyLabel="省份"
             android:horizontalGap="1%p" android:keyWidth="13%p"
             android:isModifier="true" android:isSticky="true"  />
         <Key android:codes="90" android:keyLabel="Z"

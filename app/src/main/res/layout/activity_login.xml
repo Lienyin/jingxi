@@ -12,13 +12,14 @@
         android:gravity="center_vertical|right">
 
         <TextView
+            android:id="@+id/tv_tiao_guo"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="跳过"
-            android:textColor="@color/white"
-            android:visibility="gone" />
+            android:textColor="@color/black"
+            android:visibility="visible" />
     </LinearLayout>
 
     <ScrollView

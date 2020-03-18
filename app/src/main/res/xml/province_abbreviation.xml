@@ -56,7 +56,7 @@
 
     <Row android:verticalGap="1%p">
         <Key android:codes="28189" android:keyLabel="渝"
-            android:horizontalGap="11%p" android:keyWidth="8%p"
+            android:horizontalGap="1%p" android:keyWidth="8%p"
             android:keyEdgeFlags="left"/>
         <Key android:codes="24029" android:keyLabel="川"
             android:horizontalGap="2%p" android:keyWidth="8%p" />
@@ -70,6 +70,10 @@
             android:horizontalGap="2%p" android:keyWidth="8%p" />
         <Key android:codes="29976" android:keyLabel="甘"
             android:horizontalGap="2%p" android:keyWidth="8%p" />
+        <Key android:codes="29756" android:keyLabel="琼"
+            android:horizontalGap="2%p" android:keyWidth="8%p"/>
+        <Key android:codes="26032" android:keyLabel="新"
+            android:horizontalGap="2%p" android:keyWidth="8%p" />
         <Key android:codes="38738"  android:keyLabel="青"
             android:horizontalGap="2%p" android:keyWidth="8%p"
             android:keyEdgeFlags="right" />
@@ -77,13 +81,9 @@
 
     <Row >
         <Key android:codes="-1"
-            android:keyEdgeFlags="left" android:keyLabel="收起"
-            android:horizontalGap="4%p" android:keyWidth="15%p"
+            android:keyEdgeFlags="left" android:keyLabel="A"
+            android:horizontalGap="2%p" android:keyWidth="8%p"
             android:isModifier="true" android:isSticky="true"  />
-        <Key android:codes="29756" android:keyLabel="琼"
-            android:horizontalGap="2%p" android:keyWidth="8%p"/>
-        <Key android:codes="26032" android:keyLabel="新"
-            android:horizontalGap="2%p" android:keyWidth="8%p" />
         <Key android:codes="23425" android:keyLabel="宁"
             android:horizontalGap="2%p" android:keyWidth="8%p" />
         <Key android:codes="28207" android:keyLabel="港"
@@ -92,9 +92,17 @@
             android:horizontalGap="2%p" android:keyWidth="8%p" />
         <Key android:codes="21488" android:keyLabel="台"
             android:horizontalGap="2%p" android:keyWidth="8%p"/>
+        <Key android:codes="20351" android:keyLabel="使"
+            android:horizontalGap="2%p" android:keyWidth="8%p"/>
+        <Key android:codes="39046" android:keyLabel="领"
+            android:horizontalGap="2%p" android:keyWidth="8%p"/>
+        <Key android:codes="35686" android:keyLabel="警"
+            android:horizontalGap="2%p" android:keyWidth="8%p"/>
+        <Key android:codes="23398" android:keyLabel="学"
+            android:horizontalGap="2%p" android:keyWidth="8%p"/>
         <Key  android:codes="-3"
             android:keyEdgeFlags="right" android:keyLabel="删除"
-            android:horizontalGap="2%p" android:keyWidth="15%p"
+            android:horizontalGap="2%p" android:keyWidth="12%p"
             android:isRepeatable="false" />
     </Row>
 

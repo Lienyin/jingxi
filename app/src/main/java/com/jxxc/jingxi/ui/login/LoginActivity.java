@@ -83,6 +83,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_pass_word_code;
     @BindView(R.id.iv_open_wx_login)
     ImageView iv_open_wx_login;
+    @BindView(R.id.tv_tiao_guo)
+    TextView tv_tiao_guo;
     //微信
     public IWXAPI api;
     private String wxOpenid = "";
@@ -106,7 +108,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     }
 
     @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
-    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login})
+    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login,R.id.tv_tiao_guo})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -163,6 +165,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }else{
                     toast(this,"目前您安装的微信版本过低或尚未安装");
                 }
+                break;
+            case R.id.tv_tiao_guo://跳过
+                ZzRouter.gotoActivity(this,MainActivity.class);
+                finish();
                 break;
             default:
         }
