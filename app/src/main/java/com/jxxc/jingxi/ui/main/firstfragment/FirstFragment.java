@@ -383,7 +383,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void getStateCallBack(GetStateEntity data) {
         if (data.isUnfinished==1){
             orderId = data.orderId;
-            ll_static.setVisibility(View.VISIBLE);
+            ll_static.setVisibility(View.GONE);
         }else{
             ll_static.setVisibility(View.GONE);
         }
