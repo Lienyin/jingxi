@@ -177,7 +177,7 @@ public class TimeDialog implements View.OnClickListener{
           * @return 当前日期是星期几
           */
     public static String getWeekOfDate(Date dt) {
-        String[] weekDays = {"\n周日", "\n周一", "\n周二", "\n周三", "\n周四", "\n周五", "\n周六"};
+        String[] weekDays = {"\n 周日", "\n 周一", "\n 周二", "\n 周三", "\n 周四", "\n 周五", "\n 周六"};
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
