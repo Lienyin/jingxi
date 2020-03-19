@@ -145,7 +145,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         // 注册监听  
         mLocationClient.registerLocationListener(mBDLocationListener);
 
-        mPresenter.getState();//获取用户状态
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+            mPresenter.getState();//获取用户状态
+        }
         mPresenter.recommendComboInfo("0","");//获取推荐套餐
         mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
         dialog = new XiaOrderDialog(context);
@@ -425,6 +427,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void onResume() {
         Log.i("TAG","我执行了");
         super.onResume();
-        mPresenter.getState();
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+            mPresenter.getState();//获取用户状态
+        }
     }
 }

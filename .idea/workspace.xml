@@ -24,11 +24,10 @@
     <list default="true" id="63a5ca23-686a-4d68-9ab2-9315ec7c5834" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/login/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/login/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/number_or_letters.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/number_or_letters.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_activity.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,44 +76,51 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="110" column="49" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
+            <state relative-caret-position="375">
+              <caret line="179" column="53" selection-start-line="179" selection-start-column="53" selection-end-line="179" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/addcar/AddCarActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="142" column="46" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
+            <state relative-caret-position="337">
+              <caret line="109" column="42" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/my/MyFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1540">
-              <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
+            <state relative-caret-position="439">
+              <caret line="73" selection-start-line="73" selection-end-line="73" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/number_or_letters.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-159">
-              <caret line="78" column="31" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
+            <state relative-caret-position="369">
+              <caret line="189" column="42" selection-start-line="189" selection-start-column="42" selection-end-line="189" selection-end-column="42" />
+              <folding>
+                <element signature="e#8224#8402#0" expanded="true" />
+                <element signature="e#8401#8402#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9">
-              <caret line="84" column="35" lean-forward="true" selection-start-line="84" selection-start-column="35" selection-end-line="84" selection-end-column="36" />
+            <state relative-caret-position="215">
+              <caret line="424" lean-forward="true" selection-start-line="424" selection-end-line="424" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,10 +136,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>swipeLayout</find>
-      <find>lv_set_meal_data</find>
       <find>getCar</find>
-      <find>mPresenter</find>
       <find>recommendComboInfoEntity</find>
       <find>tv_xia_order_money</find>
       <find>tv_xia_order_discounts</find>
@@ -160,6 +163,9 @@
       <find>lv_men_data</find>
       <find>StatusBarUtil.setStatusBarMode</find>
       <find>changeKeyboard</find>
+      <find>K_TOKEN</find>
+      <find>getState</find>
+      <find>mPresenter</find>
     </findStrings>
     <replaceStrings>
       <replace>mBaiduMap</replace>
@@ -194,15 +200,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/add_car_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/acivity_order_details.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/order_details_dai_fu_wu_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_my_order.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/adapter_my_order.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/my_wallet_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/shangmen_fuwu_new.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/mvp/MVPBaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/seting/SetingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/myorder/MyOrderActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/mycar/MyCarActivity.java" />
@@ -233,7 +236,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpayinfo/SetMealPayInfoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/finddetails/FindDetailsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/maptest/MapTestActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/title.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/my_car_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/second_fragment.xml" />
@@ -245,6 +247,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/xml/number_or_letters.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -337,7 +343,43 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jingxi" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingxi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingxi" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jingxi" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="firstfragment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingxi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingxi" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jingxi" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="my" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingxi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingxi" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jingxi" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="shopdetails" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jingxi" type="b2602c69:ProjectViewProjectNode" />
@@ -675,13 +717,6 @@
       <option name="presentableId" value="Default" />
       <updated>1550798933541</updated>
     </task>
-    <task id="LOCAL-00097" summary="添加">
-      <created>1583166438516</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1583166438516</updated>
-    </task>
     <task id="LOCAL-00098" summary="添加">
       <created>1583333842425</created>
       <option name="number" value="00098" />
@@ -1018,7 +1053,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584437101346</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="添加">
+      <created>1584499410452</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1584499410452</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1035,7 +1077,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23123324" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23123324" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -1087,43 +1129,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/remark/RemarkActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="41" column="78" selection-start-line="41" selection-start-column="78" selection-end-line="41" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/seting_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="85" column="41" lean-forward="true" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/seting/SetingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="42" column="31" lean-forward="true" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/update_password_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="110" column="40" lean-forward="true" selection-start-line="110" selection-start-column="40" selection-end-line="110" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/updatepassword/UpdatePasswordActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommend_set_meal_adapter.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1136,36 +1141,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="58" column="79" selection-start-line="58" selection-start-column="79" selection-end-line="58" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="61" column="34" lean-forward="true" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/shop_details_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="178" column="48" selection-start-line="178" selection-start-column="48" selection-end-line="178" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/shopdetails/ShopDetailsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1275,13 +1250,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1849">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/back.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1331,16 +1299,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="102" column="53" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/first_fragment.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1387,13 +1345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/my/MyFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_info_activity.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1431,25 +1382,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="110" column="49" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/addcar/AddCarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="142" column="46" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
+        <state relative-caret-position="9">
+          <caret line="84" column="35" lean-forward="true" selection-start-line="84" selection-start-column="35" selection-end-line="84" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1460,10 +1396,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/province_abbreviation.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/login/LoginPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="84" column="35" lean-forward="true" selection-start-line="84" selection-start-column="35" selection-end-line="84" selection-end-column="36" />
+        <state relative-caret-position="108">
+          <caret line="50" column="55" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirseFramentContract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/utils/KeyboardUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/addcar/AddCarActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="142" column="46" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/set_meal_pay_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="85" column="43" lean-forward="true" selection-start-line="85" selection-start-column="43" selection-end-line="85" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/Api.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="78" column="31" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/shopdetails/ShopDetailsPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="32" column="64" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/shopdetails/ShopDetailsContract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/shop_details_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="178" column="48" selection-start-line="178" selection-start-column="48" selection-end-line="178" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/shopdetails/ShopDetailsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/my/MyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="179" column="53" selection-start-line="179" selection-start-column="53" selection-end-line="179" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpay/SetMealPayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="109" column="42" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="189" column="42" selection-start-line="189" selection-start-column="42" selection-end-line="189" selection-end-column="42" />
+          <folding>
+            <element signature="e#8224#8402#0" expanded="true" />
+            <element signature="e#8401#8402#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/firstfragment/FirstFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="424" lean-forward="true" selection-start-line="424" selection-end-line="424" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

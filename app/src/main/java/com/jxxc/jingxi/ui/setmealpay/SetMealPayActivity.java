@@ -13,11 +13,13 @@ import com.jxxc.jingxi.adapter.MyPagerAdapter;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.login.LoginActivity;
 import com.jxxc.jingxi.ui.setmealpay.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.MyImageView;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.text.DecimalFormat;
@@ -97,12 +99,17 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
                 finish();
                 break;
             case R.id.ll_pay_set_meal://我要预约下单
-                Intent intent = new Intent(this, SetMealPayInfoActivity.class);
-                intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity);
-                intent.putExtra("serviceType",serviceType);
-                intent.putExtra("companyId",companyId);
-                startActivity(intent);
-                finish();
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+                    intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity);
+                    intent.putExtra("serviceType",serviceType);
+                    intent.putExtra("companyId",companyId);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    toast(this,"请先登录后使用");
+                    ZzRouter.gotoActivity(this, LoginActivity.class);
+                }
                 break;
             default:
         }

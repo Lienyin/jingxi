@@ -17,13 +17,16 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
+import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.finddetails.FindDetailsActivity;
+import com.jxxc.jingxi.ui.login.LoginActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.FirstFragment;
 import com.jxxc.jingxi.ui.main.msg.MsgFragment;
 import com.jxxc.jingxi.ui.main.my.MyFragment;
 import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
@@ -174,13 +177,18 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal5:
-                selected();
-                txt_deal5.setSelected(true);
-                if(f5==null){
-                    f5 = new MyFragment(this);
-                    transaction.add(R.id.fragment_container,f5);
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    selected();
+                    txt_deal5.setSelected(true);
+                    if(f5==null){
+                        f5 = new MyFragment(this);
+                        transaction.add(R.id.fragment_container,f5);
+                    }else{
+                        transaction.show(f5);
+                    }
                 }else{
-                    transaction.show(f5);
+                    toast(this,"请先登录后使用");
+                    ZzRouter.gotoActivity(this, LoginActivity.class);
                 }
                 break;
         }

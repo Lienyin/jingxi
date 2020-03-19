@@ -84,7 +84,7 @@
     <LinearLayout
         android:id="@+id/ll_pay_set_meal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:background="@color/public_all">
 
