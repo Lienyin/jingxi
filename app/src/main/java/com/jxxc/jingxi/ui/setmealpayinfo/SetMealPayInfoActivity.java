@@ -164,7 +164,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
-        mPresenter.appointmentList("",queryDate);
+        mPresenter.appointmentList(companyId,queryDate);
         mPresenter.queryMyCoupon(0);
         mPresenter.getCarList();
         mPresenter.getActivities();
@@ -175,7 +175,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             public void onFenxiangClick(String time,String startTime,String endTime,int type) {
                 if (type==0){
                     //刷新时间段
-                    mPresenter.appointmentList("",time);
+                    mPresenter.appointmentList(companyId,time);
                 }else{
                     //获得时间段
                     appointmentStartTime = startTime;
@@ -346,7 +346,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
     @Override
     public void appointmentListCallBack(List<AppointmentListEntity> data) {
-        timeDialog.updateTimeAdapter(data);
+        timeDialog.updateTimeAdapter(data,Integer.valueOf(serviceType));
     }
 
     //优惠券返回数据

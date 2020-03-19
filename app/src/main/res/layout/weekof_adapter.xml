@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:id="@+id/ll_time_bg"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:orientation="vertical"
         android:background="@drawable/tab_time_yuyue"
         android:gravity="center">

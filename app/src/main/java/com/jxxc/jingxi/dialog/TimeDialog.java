@@ -20,6 +20,8 @@ import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.shopdetails.TimeAdapter;
 import com.jxxc.jingxi.ui.shopdetails.WeekOfAdapter;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.HorizontalListView;
+import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.MyGridView;
 
 import java.text.SimpleDateFormat;
@@ -38,7 +40,7 @@ public class TimeDialog implements View.OnClickListener{
     private Context context;
     private Dialog dialog;
     private View view;
-    private MyGridView gv_weekOf_date;
+    private HorizontalListView gv_weekOf_date;
     private MyGridView gv_time_data;
     private TimeAdapter timeAdapter;
     private WeekOfAdapter weekOfAdapter;
@@ -66,7 +68,7 @@ public class TimeDialog implements View.OnClickListener{
 
         //日期设置
         weekOfAdapter = new WeekOfAdapter(context);
-        weekOfAdapter.setData(test(7));
+        weekOfAdapter.setData(test(30));
         gv_weekOf_date.setAdapter(weekOfAdapter);
 
         //获取当前日期
@@ -82,7 +84,7 @@ public class TimeDialog implements View.OnClickListener{
                 weekOfAdapter.setSelectPosition(position);
                 Calendar date = Calendar.getInstance();
                 String year = String.valueOf(date.get(Calendar.YEAR));
-                dateStr = year+"-"+test(7).get(position).toString().substring(0,5);
+                dateStr = year+"-"+test(30).get(position).toString().substring(0,5);
                 onFenxiangClickListener.onFenxiangClick(dateStr,"","",0);
             }
         });
@@ -110,9 +112,9 @@ public class TimeDialog implements View.OnClickListener{
     }
 
     //刷新时间段适配器
-    public void updateTimeAdapter(List<AppointmentListEntity> data){
+    public void updateTimeAdapter(List<AppointmentListEntity> data,int serveType){
         appointmentListEntityList = data;
-        timeAdapter = new TimeAdapter(context,0);
+        timeAdapter = new TimeAdapter(context,serveType);
         timeAdapter.setData(data);
         gv_time_data.setAdapter(timeAdapter);
         timeAdapter.notifyDataSetChanged();

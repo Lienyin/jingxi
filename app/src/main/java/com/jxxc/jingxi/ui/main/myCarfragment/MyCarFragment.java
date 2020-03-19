@@ -667,7 +667,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     //查询预约时间返回
     @Override
     public void appointmentListCallBack(List<AppointmentListEntity> data) {
-        timeDialog.updateTimeAdapter(data);
+        timeDialog.updateTimeAdapter(data,0);
     }
 
     @Override

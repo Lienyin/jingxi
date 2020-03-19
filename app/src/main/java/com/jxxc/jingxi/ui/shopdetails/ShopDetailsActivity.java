@@ -106,7 +106,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         dateStr = queryDate;//默认日期
-        mPresenter.appointmentList(cId,queryDate);
+        //mPresenter.appointmentList(cId,queryDate);
 
         //预约时间段
         gv_time_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,7 +123,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
 
         //日期设置
         weekOfAdapter = new WeekOfAdapter(this);
-        weekOfAdapter.setData(test(7));
+        weekOfAdapter.setData(test(30));
         gv_weekOf_date.setAdapter(weekOfAdapter);
         //获取周几
         gv_weekOf_date.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,7 +133,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                 weekOfAdapter.setSelectPosition(position);
                 Calendar date = Calendar.getInstance();
                 String year = String.valueOf(date.get(Calendar.YEAR));
-                dateStr = year+"-"+test(7).get(position).toString().substring(0,5);
+                dateStr = year+"-"+test(30).get(position).toString().substring(0,5);
                 mPresenter.appointmentList(cId,dateStr);
             }
         });
