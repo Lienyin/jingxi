@@ -27,13 +27,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="XXX"
+                android:typeface="normal"
                 android:textColor="@color/black26"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_recommend_context"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
+                android:typeface="normal"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/black5f"
