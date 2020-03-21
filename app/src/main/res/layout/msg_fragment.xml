@@ -38,6 +38,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="上  门"
                 android:drawableBottom="@drawable/radio_main_bg"
                 android:textColor="@drawable/radio_main"
@@ -51,6 +52,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="到  店"
+                android:textStyle="bold"
                 android:drawableBottom="@drawable/radio_main_bg"
                 android:textColor="@drawable/radio_main"
                 android:textSize="14sp" />

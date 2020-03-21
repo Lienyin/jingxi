@@ -3,7 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="order_money">#FF0002</color>
+    <color name="order_money">#FF2700</color>
     <color name="public_all">#00B487</color>
     <color name="white">#ffffff</color>
     <color name="qqq">#FCF9FC</color>
@@ -12,7 +12,10 @@
     <color name="home_bg">#F9F9F9</color>
     <color name="set_bg">#88cccccc</color>
     <color name="blackccc">#cccccc</color>
+    <color name="blackcf">#cfcfcf</color>
     <color name="black333">#333333</color>
+    <color name="black26">#262626</color>
+    <color name="black5f">#5f5f5f</color>
     <color name="black555">#555555</color>
     <color name="black999">#999999</color>
     <color name="qianbao_bg">#09896A</color>

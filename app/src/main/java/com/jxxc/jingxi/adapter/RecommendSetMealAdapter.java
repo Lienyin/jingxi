@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -67,6 +68,8 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         RecommendComboInfoEntity data = list.get(position);
+        holder.iv_recommend_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
+        holder.iv_recommend_icon.setRoundRadius(20);//矩形凹行大小
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
         holder.tv_recommend_name.setText(data.comboName);
         holder.tv_recommend_context.setText(data.comboComment);
@@ -76,7 +79,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        ImageView iv_recommend_icon;
+        ZQImageViewRoundOval iv_recommend_icon;
         TextView tv_recommend_name;
         TextView tv_recommend_context;
         TextView tv_recommend_money;

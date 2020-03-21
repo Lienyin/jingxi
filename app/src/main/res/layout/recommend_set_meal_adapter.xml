@@ -5,16 +5,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/white"
-        android:padding="20dp">
-        <ImageView
+        android:background="@color/white">
+        <com.jxxc.jingxi.utils.ZQImageViewRoundOval
             android:id="@+id/iv_recommend_icon"
             android:layout_width="130dp"
             android:layout_height="90dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@mipmap/zhan_weitu"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,38 +26,43 @@
                 android:id="@+id/tv_recommend_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/black333"
-                android:textStyle="bold"
-                android:text="XXX"/>
+                android:text="XXX"
+                android:textColor="@color/black26"
+                android:textSize="14sp" />
             <TextView
                 android:id="@+id/tv_recommend_context"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/blackccc"
+                android:textColor="@color/black5f"
                 android:text="XXX"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="bottom">
                 <TextView
                     android:id="@+id/tv_recommend_money"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/order_money"
-                    android:textStyle="bold"
                     android:text="XXX"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/order_money"
+                    android:text="起"/>
                 <TextView
                     android:id="@+id/tv_recommend_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/blackccc"
+                    android:textColor="@color/blackcf"
                     android:text="XXX"/>
             </LinearLayout>
         </LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
 
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class ShopRecommendAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         RecommendCompanyListEntity data = list.get(position);
+        holder.iv_shop_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
+        holder.iv_shop_icon.setRoundRadius(20);//矩形凹行大小
         GlideImgManager.loadRectangleImage(mContext, data.imgUrl, holder.iv_shop_icon);
         holder.tv_shop_name.setText(data.companyName);
 
@@ -63,7 +66,7 @@ public class ShopRecommendAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        ImageView iv_shop_icon;
+        ZQImageViewRoundOval iv_shop_icon;
         TextView tv_shop_name;
     }
 }

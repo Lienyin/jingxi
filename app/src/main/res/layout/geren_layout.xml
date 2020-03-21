@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="手机号码"
-                android:textColor="@color/black"
+                android:textColor="@color/black26"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -30,8 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:textColor="@color/black"
+                android:background="@color/transparent"
                 android:hint="请输入手机号码"
                 android:textSize="14sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
         </LinearLayout>
         <!--账户输入框-->
         <LinearLayout
@@ -47,7 +52,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="4dp"
-                android:textColor="@color/black"
+                android:textColor="@color/black26"
                 android:text="登录密码"/>
 
             <EditText
@@ -56,7 +61,12 @@
                 android:layout_height="50dp"
                 android:hint="请输入登录密码"
                 android:inputType="textPassword"
+                android:background="@color/transparent"
                 android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
         </LinearLayout>
 
         <!--登录按钮-->

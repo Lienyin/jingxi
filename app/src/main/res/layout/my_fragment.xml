@@ -41,26 +41,25 @@
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/black26"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:text="XXX"/>
         <TextView
             android:id="@+id/tv_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/black5f"
             android:textSize="14sp"
             android:layout_marginTop="5dp"
             android:text="XXX-XXXX-XXXX"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--车辆管理-->
     <LinearLayout
         android:id="@+id/ll_my_car"
@@ -89,10 +88,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--我的订单-->
     <LinearLayout
         android:id="@+id/ll_my_order"
@@ -122,11 +121,11 @@
     <View
         android:id="@+id/view_my_invoice"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:visibility="gone"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--发票管理-->
     <LinearLayout
         android:id="@+id/ll_my_invoice"
@@ -156,10 +155,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--我的钱包-->
     <LinearLayout
         android:id="@+id/ll_my_wallet"
@@ -188,10 +187,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--消息通知-->
     <LinearLayout
         android:id="@+id/ll_msg"
@@ -220,10 +219,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
     <!--系统设置-->
     <LinearLayout
         android:id="@+id/ll_setting"
@@ -252,8 +251,8 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/set_bg"/>
+        android:background="@color/blackf1"/>
 </LinearLayout>

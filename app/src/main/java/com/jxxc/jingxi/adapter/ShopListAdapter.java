@@ -18,6 +18,7 @@ import com.jxxc.jingxi.entity.backparameter.ShopListEntity;
 import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
 
 
 import java.text.DecimalFormat;
@@ -36,7 +37,9 @@ public class ShopListAdapter extends BaseQuickAdapter<companyListEntity, BaseVie
 
     @Override
     protected void convert(final BaseViewHolder helper, final companyListEntity item) {
-        ImageView iv = helper.getView(R.id.iv_shop_mendian);
+        ZQImageViewRoundOval iv = helper.getView(R.id.iv_shop_mendian);
+        iv.setType(ZQImageViewRoundOval.TYPE_ROUND);
+        iv.setRoundRadius(20);//矩形凹行大小
         GlideImgManager.loadRectangleSiteImage(mContext, item.imgUrl,iv);
         helper.setText(R.id.tv_shop_list_name, item.companyName);
         helper.setText(R.id.tv_shop_list_pf, item.score);
