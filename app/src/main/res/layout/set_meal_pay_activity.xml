@@ -35,7 +35,7 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:padding="10dp"
             android:gravity="center_vertical">
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/black333"
+                android:textColor="@color/black26"
                 android:textStyle="bold"
                 android:text="XXX"/>
             <TextView
@@ -59,16 +59,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_margin="10dp"
-            android:textColor="@color/black555"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black26"
             android:text="套餐介绍"/>
         <TextView
             android:id="@+id/tv_pay_set_meal_con"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_margin="10dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/black555"
             android:text="XXX"/>
         <TextView
@@ -76,7 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/order_money"
             android:text="￥0.00"/>
     </LinearLayout>

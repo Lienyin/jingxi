@@ -26,7 +26,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
+                <com.jxxc.jingxi.utils.ZQImageViewRoundOval
                     android:id="@+id/iv_recommend_icon"
                     android:layout_width="120dp"
                     android:layout_height="90dp"
@@ -35,7 +35,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -45,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="XXX"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:text="XXX"
-                        android:textColor="@color/blackccc"
+                        android:textColor="@color/black5f"
                         android:textSize="12sp" />
 
                     <LinearLayout
@@ -71,8 +71,7 @@
                             android:layout_weight="1"
                             android:text="XXX"
                             android:textColor="@color/order_money"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tv_recommend_num"
@@ -122,6 +121,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
+                    android:textColor="@color/black5f"
                     android:text="@string/set_meal_hint"/>
                 <View
                     android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="爱车信息"/>
                     <TextView
                         android:id="@+id/tv_car_info"
@@ -149,7 +149,7 @@
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="选择爱车"
                         android:text=""/>
                     <ImageView
@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="停车地址"/>
                     <TextView
                         android:id="@+id/tv_car_address"
@@ -184,7 +184,7 @@
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="添加停车地址"
                         android:text=""/>
                     <ImageView
@@ -209,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="联系电话"/>
                     <TextView
                         android:id="@+id/tv_phone_number"
@@ -218,7 +218,7 @@
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="添加联系电话"
                         android:text=""/>
                     <ImageView
@@ -245,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="预约时间"/>
                     <TextView
                         android:id="@+id/tv_appointment_time"
@@ -254,7 +254,7 @@
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="选择服务时间"
                         android:text=""/>
                     <ImageView
@@ -280,7 +280,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="优惠信息"/>
                     <TextView
                         android:id="@+id/tv_discounts"
@@ -289,7 +289,7 @@
                         android:layout_height="match_parent"
                         android:textSize="14sp"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="选择优惠券"
                         android:text=""/>
                     <ImageView
@@ -315,7 +315,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="@color/black555"
+                        android:textColor="@color/black5f"
                         android:text="备注信息"/>
                     <TextView
                         android:id="@+id/tv_user_remark"
@@ -325,7 +325,7 @@
                         android:textSize="14sp"
                         android:maxLength="12"
                         android:gravity="center_vertical|right"
-                        android:textColor="@color/black333"
+                        android:textColor="@color/black26"
                         android:hint="添加备注信息"
                         android:text=""/>
                     <ImageView
@@ -364,7 +364,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单金额：0.00元"
-                android:textColor="@color/order_money"
+                android:textColor="@color/black26"
                 android:textSize="16sp" />
 
             <TextView

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="手机号码"
-            android:textColor="@color/black"
+            android:textColor="@color/black26"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -29,8 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="请输入手机号码"
+            android:background="@color/transparent"
             android:textColor="@color/black"
             android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"/>
     </LinearLayout>
     <!--账户输入框-->
     <LinearLayout
@@ -46,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="短信验证码"
-            android:textColor="@color/black"
+            android:textColor="@color/black26"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -61,6 +66,7 @@
                 android:layout_weight="1"
                 android:layout_height="50dp"
                 android:hint="请输入短信验证码"
+                android:background="@color/transparent"
                 android:textSize="14sp" />
 
             <Button
@@ -71,6 +77,10 @@
                 android:text="获取验证码"
                 android:textColor="@color/public_all" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"/>
     </LinearLayout>
 
     <!--登录按钮-->

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +38,7 @@ import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
+import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -60,7 +62,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.iv_recommend_icon)
-    ImageView iv_recommend_icon;
+    ZQImageViewRoundOval iv_recommend_icon;
     @BindView(R.id.tv_recommend_name)
     TextView tv_recommend_name;
     @BindView(R.id.tv_recommend_context)
@@ -146,6 +148,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
         //套餐信息
         comboId = recommendComboInfoEntity.comboId+"";
+        iv_recommend_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
+        iv_recommend_icon.setRoundRadius(20);
         GlideImgManager.loadRectangleImage(this, recommendComboInfoEntity.imgUrl, iv_recommend_icon);
         tv_recommend_name.setText(recommendComboInfoEntity.comboName);
         tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
@@ -154,7 +158,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         tv_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
         //订单金额=套餐金额-活动金额-优惠券金额
         orderMoney = comboMoney-activityMoney-couponMoney;
-        tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+        tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
 
         registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
@@ -220,7 +224,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
                 //订单金额=套餐金额-活动金额-优惠券金额
                 orderMoney = comboMoney-activityMoney-couponMoney;
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
             }
         });
     }
@@ -389,7 +393,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(num)+"元");
                 //订单金额=套餐金额-活动金额-优惠券金额
                 orderMoney = comboMoney-activityMoney-couponMoney;
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
             }
         }
     }

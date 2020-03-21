@@ -28,7 +28,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:padding="20dp">
@@ -41,7 +41,7 @@
                         android:id="@+id/tv_details_shop_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black26"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:text="XXX"/>
@@ -49,31 +49,31 @@
                         android:id="@+id/tv_details_shop_yy"
                         android:layout_width="55dp"
                         android:layout_height="20dp"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:background="@color/public_all"
-                        android:textColor="@color/white"
+                        android:background="@drawable/shape_bg_edittext"
+                        android:textColor="@color/public_all"
                         android:text="营业中"/>
                     <TextView
                         android:id="@+id/tv_details_shop_jm"
                         android:layout_width="55dp"
                         android:layout_height="20dp"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:background="@color/home_yellow_m"
-                        android:textColor="@color/white"
+                        android:background="@drawable/shape_bg_edittext"
+                        android:textColor="@color/black999"
                         android:text="直营店"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:textColor="@color/black999"
@@ -82,15 +82,15 @@
                     <TextView
                         android:id="@+id/tv_details_shop_pf"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:gravity="center_vertical"
                         android:text="0"
-                        android:textColor="@color/home_yellow_m"
+                        android:textColor="@color/public_all"
                         android:textSize="14sp" />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
@@ -99,15 +99,15 @@
                     <TextView
                         android:id="@+id/tv_details_shop_dd"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp"
-                        android:textColor="@color/home_yellow_m"
+                        android:textColor="@color/public_all"
                         android:text="0"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
@@ -116,11 +116,11 @@
                     <TextView
                         android:id="@+id/tv_details_shop_js"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp"
-                        android:textColor="@color/home_yellow_m"
+                        android:textColor="@color/public_all"
                         android:text="0"/>
                 </LinearLayout>
                 <LinearLayout
@@ -131,15 +131,15 @@
                     <TextView
                         android:id="@+id/tv_details_shop_address"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
-                        android:textColor="@color/black999"
+                        android:textColor="@color/black26"
                         android:text="XXX"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical">
 
@@ -181,7 +181,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black26"
                     android:textSize="14sp"
                     android:text="门店技师"/>
                 <com.jxxc.jingxi.utils.MyGridView
@@ -242,7 +242,10 @@
                 android:id="@+id/lv_set_meal_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@color/transparent"/>
+                android:background="@color/white"
+                android:divider="@color/blackf1"
+                android:dividerHeight="0.5dp"
+                android:padding="10dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

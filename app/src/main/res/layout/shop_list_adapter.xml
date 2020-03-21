@@ -26,7 +26,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/tv_shop_list_name"
@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black999"
                     android:text="总评分"/>
@@ -63,15 +63,15 @@
                     android:id="@+id/tv_shop_list_pf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:textColor="@color/home_yellow_m"
+                    android:textColor="@color/public_all"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black999"
@@ -80,15 +80,15 @@
                     android:id="@+id/tv_shop_list_dd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:textColor="@color/home_yellow_m"
+                    android:textColor="@color/public_all"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/black999"
@@ -97,10 +97,10 @@
                     android:id="@+id/tv_shop_list_js"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:textColor="@color/home_yellow_m"
+                    android:textColor="@color/public_all"
                     android:text="0"/>
             </LinearLayout>
             <LinearLayout
@@ -112,9 +112,9 @@
                     android:id="@+id/tv_shop_list_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black26"
                     android:text="XXX"/>
             </LinearLayout>
             <LinearLayout
@@ -126,25 +126,26 @@
                     android:id="@+id/tv_shop_list_yy"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center"
-                    android:background="@color/public_all"
-                    android:textColor="@color/white"
+                    android:background="@drawable/shape_bg_edittext"
+                    android:textColor="@color/public_all"
                     android:text="营业中"/>
                 <TextView
                     android:id="@+id/tv_shop_list_hz"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:layout_marginLeft="8dp"
-                    android:background="@color/home_yellow_m"
-                    android:textColor="@color/white"
+                    android:background="@drawable/shape_bg_edittext"
+                    android:textColor="@color/black999"
                     android:text="直营店"/>
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="8dp"
+                    android:visibility="gone"
                     android:src="@mipmap/call_jishi" />
                 <TextView
                     android:id="@+id/tv_shop_list_call"
@@ -153,7 +154,8 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     android:layout_marginLeft="3dp"
-                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    android:textColor="@color/black26"
                     android:text="联系门店"/>
             </LinearLayout>
         </LinearLayout>

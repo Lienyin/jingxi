@@ -11,8 +11,8 @@
         android:orientation="vertical">
         <com.jxxc.jingxi.utils.ZQImageViewRoundOval
             android:id="@+id/iv_shop_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/zhan_weitu"/>
         <TextView
