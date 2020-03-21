@@ -135,8 +135,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/set_bg" />
+        android:layout_height="0.5dp"
+        android:background="@color/blackf1" />
     <!--优惠券-->
     <LinearLayout
         android:id="@+id/ll_Discount_Coupon"
@@ -251,6 +251,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/set_bg" />
+        android:layout_height="0.5dp"
+        android:background="@color/blackf1" />
 </LinearLayout>
