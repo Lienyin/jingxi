@@ -82,11 +82,11 @@ public class MyImgScroll extends ViewPager {
 		// ѡ��״̬СԲ����ʽ
 		final GradientDrawable focusedGD = new GradientDrawable();
 		focusedGD.setCornerRadius(5);
-		focusedGD.setColor(Color.argb(170, 255, 140, 0));
+		focusedGD.setColor(Color.argb(200, 128, 128, 128));
 		// ȡ��״̬СԲ����ʽ
 		final GradientDrawable normalGD = new GradientDrawable();
 		normalGD.setCornerRadius(5);
-		normalGD.setColor(Color.argb(170, 255, 255, 255));
+		normalGD.setColor(Color.argb(200, 255, 255, 255));
 
 		if (ovalLayout != null) {
 			for (int i = 0; i < mListViews.size(); i++) {
