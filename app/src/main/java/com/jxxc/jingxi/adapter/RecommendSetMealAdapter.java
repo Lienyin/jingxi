@@ -72,7 +72,11 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         holder.iv_recommend_icon.setRoundRadius(20);//矩形凹行大小
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
         holder.tv_recommend_name.setText(data.comboName);
-        holder.tv_recommend_context.setText(data.comboComment);
+        if (data.comboComment.length()>30){
+            holder.tv_recommend_context.setText(data.comboComment.substring(0,30)+"...");
+        }else{
+            holder.tv_recommend_context.setText(data.comboComment+"...");
+        }
         holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.totalPrice));
         holder.tv_recommend_num.setText("已售"+data.salesVolume);
         return convertView;
