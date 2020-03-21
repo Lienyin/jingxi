@@ -225,9 +225,14 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         }else if (data.status==5){
             tv_details_hint_tilt.setText("订单已取消");
             tv_details_hint_text.setText("订单已取消，请重新下单。");
+            if (!AppUtils.isEmpty(data.technicianRealName)){
+                jishi_info.setVisibility(View.VISIBLE);
+                tv_details_call_phone.setVisibility(View.VISIBLE);
+            }else{
+                jishi_info.setVisibility(View.GONE);
+                tv_details_call_phone.setVisibility(View.GONE);
+            }
             tv_details_cancel_order.setVisibility(View.GONE);
-            jishi_info.setVisibility(View.VISIBLE);
-            tv_details_call_phone.setVisibility(View.VISIBLE);
         }
         //技师星级
         if (data.technicianGrade>=0&&data.technicianGrade<=1){

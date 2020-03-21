@@ -477,7 +477,7 @@
                     android:id="@+id/lv_men_data"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:layout_height="130dp" />
+                    android:layout_height="140dp" />
             </LinearLayout>
 
             <!--创富梦想，即刻出发-->

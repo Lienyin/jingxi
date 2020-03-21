@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
                     android:layout_marginLeft="3dp"
+                    android:visibility="invisible"
                     android:textColor="@color/order_money"
                     android:text="起"/>
                 <TextView
