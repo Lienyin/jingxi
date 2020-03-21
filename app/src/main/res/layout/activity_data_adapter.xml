@@ -8,7 +8,7 @@
         android:layout_margin="10dp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:background="@drawable/activity_yellow">
+        android:background="@drawable/green_bian_yes">
 
         <TextView
             android:id="@+id/activity_name"

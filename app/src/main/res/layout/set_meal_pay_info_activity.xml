@@ -340,7 +340,9 @@
                 android:id="@+id/activity_data"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:divider="@color/blackf1"
+                android:dividerHeight="0.5dp"/>
         </LinearLayout>
     </ScrollView>
     <!--下单-->
