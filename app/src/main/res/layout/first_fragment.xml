@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/home_bg"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ScrollView
@@ -20,6 +20,7 @@
                 android:layout_height="45dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
+                android:layout_marginTop="15dp"
                 android:paddingLeft="20dp">
 
                 <ImageView
@@ -390,11 +391,14 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/home_bg"/>
             <!--第二版洗车-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -432,11 +436,14 @@
                     android:layout_marginLeft="10dp"
                     android:dividerHeight="0.5dp"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/home_bg"/>
             <!--门店推荐-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">

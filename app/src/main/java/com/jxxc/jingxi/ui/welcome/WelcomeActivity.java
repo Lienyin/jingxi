@@ -3,6 +3,8 @@ package com.jxxc.jingxi.ui.welcome;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.jxxc.jingxi.R;
@@ -31,6 +33,11 @@ public class WelcomeActivity extends MVPBaseActivity<WelcomeContract.View, Welco
 
     @Override
     protected int layoutId() {
+        //设置无标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_welcome;
     }
 
