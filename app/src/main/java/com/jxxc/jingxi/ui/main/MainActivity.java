@@ -95,8 +95,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     LinearLayout ll_msg;
     @BindView(R.id.ll_setting)
     LinearLayout ll_setting;
+    @BindView(R.id.ll_share)
+    LinearLayout ll_share;
     @BindView(R.id.view_style)
     View view_style;
+    @BindView(R.id.view_my_invoice)
+    View view_my_invoice;
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
@@ -175,6 +179,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+            }
+        });
+        //分享
+        ll_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
             }
         });
         view_style.setOnClickListener(new View.OnClickListener() {
@@ -392,7 +403,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         //帐号类型，0：个人帐号；1企业帐号
         if (data.accountType==1){
             ll_my_invoice.setVisibility(View.VISIBLE);
-            //view_my_invoice.setVisibility(View.VISIBLE);
+            view_my_invoice.setVisibility(View.VISIBLE);
         }
     }
 
