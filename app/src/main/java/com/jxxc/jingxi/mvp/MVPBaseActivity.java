@@ -53,7 +53,6 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
         initData();
         initListener();
         permission();
-        StatusBarUtil.setStatusBarMode(this, true, R.color.white);
     }
     protected void initListener() {};
     protected abstract int layoutId();

@@ -59,6 +59,7 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("品牌选择");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getBandAndType();

@@ -43,6 +43,7 @@ public class PayAccomplishActivity extends MVPBaseActivity<PayAccomplishContract
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("支付完成");
         orderId = getIntent().getStringExtra("orderId");
         orderPrice = getIntent().getStringExtra("orderPrice");

@@ -99,6 +99,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         api = WXAPIFactory.createWXAPI(this, Constant.APP_ID,true);
         api.registerApp(Constant.APP_ID);
         EventBus.getDefault().register(this);

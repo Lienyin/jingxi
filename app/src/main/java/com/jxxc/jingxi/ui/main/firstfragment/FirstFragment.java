@@ -50,6 +50,7 @@ import com.jxxc.jingxi.ui.main.MainActivity;
 import com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
+import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
@@ -81,6 +82,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
             tv_car_fuwu7,tv_car_fuwu8;
     private TextView tv_more,tv_more_set;
+    private ImageView iv_my_user,iv_msg;
     private int num1=0;
     private int num2=0;
     private int num3=0;
@@ -113,6 +115,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_static = view.findViewById(R.id.ll_static);
         tv_more = view.findViewById(R.id.tv_more);
         tv_more_set = view.findViewById(R.id.tv_more_set);
+        iv_my_user = view.findViewById(R.id.iv_my_user);
+        iv_msg = view.findViewById(R.id.iv_msg);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -137,6 +141,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_static.setOnClickListener(this);
         tv_more.setOnClickListener(this);
         tv_more_set.setOnClickListener(this);
+        iv_my_user.setOnClickListener(this);
+        iv_msg.setOnClickListener(this);
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -232,6 +238,14 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             case R.id.tv_map_jingsi://菁喜技师
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
+            case R.id.iv_my_user://我的
+                if(onButtonClick!=null){
+                    onButtonClick.onClick(iv_my_user,2);
+                }
+                break;
+            case R.id.iv_msg://消息
+                ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
+                break;
             case R.id.rb_work_order_all://上门
                 ll_shang_men.setVisibility(View.VISIBLE);
                 ll_dao_dian.setVisibility(View.GONE);
@@ -319,7 +333,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 break;
             case R.id.tv_more_set://推荐套餐更多
                 if(onButtonClick!=null){
-                    onButtonClick.onClick(tv_more_set);
+                    onButtonClick.onClick(tv_more_set,1);
                 }
                 break;
         }
@@ -334,7 +348,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         this.onButtonClick = onButtonClick;
     }
     public interface OnButtonClick{
-        public void onClick(View view);
+        public void onClick(View view,int type);
     }
 
     //刷新

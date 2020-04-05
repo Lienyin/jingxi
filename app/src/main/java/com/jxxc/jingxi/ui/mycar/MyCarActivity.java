@@ -53,6 +53,7 @@ public class MyCarActivity extends MVPBaseActivity<MyCarContract.View, MyCarPres
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("我的车辆");
         type = ZzRouter.getIntentData(this,String.class);//界面来源
         swipeLayout.setOnRefreshListener(this);

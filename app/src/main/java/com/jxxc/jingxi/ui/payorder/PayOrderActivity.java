@@ -66,6 +66,7 @@ public class PayOrderActivity extends MVPBaseActivity<PayOrderContract.View, Pay
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("订单支付");
         orderId = getIntent().getStringExtra("orderId");
         orderPrice = getIntent().getStringExtra("orderPrice");

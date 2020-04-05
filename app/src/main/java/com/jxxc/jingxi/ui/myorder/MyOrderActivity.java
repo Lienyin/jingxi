@@ -76,6 +76,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("我的订单");
         initAdapter();
         onRefresh();

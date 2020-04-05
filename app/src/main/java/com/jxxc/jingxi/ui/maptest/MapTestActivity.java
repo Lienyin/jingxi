@@ -53,6 +53,7 @@ public class MapTestActivity extends MVPBaseActivity<MapTestContract.View, MapTe
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("地图");
 
         // 声明LocationClient类  

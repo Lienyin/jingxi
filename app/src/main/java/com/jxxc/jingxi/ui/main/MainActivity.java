@@ -5,14 +5,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
@@ -26,7 +33,14 @@ import com.jxxc.jingxi.ui.main.msg.MsgFragment;
 import com.jxxc.jingxi.ui.main.my.MyFragment;
 import com.jxxc.jingxi.ui.main.myCarfragment.MyCarFragment;
 import com.jxxc.jingxi.ui.main.secondfragment.SecondFragment;
+import com.jxxc.jingxi.ui.message.MessageActivity;
+import com.jxxc.jingxi.ui.mycar.MyCarActivity;
+import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
+import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
+import com.jxxc.jingxi.ui.seting.SetingActivity;
+import com.jxxc.jingxi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
@@ -34,6 +48,7 @@ import com.jxxc.jingxi.utils.StatusBarUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
 
 
@@ -45,11 +60,13 @@ import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresenter> implements MainContract.View, View.OnClickListener {
 
+    private DrawerLayout drawerlayout;
     private TextView txt_deal1;
     private TextView txt_deal2;
     private TextView txt_deal3;
     private TextView txt_deal4;
     private TextView txt_deal5;
+    private TextView tv_location_city;
     private FrameLayout ly_content;
 
     private FirstFragment f1;
@@ -58,11 +75,38 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private MsgFragment f4;
     private MyFragment f5;
 
+    @BindView(R.id.iv_user_logo)
+    ImageView iv_user_logo;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
+    @BindView(R.id.tv_user_dengji)
+    ImageView tv_user_dengji;
+    @BindView(R.id.tv_user_phonenumber)
+    TextView tv_user_phonenumber;
+    @BindView(R.id.ll_my_car)
+    LinearLayout ll_my_car;
+    @BindView(R.id.ll_my_order)
+    LinearLayout ll_my_order;
+    @BindView(R.id.ll_my_invoice)
+    LinearLayout ll_my_invoice;
+    @BindView(R.id.ll_my_wallet)
+    LinearLayout ll_my_wallet;
+    @BindView(R.id.ll_msg)
+    LinearLayout ll_msg;
+    @BindView(R.id.ll_setting)
+    LinearLayout ll_setting;
+    @BindView(R.id.view_style)
+    View view_style;
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
     private ActivityDialog activityDialog;
     private List<View> listViews; // 图片组
+    private LocationClient mLocationClient;
+    private BDLocationListener mBDLocationListener;
+    private boolean isFirstLoc = true; // 是否首次定位
+    private double locationLatitude=0;
+    private double locationLongitude=0;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -70,22 +114,132 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
         mPresenter.banner();//先请求广告数据，在加载界面
         mPresenter.queryAppVersion("3");//查询版本
+        mPresenter.getUserInfo();
         activityDialog = new ActivityDialog(this);
         boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
         if (isfirstlogin){
             SPUtils.put(this,"ACTIVITY", false);
             activityDialog.showShareDialog(true);
         }
-
+        drawerlayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         //极光推送id
 //        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
 //        Log.i("TAG","[MyReceiver] getRegistrationID===="+pToken);
+        // 声明LocationClient类  
+        mLocationClient = new LocationClient(getApplicationContext());
+        mBDLocationListener = new MyBDLocationListener();
+        initLocation();
+        // 注册监听  
+        mLocationClient.registerLocationListener(mBDLocationListener);
+
+        //车辆管理
+        ll_my_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, MyCarActivity.class,"0");
+            }
+        });
+        //我的订单
+        ll_my_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, MyOrderActivity.class);
+            }
+        });
+        //我的钱包
+        ll_my_wallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, MyWalletActivity.class);
+            }
+        });
+        //消息通知
+        ll_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, MessageActivity.class);
+            }
+        });
+        //系统设置
+        ll_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, SetingActivity.class);
+            }
+        });
+        //头像
+        iv_user_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+            }
+        });
+        view_style.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+            }
+        });
+    }
+
+    private void initLocation() {
+        // 声明定位参数  
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式 高精度  
+        option.setCoorType("bd09ll");// 设置返回定位结果是百度经纬度 默认gcj02  
+        option.setScanSpan(5000);// 设置发起定位请求的时间间隔 单位ms  
+        option.setIsNeedAddress(true);// 设置定位结果包含地址信息  
+        option.setNeedDeviceDirect(true);// 设置定位结果包含手机机头 的方向  
+        // 设置定位参数  
+        mLocationClient.setLocOption(option);
+        // 启动定位  
+        mLocationClient.start();
+    }
+    private class MyBDLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // 非空判断  
+            if (location != null) {
+                if (!AppUtils.isEmpty(location.getCity())){
+                    tv_location_city.setText(location.getCity());
+                }else{
+                    tv_location_city.setText("菁喜");
+                }
+                if (isFirstLoc) {
+                    isFirstLoc = false;
+                    locationLatitude = location.getLatitude();
+                    locationLongitude = location.getLongitude();
+                    if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
+                        toast(MainActivity.this, "百度地图定位失败");
+                    } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {
+                        toast(MainActivity.this, "百度地图定位失败");
+                    } else {
+                        String lat = SPUtils.get(MainActivity.this, "lat", "");
+                        String lng = SPUtils.get(MainActivity.this, "lng", "");
+                        if (!"".equals(lat) && !"".equals(lng)) {
+                            SPUtils.remove(MainActivity.this, lat);
+                            SPUtils.remove(MainActivity.this, lng);
+                        }
+                        //保存经纬度
+                        SPUtils.put("lat", location.getLatitude());
+                        SPUtils.put("lng", location.getLongitude());
+                    }
+                    if (mLocationClient.isStarted()) {
+                        // 获得位置之后停止定位  
+                        mLocationClient.stop();
+                    }
+                }
+            }
+        }
     }
 
     //UI组件初始化与事件绑定
     private void bindView() {
+        tv_location_city = (TextView)this.findViewById(R.id.tv_location_city);
         txt_deal1 = (TextView)this.findViewById(R.id.txt_deal1);
         txt_deal2 = (TextView)this.findViewById(R.id.txt_deal2);
         txt_deal3 = (TextView)this.findViewById(R.id.txt_deal3);
@@ -136,6 +290,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_deal1:
+                StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
                 selected();
                 txt_deal1.setSelected(true);
                 if(f1==null){
@@ -147,6 +302,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 break;
 
             case R.id.txt_deal2:
+                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal2.setSelected(true);
                 if(f2==null){
@@ -157,6 +313,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal3:
+                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal3.setSelected(true);
                 if(f3==null){
@@ -167,6 +324,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal4:
+                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal4.setSelected(true);
                 if(f4==null){
@@ -177,6 +335,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal5:
+                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
                     selected();
                     txt_deal5.setSelected(true);
@@ -227,7 +386,14 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     //个人信息返回数据
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
-
+        GlideImgManager.loadCircleImage(this, data.avatar, iv_user_logo);
+        tv_user_name.setText(AppUtils.isEmpty(data.userName)?data.realName:data.userName);
+        tv_user_phonenumber.setText(data.phonenumber);
+        //帐号类型，0：个人帐号；1企业帐号
+        if (data.accountType==1){
+            ll_my_invoice.setVisibility(View.VISIBLE);
+            //view_my_invoice.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -258,8 +424,17 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         //推荐套餐更多
         f1.setOnButtonClick(new FirstFragment.OnButtonClick() {
             @Override
-            public void onClick(View view) {
-                txt_deal4.performClick();//自动触发首页按钮
+            public void onClick(View view,int type) {
+                if (type==1){
+                    txt_deal4.performClick();//自动触发首页按钮
+                }else{
+                    //打开抽屉
+                    if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                        drawerlayout.openDrawer(Gravity.LEFT);//打开抽屉
+                    }else{
+                        ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
+                    }
+                }
             }
         });
     }

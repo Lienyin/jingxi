@@ -90,6 +90,7 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("详细地址");
         initMap();
         adapter = new AddressDetailsAdapter(this);

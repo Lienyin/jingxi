@@ -45,6 +45,7 @@ public class CommissionListActivity extends MVPBaseActivity<CommissionListContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("账单明细");
         initAdapter();
         onRefresh();

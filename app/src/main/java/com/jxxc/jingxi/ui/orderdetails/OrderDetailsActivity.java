@@ -95,6 +95,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("订单详情");
         OrderId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();

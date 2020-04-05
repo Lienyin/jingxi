@@ -92,6 +92,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("附近技师");
         initMap();
         tv_affirm.setVisibility(View.VISIBLE);

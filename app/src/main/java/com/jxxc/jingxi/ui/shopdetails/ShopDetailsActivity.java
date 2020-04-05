@@ -96,6 +96,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("门店详情");
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();

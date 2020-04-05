@@ -53,6 +53,7 @@ public class EvaluateActivity extends MVPBaseActivity<EvaluateContract.View, Eva
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("评价");
         orderId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();

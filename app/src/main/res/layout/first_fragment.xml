@@ -15,54 +15,50 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/home_ss_bg"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp">
+                android:visibility="visible">
+                <RelativeLayout
+                    android:id="@+id/tab_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#00021D"
+                    android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="5dp"
-                    android:src="@mipmap/jx_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="菁喜"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="14dp"
-                    android:src="@mipmap/dingwei_back" />
-
-                <TextView
-                    android:id="@+id/tv_location_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="XX"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_my_user"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/my_user"/>
+                    <TextView
+                        android:id="@+id/tv_location_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@mipmap/jinxi_home_logo"
+                        android:text="菁喜"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_msg"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/msg_xiaoxi"/>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -100,16 +96,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <LinearLayout
-                    android:id="@+id/vb"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="3dip"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
             </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/vb"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="3dip"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" />
 
             <!-- 服务-->
             <LinearLayout
@@ -401,6 +397,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:padding="10dp">
 
                 <LinearLayout
@@ -435,6 +432,27 @@
                     android:divider="@color/blackf1"
                     android:layout_marginLeft="10dp"
                     android:dividerHeight="0.5dp"/>
+            </LinearLayout>
+            <!--第三版洗车-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/shangmen_3ban"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/daodian_3ban"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -487,7 +505,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@mipmap/icon_115"
                 android:gravity="center_vertical">
 

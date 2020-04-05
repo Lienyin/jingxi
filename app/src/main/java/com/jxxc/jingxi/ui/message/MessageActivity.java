@@ -50,6 +50,7 @@ public class MessageActivity extends MVPBaseActivity<MessageContract.View, Messa
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("消息");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         initAdapter();

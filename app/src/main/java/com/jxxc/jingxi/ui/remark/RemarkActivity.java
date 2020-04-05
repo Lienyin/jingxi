@@ -39,6 +39,7 @@ public class RemarkActivity extends MVPBaseActivity<RemarkContract.View, RemarkP
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("备注信息");
     }
 

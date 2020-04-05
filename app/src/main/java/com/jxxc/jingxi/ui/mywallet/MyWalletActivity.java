@@ -64,6 +64,7 @@ public class MyWalletActivity extends MVPBaseActivity<MyWalletContract.View, MyW
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("我的钱包");
         tv_affirm.setVisibility(View.VISIBLE);
         tv_affirm.setText("明细");

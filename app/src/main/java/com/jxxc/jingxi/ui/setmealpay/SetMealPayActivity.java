@@ -66,6 +66,7 @@ public class SetMealPayActivity extends MVPBaseActivity<SetMealPayContract.View,
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         myPager.removeAllViews();
         tv_title.setText("套餐详情");
         recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");

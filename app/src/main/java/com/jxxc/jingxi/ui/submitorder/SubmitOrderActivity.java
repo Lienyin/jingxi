@@ -177,6 +177,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("菁喜");
         //两种方式下单（1.推荐套餐过来的 2.正常套餐查询的）
         //推荐套餐过来选择

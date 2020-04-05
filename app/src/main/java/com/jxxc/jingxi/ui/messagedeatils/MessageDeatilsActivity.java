@@ -36,6 +36,7 @@ public class MessageDeatilsActivity extends MVPBaseActivity<MessageDeatilsContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("消息详情");
         messageListEntity = ZzRouter.getIntentData(this,MessageListEntity.class);
         tv_message_content.setText(messageListEntity.content);

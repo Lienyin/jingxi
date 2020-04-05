@@ -48,6 +48,7 @@ public class RegardsActivity extends MVPBaseActivity<RegardsContract.View, Regar
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("关于我们");
         String versionName = BuildConfig.VERSION_NAME;
         tv_version.setText("V "+versionName);

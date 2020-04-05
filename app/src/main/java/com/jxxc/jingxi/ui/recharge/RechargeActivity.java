@@ -86,6 +86,7 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("充值");
         initAdapter();
         mPresenter.getRechargeConfiguration();

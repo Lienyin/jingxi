@@ -45,6 +45,7 @@ public class UpdatePasswordActivity extends MVPBaseActivity<UpdatePasswordContra
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("修改密码");
     }
 

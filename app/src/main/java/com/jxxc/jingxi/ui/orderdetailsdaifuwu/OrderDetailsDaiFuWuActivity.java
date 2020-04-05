@@ -128,6 +128,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("订单详情");
         orderId = ZzRouter.getIntentData(this,String.class);
         initMap();

@@ -54,6 +54,7 @@ public class UsercenterActivity extends MVPBaseActivity<UsercenterContract.View,
 
     @Override
     public void initData() {
+        StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("个人资料");
         mPresenter.initImageSelecter();
         mPresenter.getUserInfo();
