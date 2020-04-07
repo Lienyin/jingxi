@@ -22,6 +22,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
+import com.jxxc.jingxi.dialog.ShareDialog;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
@@ -45,7 +46,9 @@ import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -111,6 +114,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private boolean isFirstLoc = true; // 是否首次定位
     private double locationLatitude=0;
     private double locationLongitude=0;
+    private ShareDialog shareDialog;
     @Override
     protected int layoutId() {
         return R.layout.activity_main;
@@ -122,7 +126,18 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         mPresenter.banner();//先请求广告数据，在加载界面
         mPresenter.queryAppVersion("3");//查询版本
         mPresenter.getUserInfo();
+        shareDialog = new ShareDialog(this);
         activityDialog = new ActivityDialog(this);
+        //弹邀请
+        //每天只打开一次邀请活动弹窗
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        String nyr = simpleDateFormat.format(date);//当前时间
+        if (SPUtils.get("todayData","00").equals(nyr)){
+            SPUtils.put("todayData",nyr);
+            shareDialog.showShareDialog(true);
+        }
+
         boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
         if (isfirstlogin){
             SPUtils.put(this,"ACTIVITY", false);

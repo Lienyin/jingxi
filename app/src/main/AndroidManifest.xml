@@ -185,5 +185,8 @@
         <!--备注-->
         <activity android:name=".ui.remark.RemarkActivity"
             android:screenOrientation="portrait"/>
+        <!--邀请好友-->
+        <activity android:name=".ui.share.ShareActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>
