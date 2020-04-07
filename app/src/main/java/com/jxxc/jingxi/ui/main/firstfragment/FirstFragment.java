@@ -83,6 +83,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             tv_car_fuwu7,tv_car_fuwu8;
     private TextView tv_more,tv_more_set;
     private ImageView iv_my_user,iv_msg;
+    private ImageView iv_yuyue_shangmen,iv_yuyue_daodian;
     private int num1=0;
     private int num2=0;
     private int num3=0;
@@ -117,6 +118,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_more_set = view.findViewById(R.id.tv_more_set);
         iv_my_user = view.findViewById(R.id.iv_my_user);
         iv_msg = view.findViewById(R.id.iv_msg);
+        iv_yuyue_shangmen = view.findViewById(R.id.iv_yuyue_shangmen);
+        iv_yuyue_daodian = view.findViewById(R.id.iv_yuyue_daodian);
         tv_location_city = view.findViewById(R.id.tv_location_city);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
@@ -127,6 +130,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu7 = view.findViewById(R.id.tv_car_fuwu7);
         tv_car_fuwu8 = view.findViewById(R.id.tv_car_fuwu8);
 
+        iv_yuyue_shangmen.setOnClickListener(this);
+        iv_yuyue_daodian.setOnClickListener(this);
         tv_map_jingsi.setOnClickListener(this);
         rb_work_order_all.setOnClickListener(this);
         rb_work_order_dai_jie.setOnClickListener(this);
@@ -245,6 +250,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 break;
             case R.id.iv_msg://消息
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
+                break;
+            case R.id.iv_yuyue_shangmen://新版上门
+                ZzRouter.gotoActivity((Activity) context,SubmitOrderActivity.class,"1");
+                break;
+            case R.id.iv_yuyue_daodian://新版到店
+                ZzRouter.gotoActivity((Activity) context,SubmitOrderActivity.class,"2");
                 break;
             case R.id.rb_work_order_all://上门
                 ll_shang_men.setVisibility(View.VISIBLE);

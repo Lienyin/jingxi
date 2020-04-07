@@ -443,11 +443,13 @@
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/iv_yuyue_shangmen"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:src="@mipmap/shangmen_3ban"/>
                 <ImageView
+                    android:id="@+id/iv_yuyue_daodian"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
