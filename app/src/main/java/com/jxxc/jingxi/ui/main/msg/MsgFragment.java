@@ -56,7 +56,7 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
     }
     private int fuwuType = 0;//默认上门
     private int offset = 2;
-    private String queryFlag="";
+    private String queryFlag="";//筛选 1直营 2加盟 3合作 4营业中
     private String sort="";
     private String cityId="";
     private String lat ="";

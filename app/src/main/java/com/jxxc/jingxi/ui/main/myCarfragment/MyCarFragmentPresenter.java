@@ -7,6 +7,7 @@ import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -158,6 +159,53 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                         List<AppointmentListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.appointmentListCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void companyList(double lng, double lat, String queryFlag, String sort, String areaId, int pageNum, int pageSize) {
+        OkGo.<HttpResult<List<companyListEntity>>>post(Api.COMPANY_LIST)
+                .params("lng",lng)
+                .params("lat",lat)
+                .params("queryFlag",queryFlag)
+                .params("sort",sort)
+                .params("areaId",areaId)
+                .params("pageNum",pageNum)
+                .params("pageSize",pageSize)
+                .execute(new JsonCallback<HttpResult<List<companyListEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<companyListEntity>>> response) {
+                        StyledDialog.dismissLoading();
+                        List<companyListEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.companyListCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void companyListMore(double lng, double lat, String queryFlag, String sort, String areaId, int pageNum, int pageSize) {
+        OkGo.<HttpResult<List<companyListEntity>>>post(Api.COMPANY_LIST)
+                .params("lng",lng)
+                .params("lat",lat)
+                .params("queryFlag",queryFlag)
+                .params("sort",sort)
+                .params("areaId",areaId)
+                .params("pageNum",pageNum)
+                .params("pageSize",pageSize)
+                .execute(new JsonCallback<HttpResult<List<companyListEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<companyListEntity>>> response) {
+                        List<companyListEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.companyListCallBackMore(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
