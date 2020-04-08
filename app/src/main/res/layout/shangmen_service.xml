@@ -672,6 +672,43 @@
                         android:layout_marginLeft="10dp"
                         android:src="@mipmap/jiantou"/>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/set_bg"/>
+                <!--备注信息-->
+                <LinearLayout
+                    android:id="@+id/ll_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/black5f"
+                        android:text="备注信息"/>
+                    <TextView
+                        android:id="@+id/tv_user_remark"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:maxLength="12"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/black26"
+                        android:hint="添加备注信息"
+                        android:text=""/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/jiantou"/>
+                </LinearLayout>
                 <!--活动-->
                 <com.jxxc.jingxi.utils.ListViewForScrollView
                     android:id="@+id/activity_data"
@@ -773,7 +810,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已优惠：0.00元"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textColor="@color/order_money"
                 android:textSize="10sp" />
         </LinearLayout>

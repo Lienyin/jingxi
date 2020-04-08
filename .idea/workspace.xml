@@ -22,8 +22,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragmentContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragmentContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragmentPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/main/myCarfragment/MyCarFragmentPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shangmen_service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shangmen_service.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -411,13 +409,6 @@
       <option name="presentableId" value="Default" />
       <updated>1550798933541</updated>
     </task>
-    <task id="LOCAL-00120" summary="添加">
-      <created>1583915901943</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1583915901943</updated>
-    </task>
     <task id="LOCAL-00121" summary="添加">
       <created>1583919447055</created>
       <option name="number" value="00121" />
@@ -754,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586345715026</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="添加">
+      <created>1586350044734</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1586350044734</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TodoView">
