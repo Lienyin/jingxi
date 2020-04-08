@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/view_bg"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="260dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:orientation="vertical">
@@ -335,18 +336,12 @@
             <!--车辆信息-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/attestation_bg_edittext"
+                android:layout_height="50dp"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="车辆信息"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
                 <!--添加车辆UI-->
                 <LinearLayout
                     android:id="@+id/ll_add_car"
@@ -368,31 +363,51 @@
                     android:id="@+id/ll_car_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="车牌号码"
+                            android:text="爱车信息"
                             android:textColor="@color/black555"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/tv_car_number"
+                            android:id="@+id/tv_car_info"
                             android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
                             android:text="XXXXXX"
+                            android:gravity="right"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_car_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="XXXXXX"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <TextView
+                            android:id="@+id/tv_car_type"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="XXXXXX"
+                            android:visibility="gone"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
                         <TextView
                             android:id="@+id/tv_huan_car"
                             android:layout_width="55dp"
@@ -400,19 +415,22 @@
                             android:background="@drawable/shape_bg_button"
                             android:gravity="center"
                             android:text="换辆车"
+                            android:visibility="gone"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/jiantou"/>
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/set_bg" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:gravity="center_vertical">
 
                         <TextView
@@ -420,16 +438,6 @@
                             android:layout_height="wrap_content"
                             android:text="车型选择"
                             android:textColor="@color/black555"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_car_type"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:text="XXXXXX"
-                            android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <TextView
@@ -450,6 +458,10 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/set_bg"/>
             <!--选择洗车门店-->
             <LinearLayout
                 android:id="@+id/ll_daodian"
@@ -503,35 +515,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/attestation_bg_edittext"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="联系信息"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="为了更好地为您服务请完整填写信息"
-                        android:textColor="@color/black555"
-                        android:textSize="10sp" />
-                </LinearLayout>
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/ll_address"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingLeft="20dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -549,19 +540,31 @@
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:hint="请选择停车地点"
+                        android:gravity="right"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/jiantou"/>
+                    <ImageView
                         android:id="@+id/iv_address"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:visibility="gone"
                         android:src="@mipmap/icon_56" />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/set_bg"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingLeft="20dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -571,26 +574,23 @@
                         android:textColor="@color/black555"
                         android:textSize="14sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/et_phone_number"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:background="@color/transparent"
-                        android:hint="请输入联系方式"
-                        android:inputType="phone"
-                        android:maxLength="11"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/black26"
+                        android:hint="添加联系电话"
+                        android:text=""/>
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="帮TA叫车"
-                        android:textColor="@color/black555"
-                        android:textSize="14sp"
-                        android:visibility="gone" />
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="invisible"
+                        android:src="@mipmap/jiantou"/>
 
                     <ImageView
                         android:id="@+id/iv_call_phone"
@@ -600,10 +600,15 @@
                         android:src="@drawable/call_phone"
                         android:visibility="gone" />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/set_bg"/>
                 <LinearLayout
+                    android:id="@+id/iv_time_date"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:paddingLeft="20dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -620,15 +625,61 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:hint="请选择服务时间"
+                        android:gravity="right"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <ImageView
-                        android:id="@+id/iv_time_date"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@mipmap/icon_55" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/jiantou"/>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/set_bg"/>
+                <LinearLayout
+                    android:id="@+id/ll_discount_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="优惠信息"
+                        android:textColor="@color/black555"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_discounts"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:hint="请选择服务时间"
+                        android:gravity="right"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/jiantou"/>
+                </LinearLayout>
+                <!--活动-->
+                <com.jxxc.jingxi.utils.ListViewForScrollView
+                    android:id="@+id/activity_data"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/blackf1"
+                    android:dividerHeight="0.5dp"/>
             </LinearLayout>
             <!--附加信息-->
             <LinearLayout
@@ -637,6 +688,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:padding="10dp">
 
                 <LinearLayout
@@ -675,6 +727,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:padding="10dp">
 
                 <TextView

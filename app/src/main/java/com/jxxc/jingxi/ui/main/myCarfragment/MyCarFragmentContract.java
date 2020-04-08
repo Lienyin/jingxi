@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.main.myCarfragment;
 
 
+import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
@@ -27,6 +28,7 @@ public class MyCarFragmentContract {
 
         void companyListCallBack(List<companyListEntity> data);
         void companyListCallBackMore(List<companyListEntity> data);
+        void getActivitiesCallBack(List<ActivitiesEntity> data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -41,5 +43,6 @@ public class MyCarFragmentContract {
 
         void companyList(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
         void companyListMore(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
+        void getActivities();
     }
 }

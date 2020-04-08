@@ -27,8 +27,11 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.adapter.ActivityDataAdapter;
 import com.jxxc.jingxi.adapter.ShopListAdapter;
+import com.jxxc.jingxi.dialog.DiscountCouponDialog;
 import com.jxxc.jingxi.dialog.TimeDialog;
+import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
@@ -39,6 +42,7 @@ import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
+import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
@@ -91,18 +95,20 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private TextView tv_xia_order_discounts;
     private TextView tv_car_info;
     private ImageView iv_call_phone;
-    private ImageView iv_address;
-    private ImageView iv_time_date;
+    private LinearLayout iv_time_date;
     private ListViewForScrollView lv_coupon_data;
     private TextView et_car_address;
     private TextView tv_huan_car;
     private TextView et_car_address_daodian;
-    private EditText et_phone_number;
+    private TextView et_phone_number;
+    private TextView tv_discounts;
     private EditText et_car_memo;
     private LinearLayout ll_daodian,ll_address,ll_shop_site;
+    private LinearLayout ll_discount_coupon;
     private View shang_men,view_daodian_fuwu;
     private SwipeRefreshLayout swipeLayout;
     private RecyclerView rv_list;
+    private ListViewForScrollView activity_data;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
@@ -122,8 +128,10 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private String appointmentStartTime="";
     private String appointmentEndTime="";
     private ProductInfoEntity.Combo comboData = new ProductInfoEntity.Combo();//车型套餐数据
+    private double orderMoney=0;//订单金额
     private double comboMoney=0;//套餐金额
     private double couponMoney=0;//优惠券金额
+    private double activityMoney=0;//活动金额
     private double fuwuTypeMoney6=0;
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
@@ -141,6 +149,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private List<companyListEntity> companyListEntityList = new ArrayList<>();
     private ShopListAdapter shopListAdapter;
     private String carNum="";//车牌
+    private List<MyCoupon> myCouponList = new ArrayList<>();
+    private DiscountCouponDialog discountCouponDialog;//优惠券对话框
+    private ActivityDataAdapter activityDataAdapter;
 
     public MyCarFragment(Context context){
         this.context = context;
@@ -157,7 +168,10 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         shang_men = view.findViewById(R.id.shang_men);
         swipeLayout = view.findViewById(R.id.swipeLayout);
         rv_list = view.findViewById(R.id.rv_list);
+        activity_data = view.findViewById(R.id.activity_data);
         tv_car_info = view.findViewById(R.id.tv_car_info);
+        ll_discount_coupon = view.findViewById(R.id.ll_discount_coupon);
+        tv_discounts = view.findViewById(R.id.tv_discounts);
         view_daodian_fuwu = view.findViewById(R.id.view_daodian_fuwu);
         rb_zheng_che = view.findViewById(R.id.rb_zheng_che);
         ll_car_fuwu = view.findViewById(R.id.ll_car_fuwu);
@@ -187,7 +201,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_appointment_time = view.findViewById(R.id.tv_appointment_time);
         tv_create_order = view.findViewById(R.id.tv_create_order);
         iv_call_phone = view.findViewById(R.id.iv_call_phone);
-        iv_address = view.findViewById(R.id.iv_address);
         iv_time_date = view.findViewById(R.id.iv_time_date);
         lv_coupon_data = view.findViewById(R.id.lv_coupon_data);
         et_car_address = view.findViewById(R.id.et_car_address);
@@ -212,14 +225,17 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_car_fuwu6.setOnClickListener(this);
         tv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
-        iv_address.setOnClickListener(this);
+        ll_address.setOnClickListener(this);
         iv_time_date.setOnClickListener(this);
         tv_huan_car.setOnClickListener(this);
         tv_create_order.setOnClickListener(this);
         ll_shop_site.setOnClickListener(this);
+        ll_discount_coupon.setOnClickListener(this);
         mPresenter.getCarList();
         mPresenter.queryMyCoupon(0);
         mPresenter.comboInfo();
+        mPresenter.getActivities();
+        et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));//手机号码
         lat = SPUtils.get(context, "lat", "");
         lng = SPUtils.get(context, "lng", "");
         onRefresh();
@@ -292,6 +308,45 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
             }
         });
+        //优惠券管理
+        discountCouponDialog = new DiscountCouponDialog(context);
+        discountCouponDialog.setOnFenxiangClickListener(new DiscountCouponDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(MyCoupon coupon) {
+                //优惠券
+                counponId = coupon.counponId+"";
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                //优惠券类型 0无门槛减N 1满N减N 2折扣券
+                if (coupon.couponRuleType==0){
+                    couponMoney = coupon.money;
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(couponMoney+activityMoney)+"元");
+                }else if (coupon.couponRuleType==1){
+                    couponMoney = coupon.money;
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(couponMoney+activityMoney)+"元");
+                }else{
+                    //折扣券
+                    double num = comboMoney-activityMoney;
+                    couponMoney =num - (num *(coupon.discount/10));
+                    //double zheMoney = (recommendComboInfoEntity.totalPrice) - comboMoney;
+                    tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(couponMoney+activityMoney)+"元");
+                }
+                if (!"不使用优惠券".equals(coupon.counponName)){
+                    tv_discounts.setText(new DecimalFormat("0.00").format(coupon.money)+"元优惠券");
+                    if (coupon.couponRuleType==0){
+                        tv_discounts.setText(new DecimalFormat("0.00").format(coupon.money)+"元优惠券");
+                    }else if (coupon.couponRuleType == 1){
+                        tv_discounts.setText(new DecimalFormat("0.00").format(coupon.money)+"元优惠券");
+                    }else{
+                        tv_discounts.setText(new DecimalFormat("0.00").format(coupon.discount)+"折优惠券");
+                    }
+                }else{
+                    tv_discounts.setText("");
+                }
+                //订单金额=套餐金额-活动金额-优惠券金额
+                orderMoney = comboMoney-activityMoney-couponMoney;
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+            }
+        });
         return view;
     }
 
@@ -316,12 +371,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         @Override
         public void onReceive(Context context, Intent intent) {
             //停车地点
-            addressEntity = (AddressEntity) intent.getSerializableExtra("addressEntity");
-            if (!AppUtils.isEmpty(addressEntity)){
-                et_car_address.setText(addressEntity.getAddress());
-                siteLat = addressEntity.getLat();
-                siteLng = addressEntity.getLng();
-            }
+            et_car_address.setText(intent.getStringExtra("datouzhenAddress"));
+            siteLat = intent.getStringExtra("datouzhenLatitude");
+            siteLng = intent.getStringExtra("datouzhenLongitude");
         }
     };
     private BroadcastReceiver receiverCarInfo = new BroadcastReceiver() {
@@ -394,6 +446,13 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 ll_car_fuwu.setVisibility(View.GONE);
                 ll_fuwu_no_data.setVisibility(View.VISIBLE);
                 break;
+            case R.id.ll_discount_coupon://优惠信息
+                if (myCouponList.size()>0){
+                    discountCouponDialog.showShareDialog(true,myCouponList,comboMoney);
+                }else{
+                    Toast.makeText(context,"暂无优惠券可用",Toast.LENGTH_SHORT).show();
+                }
+                break;
             case R.id.tv_car_fuwu1:
             case R.id.tv_car_fuwu2:
             case R.id.tv_car_fuwu3:
@@ -434,9 +493,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
+                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
+                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -461,9 +520,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
+                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
+                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
@@ -488,15 +547,14 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney;//套餐金额=基础套餐金额+选择服务项金额-优惠券金额
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboMoney)+"元");
-                rb_wai_guan.setText(Html.fromHtml("外观清洗 <font color=\"#BB222F\">("+(comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8)+"元)</font>"));
+                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
+                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
+                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
                 adapter.setOrderMoney(comboMoney);//优惠券适配器使用
                 adapter.notifyDataSetChanged();
                 break;
-            case R.id.iv_address://选择地址
-                HuanCar = 1;
-                ZzRouter.gotoActivity((Activity) context, AddressDetailsActivity.class);
+            case R.id.ll_address://选择地址
+                ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
             case R.id.iv_time_date://选择时间
                 if (ll_daodian.getVisibility()==View.VISIBLE){
@@ -515,8 +573,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     Toast.makeText(context,"请添加车辆",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(et_car_address.getText().toString())&&serviceType==0){
                     Toast.makeText(context,"请选择停车地点",Toast.LENGTH_SHORT).show();
-                }else if (AppUtils.isEmpty(et_phone_number.getText().toString())){
-                    Toast.makeText(context,"请输入联系方式",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
                     Toast.makeText(context,"请选择服务时间",Toast.LENGTH_SHORT).show();
                 }else{
@@ -567,6 +623,33 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             }
         });
         picker.show();
+    }
+
+    //活动数据
+    @Override
+    public void getActivitiesCallBack(List<ActivitiesEntity> data) {
+        //组装活动
+        if (data.size()>0){
+            activityDataAdapter = new ActivityDataAdapter(context);
+            activityDataAdapter.setData(data);
+            activity_data.setAdapter(activityDataAdapter);
+
+            for (int i=0;i<data.size();i++){
+                if (comboMoney>data.get(i).doorsillMoney){
+                    if (data.get(i).money>activityMoney){
+                        activityMoney = data.get(i).money;
+                    }
+                }
+            }
+            if (activityMoney>0){//大于0说明有活动
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                double num = activityMoney+couponMoney;//总共优惠的金额
+                tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(num)+"元");
+                //订单金额=套餐金额-活动金额-优惠券金额
+                orderMoney = comboMoney-activityMoney-couponMoney;
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+            }
+        }
     }
 
     //获取车辆列表
@@ -626,9 +709,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     @Override
     public void queryMyCouponCallback(List<MyCoupon> data) {
         if (data.size()>0){
-            list = data;
-            adapter.setData(list);
-            adapter.notifyDataSetChanged();
+            myCouponList = data;
         }
     }
 
@@ -680,9 +761,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 tv_car_fuwu8_money.setText("外加服务");
             }
         }
-        //comboMoney = comboData.basicPrice;//获得基础套餐金额
+        comboMoney = comboData.basicPrice;//获得基础套餐金额
         tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(comboData.basicPrice)+"元");
-        rb_wai_guan.setText(Html.fromHtml("外观清洗<font color=\"#BB222F\">("+new DecimalFormat("0.00").format(comboData.basicPrice)+"元)</font>"));//基础套餐价格
 //        adapter.setOrderMoney(comboMoney);//优惠券适配器使用
 //        adapter.notifyDataSetChanged();
     }
