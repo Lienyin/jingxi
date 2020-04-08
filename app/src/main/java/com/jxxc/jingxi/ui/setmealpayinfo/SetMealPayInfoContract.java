@@ -7,6 +7,7 @@ import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
+import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -24,6 +25,7 @@ public class SetMealPayInfoContract {
         void queryMyCouponCallback(List<MyCoupon> data);
         void createOrderCallBack(CreateOrderEntity data);
         void getActivitiesCallBack(List<ActivitiesEntity> data);
+        void comboInfoCallBack(ProductInfoEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -35,5 +37,6 @@ public class SetMealPayInfoContract {
                          String lng,String lat,String appointmentStartTime,String appointmentEndTime,
                          String remark,String companyId);
         void getActivities();
+        void comboInfo();
     }
 }

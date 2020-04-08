@@ -55,6 +55,7 @@ import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
+import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
@@ -256,10 +257,13 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
-                ZzRouter.gotoActivity((Activity) context,SubmitOrderActivity.class,"1");
+                Intent intent = new Intent((Activity) context, SetMealPayInfoActivity.class);
+                intent.putExtra("serviceType","0");
+                intent.putExtra("companyId","");
+                startActivity(intent);
                 break;
             case R.id.iv_yuyue_daodian://新版到店
-                ZzRouter.gotoActivity((Activity) context,SubmitOrderActivity.class,"2");
+                ZzRouter.gotoActivity((Activity) context,ShopListActivity.class);
                 break;
             case R.id.rb_work_order_all://上门
                 ll_shang_men.setVisibility(View.VISIBLE);

@@ -9,6 +9,7 @@ import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
+import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -160,6 +161,26 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                         List<ActivitiesEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.getActivitiesCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取洗车组合套餐
+     */
+    @Override
+    public void comboInfo() {
+        OkGo.<HttpResult<ProductInfoEntity>>post(Api.COMBO_INFO)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<ProductInfoEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<ProductInfoEntity>> response) {
+                        ProductInfoEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.comboInfoCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }
