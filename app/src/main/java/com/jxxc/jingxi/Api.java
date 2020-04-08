@@ -95,4 +95,6 @@ public class Api {
     public static final String GET_STATE = BASEURL + "/system/customer/getState";
     //44-获取活动
     public static final String GET_ACTIVITIES = BASEURL + "/biz/order/getActivities";
+    //45-产品banner
+    public static final String PRODUCT_ID_LIST = BASEURL + "/system/banner/productIdList";
 }

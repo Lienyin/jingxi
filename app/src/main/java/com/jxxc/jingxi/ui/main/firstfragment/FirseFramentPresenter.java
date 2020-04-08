@@ -4,6 +4,7 @@ package com.jxxc.jingxi.ui.main.firstfragment;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.GetStateEntity;
+import com.jxxc.jingxi.entity.backparameter.ProductIdListEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
@@ -84,6 +85,26 @@ public class FirseFramentPresenter extends BasePresenterImpl<FirseFramentContrac
                         GetStateEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getStateCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 菁喜产品
+     */
+    @Override
+    public void productIdList() {
+        OkGo.<HttpResult<List<ProductIdListEntity>>>post(Api.PRODUCT_ID_LIST)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<List<ProductIdListEntity>>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<List<ProductIdListEntity>>> response) {
+                        List<ProductIdListEntity> d = response.body().data;
+                        if (response.body().code==0){
+                            mView.productIdListCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

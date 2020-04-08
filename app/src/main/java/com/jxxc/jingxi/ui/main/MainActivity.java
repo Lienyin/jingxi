@@ -39,6 +39,7 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
 import com.jxxc.jingxi.ui.seting.SetingActivity;
+import com.jxxc.jingxi.ui.share.ShareActivity;
 import com.jxxc.jingxi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -200,7 +201,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         ll_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+                ZzRouter.gotoActivity(MainActivity.this, ShareActivity.class);
             }
         });
         view_style.setOnClickListener(new View.OnClickListener() {

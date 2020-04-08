@@ -34,12 +34,14 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
+import com.jxxc.jingxi.adapter.ProductAdapter;
 import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.adapter.ShopRecommendAdapter;
 import com.jxxc.jingxi.dialog.XiaOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
 import com.jxxc.jingxi.entity.backparameter.GetStateEntity;
+import com.jxxc.jingxi.entity.backparameter.ProductIdListEntity;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendCompanyListEntity;
@@ -75,7 +77,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
     private LinearLayout ll_dao_dian,ll_shang_men,ll_static;
     private ListViewForScrollView lv_set_meal_data;
-    private HorizontalListView lv_men_data;
+    private HorizontalListView lv_men_data,lv_product_data;
     private LocationClient mLocationClient;
     private BDLocationListener mBDLocationListener;
     private XiaOrderDialog dialog;
@@ -113,6 +115,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
         lv_men_data = view.findViewById(R.id.lv_men_data);
+        lv_product_data = view.findViewById(R.id.lv_product_data);
         ll_static = view.findViewById(R.id.ll_static);
         tv_more = view.findViewById(R.id.tv_more);
         tv_more_set = view.findViewById(R.id.tv_more_set);
@@ -161,6 +164,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         }
         mPresenter.recommendComboInfo("0","");//获取推荐套餐
         mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
+        mPresenter.productIdList();//获取菁喜产品
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
         //开始滚动(默认添加一张图片)
@@ -411,6 +415,22 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             ll_static.setVisibility(View.GONE);
         }else{
             ll_static.setVisibility(View.GONE);
+        }
+    }
+
+    //菁喜产品返回数据
+    @Override
+    public void productIdListCallBack(List<ProductIdListEntity> data) {
+        if (data.size()>0){
+            ProductAdapter productAdapter = new ProductAdapter(context);
+            productAdapter.setData(data);
+            lv_product_data.setAdapter(productAdapter);
+            lv_product_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    //
+                }
+            });
         }
     }
 
