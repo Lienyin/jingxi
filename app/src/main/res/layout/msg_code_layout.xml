@@ -6,23 +6,30 @@
     android:orientation="vertical">
     <!--短信验证码登录-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/jing_xi_moren_head"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
     <!--账户输入框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="60dp"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="手机号码"
-            android:textColor="@color/black26"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_phone_number_code"
@@ -32,28 +39,21 @@
             android:background="@color/transparent"
             android:textColor="@color/black"
             android:textSize="14sp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
+
     <!--账户输入框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="60dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="短信验证码"
-            android:textColor="@color/black26"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:id="@+id/et_pass_word_code"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:hint="请输入短信验证码"
                 android:background="@color/transparent"
                 android:textSize="14sp" />
@@ -72,16 +72,18 @@
             <Button
                 android:id="@+id/btn_send_msg_code"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/send_code_btn_bg"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
                 android:text="获取验证码"
                 android:textColor="@color/public_all" />
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
 
     <!--登录按钮-->
     <Button
@@ -89,22 +91,51 @@
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_bg_button"
         android:text="登录"
         android:textColor="@color/white"
         android:textSize="14sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black5f"
+            android:textSize="14sp"
+            android:text="已阅读并同意"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/public_all"
+            android:textSize="14sp"
+            android:text="《用户协议》"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/public_all"
+            android:textSize="14sp"
+            android:text="《隐私协议》"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_pw_login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="12dp"
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:text="账户密码登录"
+        android:visibility="gone"
         android:textColor="@color/public_all"
         android:textSize="14sp" />
 </LinearLayout>

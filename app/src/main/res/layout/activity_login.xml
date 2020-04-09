@@ -16,31 +16,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@mipmap/jx_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="欢迎来到菁喜"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <!--选择界面-->
+            <include
+                android:id="@+id/loginSelectView"
+                layout="@layout/login_select"
+                android:visibility="visible" />
             <!--个人用户-->
             <include
                 android:id="@+id/gerenView"
                 layout="@layout/geren_layout"
-                android:visibility="visible" />
+                android:visibility="gone" />
             <!--企业用户-->
             <include
                 android:id="@+id/qiyeView"

@@ -32,6 +32,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.adapter.ProductAdapter;
@@ -66,6 +67,7 @@ import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -249,14 +251,26 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
             case R.id.iv_my_user://我的
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
                 if(onButtonClick!=null){
                     onButtonClick.onClick(iv_my_user,2);
                 }
                 break;
             case R.id.iv_msg://消息
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
                 Intent intent = new Intent((Activity) context, SetMealPayInfoActivity.class);
                 intent.putExtra("serviceType","0");
                 intent.putExtra("companyId","");
@@ -368,6 +382,11 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     }
     public interface OnButtonClick{
         public void onClick(View view,int type);
+    }
+
+    private void gotoLogin() {
+        toast(context, "请先登录后使用");
+        ZzRouter.gotoActivity((Activity) context, ConfigApplication.LOGIN_PATH, ZzRouter.HOST_PLUGIN);
     }
 
     //刷新

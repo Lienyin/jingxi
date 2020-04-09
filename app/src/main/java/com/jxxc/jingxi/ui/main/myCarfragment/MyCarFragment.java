@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.ActivityDataAdapter;
 import com.jxxc.jingxi.adapter.ShopListAdapter;
@@ -539,10 +540,18 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 break;
             case R.id.ll_car_info://换辆车
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
                 HuanCar = 1;
                 ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"1");
                 break;
             case R.id.tv_create_order://立即下单
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
                 if (AppUtils.isEmpty(tv_car_info.getText().toString())){
                     Toast.makeText(context,"请添加车辆",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(et_car_address.getText().toString())&&serviceType==0){
@@ -597,6 +606,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             }
         });
         picker.show();
+    }
+
+    private void gotoLogin() {
+        toast(context, "请先登录后使用");
+        ZzRouter.gotoActivity((Activity) context, ConfigApplication.LOGIN_PATH, ZzRouter.HOST_PLUGIN);
     }
 
     //活动数据
@@ -693,9 +707,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         productInfoEntity = proData;
         setService(productInfoEntity);
         //查询套餐接口结束后调其他接口
-        mPresenter.getCarList();
-        mPresenter.queryMyCoupon(0);
-        mPresenter.getActivities();
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+            mPresenter.getCarList();
+            mPresenter.queryMyCoupon(0);
+            mPresenter.getActivities();
+        }
     }
 
     //设置服务选项UI
@@ -766,8 +782,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         if (HuanCar == 1){
             HuanCar =0;
         }else{
-            mPresenter.getCarList();
-            mPresenter.queryMyCoupon(0);
+            if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                mPresenter.getCarList();
+                mPresenter.queryMyCoupon(0);
+                mPresenter.getActivities();
+            }
             mPresenter.comboInfo();
         }
     }
@@ -783,6 +802,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         }
         if (!AppUtils.isEmpty(receiver)){
             context.unregisterReceiver(receiver);
+        }
+        if (!AppUtils.isEmpty(receiverRemark)){
+            context.unregisterReceiver(receiverRemark);
         }
     }
 

@@ -69,6 +69,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     Button btn_login_code;
     @BindView(R.id.btn_send_msg_code)
     Button btn_send_msg_code;
+    @BindView(R.id.btn_weixin_login)
+    Button btn_weixin_login;
+    @BindView(R.id.btn_yzm_login)
+    Button btn_yzm_login;
     @BindView(R.id.tv_msg_login)
     TextView tv_msg_login;
     @BindView(R.id.tv_pw_login)
@@ -79,6 +83,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     View qiyeView;
     @BindView(R.id.msgView)
     View msgView;
+    @BindView(R.id.loginSelectView)
+    View loginSelectView;
     @BindView(R.id.et_user_phone)
     EditText et_user_phone;
     @BindView(R.id.et_pass_word)
@@ -116,10 +122,22 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     }
 
     @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
-    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login})
+    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login,R.id.btn_weixin_login,
+    R.id.btn_yzm_login})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
+            case R.id.btn_weixin_login://微信登录
+                if (isAvilible(this,"com.tencent.mm")){
+                    weiXinLogin();
+                }else{
+                    toast(this,"目前您安装的微信版本过低或尚未安装");
+                }
+                break;
+            case R.id.btn_yzm_login://短信验证码登录
+                loginSelectView.setVisibility(View.GONE);
+                msgView.setVisibility(View.VISIBLE);
+                break;
             case R.id.btn_qiye://企业用户
                 gerenView.setVisibility(View.GONE);
                 qiyeView.setVisibility(View.VISIBLE);
@@ -133,7 +151,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             case R.id.tv_msg_login://短信验证码
                 gerenView.setVisibility(View.GONE);
                 qiyeView.setVisibility(View.GONE);
-                msgView.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_pw_login://账户密码登录
                 gerenView.setVisibility(View.VISIBLE);
@@ -192,26 +209,26 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         ZzRouter.gotoActivity(this, MainActivity.class);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exit();
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    private void exit() {
-        if ((System.currentTimeMillis() - exitTime) > 2000) {
-            toast(this, "再按一次退出程序");
-            exitTime = System.currentTimeMillis();
-        } else {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            System.exit(0);
-        }
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            exit();
+//            return false;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+//
+//    private void exit() {
+//        if ((System.currentTimeMillis() - exitTime) > 2000) {
+//            toast(this, "再按一次退出程序");
+//            exitTime = System.currentTimeMillis();
+//        } else {
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            startActivity(intent);
+//            System.exit(0);
+//        }
+//    }
 
     /**
      * 检查手机上是否安装了指定的软件
