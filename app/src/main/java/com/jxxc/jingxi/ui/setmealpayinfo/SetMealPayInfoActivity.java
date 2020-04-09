@@ -188,11 +188,11 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList(companyId,queryDate);//查询预约时间
-        mPresenter.queryMyCoupon(0);//优惠券
-        mPresenter.getCarList();//车辆列表
-        mPresenter.getActivities();//活动
 
         if (!AppUtils.isEmpty(companyId)){//到店加载
+            mPresenter.queryMyCoupon(0);//优惠券
+            mPresenter.getCarList();//车辆列表
+            mPresenter.getActivities();//活动
             recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
             String[] str = recommendComboInfoEntity.productIds.split(",");
             for (int i=0;i<str.length;i++){
@@ -560,6 +560,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     public void comboInfoCallBack(ProductInfoEntity proData) {
         productInfoEntity = proData;
         setService(productInfoEntity);
+        mPresenter.queryMyCoupon(0);//优惠券
+        mPresenter.getCarList();//车辆列表
+        mPresenter.getActivities();//活动
     }
 
     //设置服务选项UI
