@@ -124,9 +124,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
+        if(!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+            mPresenter.getUserInfo();
+        }
         mPresenter.banner();//先请求广告数据，在加载界面
         mPresenter.queryAppVersion("3");//查询版本
-        mPresenter.getUserInfo();
         shareDialog = new ShareDialog(this);
         activityDialog = new ActivityDialog(this);
         //弹邀请

@@ -41,11 +41,12 @@ public class StartActivity extends Activity {
         timer = new Timer();
         TimerTask task =new TimerTask(){
             public void run(){
-                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
-                    ZzRouter.gotoActivity(StartActivity.this, MainActivity.class);
-                }else{
-                    ZzRouter.gotoActivity(StartActivity.this, LoginActivity.class);
-                }
+                ZzRouter.gotoActivity(StartActivity.this, MainActivity.class);
+//                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+//                    ZzRouter.gotoActivity(StartActivity.this, MainActivity.class);
+//                }else{
+//                    ZzRouter.gotoActivity(StartActivity.this, LoginActivity.class);
+//                }
             }
         };
         timer.schedule(task,2000);//延迟2秒启动

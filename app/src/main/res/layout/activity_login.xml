@@ -5,23 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical|right">
-
-        <TextView
-            android:id="@+id/tv_tiao_guo"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="跳过"
-            android:textColor="@color/black"
-            android:visibility="visible" />
-    </LinearLayout>
+    <include layout="@layout/title"/>
 
     <ScrollView
         android:layout_width="match_parent"

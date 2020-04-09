@@ -164,8 +164,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             mPresenter.getState();//获取用户状态
         }
         mPresenter.recommendComboInfo("0","");//获取推荐套餐
-        mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
         mPresenter.productIdList();//获取菁喜产品
+        mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
         //开始滚动(默认添加一张图片)

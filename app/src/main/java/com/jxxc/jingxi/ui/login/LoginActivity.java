@@ -53,6 +53,12 @@ import butterknife.OnClick;
 
 public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
+    @BindView(R.id.tv_back)
+    TextView tv_back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.tv_affirm)
+    TextView tv_affirm;
     @BindView(R.id.btn_qiye)
     Button btn_qiye;
     @BindView(R.id.btn_geren)
@@ -83,8 +89,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_pass_word_code;
     @BindView(R.id.iv_open_wx_login)
     ImageView iv_open_wx_login;
-    @BindView(R.id.tv_tiao_guo)
-    TextView tv_tiao_guo;
     //微信
     public IWXAPI api;
     private String wxOpenid = "";
@@ -100,6 +104,9 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, false, R.color.white);
+        tv_title.setText("登录");
+        tv_affirm.setText("跳过");
+        tv_affirm.setVisibility(View.VISIBLE);
         api = WXAPIFactory.createWXAPI(this, Constant.APP_ID,true);
         api.registerApp(Constant.APP_ID);
         EventBus.getDefault().register(this);
@@ -108,8 +115,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         }
     }
 
-    @OnClick({R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
-    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login,R.id.tv_tiao_guo})
+    @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
+    R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -167,8 +174,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                     toast(this,"目前您安装的微信版本过低或尚未安装");
                 }
                 break;
-            case R.id.tv_tiao_guo://跳过
-                ZzRouter.gotoActivity(this,MainActivity.class);
+            case R.id.tv_back://返回
+            case R.id.tv_affirm://返回
                 finish();
                 break;
             default:
