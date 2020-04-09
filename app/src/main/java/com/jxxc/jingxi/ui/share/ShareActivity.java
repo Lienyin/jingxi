@@ -24,6 +24,8 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.btn_share_friend)
+    TextView btn_share_friend;
     @Override
     protected int layoutId() {
         return R.layout.share_activity;

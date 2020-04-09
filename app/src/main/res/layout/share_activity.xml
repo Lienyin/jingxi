@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#46AF85"
+                android:background="#6DCAA2"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
                 <LinearLayout
@@ -75,127 +75,180 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="50dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:orientation="horizontal">
                         <!--进度条1-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_101"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="1"/>
 
                         <View
                             android:id="@+id/view_share_schedule_1011"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
 
                         <View
-                            android:id="@+id/view_share_schedule_1021"
-                            android:layout_width="20dp"
+                            android:id="@+id/view_share_schedule_1012"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条2-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_102"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="6"/>
+
+                        <View
+                            android:id="@+id/view_share_schedule_1021"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
 
                         <View
                             android:id="@+id/view_share_schedule_1022"
-                            android:layout_width="20dp"
-                            android:layout_height="2dp"
-                            android:background="@color/public_white" />
-
-                        <View
-                            android:id="@+id/view_share_schedule_1031"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条3-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_103"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="12"/>
+
+                        <View
+                            android:id="@+id/view_share_schedule_1031"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
 
                         <View
                             android:id="@+id/view_share_schedule_1032"
-                            android:layout_width="20dp"
-                            android:layout_height="2dp"
-                            android:background="@color/public_white" />
-
-                        <View
-                            android:id="@+id/view_share_schedule_1041"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条4-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_104"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="18"/>
+
+                        <View
+                            android:id="@+id/view_share_schedule_1041"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
 
                         <View
                             android:id="@+id/view_share_schedule_1042"
-                            android:layout_width="20dp"
-                            android:layout_height="2dp"
-                            android:background="@color/public_white" />
-
-                        <View
-                            android:id="@+id/view_share_schedule_1051"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条5-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_105"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="24"/>
+
+                        <View
+                            android:id="@+id/view_share_schedule_1051"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
 
                         <View
                             android:id="@+id/view_share_schedule_1052"
-                            android:layout_width="20dp"
-                            android:layout_height="2dp"
-                            android:background="@color/public_white" />
-
-                        <View
-                            android:id="@+id/view_share_schedule_1061"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条6-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_106"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="30"/>
+
+                        <View
+                            android:id="@+id/view_share_schedule_1061"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
 
                         <View
                             android:id="@+id/view_share_schedule_1062"
-                            android:layout_width="20dp"
-                            android:layout_height="2dp"
-                            android:background="@color/public_white" />
-
-                        <View
-                            android:id="@+id/view_share_schedule_1071"
-                            android:layout_width="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="2dp"
                             android:background="@color/public_white" />
                         <!--进度条7-->
-                        <View
+                        <TextView
                             android:id="@+id/view_yuan_share_schedule_107"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/share_num_bg_no" />
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/share_num_bg_no"
+                            android:textColor="#ADADAD"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="36"/>
+                    </LinearLayout>
+                    <!--文字描述-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="8sp"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black666"
+                            android:text="当前邀请人数： 16 人，已获赠免费洗车机会3次，还差 2 人可以再享受一次。"/>
                     </LinearLayout>
                 </LinearLayout>
                 <!--我的成就-->
@@ -205,7 +258,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@mipmap/invite_result"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:orientation="vertical">
 
 
@@ -288,21 +341,15 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp">
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                        android:layout_height="60dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/tv_ji_suan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="35dp"
                             android:text="查看计算规则>"
-                            android:textColor="#FB6451"
+                            android:textColor="@color/public_all"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>

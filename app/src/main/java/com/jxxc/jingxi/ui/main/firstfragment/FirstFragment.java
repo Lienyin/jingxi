@@ -443,7 +443,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     //菁喜产品返回数据
     @Override
-    public void productIdListCallBack(List<ProductIdListEntity> data) {
+    public void productIdListCallBack(final List<ProductIdListEntity> data) {
         if (data.size()>0){
             ProductAdapter productAdapter = new ProductAdapter(context);
             productAdapter.setData(data);
@@ -451,7 +451,14 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             lv_product_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    //
+                    if (data.get(i).linkType==1){
+                        //跳转类型 1发现文章；2活动
+                        Intent intent = new Intent(context, FindDetailsActivity.class);
+                        intent.putExtra("linkId",data.get(i).linkId);
+                        context.startActivity(intent);
+                    }else{
+                        toast(context,"暂无标签");
+                    }
                 }
             });
         }
