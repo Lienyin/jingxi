@@ -103,6 +103,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     ImageView iv_user_head_code;
     @BindView(R.id.rb_xieyi)
     RadioButton rb_xieyi;
+    @BindView(R.id.tv_user_name_code)
+    TextView tv_user_name_code;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
     //微信
     public IWXAPI api;
     private String wxOpenid = "";
@@ -130,6 +134,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_WX_HEAD,""))){
             GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head);
             GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head_code);
+        }
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_WX_NAME,""))){
+            tv_user_name_code.setText(SPUtils.get(SPUtils.K_WX_NAME,"")+"\n"+"欢迎回来！");
+            tv_user_name.setText(SPUtils.get(SPUtils.K_WX_NAME,"")+"\n"+"欢迎回来！");
         }
     }
 
