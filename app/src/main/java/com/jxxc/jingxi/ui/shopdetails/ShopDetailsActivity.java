@@ -22,6 +22,7 @@ import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
+import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -267,7 +268,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayActivity.class);
+                Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayInfoActivity.class);
                 intent.putExtra("recommendComboInfoEntity",data.get(i));
                 intent.putExtra("serviceType","1");
                 intent.putExtra("companyId",cId);

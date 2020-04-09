@@ -100,7 +100,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private LinearLayout iv_time_date;
     private ListViewForScrollView lv_coupon_data;
     private TextView et_car_address;
-    private TextView tv_huan_car;
     private TextView et_car_address_daodian;
     private TextView et_phone_number;
     private TextView tv_discounts;
@@ -208,7 +207,6 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         iv_time_date = view.findViewById(R.id.iv_time_date);
         lv_coupon_data = view.findViewById(R.id.lv_coupon_data);
         et_car_address = view.findViewById(R.id.et_car_address);
-        tv_huan_car = view.findViewById(R.id.tv_huan_car);
         et_phone_number = view.findViewById(R.id.et_phone_number);
         et_car_memo = view.findViewById(R.id.et_car_memo);
         tv_xia_order_discounts = view.findViewById(R.id.tv_xia_order_discounts);
@@ -232,14 +230,13 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_car_fuwu8.setOnClickListener(this);
         ll_address.setOnClickListener(this);
         iv_time_date.setOnClickListener(this);
-        tv_huan_car.setOnClickListener(this);
+        ll_car_info.setOnClickListener(this);
         tv_create_order.setOnClickListener(this);
         ll_shop_site.setOnClickListener(this);
         ll_discount_coupon.setOnClickListener(this);
-        mPresenter.getCarList();
-        mPresenter.queryMyCoupon(0);
-        mPresenter.comboInfo();
-        mPresenter.getActivities();
+        StyledDialog.buildLoading("数据加载中").setActivity((Activity) context).show();
+        mPresenter.comboInfo();//查询套餐
+
         et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));//手机号码
         lat = SPUtils.get(context, "lat", "");
         lng = SPUtils.get(context, "lng", "");
@@ -541,7 +538,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     timeDialog.showShareDialog(true);
                 }
                 break;
-            case R.id.tv_huan_car://换辆车
+            case R.id.ll_car_info://换辆车
                 HuanCar = 1;
                 ZzRouter.gotoActivity((Activity) context, MyCarActivity.class,"1");
                 break;
@@ -556,10 +553,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     StyledDialog.buildLoading("正在下单").setActivity((Activity) context).show();
                     comboProductId = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
                     mPresenter.createOrder(
-                            comboProductId.substring(0,comboProductId.length()-1),
                             serviceType,
                             counponId,
-                            comboTypeId,
                             carNum,
                             "",
                             et_phone_number.getText().toString(),
@@ -569,7 +564,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                             appointmentStartTime,
                             appointmentEndTime,
                             remark,
-                            companyId);
+                            companyId,
+                            comboProductId.substring(0,comboProductId.length()-1),
+                            comboTypeId);
                 }
                 break;
         }
@@ -612,11 +609,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             activity_data.setAdapter(activityDataAdapter);
 
             for (int i=0;i<data.size();i++){
-                if (data.get(i).money>activityMoney){
-                    activityMoney = data.get(i).money;
+                if (comboMoney>=data.get(i).doorsillMoney){//套餐金额>=活动金额才有效果
+                    if (data.get(i).money>activityMoney){
+                        activityMoney = data.get(i).money;
+                    }
                 }
-//                if (comboMoney>data.get(i).doorsillMoney){
-//                }
             }
             if (activityMoney>0){//大于0说明有活动
                 tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
@@ -695,6 +692,10 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     public void comboInfoCallBack(ProductInfoEntity proData) {
         productInfoEntity = proData;
         setService(productInfoEntity);
+        //查询套餐接口结束后调其他接口
+        mPresenter.getCarList();
+        mPresenter.queryMyCoupon(0);
+        mPresenter.getActivities();
     }
 
     //设置服务选项UI

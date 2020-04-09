@@ -35,10 +35,20 @@ public class MyCarFragmentContract {
         void getCarList();
         void queryMyCoupon(int status);
         void comboInfo();
-        void createOrder(String comboProductIds,int serviceType,String counponId,String comboTypeId,
-                         String carNum,String carNums,String phonenumber,String address,
-                         String lng,String lat,String appointmentStartTime,String appointmentEndTime,
-                         String remark,String companyId);
+        void createOrder(int serviceType,
+                         String counponId,
+                         String carNum,
+                         String carNums,
+                         String phonenumber,
+                         String address,
+                         String lng,
+                         String lat,
+                         String appointmentStartTime,
+                         String appointmentEndTime,
+                         String remark,
+                         String companyId,
+                         String comboProductIds,
+                         String comboTypeId);
         void appointmentList(String companyId,String queryDate);
 
         void companyList(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);

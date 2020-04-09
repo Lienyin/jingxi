@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -193,6 +194,35 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
         if (!AppUtils.isEmpty(companyId)){//到店加载
             recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
+            String[] str = recommendComboInfoEntity.productIds.split(",");
+            for (int i=0;i<str.length;i++){
+                Log.i("TAG","=="+str[i]);
+                if ("1".equals(str[i])){
+                    tv_car_fuwu1.setSelected(true);
+                }else if ("2".equals(str[i])){
+                    tv_car_fuwu2.setSelected(true);
+                }else if ("3".equals(str[i])){
+                    tv_car_fuwu3.setSelected(true);
+                }else if ("4".equals(str[i])){
+                    tv_car_fuwu4.setSelected(true);
+                }else if ("5".equals(str[i])){
+                    tv_car_fuwu5.setSelected(true);
+                }else if ("6".equals(str[i])){
+                    tv_car_fuwu6.setSelected(true);
+                }else if ("7".equals(str[i])){
+                    tv_car_fuwu7.setSelected(true);
+                }else if ("8".equals(str[i])){
+                    tv_car_fuwu8.setSelected(true);
+                }
+            }
+            //隐藏价格
+            tv_car_fuwu6_money.setVisibility(View.INVISIBLE);
+            tv_car_fuwu7_money.setVisibility(View.INVISIBLE);
+            tv_car_fuwu8_money.setVisibility(View.INVISIBLE);
+            //设置禁止点击
+            tv_car_fuwu6.setClickable(false);
+            tv_car_fuwu7.setClickable(false);
+            tv_car_fuwu8.setClickable(false);
             comboMoney = recommendComboInfoEntity.totalPrice;//套餐金额
             //套餐信息m
             comboId = recommendComboInfoEntity.comboId+"";
@@ -363,9 +393,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }else{
                     StyledDialog.buildLoading("正在下单").setActivity(this).show();
                     mPresenter.createOrder(
-                            serviceType,
+                            Integer.valueOf(serviceType),
                             counponId,
-                            comboId,
                             carNum,
                             "",
                             tv_phone_number.getText().toString(),
@@ -375,7 +404,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                             appointmentStartTime,
                             appointmentEndTime,
                             remark,
-                            companyId);
+                            companyId,
+                            "",
+                            comboId);
                 }
                 break;
             case R.id.tv_car_fuwu6:
@@ -507,7 +538,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             activity_data.setAdapter(activityDataAdapter);
 
             for (int i=0;i<data.size();i++){
-                if (comboMoney>data.get(i).doorsillMoney){
+                if (comboMoney>=data.get(i).doorsillMoney){
                     if (data.get(i).money>activityMoney){
                         activityMoney = data.get(i).money;
                     }

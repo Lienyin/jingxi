@@ -11,6 +11,7 @@ public class RecommendComboInfoEntity implements Serializable {
     public String comboName;
     public double totalPrice;
     public int comboId;
+    public String productIds;
     public String imgUrls[];
     public List<ProductList> carTypePrices;
     public class ProductList implements Serializable{

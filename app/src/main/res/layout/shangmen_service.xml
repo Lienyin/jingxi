@@ -660,7 +660,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:hint="请选择服务时间"
+                        android:hint="选择优惠券"
                         android:gravity="right"
                         android:textColor="@color/black"
                         android:textSize="14sp" />

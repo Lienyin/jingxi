@@ -103,7 +103,6 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
      * 下单
      * @param serviceType
      * @param counponId
-     * @param comboId
      * @param carNum
      * @param carNums
      * @param phonenumber
@@ -114,16 +113,27 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
      * @param appointmentEndTime
      * @param remark
      * @param companyId
+     * @param comboProductIds
+     * @param comboTypeId
      */
     @Override
-    public void createOrder(String serviceType, String counponId, String comboId,
-                            String carNum, String carNums, String phonenumber, String address, String lng,
-                            String lat, String appointmentStartTime, String appointmentEndTime,
-                            String remark,String companyId) {
+    public void createOrder(int serviceType,
+                            String counponId,
+                            String carNum,
+                            String carNums,
+                            String phonenumber,
+                            String address,
+                            String lng,
+                            String lat,
+                            String appointmentStartTime,
+                            String appointmentEndTime,
+                            String remark,
+                            String companyId,
+                            String comboProductIds,
+                            String comboTypeId) {
         OkGo.<HttpResult<CreateOrderEntity>>post(Api.CREATE_ORDER)
                 .params("serviceType",serviceType)
                 .params("counponId",counponId)
-                .params("comboId",comboId)
                 .params("carNum",carNum)
                 .params("carNums",carNums)
                 .params("phonenumber",phonenumber)
@@ -134,6 +144,8 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                 .params("appointmentEndTime",appointmentEndTime)
                 .params("remark",remark)
                 .params("companyId",companyId)
+                .params("comboProductIds",comboProductIds)
+                .params("comboTypeId",comboTypeId)
                 .execute(new JsonCallback<HttpResult<CreateOrderEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<CreateOrderEntity>> response) {

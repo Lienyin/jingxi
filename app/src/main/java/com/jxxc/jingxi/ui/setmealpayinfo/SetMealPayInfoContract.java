@@ -32,10 +32,20 @@ public class SetMealPayInfoContract {
         void getCarList();
         void appointmentList(String companyId,String queryDate);
         void queryMyCoupon(int status);
-        void createOrder(String serviceType,String counponId,String comboId,
-                         String carNum,String carNums,String phonenumber,String address,
-                         String lng,String lat,String appointmentStartTime,String appointmentEndTime,
-                         String remark,String companyId);
+        void createOrder(int serviceType,
+                         String counponId,
+                         String carNum,
+                         String carNums,
+                         String phonenumber,
+                         String address,
+                         String lng,
+                         String lat,
+                         String appointmentStartTime,
+                         String appointmentEndTime,
+                         String remark,
+                         String companyId,
+                         String comboProductIds,
+                         String comboTypeId);
         void getActivities();
         void comboInfo();
     }

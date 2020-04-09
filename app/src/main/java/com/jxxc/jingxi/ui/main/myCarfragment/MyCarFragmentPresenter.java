@@ -61,6 +61,7 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                 .execute(new JsonCallback<HttpResult<List<ActivitiesEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<ActivitiesEntity>>> response) {
+                        StyledDialog.dismissLoading();
                         List<ActivitiesEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.getActivitiesCallBack(d);
@@ -130,15 +131,23 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
      * @param companyId
      */
     @Override
-    public void createOrder(String comboProductIds, int serviceType, String counponId, String comboTypeId,
-                            String carNum, String carNums, String phonenumber, String address, String lng,
-                            String lat, String appointmentStartTime, String appointmentEndTime,
-                            String remark,String companyId) {
+    public void createOrder(int serviceType,
+                            String counponId,
+                            String carNum,
+                            String carNums,
+                            String phonenumber,
+                            String address,
+                            String lng,
+                            String lat,
+                            String appointmentStartTime,
+                            String appointmentEndTime,
+                            String remark,
+                            String companyId,
+                            String comboProductIds,
+                            String comboTypeId) {
         OkGo.<HttpResult<CreateOrderEntity>>post(Api.CREATE_ORDER)
-                .params("comboProductIds",comboProductIds)
                 .params("serviceType",serviceType)
                 .params("counponId",counponId)
-                .params("comboTypeId",comboTypeId)
                 .params("carNum",carNum)
                 .params("carNums",carNums)
                 .params("phonenumber",phonenumber)
@@ -149,6 +158,8 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                 .params("appointmentEndTime",appointmentEndTime)
                 .params("remark",remark)
                 .params("companyId",companyId)
+                .params("comboProductIds",comboProductIds)
+                .params("comboTypeId",comboTypeId)
                 .execute(new JsonCallback<HttpResult<CreateOrderEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<CreateOrderEntity>> response) {
