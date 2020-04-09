@@ -68,8 +68,6 @@ public class BindingPhoneNumberActivity extends MVPBaseActivity<BindingPhoneNumb
             case R.id.btn_binding://绑定
                 if (AppUtils.isEmpty(et_account.getText().toString())){
                     toast(this,"请输入您的手机号码");
-                }else if (AppUtils.isEmpty(et_password.getText().toString())){
-                    toast(this,"请输入您的账户密码");
                 }else if (AppUtils.isEmpty(et_affirm_password.getText().toString())){
                     toast(this,"请确认短信验证码");
                 }else{

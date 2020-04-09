@@ -27,11 +27,12 @@
         android:layout_height="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/et_account"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:hint="请输入您的手机号码"
             android:layout_gravity="center_horizontal"
             android:paddingLeft="15dp"
@@ -57,11 +58,12 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:visibility="gone"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:hint="请输入您的账户密码"
             android:layout_gravity="center_horizontal"
             android:paddingLeft="15dp"
@@ -84,13 +86,14 @@
         android:layout_height="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/et_affirm_password"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:hint="请输入短信验证码"
             android:layout_gravity="center_horizontal"
             android:paddingLeft="15dp"

@@ -5,28 +5,353 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/title"/>
-    <ScrollView
-        android:id="@+id/scrollView"
+    <include layout="@layout/title" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/public_all"
-        android:scrollbars="none">
-        <LinearLayout
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/share_bg"/>
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#46AF85"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"
+                    android:background="@mipmap/share_bg"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_share_rule"
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_bg_button_rule"
+                        android:gravity="center"
+                        android:text="活动规则"
+                        android:textColor="@color/public_all" />
+                </LinearLayout>
+                <!--邀请奖励-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@mipmap/invite_reward"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
+                    <View
+                        android:id="@+id/btn_share_friend"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="220dp"
+                        android:layout_marginRight="30dp" />
+
+                </LinearLayout>
+                <!--邀请进度-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="5dp"
+                    android:background="@mipmap/invite_progress"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+                    <!--已邀请好友-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <!--进度条1-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_101"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1011"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1021"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条2-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_102"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1022"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1031"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条3-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_103"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1032"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1041"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条4-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_104"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1042"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1051"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条5-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_105"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1052"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1061"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条6-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_106"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/share_num_bg_no" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1062"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+
+                        <View
+                            android:id="@+id/view_share_schedule_1071"
+                            android:layout_width="20dp"
+                            android:layout_height="2dp"
+                            android:background="@color/public_white" />
+                        <!--进度条7-->
+                        <View
+                            android:id="@+id/view_yuan_share_schedule_107"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/share_num_bg_no" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!--我的成就-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@mipmap/invite_result"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:orientation="horizontal">
+                        <!--已得优惠券-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/tv_achievement_discounts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="#FB6451"
+                                    android:textSize="22sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="个"
+                                    android:textColor="@color/black666"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="已得优惠券"
+                                android:textColor="@color/black666"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                        <!--可得现金红包-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/tv_achievement_cash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="#FB6451"
+                                    android:textSize="22sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="元"
+                                    android:textColor="@color/black666"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="可得现金红包"
+                                android:textColor="@color/black666"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_ji_suan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="35dp"
+                            android:text="查看计算规则>"
+                            android:textColor="#FB6451"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--邀请记录-->
+                <LinearLayout
+                    android:id="@+id/ll_share_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@mipmap/invite_record"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="50dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="好友"
+                            android:textColor="@color/black666"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="状态"
+                            android:textColor="@color/black666"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/lv_share_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:divider="@color/transparent"
+                        android:visibility="visible" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>
