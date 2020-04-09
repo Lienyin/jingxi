@@ -5,13 +5,28 @@
     android:background="@color/white"
     android:orientation="vertical">
     <include layout="@layout/title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/jing_xi_moren_head"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
     <!--账户输入框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="60dp"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/et_account"
@@ -24,17 +39,24 @@
             android:inputType="phone"
             android:maxLength="11"
             android:textSize="14sp"
-            android:background="@drawable/shape_bg_edittext"
+            android:background="@color/transparent"
             android:text=""/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"
+        android:background="@color/gray"/>
     <!--账户密码输入框-->
     <LinearLayout
         android:id="@+id/ll_password_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/et_password"
@@ -46,17 +68,22 @@
             android:drawablePadding="15dp"
             android:textSize="14sp"
             android:inputType="textPassword"
-            android:background="@drawable/shape_bg_edittext"
+            android:background="@color/transparent"
             android:text=""/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
     <!--确认账户密码输入框-->
     <LinearLayout
         android:id="@+id/ll_affirm_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="30dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <EditText
@@ -70,18 +97,23 @@
             android:drawablePadding="15dp"
             android:textSize="14sp"
             android:inputType="textPassword"
-            android:background="@drawable/shape_bg_edittext"
+            android:background="@color/transparent"
             android:text=""/>
         <Button
             android:id="@+id/btn_send_msg_code"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/send_code_btn_bg"
+            android:background="@color/transparent"
             android:text="获取验证码"
             android:textColor="@color/public_all" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray"/>
     <!--服务条款-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,7 +141,7 @@
         android:layout_height="47dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/shape_bg_button"
         android:text="绑  定"
         android:textColor="@color/white"

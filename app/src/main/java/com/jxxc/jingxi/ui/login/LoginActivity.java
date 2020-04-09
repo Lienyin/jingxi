@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
@@ -21,6 +22,7 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
+import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.jxxc.jingxi.wxapi.Constant;
@@ -95,6 +97,12 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     EditText et_pass_word_code;
     @BindView(R.id.iv_open_wx_login)
     ImageView iv_open_wx_login;
+    @BindView(R.id.iv_user_head)
+    ImageView iv_user_head;
+    @BindView(R.id.iv_user_head_code)
+    ImageView iv_user_head_code;
+    @BindView(R.id.rb_xieyi)
+    RadioButton rb_xieyi;
     //微信
     public IWXAPI api;
     private String wxOpenid = "";
@@ -118,6 +126,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         EventBus.getDefault().register(this);
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
             et_user_phone.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        }
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_WX_HEAD,""))){
+            GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head);
+            GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head_code);
         }
     }
 
@@ -167,6 +179,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }
                 break;
             case R.id.btn_login_code://短信验证码登录
+                if (!rb_xieyi.isChecked()){toast(this,"请同意用户协议");return;}
                 if (AppUtils.isEmpty(et_phone_number_code.getText().toString())){
                     toast(this,"请输入手机号码");
                 }else if (AppUtils.isEmpty(et_pass_word_code.getText().toString())){
@@ -192,7 +205,14 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 }
                 break;
             case R.id.tv_back://返回
-            case R.id.tv_affirm://返回
+                if (msgView.getVisibility()==View.VISIBLE){
+                    msgView.setVisibility(View.GONE);
+                    loginSelectView.setVisibility(View.VISIBLE);
+                }else{
+                    finish();
+                }
+                break;
+            case R.id.tv_affirm://跳过
                 finish();
                 break;
             default:
@@ -295,6 +315,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                             wxOpenid = dataJson.getString("openid");
                             wxHeadimgurl = dataJson.getString("headimgurl");
                             fullName = dataJson.getString("nickname");
+                            SPUtils.put(SPUtils.K_WX_HEAD,wxHeadimgurl);//保存微信
+                            SPUtils.put(SPUtils.K_WX_NAME,fullName);//保存微信
                             mPresenter.thirdPartyLogin(wxOpenid);
                         } catch (JSONException e) {
                             System.out.println("Something wrong...");
