@@ -13,16 +13,22 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/iv_user_heads_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/jingxi_login_icon"/>
+        <ImageView
             android:id="@+id/iv_user_head_code"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:src="@mipmap/jing_xi_moren_head"/>
+            android:visibility="gone"
+            android:src="@mipmap/jingxi_login_icon"/>
         <TextView
             android:id="@+id/tv_user_name_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:textSize="14sp"
             android:textColor="@color/black333"/>
     </LinearLayout>

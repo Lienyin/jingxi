@@ -165,6 +165,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String comboProductId6="";
     private String comboProductId7="";
     private String comboProductId8="";
+    private String comboProductIds="";
     private double fuwuTypeMoney6=0;
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
@@ -392,6 +393,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     toast(this,"请选择服务时间");
                 }else{
                     StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                    comboProductIds = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
                     mPresenter.createOrder(
                             Integer.valueOf(serviceType),
                             counponId,
@@ -405,7 +407,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                             appointmentEndTime,
                             remark,
                             companyId,
-                            "",
+                            comboProductIds,
                             comboId);
                 }
                 break;
@@ -575,10 +577,12 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 a++;
                 //默认车型数据
                 comboData = data.combo.get(i);
+                comboId = data.combo.get(i).comboTypeId;
             }
         }
         if (a==0){
             comboData = data.combo.get(0);
+            comboId = data.combo.get(0).comboTypeId;
         }
         //拿前五项基本套餐id(--------------)
         comboProductId0="";

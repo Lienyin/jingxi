@@ -99,8 +99,12 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     ImageView iv_open_wx_login;
     @BindView(R.id.iv_user_head)
     ImageView iv_user_head;
+    @BindView(R.id.iv_user_heads)
+    ImageView iv_user_heads;
     @BindView(R.id.iv_user_head_code)
     ImageView iv_user_head_code;
+    @BindView(R.id.iv_user_heads_code)
+    ImageView iv_user_heads_code;
     @BindView(R.id.rb_xieyi)
     RadioButton rb_xieyi;
     @BindView(R.id.tv_user_name_code)
@@ -132,6 +136,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             et_user_phone.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
         }
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_WX_HEAD,""))){
+            iv_user_heads.setVisibility(View.GONE);
+            iv_user_head.setVisibility(View.VISIBLE);
+            iv_user_heads_code.setVisibility(View.GONE);
+            iv_user_head_code.setVisibility(View.VISIBLE);
             GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head);
             GlideImgManager.loadCircleImage(this, SPUtils.get(SPUtils.K_WX_HEAD,""), iv_user_head_code);
         }

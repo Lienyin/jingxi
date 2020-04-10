@@ -3,8 +3,8 @@ package com.jxxc.jingxi;
 import com.jxxc.jingxi.utils.SPUtils;
 
 public class Api {
-   //public static final String BASEURL = "http://47.101.185.138:8080";
-   public static final String BASEURL = "http://192.168.0.59:8080";//于立华
+   public static final String BASEURL = "http://47.101.185.138:8080";
+   //public static final String BASEURL = "http://192.168.0.59:8080";//于立华
 
     //1-客户登录
     public static final String LOGIN = BASEURL + "/system/customer/login";

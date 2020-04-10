@@ -78,7 +78,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private Context context;
     private TextView tv_map_jingsi,tv_location_city;
     private RadioButton rb_work_order_all,rb_work_order_dai_jie;
-    private LinearLayout ll_dao_dian,ll_shang_men,ll_static;
+    private LinearLayout ll_dao_dian,ll_shang_men;
     private ListViewForScrollView lv_set_meal_data;
     private HorizontalListView lv_men_data,lv_product_data;
     private LocationClient mLocationClient;
@@ -119,7 +119,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
         lv_men_data = view.findViewById(R.id.lv_men_data);
         lv_product_data = view.findViewById(R.id.lv_product_data);
-        ll_static = view.findViewById(R.id.ll_static);
         tv_more = view.findViewById(R.id.tv_more);
         tv_more_set = view.findViewById(R.id.tv_more_set);
         iv_my_user = view.findViewById(R.id.iv_my_user);
@@ -149,7 +148,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_car_fuwu6.setOnClickListener(this);
         tv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
-        ll_static.setOnClickListener(this);
         tv_more.setOnClickListener(this);
         tv_more_set.setOnClickListener(this);
         iv_my_user.setOnClickListener(this);
@@ -358,9 +356,6 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                     dialog.showShareDialog(true,num1,num2,num3);
                 }
                 break;
-            case R.id.ll_static:
-                ZzRouter.gotoActivity((Activity) context, OrderDetailsDaiFuWuActivity.class,orderId);
-                break;
             case R.id.tv_more://推荐店铺更多
                 ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
@@ -435,9 +430,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void getStateCallBack(GetStateEntity data) {
         if (data.isUnfinished==1){
             orderId = data.orderId;
-            ll_static.setVisibility(View.GONE);
         }else{
-            ll_static.setVisibility(View.GONE);
         }
     }
 
