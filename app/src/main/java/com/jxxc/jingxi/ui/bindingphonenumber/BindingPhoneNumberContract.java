@@ -16,7 +16,12 @@ public class BindingPhoneNumberContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void getThirdPartyInfo(String phonenumber, String password, String wxOpenId,String code);
+        void getThirdPartyInfo(String phonenumber,
+                               String userName,
+                               String avatar,
+                               String wxOpenId,
+                               String appleId,
+                               String code);
         void getCode(String phonenumber, TextView tvAuthCode);
     }
 }

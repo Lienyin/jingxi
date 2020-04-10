@@ -179,7 +179,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     @Override
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, false, R.color.white);
-        tv_title.setText("上门洗车");
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         serviceType = getIntent().getStringExtra("serviceType");
         companyId = getIntent().getStringExtra("companyId");
@@ -190,63 +189,70 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList(companyId,queryDate);//查询预约时间
 
-        if (!AppUtils.isEmpty(companyId)){//到店加载
-            mPresenter.queryMyCoupon(0);//优惠券
-            mPresenter.getCarList();//车辆列表
-            mPresenter.getActivities();//活动
-            recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
-            String[] str = recommendComboInfoEntity.productIds.split(",");
-            for (int i=0;i<str.length;i++){
-                Log.i("TAG","=="+str[i]);
-                if ("1".equals(str[i])){
-                    tv_car_fuwu1.setSelected(true);
-                }else if ("2".equals(str[i])){
-                    tv_car_fuwu2.setSelected(true);
-                }else if ("3".equals(str[i])){
-                    tv_car_fuwu3.setSelected(true);
-                }else if ("4".equals(str[i])){
-                    tv_car_fuwu4.setSelected(true);
-                }else if ("5".equals(str[i])){
-                    tv_car_fuwu5.setSelected(true);
-                }else if ("6".equals(str[i])){
-                    tv_car_fuwu6.setSelected(true);
-                }else if ("7".equals(str[i])){
-                    tv_car_fuwu7.setSelected(true);
-                }else if ("8".equals(str[i])){
-                    tv_car_fuwu8.setSelected(true);
-                }
-            }
+//        if (!AppUtils.isEmpty(companyId)){//到店加载
+//            mPresenter.queryMyCoupon(0);//优惠券
+//            mPresenter.getCarList();//车辆列表
+//            mPresenter.getActivities();//活动
+            //老的套餐数据
+//            recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
+//            String[] str = recommendComboInfoEntity.productIds.split(",");
+//            for (int i=0;i<str.length;i++){
+//                Log.i("TAG","=="+str[i]);
+//                if ("1".equals(str[i])){
+//                    tv_car_fuwu1.setSelected(true);
+//                }else if ("2".equals(str[i])){
+//                    tv_car_fuwu2.setSelected(true);
+//                }else if ("3".equals(str[i])){
+//                    tv_car_fuwu3.setSelected(true);
+//                }else if ("4".equals(str[i])){
+//                    tv_car_fuwu4.setSelected(true);
+//                }else if ("5".equals(str[i])){
+//                    tv_car_fuwu5.setSelected(true);
+//                }else if ("6".equals(str[i])){
+//                    tv_car_fuwu6.setSelected(true);
+//                }else if ("7".equals(str[i])){
+//                    tv_car_fuwu7.setSelected(true);
+//                }else if ("8".equals(str[i])){
+//                    tv_car_fuwu8.setSelected(true);
+//                }
+//            }
             //隐藏价格
-            tv_car_fuwu6_money.setVisibility(View.INVISIBLE);
-            tv_car_fuwu7_money.setVisibility(View.INVISIBLE);
-            tv_car_fuwu8_money.setVisibility(View.INVISIBLE);
+//            tv_car_fuwu6_money.setVisibility(View.INVISIBLE);
+//            tv_car_fuwu7_money.setVisibility(View.INVISIBLE);
+//            tv_car_fuwu8_money.setVisibility(View.INVISIBLE);
             //设置禁止点击
-            tv_car_fuwu6.setClickable(false);
-            tv_car_fuwu7.setClickable(false);
-            tv_car_fuwu8.setClickable(false);
-            comboMoney = recommendComboInfoEntity.totalPrice;//套餐金额
+//            tv_car_fuwu6.setClickable(false);
+//            tv_car_fuwu7.setClickable(false);
+//            tv_car_fuwu8.setClickable(false);
+//            comboMoney = recommendComboInfoEntity.totalPrice;//套餐金额
             //套餐信息m
-            comboId = recommendComboInfoEntity.comboId+"";
-            iv_recommend_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
-            iv_recommend_icon.setRoundRadius(20);
-            GlideImgManager.loadRectangleImage(this, recommendComboInfoEntity.imgUrl, iv_recommend_icon);
-            tv_recommend_name.setText(recommendComboInfoEntity.comboName);
-            tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
-            tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
-            tv_recommend_num.setText("已售"+recommendComboInfoEntity.salesVolume);
+//            comboId = recommendComboInfoEntity.comboId+"";
+//            iv_recommend_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
+//            iv_recommend_icon.setRoundRadius(20);
+//            GlideImgManager.loadRectangleImage(this, recommendComboInfoEntity.imgUrl, iv_recommend_icon);
+//            tv_recommend_name.setText(recommendComboInfoEntity.comboName);
+//            tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
+//            tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
+//            tv_recommend_num.setText("已售"+recommendComboInfoEntity.salesVolume);
             //订单金额=套餐金额-活动金额-优惠券金额
-            orderMoney = comboMoney-activityMoney-couponMoney;
-            tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
-        }else{
+//            orderMoney = comboMoney-activityMoney-couponMoney;
+//            tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+//        }else{
             //上门加载
-            mPresenter.comboInfo();
-            //默认选择前5项套餐
-            tv_car_fuwu1.setSelected(true);
-            tv_car_fuwu2.setSelected(true);
-            tv_car_fuwu3.setSelected(true);
-            tv_car_fuwu4.setSelected(true);
-            tv_car_fuwu5.setSelected(true);
+//            mPresenter.comboInfo();
+//        }
+        if (!AppUtils.isEmpty(companyId)){
+            tv_title.setText("到店洗车");
+        }else {
+            tv_title.setText("上门洗车");
         }
+        mPresenter.comboInfo();
+        //默认选择前5项套餐
+        tv_car_fuwu1.setSelected(true);
+        tv_car_fuwu2.setSelected(true);
+        tv_car_fuwu3.setSelected(true);
+        tv_car_fuwu4.setSelected(true);
+        tv_car_fuwu5.setSelected(true);
 
         if (!AppUtils.isEmpty(companyId)){
             tv_hint1.setBackgroundColor(getResources().getColor(R.color.qqq));
@@ -509,7 +515,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
     @Override
     public void appointmentListCallBack(List<AppointmentListEntity> data) {
-        timeDialog.updateTimeAdapter(data,Integer.valueOf(serviceType));
+        if (data.size()>0){
+            timeDialog.updateTimeAdapter(data,Integer.valueOf(serviceType));
+        }
     }
 
     //优惠券返回数据

@@ -333,7 +333,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                             fullName = dataJson.getString("nickname");
                             SPUtils.put(SPUtils.K_WX_HEAD,wxHeadimgurl);//保存微信
                             SPUtils.put(SPUtils.K_WX_NAME,fullName);//保存微信
-                            mPresenter.thirdPartyLogin(wxOpenid);
+                            mPresenter.thirdPartyLogin(wxOpenid,fullName,wxHeadimgurl);
                         } catch (JSONException e) {
                             System.out.println("Something wrong...");
                             e.printStackTrace();

@@ -21,7 +21,7 @@ public class LoginContract {
     interface  Presenter extends BasePresenter<View> {
         void login(String phonenumber,String password);
         void loginCode(String phonenumber,String code);
-        void thirdPartyLogin(String wxOpenid);
+        void thirdPartyLogin(String wxOpenid,String userName,String avatar);
 
         void getCode(String phonenumber, TextView tvAuthCode);
     }

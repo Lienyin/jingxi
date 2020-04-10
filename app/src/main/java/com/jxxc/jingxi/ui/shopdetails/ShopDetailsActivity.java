@@ -9,10 +9,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
@@ -26,6 +28,7 @@ import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -81,6 +84,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     Button btn_subscribe_time;
     @BindView(R.id.lv_set_meal_data)
     ListView lv_set_meal_data;
+    @BindView(R.id.ll_xia_dan)
+    LinearLayout ll_xia_dan;
     private String cId;
     private String phonenumber="";
     private String address="";
@@ -101,14 +106,13 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         tv_title.setText("门店详情");
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
-        mPresenter.getCompany(cId);
-        mPresenter.recommendComboInfo("1",cId);
+        mPresenter.getCompany(cId);//加盟商详细
+        //mPresenter.recommendComboInfo("1",cId);//获取洗车套餐
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         dateStr = queryDate;//默认日期
-        //mPresenter.appointmentList(cId,queryDate);
 
         //预约时间段
         gv_time_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -185,7 +189,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         return weekDays[w];
     }
 
-    @OnClick({R.id.tv_back,R.id.tv_details_shop_call,R.id.btn_subscribe_time})
+    @OnClick({R.id.tv_back,R.id.tv_details_shop_call,R.id.btn_subscribe_time,R.id.ll_xia_dan})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -216,8 +220,23 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     AppUtils.callPhone(this,phonenumber);
                 }
                 break;
+            case R.id.ll_xia_dan://预约下单
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    gotoLogin();
+                    return;
+                }
+                Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+                intent.putExtra("serviceType","1");
+                intent.putExtra("companyId",cId);
+                startActivity(intent);
+                break;
             default:
         }
+    }
+
+    private void gotoLogin() {
+        toast(this, "请先登录后使用");
+        ZzRouter.gotoActivity(this, ConfigApplication.LOGIN_PATH, ZzRouter.HOST_PLUGIN);
     }
 
     //返回详情

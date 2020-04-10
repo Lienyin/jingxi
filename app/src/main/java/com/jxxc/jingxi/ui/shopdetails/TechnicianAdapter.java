@@ -57,7 +57,11 @@ public class TechnicianAdapter extends BaseAdapter {
         }
         CompanyDetailsEntity.Jishi data = list.get(position);
         GlideImgManager.loadCircleImage(context, data.avatar, holder.iv_jishi_hand);
-        holder.tv_jishi_name.setText(data.userName);
+        if (data.userName.length()>5){
+            holder.tv_jishi_name.setText(data.userName.substring(0,4)+"...");
+        }else{
+            holder.tv_jishi_name.setText(data.userName);
+        }
         holder.tv_hao_ping_number.setText(data.orderNum);
         return convertView;
     }

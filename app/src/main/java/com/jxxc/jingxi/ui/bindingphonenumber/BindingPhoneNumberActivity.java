@@ -72,7 +72,13 @@ public class BindingPhoneNumberActivity extends MVPBaseActivity<BindingPhoneNumb
                     toast(this,"请确认短信验证码");
                 }else{
                     StyledDialog.buildLoading("正在绑定").setActivity(this).show();
-                    mPresenter.getThirdPartyInfo(et_account.getText().toString().trim(),et_password.getText().toString().trim(),otherAppId,et_affirm_password.getText().toString());
+                    mPresenter.getThirdPartyInfo(
+                            et_account.getText().toString().trim(),
+                            nickName,
+                            photoPath,
+                            otherAppId,
+                            "",
+                            et_affirm_password.getText().toString());
                 }
                 break;
             case R.id.btn_send_msg_code://发送验证码

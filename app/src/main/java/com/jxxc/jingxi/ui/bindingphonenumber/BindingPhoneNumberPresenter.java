@@ -35,15 +35,22 @@ public class BindingPhoneNumberPresenter extends BasePresenterImpl<BindingPhoneN
     /**
      * 绑定微信
      * @param phonenumber
-     * @param password
+     * @param userName
      * @param wxOpenId
      */
     @Override
-    public void getThirdPartyInfo(String phonenumber, String password, String wxOpenId,String code) {
+    public void getThirdPartyInfo(String phonenumber,
+                                  String userName,
+                                  String avatar,
+                                  String wxOpenId,
+                                  String appleId,
+                                  String code) {
         OkGo.<HttpResult<back_Login>>post(Api.AUTH_WECHAT)
                 .params("phonenumber",phonenumber)
-                .params("password", MD5Utils.shaPassword(password).trim().toUpperCase())
+                .params("userName", userName)
+                .params("avatar", avatar)
                 .params("wxOpenId",wxOpenId)
+                .params("appleId",appleId)
                 .params("code",code)
                 .execute(new JsonCallback<HttpResult<back_Login>>() {
                     @Override

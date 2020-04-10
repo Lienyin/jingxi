@@ -87,9 +87,11 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
      * @param wxOpenId
      */
     @Override
-    public void thirdPartyLogin(String wxOpenId) {
+    public void thirdPartyLogin(String wxOpenId,String userName,String avatar) {
         OkGo.<HttpResult<ThirdPartyLogin>>post(Api.LOGIN_BY_WECHAT)
                 .params("wxOpenId",wxOpenId)
+                .params("userName",userName)
+                .params("avatar",avatar)
                 .execute(new JsonCallback<HttpResult<ThirdPartyLogin>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<ThirdPartyLogin>> response) {

@@ -89,26 +89,28 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     }
 
     private void setView(FindEntity data){
-        findId = data.noticeId+"";
-        findContent = data.content;
-        type = data.type;
-        tv_num_data.setText(data.appreciateNum);//点赞数
-        tv_title_faxian.setText(data.title);
-        tv_time_faxian.setText(data.createTime);
+        if (!AppUtils.isEmpty(data)){
+            findId = data.noticeId+"";
+            findContent = data.content;
+            type = data.type;
+            tv_num_data.setText(data.appreciateNum);//点赞数
+            tv_title_faxian.setText(data.title);
+            tv_time_faxian.setText(data.createTime);
 
-        find_details_context.getSettings().setJavaScriptEnabled(true);
-        WebSettings settings = find_details_context.getSettings();
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        find_details_context.loadData(findContent.replace("\\",""),"text/html; charset=UTF-8", null);
+            find_details_context.getSettings().setJavaScriptEnabled(true);
+            WebSettings settings = find_details_context.getSettings();
+            settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            find_details_context.loadData(findContent.replace("\\",""),"text/html; charset=UTF-8", null);
 
-        if ("1".equals(type)){
-            tv_type.setText("文章标签：经验/观点");
-        }else if ("2".equals(type)){
-            tv_type.setText("文章标签：爱车养护");
-        }else if ("3".equals(type)){
-            tv_type.setText("文章标签：教程");
-        }else{
-            tv_type.setText("文章标签：推荐");
+            if ("1".equals(type)){
+                tv_type.setText("文章标签：经验/观点");
+            }else if ("2".equals(type)){
+                tv_type.setText("文章标签：爱车养护");
+            }else if ("3".equals(type)){
+                tv_type.setText("文章标签：教程");
+            }else{
+                tv_type.setText("文章标签：推荐");
+            }
         }
     }
 
