@@ -1,7 +1,15 @@
 package com.jxxc.jingxi.ui.share;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.text.Html;
 import android.view.View;
@@ -9,7 +17,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
@@ -17,6 +24,15 @@ import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.sharerule.ShareRuleActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
+import com.jxxc.jingxi.wxapi.Constant;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXWebpageObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -84,6 +100,17 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     @BindView(R.id.lv_share_info)
     ListView lv_share_info;
     private FriendListAdapter adapter;
+    private ShareDialog dialog;
+    private String URL = "";
+    private String BaseURL = "";
+    private String BaseURLIMG = "";
+    private String BaseTitle = "";
+    private String BaseDescription = "";
+    private String BaseDetailsURL = "";
+    private IWXAPI api;
+//    //支付宝
+//    private IAPApi aliApi;
+
     @Override
     protected int layoutId() {
         return R.layout.share_activity;
@@ -94,9 +121,63 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("邀请好友");
         mPresenter.getInfo();
+        //支付宝
+        //aliApi = APAPIFactory.createZFBApi(getApplicationContext(), Constant.ALIPAY_APPID, false);
+
+        api = WXAPIFactory.createWXAPI(this, Constant.APP_ID, true);
+        api.registerApp(Constant.APP_ID);
+
+        dialog = new ShareDialog(this);
+        dialog.setOnFenxiangClickListener(new ShareDialog.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick(int shareType) {
+                if (shareType == 1) {
+                    if (!isAvilible(ShareActivity.this,"com.tencent.mm")){
+                        toast(ShareActivity.this,"目前您安装的微信版本过低或尚未安装");
+                    }else{
+                        showWeiXin();
+                    }
+                } else if (shareType == 2) {
+//                    if (!isAvilible(ShareActivity.this,"com.tencent.mm")){
+//                        toast(ShareActivity.this,"目前您安装的微信版本过低或尚未安装");
+//                    }else{
+//                        showWeiXinP();
+//                    }
+                }else if (shareType ==3){
+//                    if (!isAvilible(ShareActivity.this,"com.tencent.mobileqq")){
+//                        toast(ShareActivity.this,"目前您安装的QQ版本过低或尚未安装");
+//                    }else{
+//                        shareQQ();
+//                    }
+                }else if (shareType ==4){
+//                    if (!isAvilible(ShareActivity.this,"com.tencent.mobileqq")){
+//                        toast(ShareActivity.this,"目前您安装的QQ版本过低或尚未安装");
+//                    }else{
+//                        shareQzone();
+//                    }
+                }else if (shareType == 5){
+                    //分享到支付宝
+//                    if (aliApi.isZFBSupportAPI()){
+//                        sendToAliPay();
+//                        //sendToAliPay("智租出行",ShareActivity.this);
+//                    }else{
+//                        toast(ShareActivity.this,"目前您安装的支付宝版本过低或尚未安装 ");
+//                    }
+                }else if (shareType == 6){
+                    //复制链接
+                    //获取剪贴板管理器：
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    // 创建普通字符型ClipData
+                    ClipData mClipData = ClipData.newRawUri("Label", Uri.parse(BaseURL));
+                    // 将ClipData内容放到系统剪贴板里。
+                    cm.setPrimaryClip(mClipData);
+                    toast(ShareActivity.this,"复制成功");
+                }
+            }
+        });
     }
 
-    @OnClick({R.id.tv_back,R.id.tv_share_rule})
+    @OnClick({R.id.tv_back,R.id.tv_share_rule,R.id.btn_share_friend})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -106,9 +187,60 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             case R.id.tv_share_rule://规则
                 ZzRouter.gotoActivity(this, ShareRuleActivity.class);
                 break;
+            case R.id.btn_share_friend://分享
+                dialog.showShareDialog(true);
+                break;
             default:
         }
     }
+
+    //分享到微信
+    public void showWeiXin() {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = BaseURL;
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = BaseTitle;
+        msg.description = BaseDescription;
+        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.wx_logo);
+        msg.thumbData = com.tencent.mm.sdk.platformtools.Util.bmpToByteArray(bitmap, true);
+
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("webpage");
+        req.message = msg;
+        req.scene = SendMessageToWX.Req.WXSceneSession;
+        api.sendReq(req);
+    }
+
+    private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
+
+    //分享到支付宝
+//    public void sendToAliPay() {
+//        APWebPageObject webPageObject = new APWebPageObject();
+//        webPageObject.webpageUrl = BaseURL;
+//        APMediaMessage webMessage = new APMediaMessage();
+//        webMessage.title = BaseTitle;
+//        webMessage.description = BaseDescription;
+//        webMessage.mediaObject = webPageObject;
+//        webMessage.thumbUrl = BaseURLIMG;
+//        SendMessageToZFB.Req webReq = new SendMessageToZFB.Req();
+//        webReq.message = webMessage;
+//        webReq.transaction = buildTransaction("webpage");
+//
+//        //在支付宝版本会合并分享渠道的情况下,不需要传递分享场景参数
+//        if (!isAlipayIgnoreChannel()) {
+//            webReq.scene = SendMessageToZFB.Req.ZFBSceneTimeLine;
+//            //webReq.scene = SendMessageToZFB.Req.ZFBSceneSession;
+//
+//        }
+//        aliApi.sendReq(webReq);
+//        //finish();
+//    }
+
+//    private boolean isAlipayIgnoreChannel() {
+//        return aliApi.getZFBVersionCode() >= 101;
+//    }
 
     //进度返回数据
     @Override
@@ -263,5 +395,26 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1061.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1062.setBackgroundColor(getResources().getColor(R.color.public_all));
         }
+    }
+
+    /**
+     * 检查手机上是否安装了指定的软件
+     * @param context
+     * @param packageName
+     * @return
+     */
+    public static boolean isAvilible(Context context, String packageName) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> packageInfos = packageManager.getInstalledPackages(0);
+        List<String> packageNames = new ArrayList<String>();
+
+        if (packageInfos != null) {
+            for (int i = 0; i < packageInfos.size(); i++) {
+                String packName = packageInfos.get(i).packageName;
+                packageNames.add(packName);
+            }
+        }
+        // 判断packageNames中是否有目标程序的包名，有TRUE，没有FALSE
+        return packageNames.contains(packageName);
     }
 }
