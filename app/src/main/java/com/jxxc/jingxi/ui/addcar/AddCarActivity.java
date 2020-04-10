@@ -105,8 +105,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             tv_title.setText("修改车辆");
             btn_add_car.setText("修改车辆");
             ll_car_moren.setVisibility(View.VISIBLE);
-            mEditText.setFocusable(false);
-            tv_new.setClickable(false);
+//            mEditText.setFocusable(false);
+//            tv_new.setClickable(false);
         }else{
             tv_title.setText("添加车辆");
             btn_add_car.setText("添加车辆");
@@ -118,20 +118,20 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
 //                    return false;
 //                }
 //            });
-            keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
-            keyboardUtil.hideSoftInputMethod();
-            keyboardUtil.hideKeyboard();
-            mEditText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (keyboardUtil.isShow()){
-                        keyboardUtil.hideKeyboard();
-                    }else{
-                        keyboardUtil.showKeyboard();
-                    }
-                }
-            });
         }
+        keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
+        keyboardUtil.hideSoftInputMethod();
+        keyboardUtil.hideKeyboard();
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (keyboardUtil.isShow()){
+                    keyboardUtil.hideKeyboard();
+                }else{
+                    keyboardUtil.showKeyboard();
+                }
+            }
+        });
         mEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -139,7 +139,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                 //Log.i("字符变换后", "afterTextChanged");
                 key = s.toString();
                 setKey();
-                if (mEditText.getText().toString().length()==7&&t8.getVisibility()==View.GONE){
+                if (mEditText.getText().toString().length()==7&&t8.getVisibility()==View.GONE
+                ||mEditText.getText().toString().length()==8&&t8.getVisibility()==View.VISIBLE){
                     if (keyboardUtil == null) {
                         keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
                         keyboardUtil.hideSoftInputMethod();
@@ -269,6 +270,7 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
             case R.id.tv_new://新能源
                 tv_new.setVisibility(View.GONE);
                 t8.setVisibility(View.VISIBLE);
+                mEditText.setSelection(mEditText.getText().toString().length());////将光标移至文字末尾
                 if (keyboardUtil == null) {
                     keyboardUtil = new KeyboardUtil(AddCarActivity.this, mEditText);
                     keyboardUtil.hideSoftInputMethod();
