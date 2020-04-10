@@ -66,8 +66,6 @@ import com.jxxc.jingxi.utils.HorizontalListView;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.MyImageView;
 import com.jxxc.jingxi.utils.SPUtils;
-import com.jxxc.jingxi.utils.StatusBarUtil;
-import com.sdsmdg.tastytoast.TastyToast;
 
 import java.io.IOException;
 import java.util.ArrayList;

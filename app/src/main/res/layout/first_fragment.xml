@@ -15,60 +15,59 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:background="@color/home_ss_bg"/>
-            <!--头部-->
-            <RelativeLayout
-                android:id="@+id/tab_title"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/home_ss_bg"
-                android:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/iv_my_user"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:src="@mipmap/my_user"/>
-                <TextView
-                    android:id="@+id/tv_location_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="@mipmap/jinxi_home_logo"
-                    android:text="菁喜"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-                <ImageView
-                    android:id="@+id/iv_msg"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:src="@mipmap/msg_xiaoxi"/>
-            </RelativeLayout>
-
-            <!--广告-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll
-                    android:id="@+id/myvp"
+                android:layout_height="wrap_content">
+                <!--广告-->
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="250dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-            </RelativeLayout>
+                    <com.jxxc.jingxi.ui.main.firstfragment.roll.MyImgScroll
+                        android:id="@+id/myvp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+                <!--头部-->
+                <RelativeLayout
+                    android:id="@+id/tab_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/transparent"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/iv_my_user"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/my_user"/>
+                    <TextView
+                        android:id="@+id/tv_location_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@mipmap/jinxi_home_logo"
+                        android:text="菁喜"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_msg"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/msg_xiaoxi"/>
+                </RelativeLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/vb"

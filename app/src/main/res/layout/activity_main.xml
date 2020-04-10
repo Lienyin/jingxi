@@ -35,50 +35,47 @@
                 <TextView
                     android:id="@+id/txt_deal1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/tab_menu_bg"
                     android:drawableTop="@drawable/tab_menu_deal"
-                    android:drawablePadding="3dp"
                     android:gravity="center"
                     android:text="首页"
-                    android:textColor="@color/black" />
+                    android:textColor="@drawable/tab_menu_deal_text" />
 
                 <TextView
                     android:id="@+id/txt_deal3"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/tab_menu_xiche"
-                    android:drawablePadding="3dp"
                     android:gravity="center"
                     android:text="洗车"
-                    android:textColor="@color/black"
+                    android:textColor="@drawable/tab_menu_deal_text"
                     android:visibility="visible" />
 
                 <TextView
                     android:id="@+id/txt_deal4"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/tab_menu_xiche"
                     android:drawablePadding="3dp"
                     android:gravity="center"
                     android:text="洗车"
-                    android:textColor="@color/black"
+                    android:textColor="@drawable/tab_menu_deal_text"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/txt_deal2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/tab_menu_bg"
                     android:drawableTop="@drawable/tab_menu_faxian"
-                    android:drawablePadding="3dp"
                     android:gravity="center"
                     android:text="惊喜"
-                    android:textColor="@color/black" />
+                    android:textColor="@drawable/tab_menu_deal_text" />
 
                 <TextView
                     android:id="@+id/txt_deal5"
@@ -90,7 +87,7 @@
                     android:gravity="center"
                     android:visibility="gone"
                     android:text="我的"
-                    android:textColor="@color/black" />
+                    android:textColor="@drawable/tab_menu_deal_text" />
 
             </LinearLayout>
         </LinearLayout>

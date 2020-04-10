@@ -3,6 +3,8 @@ package com.jxxc.jingxi.ui.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -123,7 +127,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     @Override
     public void initData() {
-        StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
+        StatusBarUtil.setStatusBarMode(this, false, R.color.black);
         if(!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
             mPresenter.getUserInfo();
         }
@@ -319,7 +323,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_deal1:
-                StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
+                //StatusBarUtil.setStatusBarMode(this, false, R.color.home_ss_bg);
                 selected();
                 txt_deal1.setSelected(true);
                 if(f1==null){
@@ -331,7 +335,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 break;
 
             case R.id.txt_deal2:
-                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
+                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal2.setSelected(true);
                 if(f2==null){
@@ -342,7 +346,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal3:
-                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
+                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal3.setSelected(true);
                 if(f3==null){
@@ -353,7 +357,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal4:
-                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
+                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 selected();
                 txt_deal4.setSelected(true);
                 if(f4==null){
@@ -364,7 +368,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal5:
-                StatusBarUtil.setStatusBarMode(this, false, R.color.white);
+                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
                 if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
                     selected();
                     txt_deal5.setSelected(true);
@@ -467,4 +471,5 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             }
         });
     }
+
 }
