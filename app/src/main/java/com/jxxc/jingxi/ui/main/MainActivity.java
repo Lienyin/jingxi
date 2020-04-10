@@ -28,6 +28,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.jxxc.jingxi.dialog.ShareDialog;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
+import com.jxxc.jingxi.entity.backparameter.GetStaticEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -135,15 +136,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         mPresenter.queryAppVersion("3");//查询版本
         shareDialog = new ShareDialog(this);
         activityDialog = new ActivityDialog(this);
-        //弹邀请
-        //每天只打开一次邀请活动弹窗
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
-        String nyr = simpleDateFormat.format(date);//当前时间
-        if (SPUtils.get("todayData","00").equals(nyr)){
-            SPUtils.put("todayData",nyr);
-            shareDialog.showShareDialog(true);
-        }
 
         boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
         if (isfirstlogin){
@@ -470,6 +462,23 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
             }
         });
+    }
+
+    //活动状态接口返回数据
+    @Override
+    public void getStaticCallBack(GetStaticEntity data) {
+        //活动是否在有效期内标识 1是0否
+        if (data.dateFlag==1){
+            //弹邀请
+            //每天只打开一次邀请活动弹窗
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(System.currentTimeMillis());
+            String nyr = simpleDateFormat.format(date);//当前时间
+            if (SPUtils.get("todayData","00").equals(nyr)){
+                SPUtils.put("todayData",nyr);
+                shareDialog.showShareDialog(true);
+            }
+        }
     }
 
 }

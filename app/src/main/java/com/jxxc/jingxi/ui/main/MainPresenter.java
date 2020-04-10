@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.entity.backparameter.BannerEntity;
+import com.jxxc.jingxi.entity.backparameter.GetStaticEntity;
 import com.jxxc.jingxi.entity.backparameter.LatestVersionEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.utils.SPUtils;
@@ -108,6 +109,24 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
                         List<BannerEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.bannerCallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    //获取活动状态
+    @Override
+    public void getStatic() {
+        OkGo.<HttpResult<GetStaticEntity>>post(Api.GET_STATUS)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<GetStaticEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<GetStaticEntity>> response) {
+                        GetStaticEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getStaticCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

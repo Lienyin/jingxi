@@ -362,7 +362,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="@color/home_bg"/>
+                android:background="@color/white"/>
             <!--第二版洗车-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -431,7 +431,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="@color/home_bg"/>
+                android:background="@color/white"/>
             <!--门店推荐-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -477,12 +477,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp">
+                    android:layout_height="25dp"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -500,7 +500,6 @@
                 <com.jxxc.jingxi.utils.HorizontalListView
                     android:id="@+id/lv_product_data"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:layout_height="190dp" />
             </LinearLayout>
 
@@ -508,9 +507,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:visibility="visible"
                 android:background="@mipmap/icon_115"
                 android:gravity="center_vertical">

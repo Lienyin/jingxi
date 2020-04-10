@@ -1,8 +1,7 @@
-package com.jxxc.jingxi.ui.share;
+package com.jxxc.jingxi.ui.sharerule;
 
 import android.content.Context;
 
-import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
 import com.jxxc.jingxi.mvp.BaseView;
 
@@ -11,12 +10,12 @@ import com.jxxc.jingxi.mvp.BaseView;
  *  邮箱 784787081@qq.com
  */
 
-public class ShareContract {
+public class ShareRuleContract {
     interface View extends BaseView {
-        void getInfoCallBack(GetInfoEntity data);
+        
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void getInfo();
+        
     }
 }

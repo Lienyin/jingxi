@@ -98,4 +98,8 @@ public class Api {
     public static final String GET_ACTIVITIES = BASEURL + "/biz/order/getActivities";
     //45-产品banner
     public static final String PRODUCT_ID_LIST = BASEURL + "/system/banner/productIdList";
+    //46-获取当前状态
+    public static final String GET_STATUS = BASEURL + "/biz/marketing/getStatus";
+    //47-获取推广进度
+    public static final String GET_INFO = BASEURL + "/biz/marketing/getInfo";
 }

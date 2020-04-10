@@ -89,7 +89,7 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     }
 
     private void setView(FindEntity data){
-        findId = data.noticeId;
+        findId = data.noticeId+"";
         findContent = data.content;
         type = data.type;
         tv_num_data.setText(data.appreciateNum);//点赞数
