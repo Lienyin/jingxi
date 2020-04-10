@@ -57,43 +57,51 @@ public class AddCarAdapter extends BaseAdapter {
         ColorEntity.Color data = list.get(position);
         if (data.color==1){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_1);
-            holder.color_name.setText("绿色");
+            holder.color_name.setText("白色");
         }else if (data.color==2){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_2);
-            holder.color_name.setText("蓝色");
+            holder.color_name.setText("黑色");
         }else if (data.color==3){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_3);
-            holder.color_name.setText("橙色");
+            holder.color_name.setText("红色");
         }else if (data.color==4){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_4);
-            holder.color_name.setText("黄色");
+            holder.color_name.setText("蓝色");
         }else if (data.color==5){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_5);
-            holder.color_name.setText("红色");
+            holder.color_name.setText("绿色");
         }else if (data.color==6){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_6);
-            holder.color_name.setText("黑色");
+            holder.color_name.setText("黄色");
         }else if (data.color==7){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_7);
-            holder.color_name.setText("灰色");
+            holder.color_name.setText("橙色");
         }else if (data.color==8){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_8);
-            holder.color_name.setText("白色");
+            holder.color_name.setText("紫色");
         }else if (data.color==9){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_9);
-            holder.color_name.setText("紫色");
+            holder.color_name.setText("银色");
         }else if (data.color==10){
             holder.view_bg.setBackgroundResource(R.drawable.car_color_10);
+            holder.color_name.setText("玫红");
+        }else if (data.color==11){
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_11);
             holder.color_name.setText("棕色");
+        }else if (data.color==12){
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_1);
+            holder.color_name.setText("其他");
         }else{
-            holder.view_bg.setBackgroundResource(R.drawable.car_color_8);
+            holder.view_bg.setBackgroundResource(R.drawable.car_color_1);
             holder.color_name.setText("其他");
         }
 
         if (position == defaultSelection) {// 选中时设置单纯颜色
             holder.ll_car_type.setBackgroundResource(R.drawable.car_color_yes);
+            holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
         } else {// 未选中时设置selector
             holder.ll_car_type.setBackgroundResource(R.drawable.car_color_no);
+            holder.color_name.setTextColor(context.getResources().getColor(R.color.black));
         }
         return convertView;
     }
