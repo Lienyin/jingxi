@@ -17,8 +17,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.alipay.share.sdk.openapi.APAPIFactory;
+import com.alipay.share.sdk.openapi.APMediaMessage;
+import com.alipay.share.sdk.openapi.APWebPageObject;
+import com.alipay.share.sdk.openapi.IAPApi;
+import com.alipay.share.sdk.openapi.SendMessageToZFB;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.sharerule.ShareRuleActivity;
@@ -104,12 +111,11 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     private String URL = "";
     private String BaseURL = "";
     private String BaseURLIMG = "";
-    private String BaseTitle = "";
-    private String BaseDescription = "";
-    private String BaseDetailsURL = "";
+    private String BaseTitle = "菁喜科技活动推广邀请好友有礼！";
+    private String BaseDescription = "邀请好友成功成为菁喜平台用户，拿优惠券/获免费洗车，多邀多得！";
     private IWXAPI api;
-//    //支付宝
-//    private IAPApi aliApi;
+    //支付宝
+    private IAPApi aliApi;
 
     @Override
     protected int layoutId() {
@@ -121,8 +127,9 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("邀请好友");
         mPresenter.getInfo();
+        mPresenter.getUserInfo();
         //支付宝
-        //aliApi = APAPIFactory.createZFBApi(getApplicationContext(), Constant.ALIPAY_APPID, false);
+        aliApi = APAPIFactory.createZFBApi(getApplicationContext(), Constant.ALIPAY_APPID, false);
 
         api = WXAPIFactory.createWXAPI(this, Constant.APP_ID, true);
         api.registerApp(Constant.APP_ID);
@@ -157,12 +164,12 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
 //                    }
                 }else if (shareType == 5){
                     //分享到支付宝
-//                    if (aliApi.isZFBSupportAPI()){
-//                        sendToAliPay();
-//                        //sendToAliPay("智租出行",ShareActivity.this);
-//                    }else{
-//                        toast(ShareActivity.this,"目前您安装的支付宝版本过低或尚未安装 ");
-//                    }
+                    if (aliApi.isZFBSupportAPI()){
+                        sendToAliPay();
+                        //sendToAliPay("智租出行",ShareActivity.this);
+                    }else{
+                        toast(ShareActivity.this,"目前您安装的支付宝版本过低或尚未安装 ");
+                    }
                 }else if (shareType == 6){
                     //复制链接
                     //获取剪贴板管理器：
@@ -216,31 +223,31 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     }
 
     //分享到支付宝
-//    public void sendToAliPay() {
-//        APWebPageObject webPageObject = new APWebPageObject();
-//        webPageObject.webpageUrl = BaseURL;
-//        APMediaMessage webMessage = new APMediaMessage();
-//        webMessage.title = BaseTitle;
-//        webMessage.description = BaseDescription;
-//        webMessage.mediaObject = webPageObject;
-//        webMessage.thumbUrl = BaseURLIMG;
-//        SendMessageToZFB.Req webReq = new SendMessageToZFB.Req();
-//        webReq.message = webMessage;
-//        webReq.transaction = buildTransaction("webpage");
-//
-//        //在支付宝版本会合并分享渠道的情况下,不需要传递分享场景参数
-//        if (!isAlipayIgnoreChannel()) {
-//            webReq.scene = SendMessageToZFB.Req.ZFBSceneTimeLine;
-//            //webReq.scene = SendMessageToZFB.Req.ZFBSceneSession;
-//
-//        }
-//        aliApi.sendReq(webReq);
-//        //finish();
-//    }
+    public void sendToAliPay() {
+        APWebPageObject webPageObject = new APWebPageObject();
+        webPageObject.webpageUrl = BaseURL;
+        APMediaMessage webMessage = new APMediaMessage();
+        webMessage.title = BaseTitle;
+        webMessage.description = BaseDescription;
+        webMessage.mediaObject = webPageObject;
+        webMessage.thumbUrl = BaseURLIMG;
+        SendMessageToZFB.Req webReq = new SendMessageToZFB.Req();
+        webReq.message = webMessage;
+        webReq.transaction = buildTransaction("webpage");
 
-//    private boolean isAlipayIgnoreChannel() {
-//        return aliApi.getZFBVersionCode() >= 101;
-//    }
+        //在支付宝版本会合并分享渠道的情况下,不需要传递分享场景参数
+        if (!isAlipayIgnoreChannel()) {
+            webReq.scene = SendMessageToZFB.Req.ZFBSceneTimeLine;
+            //webReq.scene = SendMessageToZFB.Req.ZFBSceneSession;
+
+        }
+        aliApi.sendReq(webReq);
+        //finish();
+    }
+
+    private boolean isAlipayIgnoreChannel() {
+        return aliApi.getZFBVersionCode() >= 101;
+    }
 
     //进度返回数据
     @Override
@@ -395,6 +402,11 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1061.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1062.setBackgroundColor(getResources().getColor(R.color.public_all));
         }
+    }
+
+    @Override
+    public void getUserInfoCallBack(UserInfoEntity data) {
+        BaseURL = "http://47.101.185.138:8090/share/shareRegister.html?cId="+data.customerId;
     }
 
     /**

@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName '1.0.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         //极光推送设置1
         ndk {
@@ -56,7 +57,6 @@ dependencies {
     implementation 'com.lzy.net:okserver:2.0.5'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.wanjian:cockroach:0.0.5'
     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
@@ -77,6 +77,7 @@ dependencies {
     implementation files('libs/libammsdk.jar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     implementation files('libs/pinyin4j-2.5.0.jar')
+    implementation 'com.android.support:multidex:1.0.3'
     //implementation 'cn.qqtheme.framework:WheelPicker:1.4.5'
     implementation('cn.qqtheme.framework:WheelPicker:1.5.1') {
         exclude group: 'com.android.support'
@@ -86,7 +87,6 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:1.1.7'
     // 此处以JCore 1.1.7 版本为例。
     implementation files('libs/BaiduLBS_Android.jar')
-
     //implementation 'org.jsoup:jsoup:1.13.1'
-
+    implementation files('libs/libapshare20161108.jar')
 }

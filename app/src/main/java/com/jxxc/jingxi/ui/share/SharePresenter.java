@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -36,6 +37,25 @@ public class SharePresenter extends BasePresenterImpl<ShareContract.View> implem
                         GetInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.getInfoCallBack(d);
+                        }else {
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+    /**
+     * 获得个人信息
+     */
+    @Override
+    public void getUserInfo() {
+        OkGo.<HttpResult<UserInfoEntity>>post(Api.INFO_USER)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<UserInfoEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<UserInfoEntity>> response) {
+                        UserInfoEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.getUserInfoCallBack(d);
                         }else {
                             toast(mContext,response.body().message);
                         }
