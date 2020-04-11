@@ -182,6 +182,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         serviceType = getIntent().getStringExtra("serviceType");
         companyId = getIntent().getStringExtra("companyId");
+        appointmentStartTime = getIntent().getStringExtra("appointmentStartTime");
+        appointmentEndTime = getIntent().getStringExtra("appointmentEndTime");
+        tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
         tv_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));//手机号码
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");

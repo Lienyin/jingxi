@@ -14,10 +14,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.ThirdPartyLogin;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.bindingphonenumber.BindingPhoneNumberActivity;
 import com.jxxc.jingxi.ui.main.MainActivity;
+import com.jxxc.jingxi.ui.regardsagreement.RegardsAgreementActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -111,6 +113,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     TextView tv_user_name_code;
     @BindView(R.id.tv_user_name)
     TextView tv_user_name;
+    @BindView(R.id.tv_user_xieyi)
+    TextView tv_user_xieyi;
+    @BindView(R.id.tv_yingsi_xieyi)
+    TextView tv_yingsi_xieyi;
     //微信
     public IWXAPI api;
     private String wxOpenid = "";
@@ -151,7 +157,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @OnClick({R.id.tv_back,R.id.tv_affirm,R.id.btn_qiye,R.id.btn_geren,R.id.tv_msg_login,R.id.tv_pw_login,R.id.btn_geren_login,
     R.id.btn_login_code,R.id.btn_send_msg_code,R.id.iv_open_wx_login,R.id.btn_weixin_login,
-    R.id.btn_yzm_login})
+    R.id.btn_yzm_login,R.id.tv_user_xieyi,R.id.tv_yingsi_xieyi})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -230,6 +236,20 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 break;
             case R.id.tv_affirm://跳过
                 finish();
+                break;
+            case R.id.tv_user_xieyi:
+                String URL = "http://47.101.185.138:8090/tool/build/agreement";
+                Intent intent = new Intent(this, RegardsAgreementActivity.class);
+                intent.putExtra("URL",URL);
+                intent.putExtra("h5Type","1");
+                startActivity(intent);
+                break;
+            case R.id.tv_yingsi_xieyi:
+                String URL1 = "http://47.101.185.138:8090/tool/build/ios_privacy";
+                Intent intent1 = new Intent(this, RegardsAgreementActivity.class);
+                intent1.putExtra("URL",URL1);
+                intent1.putExtra("h5Type","0");
+                startActivity(intent1);
                 break;
             default:
         }

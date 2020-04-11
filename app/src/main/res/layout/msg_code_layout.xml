@@ -131,12 +131,14 @@
             android:textSize="14sp"
             android:text="已阅读并同意"/>
         <TextView
+            android:id="@+id/tv_user_xieyi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/public_all"
             android:textSize="14sp"
             android:text="《用户协议》"/>
         <TextView
+            android:id="@+id/tv_yingsi_xieyi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/public_all"

@@ -110,6 +110,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     View view_style;
     @BindView(R.id.view_my_invoice)
     View view_my_invoice;
+    @BindView(R.id.tv_call_phone)
+    TextView tv_call_phone;
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
@@ -206,6 +208,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 //ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+            }
+        });
+        //400电话
+        tv_call_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppUtils.callPhone(MainActivity.this,"4001008682");
             }
         });
     }

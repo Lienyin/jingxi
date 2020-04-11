@@ -191,5 +191,8 @@
         <!--活动规则-->
         <activity android:name=".ui.sharerule.ShareRuleActivity"
             android:screenOrientation="portrait"/>
+        <!--用户协议/隐私政策-->
+        <activity android:name=".ui.regardsagreement.RegardsAgreementActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

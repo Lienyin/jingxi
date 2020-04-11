@@ -226,9 +226,13 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     gotoLogin();
                     return;
                 }
+                String start = dateStr+" "+timeStr.substring(0,5);
+                String end = dateStr+" "+timeStr.substring(6,11);
                 Intent intent = new Intent(this, SetMealPayInfoActivity.class);
                 intent.putExtra("serviceType","1");
                 intent.putExtra("companyId",cId);
+                intent.putExtra("appointmentStartTime",start);
+                intent.putExtra("appointmentEndTime",end);
                 startActivity(intent);
                 break;
             default:
