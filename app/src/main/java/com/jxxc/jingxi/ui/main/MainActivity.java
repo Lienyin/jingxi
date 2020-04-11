@@ -75,7 +75,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private TextView txt_deal3;
     private TextView txt_deal4;
     private TextView txt_deal5;
-    private TextView tv_location_city;
+    //private TextView tv_location_city;
     private FrameLayout ly_content;
 
     private FirstFragment f1;
@@ -229,11 +229,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         public void onReceiveLocation(BDLocation location) {
             // 非空判断  
             if (location != null) {
-                if (!AppUtils.isEmpty(location.getCity())){
-                    tv_location_city.setText(location.getCity());
-                }else{
-                    tv_location_city.setText("菁喜");
-                }
+//                if (!AppUtils.isEmpty(location.getCity())){
+//                    tv_location_city.setText(location.getCity());
+//                }else{
+//                    tv_location_city.setText("菁喜");
+//                }
                 if (isFirstLoc) {
                     isFirstLoc = false;
                     locationLatitude = location.getLatitude();
@@ -264,7 +264,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     //UI组件初始化与事件绑定
     private void bindView() {
-        tv_location_city = (TextView)this.findViewById(R.id.tv_location_city);
+        //tv_location_city = (TextView)this.findViewById(R.id.tv_location_city);
         txt_deal1 = (TextView)this.findViewById(R.id.txt_deal1);
         txt_deal2 = (TextView)this.findViewById(R.id.txt_deal2);
         txt_deal3 = (TextView)this.findViewById(R.id.txt_deal3);

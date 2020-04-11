@@ -202,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:padding="20dp">
 
                 <TextView
@@ -214,10 +214,10 @@
                     android:textColor="@color/black"
                     android:text="选择预约时间段"/>
                 <!--周几-->
-                <com.jxxc.jingxi.utils.MyGridView
+                <com.jxxc.jingxi.utils.HorizontalListView
                     android:id="@+id/gv_weekOf_date"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="70dp"
                     android:layout_marginTop="5dp"
                     android:numColumns="7"/>
                 <!--预约时间段-->

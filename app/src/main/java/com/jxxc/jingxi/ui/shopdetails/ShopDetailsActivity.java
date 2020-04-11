@@ -28,6 +28,7 @@ import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.HorizontalListView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
@@ -79,7 +80,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     @BindView(R.id.gv_time_data)
     GridView gv_time_data;
     @BindView(R.id.gv_weekOf_date)
-    GridView gv_weekOf_date;
+    HorizontalListView gv_weekOf_date;
     @BindView(R.id.btn_subscribe_time)
     Button btn_subscribe_time;
     @BindView(R.id.lv_set_meal_data)

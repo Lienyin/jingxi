@@ -100,6 +100,13 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
             find_details_context.getSettings().setJavaScriptEnabled(true);
             WebSettings settings = find_details_context.getSettings();
             settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+//            find_details_context.getSettings().setUseWideViewPort(true);//关键点
+//            find_details_context.getSettings().setLoadWithOverviewMode(true);
+//            find_details_context.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+            find_details_context.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
             find_details_context.loadData(findContent.replace("\\",""),"text/html; charset=UTF-8", null);
 
             if ("1".equals(type)){
@@ -137,6 +144,8 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
     //发现返回数据
     @Override
     public void noticeCallBack(List<FindEntity> data) {
-        setView(data.get(0));
+        if (data.size()>0){
+            setView(data.get(0));
+        }
     }
 }
