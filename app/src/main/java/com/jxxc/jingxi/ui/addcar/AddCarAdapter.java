@@ -97,8 +97,43 @@ public class AddCarAdapter extends BaseAdapter {
         }
 
         if (position == defaultSelection) {// 选中时设置单纯颜色
-            holder.ll_car_type.setBackgroundResource(R.drawable.car_color_yes);
-            holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            if (defaultSelection==0){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_1);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.black));
+            }else if (defaultSelection==1){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_2);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==2){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_3);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==3){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_4);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==4){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_5);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==5){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_6);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==6){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_7);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==7){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_8);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==8){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_9);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==9){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_10);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==10){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_11);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.white));
+            }else if (defaultSelection==11){
+                holder.ll_car_type.setBackgroundResource(R.drawable.car_color_1);
+                holder.color_name.setTextColor(context.getResources().getColor(R.color.black));
+            }
         } else {// 未选中时设置selector
             holder.ll_car_type.setBackgroundResource(R.drawable.car_color_no);
             holder.color_name.setTextColor(context.getResources().getColor(R.color.black));

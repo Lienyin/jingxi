@@ -87,7 +87,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private TextView tv_car_fuwu1, tv_car_fuwu2, tv_car_fuwu3, tv_car_fuwu4, tv_car_fuwu5, tv_car_fuwu6,
             tv_car_fuwu7, tv_car_fuwu8;
     private TextView tv_more, tv_more_set;
-    private ImageView iv_my_user, iv_msg;
+    private ImageView iv_my_user, iv_msg,iv_he_huoren;
     private ImageView iv_yuyue_shangmen, iv_yuyue_daodian;
     private int num1 = 0;
     private int num2 = 0;
@@ -117,6 +117,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         rb_work_order_dai_jie = view.findViewById(R.id.rb_work_order_dai_jie);
         ll_dao_dian = view.findViewById(R.id.ll_dao_dian);
         ll_shang_men = view.findViewById(R.id.ll_shang_men);
+        iv_he_huoren = view.findViewById(R.id.iv_he_huoren);
         lv_men_data = view.findViewById(R.id.lv_men_data);
         lv_product_data = view.findViewById(R.id.lv_product_data);
         tv_more = view.findViewById(R.id.tv_more);
@@ -152,6 +153,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         tv_more_set.setOnClickListener(this);
         iv_my_user.setOnClickListener(this);
         iv_msg.setOnClickListener(this);
+        iv_he_huoren.setOnClickListener(this);
 
         // 声明LocationClient类  
         mLocationClient = new LocationClient(context.getApplicationContext());
@@ -265,6 +267,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                     return;
                 }
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
+                break;
+            case R.id.iv_he_huoren:
+                Toast.makeText(context,"待开发",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
                 if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
