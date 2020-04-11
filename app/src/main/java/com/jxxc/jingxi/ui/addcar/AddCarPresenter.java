@@ -76,7 +76,8 @@ public class AddCarPresenter extends BasePresenterImpl<AddCarContract.View> impl
     }
 
     @Override
-    public void editCar(String carNum, String brandId, String typeId, String color, String isNewEnergy, String isDefault) {
+    public void editCar(String carNum, String brandId, String typeId, String color, String isNewEnergy,
+                        String isDefault,String newCarNum) {
         OkGo.<HttpResult>post(Api.EDIT_CAR)
                 .params("carNum",carNum)
                 .params("brandId",brandId)
@@ -84,6 +85,7 @@ public class AddCarPresenter extends BasePresenterImpl<AddCarContract.View> impl
                 .params("color",color)
                 .params("isNewEnergy",isNewEnergy)
                 .params("isDefault",isDefault)
+                .params("newCarNum",newCarNum)
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {

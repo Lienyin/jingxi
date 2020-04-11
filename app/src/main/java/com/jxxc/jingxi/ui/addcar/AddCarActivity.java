@@ -260,7 +260,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
                         }else{
                             isDefault ="0";
                         }
-                        mPresenter.editCar(carNum,brandId,carTypeId,colorId,isNewEnergy+"",isDefault);
+                        mPresenter.editCar(carData.carNum,brandId,carTypeId,colorId,isNewEnergy+"",
+                                isDefault,carNum);
                     }else{
                         //添加车辆
                         mPresenter.addCar(carNum,brandId,carTypeId,colorId,isNewEnergy+"");
