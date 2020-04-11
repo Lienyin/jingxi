@@ -190,5 +190,6 @@ public class PartnershipActivity extends MVPBaseActivity<PartnershipContract.Vie
     @Override
     public void applyCallBack() {
         toast(this,"申请成功");
+        finish();
     }
 }

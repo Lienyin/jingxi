@@ -107,5 +107,5 @@ public class Api {
     //49-查询是否已申请
     public static final String SELECT_BY_PHONE = BASEURL + "/system/company/selectByPhone";
     //50-申请加入接口
-    public static final String APPLY = BASEURL + "/system/company/apply";
+    public static final String APPLY = BASEURL + "/system/company/applyToJoin";
 }
