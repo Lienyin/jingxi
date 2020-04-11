@@ -1,6 +1,8 @@
 package com.jxxc.jingxi.ui.regardsagreement;
 
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -42,6 +44,7 @@ public class RegardsAgreementActivity extends MVPBaseActivity<RegardsAgreementCo
         return R.layout.activity_regards_agreement;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initData() {
         URL = getIntent().getStringExtra("URL");
@@ -50,15 +53,45 @@ public class RegardsAgreementActivity extends MVPBaseActivity<RegardsAgreementCo
             tv_title.setText("隐私政策");
         } else if ("1".equals(h5Type)) {
             tv_title.setText("用户协议");
+        } else if ("2".equals(h5Type)) {
+            tv_title.setText("江苏汇智拓信息科技有限公司");
         } else {
             tv_title.setText("菁喜科技");
         }
-        //wv_agreement.getSettings().setJavaScriptEnabled(true);
 
-        wv_agreement.getSettings().setJavaScriptEnabled(true);
-        WebSettings settings = wv_agreement.getSettings();
-        settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(true);
+//        wv_agreement.getSettings().setJavaScriptEnabled(true);
+//        WebSettings settings = wv_agreement.getSettings();
+//        settings.setUseWideViewPort(true);
+//        settings.setLoadWithOverviewMode(true);
+
+        WebSettings webSettings = wv_agreement.getSettings();
+        // 让WebView能够执行javaScript
+        webSettings.setJavaScriptEnabled(true);
+        // 让JavaScript可以自动打开windows
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        // 设置缓存
+        webSettings.setAppCacheEnabled(true);
+        // 设置缓存模式,一共有四种模式
+        webSettings.setCacheMode(webSettings.LOAD_CACHE_ELSE_NETWORK);
+        // 设置缓存路径
+//        webSettings.setAppCachePath("");
+        // 支持缩放(适配到当前屏幕)
+        webSettings.setSupportZoom(true);
+        // 将图片调整到合适的大小
+        webSettings.setUseWideViewPort(true);
+        // 支持内容重新布局,一共有四种方式
+        // 默认的是NARROW_COLUMNS
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        // 设置可以被显示的屏幕控制
+        webSettings.setDisplayZoomControls(true);
+        // 设置默认字体大小
+        webSettings.setDefaultFontSize(12);
+
+        // 设置WebView属性，能够执行Javascript脚本
+        // mWebView.getSettings().setJavaScriptEnabled(true);
+        //3、 加载需要显示的网页
+        ///4、设置响应超链接，在安卓5.0系统，不使用下面语句超链接也是正常的，但在MIUI中安卓4.4.4中需要使用下面这条语句，才能响应超链接
+        // mWebView.setWebViewClient(new HelloWebViewClient());
 
         wv_agreement.loadUrl(URL);
 

@@ -55,6 +55,7 @@ import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
+import com.jxxc.jingxi.ui.partnership.PartnershipActivity;
 import com.jxxc.jingxi.ui.recharge.RechargeActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
@@ -268,8 +269,8 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 }
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
                 break;
-            case R.id.iv_he_huoren:
-                Toast.makeText(context,"待开发",Toast.LENGTH_SHORT).show();
+            case R.id.iv_he_huoren://合伙人
+                ZzRouter.gotoActivity((Activity) context, PartnershipActivity.class);
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
                 if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {

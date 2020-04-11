@@ -194,5 +194,8 @@
         <!--用户协议/隐私政策-->
         <activity android:name=".ui.regardsagreement.RegardsAgreementActivity"
             android:screenOrientation="portrait"/>
+        <!--合伙人-->
+        <activity android:name=".ui.partnership.PartnershipActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

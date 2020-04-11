@@ -106,6 +106,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     LinearLayout ll_setting;
     @BindView(R.id.ll_share)
     LinearLayout ll_share;
+    @BindView(R.id.ll_user_info)
+    LinearLayout ll_user_info;
     @BindView(R.id.view_style)
     View view_style;
     @BindView(R.id.view_my_invoice)
@@ -115,7 +117,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
-    private ActivityDialog activityDialog;
     private List<View> listViews; // 图片组
     private LocationClient mLocationClient;
     private BDLocationListener mBDLocationListener;
@@ -133,17 +134,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         StatusBarUtil.setStatusBarMode(this, false, R.color.black);
         if(!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
             mPresenter.getUserInfo();
+            mPresenter.getStatic();
         }
         mPresenter.banner();//先请求广告数据，在加载界面
         mPresenter.queryAppVersion("3");//查询版本
         shareDialog = new ShareDialog(this);
-        activityDialog = new ActivityDialog(this);
 
-        boolean isfirstlogin =  SPUtils.get(this,"ACTIVITY", true);
-        if (isfirstlogin){
-            SPUtils.put(this,"ACTIVITY", false);
-            activityDialog.showShareDialog(true);
-        }
         drawerlayout =(DrawerLayout)findViewById(R.id.drawerlayout);//抽屉
         //极光推送id
 //        String pToken = JPushInterface.getRegistrationID(this);//1a0018970a33bcf8b75
@@ -191,7 +187,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             }
         });
         //头像
-        iv_user_logo.setOnClickListener(new View.OnClickListener() {
+        ll_user_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
@@ -489,7 +485,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(System.currentTimeMillis());
             String nyr = simpleDateFormat.format(date);//当前时间
-            if (SPUtils.get("todayData","00").equals(nyr)){
+            if (!SPUtils.get("todayData","00").equals(nyr)){
                 SPUtils.put("todayData",nyr);
                 shareDialog.showShareDialog(true);
             }

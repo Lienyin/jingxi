@@ -6,7 +6,7 @@ public class AppointmentListEntity implements Serializable {
     public int num;
     public int isFull;
     public String title;
-    public String awaitMinute;
+    public int awaitMinute;
 
     public boolean isForbidden;
 

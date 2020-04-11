@@ -12,6 +12,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.BuildConfig;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.regardsagreement.RegardsAgreementActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
@@ -65,12 +66,22 @@ public class RegardsActivity extends MVPBaseActivity<RegardsContract.View, Regar
                 gradeGo();
                 break;
             case R.id.ll_privacy://隐私政策
+                String URL = "http://47.101.185.138:8090/tool/build/ios_privacy";
+                Intent intent = new Intent(this, RegardsAgreementActivity.class);
+                intent.putExtra("URL",URL);
+                intent.putExtra("h5Type","0");
+                startActivity(intent);
                 break;
             case R.id.ll_renewal://版本更新
                 StyledDialog.buildLoading("加载中").setActivity(this).show();
                 mPresenter.queryAppVersion("3");
                 break;
             case R.id.ll_official_website://官方网站
+                String URL1 = "http://www.incofuture.com";
+                Intent intent1 = new Intent(this, RegardsAgreementActivity.class);
+                intent1.putExtra("URL",URL1);
+                intent1.putExtra("h5Type","2");
+                startActivity(intent1);
                 break;
             default:
         }

@@ -417,7 +417,7 @@
                 android:drawableLeft="@mipmap/kefu_call"
                 android:textSize="14sp"
                 android:textColor="@color/black333"
-                android:text="400  100  8682"/>
+                android:text="  400  100  8682"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

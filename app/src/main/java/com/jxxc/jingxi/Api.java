@@ -102,4 +102,10 @@ public class Api {
     public static final String GET_STATUS = BASEURL + "/biz/marketing/getStatus";
     //47-获取推广进度
     public static final String GET_INFO = BASEURL + "/biz/marketing/getInfo";
+    //48-查询省市区
+    public static final String SELECT_ALL_AREA = BASEURL + "/system/area/selectAllArea";
+    //49-查询是否已申请
+    public static final String SELECT_BY_PHONE = BASEURL + "/system/company/selectByPhone";
+    //50-申请加入接口
+    public static final String APPLY = BASEURL + "/system/company/apply";
 }
