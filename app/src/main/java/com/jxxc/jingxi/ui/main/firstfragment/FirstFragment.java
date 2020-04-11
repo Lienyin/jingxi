@@ -55,8 +55,10 @@ import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.maptest.MapTestActivity;
 import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
+import com.jxxc.jingxi.ui.recharge.RechargeActivity;
 import com.jxxc.jingxi.ui.setmealpay.SetMealPayActivity;
 import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
+import com.jxxc.jingxi.ui.share.ShareActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
@@ -74,31 +76,31 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, FirseFramentPresenter> implements View.OnClickListener, FirseFramentContract.View, SwipeRefreshLayout.OnRefreshListener {
     private Context context;
-    private TextView tv_map_jingsi,tv_location_city;
-    private RadioButton rb_work_order_all,rb_work_order_dai_jie;
-    private LinearLayout ll_dao_dian,ll_shang_men;
+    private TextView tv_map_jingsi, tv_location_city;
+    private RadioButton rb_work_order_all, rb_work_order_dai_jie;
+    private LinearLayout ll_dao_dian, ll_shang_men;
     private ListViewForScrollView lv_set_meal_data;
-    private HorizontalListView lv_men_data,lv_product_data;
+    private HorizontalListView lv_men_data, lv_product_data;
     private LocationClient mLocationClient;
     private BDLocationListener mBDLocationListener;
     private XiaOrderDialog dialog;
-    private TextView tv_car_fuwu1,tv_car_fuwu2,tv_car_fuwu3,tv_car_fuwu4,tv_car_fuwu5,tv_car_fuwu6,
-            tv_car_fuwu7,tv_car_fuwu8;
-    private TextView tv_more,tv_more_set;
-    private ImageView iv_my_user,iv_msg;
-    private ImageView iv_yuyue_shangmen,iv_yuyue_daodian;
-    private int num1=0;
-    private int num2=0;
-    private int num3=0;
+    private TextView tv_car_fuwu1, tv_car_fuwu2, tv_car_fuwu3, tv_car_fuwu4, tv_car_fuwu5, tv_car_fuwu6,
+            tv_car_fuwu7, tv_car_fuwu8;
+    private TextView tv_more, tv_more_set;
+    private ImageView iv_my_user, iv_msg;
+    private ImageView iv_yuyue_shangmen, iv_yuyue_daodian;
+    private int num1 = 0;
+    private int num2 = 0;
+    private int num3 = 0;
     private MyImgScroll myPager; // 图片容器
     private LinearLayout ovalLayout; // 圆点容器
     private List<View> listViews; // 图片组
     private boolean isFirstLoc = true; // 是否首次定位
-    private double locationLatitude=0;
-    private double locationLongitude=0;
-    private String orderId="";
+    private double locationLatitude = 0;
+    private double locationLongitude = 0;
+    private String orderId = "";
 
-    public FirstFragment(Context context,List<View> listViews) {
+    public FirstFragment(Context context, List<View> listViews) {
         this.context = context;
         this.listViews = listViews;
     }
@@ -158,12 +160,12 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         // 注册监听  
         mLocationClient.registerLocationListener(mBDLocationListener);
 
-        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
             mPresenter.getState();//获取用户状态
         }
-        mPresenter.recommendComboInfo("0","");//获取推荐套餐
+        mPresenter.recommendComboInfo("0", "");//获取推荐套餐
         mPresenter.productIdList();//获取菁喜产品
-        mPresenter.recommendCompanyList(locationLatitude,locationLongitude);//获取推荐门店
+        mPresenter.recommendCompanyList(locationLatitude, locationLongitude);//获取推荐门店
         dialog = new XiaOrderDialog(context);
         InitViewPager();//初始化图片
         //开始滚动(默认添加一张图片)
@@ -201,15 +203,16 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
         // 启动定位  
         mLocationClient.start();
     }
+
     private class MyBDLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
             // 非空判断  
             if (location != null) {
-                if (!AppUtils.isEmpty(location.getCity())){
+                if (!AppUtils.isEmpty(location.getCity())) {
                     tv_location_city.setText(location.getCity());
-                }else{
+                } else {
                     tv_location_city.setText("当前位置");
                 }
                 if (isFirstLoc) {
@@ -239,6 +242,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             }
         }
     }
+
     @Override
     public void onClick(View view) {
         AnimUtils.clickAnimator(view);
@@ -247,33 +251,33 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
                 break;
             case R.id.iv_my_user://我的
-                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                     gotoLogin();
                     return;
                 }
-                if(onButtonClick!=null){
-                    onButtonClick.onClick(iv_my_user,2);
+                if (onButtonClick != null) {
+                    onButtonClick.onClick(iv_my_user, 2);
                 }
                 break;
             case R.id.iv_msg://消息
-                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                     gotoLogin();
                     return;
                 }
                 ZzRouter.gotoActivity((Activity) context, MessageActivity.class);
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
-                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                     gotoLogin();
                     return;
                 }
                 Intent intent = new Intent((Activity) context, SetMealPayInfoActivity.class);
-                intent.putExtra("serviceType","0");
-                intent.putExtra("companyId","");
+                intent.putExtra("serviceType", "0");
+                intent.putExtra("companyId", "");
                 startActivity(intent);
                 break;
             case R.id.iv_yuyue_daodian://新版到店
-                ZzRouter.gotoActivity((Activity) context,ShopListActivity.class);
+                ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
             case R.id.rb_work_order_all://上门
                 ll_shang_men.setVisibility(View.VISIBLE);
@@ -288,78 +292,78 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             case R.id.tv_car_fuwu3:
             case R.id.tv_car_fuwu4:
             case R.id.tv_car_fuwu5:
-                if (tv_car_fuwu1.isSelected()==true){
+                if (tv_car_fuwu1.isSelected() == true) {
                     tv_car_fuwu1.setSelected(false);
                     tv_car_fuwu2.setSelected(false);
                     tv_car_fuwu3.setSelected(false);
                     tv_car_fuwu4.setSelected(false);
                     tv_car_fuwu5.setSelected(false);
-                }else{
+                } else {
                     tv_car_fuwu1.setSelected(true);
                     tv_car_fuwu2.setSelected(true);
                     tv_car_fuwu3.setSelected(true);
                     tv_car_fuwu4.setSelected(true);
                     tv_car_fuwu5.setSelected(true);
-                    dialog.showShareDialog(true,0,0,0);
+                    dialog.showShareDialog(true, 0, 0, 0);
                 }
                 break;
             case R.id.tv_car_fuwu6:
-                if (tv_car_fuwu6.isSelected()==true){
+                if (tv_car_fuwu6.isSelected() == true) {
                     tv_car_fuwu6.setSelected(false);
                     num1 = 0;
-                }else{
+                } else {
                     tv_car_fuwu6.setSelected(true);
-                    num1=6;
-                    if (tv_car_fuwu1.isSelected()==false){
+                    num1 = 6;
+                    if (tv_car_fuwu1.isSelected() == false) {
                         tv_car_fuwu1.setSelected(true);
                         tv_car_fuwu2.setSelected(true);
                         tv_car_fuwu3.setSelected(true);
                         tv_car_fuwu4.setSelected(true);
                         tv_car_fuwu5.setSelected(true);
                     }
-                    dialog.showShareDialog(true,num1,num2,num3);
+                    dialog.showShareDialog(true, num1, num2, num3);
                 }
                 break;
             case R.id.tv_car_fuwu7:
-                if (tv_car_fuwu7.isSelected()==true){
+                if (tv_car_fuwu7.isSelected() == true) {
                     tv_car_fuwu7.setSelected(false);
-                    num2=0;
-                }else{
+                    num2 = 0;
+                } else {
                     tv_car_fuwu7.setSelected(true);
-                    num2=7;
-                    if (tv_car_fuwu1.isSelected()==false){
+                    num2 = 7;
+                    if (tv_car_fuwu1.isSelected() == false) {
                         tv_car_fuwu1.setSelected(true);
                         tv_car_fuwu2.setSelected(true);
                         tv_car_fuwu3.setSelected(true);
                         tv_car_fuwu4.setSelected(true);
                         tv_car_fuwu5.setSelected(true);
                     }
-                    dialog.showShareDialog(true,num1,num2,num3);
+                    dialog.showShareDialog(true, num1, num2, num3);
                 }
                 break;
             case R.id.tv_car_fuwu8:
-                if (tv_car_fuwu8.isSelected()==true){
+                if (tv_car_fuwu8.isSelected() == true) {
                     tv_car_fuwu8.setSelected(false);
-                    num3=0;
-                }else{
+                    num3 = 0;
+                } else {
                     tv_car_fuwu8.setSelected(true);
-                    num3=8;
-                    if (tv_car_fuwu1.isSelected()==false){
+                    num3 = 8;
+                    if (tv_car_fuwu1.isSelected() == false) {
                         tv_car_fuwu1.setSelected(true);
                         tv_car_fuwu2.setSelected(true);
                         tv_car_fuwu3.setSelected(true);
                         tv_car_fuwu4.setSelected(true);
                         tv_car_fuwu5.setSelected(true);
                     }
-                    dialog.showShareDialog(true,num1,num2,num3);
+                    dialog.showShareDialog(true, num1, num2, num3);
                 }
                 break;
             case R.id.tv_more://推荐店铺更多
                 ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
             case R.id.tv_more_set://推荐套餐更多
-                if(onButtonClick!=null){
-                    onButtonClick.onClick(tv_more_set,1);
+                if (onButtonClick != null) {
+                    onButtonClick.onClick(tv_more_set, 1);
                 }
                 break;
         }
@@ -370,11 +374,13 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public OnButtonClick getOnButtonClick() {
         return onButtonClick;
     }
+
     public void setOnButtonClick(OnButtonClick onButtonClick) {
         this.onButtonClick = onButtonClick;
     }
-    public interface OnButtonClick{
-        public void onClick(View view,int type);
+
+    public interface OnButtonClick {
+        public void onClick(View view, int type);
     }
 
     private void gotoLogin() {
@@ -391,16 +397,16 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //获取推荐洗车组合套餐返回数据
     @Override
     public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
-        if (data.size()>0){
+        if (data.size() > 0) {
             RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-            recommendSetMealAdapter.setData(data,1);//只显示前面两条
+            recommendSetMealAdapter.setData(data, 1);//只显示前面两条
             lv_set_meal_data.setAdapter(recommendSetMealAdapter);
             lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent((Activity) context, SetMealPayActivity.class);
-                    intent.putExtra("recommendComboInfoEntity",data.get(i));
-                    intent.putExtra("serviceType","0");
+                    intent.putExtra("recommendComboInfoEntity", data.get(i));
+                    intent.putExtra("serviceType", "0");
                     context.startActivity(intent);
                 }
             });
@@ -410,14 +416,14 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //推荐门店返回数据
     @Override
     public void recommendCompanyListCallBack(final List<RecommendCompanyListEntity> data) {
-        if (data.size()>0){
+        if (data.size() > 0) {
             ShopRecommendAdapter shopRecommendAdapter = new ShopRecommendAdapter(context);
             shopRecommendAdapter.setData(data);
             lv_men_data.setAdapter(shopRecommendAdapter);
             lv_men_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    ZzRouter.gotoActivity((Activity) context, ShopDetailsActivity.class,data.get(i).companyId);
+                    ZzRouter.gotoActivity((Activity) context, ShopDetailsActivity.class, data.get(i).companyId);
                 }
             });
         }
@@ -426,29 +432,30 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //获取用户状态返回数据
     @Override
     public void getStateCallBack(GetStateEntity data) {
-        if (data.isUnfinished==1){
+        if (data.isUnfinished == 1) {
             orderId = data.orderId;
-        }else{
+        } else {
         }
     }
 
     //菁喜产品返回数据
     @Override
     public void productIdListCallBack(final List<ProductIdListEntity> data) {
-        if (data.size()>0){
+        if (data.size() > 0) {
             ProductAdapter productAdapter = new ProductAdapter(context);
             productAdapter.setData(data);
             lv_product_data.setAdapter(productAdapter);
             lv_product_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (data.get(i).linkType==1){
+                    if (data.get(i).linkType == 1||data.get(i).linkType == 3) {
                         //跳转类型 1发现文章；2活动
-                        Intent intent = new Intent(context, FindDetailsActivity.class);
-                        intent.putExtra("linkId",data.get(i).linkId);
+                        //Intent intent = new Intent(context, FindDetailsActivity.class);
+                        //intent.putExtra("linkId",data.get(i).linkId);
+                        Intent intent = new Intent(context, RechargeActivity.class);
                         context.startActivity(intent);
-                    }else{
-                        toast(context,"暂无标签");
+                    } else {
+                        toast(context, "暂无标签");
                     }
                 }
             });
@@ -458,20 +465,26 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     //广告滚动数据
     @Override
     public void bannerCallBack(final List<BannerEntity> data) {
-        if (data.size()>0){
+        if (data.size() > 0) {
             listViews = new ArrayList<View>(); // 图片组
             for (int i = 0; i < data.size(); i++) {
-                MyImageView imageView = new MyImageView (context);
+                MyImageView imageView = new MyImageView(context);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {// 设置图片点击事件
-                    if (data.get(myPager.getCurIndex()).linkType==1){
-                        //跳转类型 1发现文章；2活动
-                        Intent intent = new Intent(context, FindDetailsActivity.class);
-                        intent.putExtra("linkId",data.get(myPager.getCurIndex()).linkId);
-                        context.startActivity(intent);
-                     }else{
-                        toast(context,"暂无标签");
-                    }
+                        if (data.get(myPager.getCurIndex()).linkType == 1) {
+                            //跳转类型 1发现文章；2活动
+                            Intent intent = new Intent(context, FindDetailsActivity.class);
+                            intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                            //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                            context.startActivity(intent);
+                        } else if (data.get(myPager.getCurIndex()).linkType == 2) {
+                            //跳转类型 1发现文章；2活动
+                            Intent intent = new Intent(context, ShareActivity.class);
+                            //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                            context.startActivity(intent);
+                        } else {
+                            toast(context, "暂无标签");
+                        }
                     }
                 });
                 imageView.setImageURL(data.get(i).imgUrl);
@@ -491,9 +504,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
 
     @Override
     public void onResume() {
-        Log.i("TAG","我执行了");
+        Log.i("TAG", "我执行了");
         super.onResume();
-        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
             mPresenter.getState();//获取用户状态
         }
     }

@@ -28,6 +28,11 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -105,9 +110,10 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
 //            find_details_context.getSettings().setLoadWithOverviewMode(true);
 //            find_details_context.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
-            find_details_context.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
             find_details_context.loadData(findContent.replace("\\",""),"text/html; charset=UTF-8", null);
+            //find_details_context.loadDataWithBaseURL(null,getNewContent(findContent.replace("\\","")), "text/htm","utf-8", null);
+
 
             if ("1".equals(type)){
                 tv_type.setText("文章标签：经验/观点");
@@ -148,4 +154,15 @@ public class FindDetailsActivity extends MVPBaseActivity<FindDetailsContract.Vie
             setView(data.get(0));
         }
     }
+
+    //java
+    public String getNewContent(String htmltext){
+        Document doc= Jsoup.parse(htmltext);
+        Elements elements=doc.getElementsByTag("img");
+        for (Element element : elements) {
+            element.attr("width","100%").attr("height","auto");
+        }
+        return doc.toString();
+    }
+
 }

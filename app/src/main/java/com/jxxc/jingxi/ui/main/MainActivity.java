@@ -442,9 +442,15 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                         if (data.get(finalI).linkType==1){
                             //跳转类型 1发现文章；2活动
                             Intent intent = new Intent(MainActivity.this, FindDetailsActivity.class);
-                            intent.putExtra("linkId",data.get(finalI).linkId);
+                            //intent.putExtra("linkId",data.get(finalI).linkId);
+                            intent.putExtra("linkId","16");
                             startActivity(intent);
-                        }else{
+                        } else if (data.get(finalI).linkType == 2) {
+                            //跳转类型 1发现文章；2活动
+                            Intent intent = new Intent(MainActivity.this, ShareActivity.class);
+                            //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                            startActivity(intent);
+                        } else{
                             toast(MainActivity.this,"暂无标签");
                         }
                     }
