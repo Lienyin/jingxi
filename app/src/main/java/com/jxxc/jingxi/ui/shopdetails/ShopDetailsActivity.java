@@ -76,7 +76,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     @BindView(R.id.tv_details_shop_call)
     TextView tv_details_shop_call;
     @BindView(R.id.gv_technician_data)
-    GridView gv_technician_data;
+    HorizontalListView gv_technician_data;
     @BindView(R.id.gv_time_data)
     GridView gv_time_data;
     @BindView(R.id.gv_weekOf_date)
@@ -226,14 +226,19 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     gotoLogin();
                     return;
                 }
-                String start = dateStr+" "+timeStr.substring(0,5);
-                String end = dateStr+" "+timeStr.substring(6,11);
-                Intent intent = new Intent(this, SetMealPayInfoActivity.class);
-                intent.putExtra("serviceType","1");
-                intent.putExtra("companyId",cId);
-                intent.putExtra("appointmentStartTime",start);
-                intent.putExtra("appointmentEndTime",end);
-                startActivity(intent);
+                if (AppUtils.isEmpty(timeStr)){
+                    toast(this,"请选择服务时间");
+                }else{
+                    String start = dateStr+" "+timeStr.substring(0,5);
+                    String end = dateStr+" "+timeStr.substring(6,11);
+                    Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+                    intent.putExtra("serviceType","1");
+                    intent.putExtra("companyId",cId);
+                    intent.putExtra("appointmentStartTime",start);
+                    intent.putExtra("appointmentEndTime",end);
+                    intent.putExtra("address",address);
+                    startActivity(intent);
+                }
                 break;
             default:
         }

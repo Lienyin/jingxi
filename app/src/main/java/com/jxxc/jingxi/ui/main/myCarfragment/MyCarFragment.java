@@ -311,9 +311,13 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }else{
                     tv_discounts.setText("");
                 }
-                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboMoney+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                //订单金额=套餐金额-活动金额-优惠券金额
+                orderMoney = comboMoney-activityMoney-couponMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
             }
         });
         return view;
@@ -474,9 +478,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+                //套餐金额=基础套餐金额+fuwuTypeMoney6
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8;
+                //订单金额=(基础套餐金额+选择服务项金额)-优惠券金额-活动金额
+                orderMoney = comboMoney-couponMoney-activityMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
                 break;
             case R.id.tv_car_fuwu7:
                 if (tv_car_fuwu7.isSelected()==true){
@@ -499,9 +509,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+                //套餐金额=基础套餐金额+fuwuTypeMoney7
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8;
+                //订单金额=(基础套餐金额+选择服务项金额)-优惠券金额-活动金额
+                orderMoney = comboMoney-couponMoney-activityMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
                 break;
             case R.id.tv_car_fuwu8:
                 if (tv_car_fuwu8.isSelected()==true){
@@ -524,9 +540,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         }
                     }
                 }
-                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-                tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+                //套餐金额=基础套餐金额+fuwuTypeMoney6
+                comboMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8;
+                //订单金额=(基础套餐金额+选择服务项金额)-优惠券金额-活动金额
+                orderMoney = comboMoney-couponMoney-activityMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
                 break;
             case R.id.ll_address://选择地址
                 ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
@@ -634,8 +656,12 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 double num = activityMoney+couponMoney;//总共优惠的金额
                 tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(num)+"元");
                 //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboMoney+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
             }
         }
     }
@@ -755,10 +781,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 tv_car_fuwu8_money.setText("外加服务");
             }
         }
-        comboMoney = comboData.basicPrice;//获得基础套餐金额
+        //套餐金额=基础套餐金额
+        comboMoney = comboData.basicPrice;
         //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
         orderMoney = comboMoney+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
-        tv_xia_order_money.setText("订单金额："+new DecimalFormat("0.00").format(orderMoney)+"元");
+        if (orderMoney<0){
+            tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+        }else{
+            tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+        }
     }
 
     @Override

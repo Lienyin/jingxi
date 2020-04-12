@@ -186,10 +186,10 @@
                     android:textColor="@color/black26"
                     android:textSize="14sp"
                     android:text="门店技师"/>
-                <com.jxxc.jingxi.utils.MyGridView
+                <com.jxxc.jingxi.utils.HorizontalListView
                     android:id="@+id/gv_technician_data"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_marginTop="5dp"
                     android:numColumns="3"/>
             </LinearLayout>
