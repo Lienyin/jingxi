@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="车牌号码"
-            android:textColor="@color/black"
+            android:text="请输入车牌号"
+            android:textColor="@color/black666"
             android:textSize="14sp" />
 
         <RelativeLayout
@@ -32,7 +32,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="80dp"
+                android:layout_marginRight="100dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/transparent"
                 android:inputType="text"
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
-            android:text="车型选择"
-            android:textColor="@color/black"
+            android:text="车辆型号"
+            android:textColor="@color/black666"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -82,9 +82,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="请选择车型"
+                android:hint="请选择您的车辆型号"
                 android:inputType="text"
-                android:textColor="#000"
+                android:textColor="@color/black666"
                 android:textSize="20sp" />
 
             <TextView
@@ -110,7 +110,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:text="车身颜色"
-            android:textColor="@color/black"
+            android:textColor="@color/black666"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -154,11 +154,8 @@
     <Button
         android:id="@+id/btn_add_car"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg_button"
+        android:layout_height="60dp"
+        android:background="@color/public_all"
         android:text="添加车辆"
         android:textColor="@color/white"
         android:textSize="14sp" />
