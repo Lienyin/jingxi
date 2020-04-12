@@ -51,10 +51,11 @@ public class RechargePresenter extends BasePresenterImpl<RechargeContract.View> 
      * 支付宝支付
      */
     @Override
-    public void payByAliPay(double money,int payType) {
+    public void payByAliPay(double money,int payType,String phonenumber) {
         OkGo.<HttpResult<AliPayInfo>>post(Api.RECHARGE)
                 .params("money",money)
                 .params("payType",payType)
+                .params("phonenumber",phonenumber)
                 .execute(new JsonCallback<HttpResult<AliPayInfo>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<AliPayInfo>> response) {
@@ -74,10 +75,11 @@ public class RechargePresenter extends BasePresenterImpl<RechargeContract.View> 
      * 微信支付
      */
     @Override
-    public void payByWeChat(double money,int payType) {
+    public void payByWeChat(double money,int payType,String phonenumber) {
         OkGo.<HttpResult<PayByWeChat>>post(Api.RECHARGE)
                 .params("money",money)
                 .params("payType",payType)
+                .params("phonenumber",phonenumber)
                 .execute(new JsonCallback<HttpResult<PayByWeChat>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<PayByWeChat>> response) {

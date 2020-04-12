@@ -20,6 +20,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +74,10 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
     SmoothCheckBox scbWxPay;
     @BindView(R.id.btn_pay)
     Button btnPay;
+    @BindView(R.id.et_phone_number)
+    EditText et_phone_number;
+    @BindView(R.id.iv_cancenl)
+    ImageView iv_cancenl;
     private RechargeAdapter adapter;
     private int type = 2;
     private double money;
@@ -93,6 +98,9 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
         scbWxPay.setChecked(true);
         //注册广播
         registerReceiver(receiver, new IntentFilter("wei_xin_pay_sucess"));
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_SESSION_MOBILE,""))){
+            et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));
+        }
     }
 
     private void initAdapter() {
@@ -172,7 +180,7 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
     }
 
     @OnClick({R.id.tv_back, R.id.scb_alipay, R.id.ll_alipay, R.id.scb_wx_pay, R.id.ll_wx_pay,
-            R.id.btn_pay})
+            R.id.btn_pay,R.id.iv_cancenl})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -202,7 +210,7 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                         toast(this,"目前您安装的支付宝版本过低或尚未安装");
                     }else{
                         StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByAliPay(money,3);
+                        mPresenter.payByAliPay(money,3,et_phone_number.getText().toString().trim());
                     }
                 }else if (type == 2){
                     //微信
@@ -210,9 +218,12 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                         toast(this,"目前您安装的微信版本过低或尚未安装");
                     }else{
                         StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByWeChat(money,2);
+                        mPresenter.payByWeChat(money,2,et_phone_number.getText().toString().trim());
                     }
                 }
+                break;
+            case R.id.iv_cancenl://清空
+                et_phone_number.setText("");
                 break;
             default:
         }

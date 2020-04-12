@@ -28,10 +28,41 @@
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="12dp"
-                    android:text="充值面额"
+                    android:text="余额充值"
                     android:textColor="@color/md_grey_800"
                     android:textSize="14sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shape_round_rect_loop_gray">
+
+                    <EditText
+                        android:id="@+id/et_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black333"
+                        android:layout_margin="2dp"
+                        android:background="@color/white"
+                        android:inputType="phone"
+                        android:paddingLeft="5dp"
+                        android:hint="输入充值账号"
+                        android:textSize="14sp"/>
+                    <ImageView
+                        android:id="@+id/iv_cancenl"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/cancenl_cha"/>
+                </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_list"
                     android:layout_width="match_parent"
@@ -40,17 +71,20 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_margin="12dp">
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp">
 
                     <EditText
                         android:id="@+id/et_money"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/shape_bg_edittext"
+                        android:background="@drawable/shape_round_rect_loop_gray"
                         android:hint="其他金额"
                         android:inputType="numberDecimal"
                         android:maxLength="6"
+                        android:textColor="@color/black333"
                         android:paddingLeft="34dp"
                         android:textSize="14sp" />
 
@@ -60,7 +94,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="13dp"
                         android:text="￥"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black333"
                         android:textSize="18sp" />
 
                 </RelativeLayout>
@@ -83,44 +117,6 @@
                 android:background="#55cccccc" />
 
             <LinearLayout
-                android:id="@+id/ll_alipay"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:background="@mipmap/ic_alipay" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:text="支付宝"
-                    android:textColor="@color/md_grey_800"
-                    android:textSize="14sp" />
-
-                <com.jxxc.jingxi.view.SmoothCheckBox
-                    android:id="@+id/scb_alipay"
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginRight="10dp" />
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#55cccccc" />
-
-            <LinearLayout
                 android:id="@+id/ll_wx_pay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -133,23 +129,63 @@
                 <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
+                    android:visibility="gone"
                     android:background="@mipmap/ex_share_wp" />
-
-                <TextView
-                    android:layout_width="0pt"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:text="微信"
-                    android:textColor="@color/md_grey_800"
-                    android:textSize="15dp" />
 
                 <com.jxxc.jingxi.view.SmoothCheckBox
                     android:id="@+id/scb_wx_pay"
                     android:layout_width="19dp"
                     android:layout_height="19dp"
                     android:layout_gravity="center_vertical|right"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="0pt"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="微信支付"
+                    android:textColor="@color/md_grey_800"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#55cccccc" />
+
+            <LinearLayout
+                android:id="@+id/ll_alipay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="29dp"
+                    android:layout_height="29dp"
+                    android:visibility="gone"
+                    android:background="@mipmap/ic_alipay" />
+
+                <com.jxxc.jingxi.view.SmoothCheckBox
+                    android:id="@+id/scb_alipay"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="支付宝支付"
+                    android:textColor="@color/md_grey_800"
+                    android:textSize="14sp" />
+
             </LinearLayout>
 
             <Button
@@ -159,7 +195,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="33dp"
                 android:background="@drawable/shape_bg_button"
-                android:text="立即充值"
+                android:text="确认支付"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>

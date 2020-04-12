@@ -6,16 +6,17 @@
     <LinearLayout
         android:id="@+id/ll_bg"
         android:background="@drawable/shape_round_rect_loop_gray"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:padding="5dp"
-        android:layout_margin="2dp"
-        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_height="55dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_money"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:text="***"
             android:gravity="center"
+            android:textColor="@color/black333"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -23,6 +24,7 @@
             android:textSize="10sp"
             android:text="送***"
             android:gravity="center"
+            android:textColor="@color/black333"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

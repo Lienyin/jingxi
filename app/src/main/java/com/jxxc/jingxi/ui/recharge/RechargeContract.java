@@ -22,7 +22,7 @@ public class RechargeContract {
 
     interface  Presenter extends BasePresenter<View> {
         void getRechargeConfiguration();
-        void payByAliPay(double money, int payType);
-        void payByWeChat(double money, int payType);
+        void payByAliPay(double money, int payType,String phonenumber);
+        void payByWeChat(double money, int payType,String phonenumber);
     }
 }
