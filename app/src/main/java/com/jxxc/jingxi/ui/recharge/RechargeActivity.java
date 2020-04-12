@@ -200,25 +200,27 @@ public class RechargeActivity extends MVPBaseActivity<RechargeContract.View, Rec
                 scbAlipay.setChecked(false);
                 break;
             case R.id.btn_pay://立即充值
-                if (money <= 0){
+                if (AppUtils.isEmpty(et_phone_number.getText().toString().trim())){
+                    toast(this,"请输入充值账户");
+                }else if (money <= 0){
                     toast(this,"充值金额要大于0");
-                    return;
-                }
-                if (type == 3){
-                    //支付宝
-                    if (!isAvilible(this,"com.eg.android.AlipayGphone")){
-                        toast(this,"目前您安装的支付宝版本过低或尚未安装");
-                    }else{
-                        StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByAliPay(money,3,et_phone_number.getText().toString().trim());
-                    }
-                }else if (type == 2){
-                    //微信
-                    if (!isAvilible(this,"com.tencent.mm")){
-                        toast(this,"目前您安装的微信版本过低或尚未安装");
-                    }else{
-                        StyledDialog.buildLoading("正在支付").setActivity(this).show();
-                        mPresenter.payByWeChat(money,2,et_phone_number.getText().toString().trim());
+                }else{
+                    if (type == 3){
+                        //支付宝
+                        if (!isAvilible(this,"com.eg.android.AlipayGphone")){
+                            toast(this,"目前您安装的支付宝版本过低或尚未安装");
+                        }else{
+                            StyledDialog.buildLoading("正在支付").setActivity(this).show();
+                            mPresenter.payByAliPay(money,3,et_phone_number.getText().toString().trim());
+                        }
+                    }else if (type == 2){
+                        //微信
+                        if (!isAvilible(this,"com.tencent.mm")){
+                            toast(this,"目前您安装的微信版本过低或尚未安装");
+                        }else{
+                            StyledDialog.buildLoading("正在支付").setActivity(this).show();
+                            mPresenter.payByWeChat(money,2,et_phone_number.getText().toString().trim());
+                        }
                     }
                 }
                 break;

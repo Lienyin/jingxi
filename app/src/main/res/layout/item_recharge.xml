@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/ll_bg"
         android:background="@drawable/shape_round_rect_loop_gray"
-        android:layout_width="100dp"
-        android:padding="5dp"
-        android:layout_margin="5dp"
+        android:layout_width="110dp"
         android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_money"

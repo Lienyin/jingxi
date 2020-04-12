@@ -25,9 +25,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="20dp"
                     android:text="余额充值"
                     android:textColor="@color/md_grey_800"
                     android:textSize="14sp" />
@@ -37,7 +37,7 @@
                     android:layout_height="55dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
