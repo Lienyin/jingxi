@@ -72,10 +72,10 @@
             <LinearLayout
                 android:id="@+id/vb"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="3dip"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="2dp"
                 android:gravity="center"
                 android:orientation="horizontal" />
 
@@ -361,7 +361,7 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
+                android:layout_height="2dp"
                 android:background="@color/white"/>
             <!--第二版洗车-->
             <LinearLayout
@@ -412,7 +412,8 @@
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:padding="10dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <ImageView
                     android:id="@+id/iv_yuyue_shangmen"
@@ -430,7 +431,7 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
+                android:layout_height="2dp"
                 android:background="@color/white"/>
             <!--门店推荐-->
             <LinearLayout
@@ -481,7 +482,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="20dp"
                     android:gravity="center_vertical">
 
                     <TextView

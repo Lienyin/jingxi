@@ -202,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:padding="20dp">
 
                 <TextView
@@ -239,6 +239,54 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_xiche"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="洗  车"
+                        android:drawableBottom="@drawable/radio_bg"
+                        android:textColor="@drawable/radio_main"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_meirong"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="美  容"
+                        android:drawableBottom="@drawable/radio_bg"
+                        android:textColor="@drawable/radio_main"
+                        android:textSize="16sp" />
+                    <RadioButton
+                        android:id="@+id/rb_huli"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="护  理"
+                        android:drawableBottom="@drawable/radio_bg"
+                        android:textColor="@drawable/radio_main"
+                        android:textSize="16sp" />
+                </RadioGroup>
+            </LinearLayout>
             <!--门店下的套餐列表-->
             <com.jxxc.jingxi.utils.ListViewForScrollView
                 android:id="@+id/lv_set_meal_data"

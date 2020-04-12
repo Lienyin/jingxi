@@ -108,7 +108,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCompany(cId);//加盟商详细
-        //mPresenter.recommendComboInfo("1",cId);//获取洗车套餐
+        mPresenter.recommendComboInfo("1",cId);//获取洗车套餐
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
