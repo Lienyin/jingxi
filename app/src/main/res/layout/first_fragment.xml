@@ -31,6 +31,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
+                    <LinearLayout
+                        android:id="@+id/vb"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
                 </RelativeLayout>
                 <!--头部-->
                 <RelativeLayout
@@ -68,16 +77,6 @@
                         android:src="@mipmap/msg_xiaoxi"/>
                 </RelativeLayout>
             </FrameLayout>
-
-            <LinearLayout
-                android:id="@+id/vb"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="3dip"
-                android:layout_marginBottom="2dp"
-                android:gravity="center"
-                android:orientation="horizontal" />
 
             <!-- 服务-->
             <LinearLayout

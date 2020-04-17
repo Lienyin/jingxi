@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
+    <!--套餐-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@color/white">
@@ -14,9 +17,24 @@
             android:layout_width="130dp"
             android:layout_height="90dp"
             android:scaleType="centerCrop"
+            android:visibility="gone"
             android:src="@mipmap/zhan_weitu"/>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_fuwu_select"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/iv_fuwu_item"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/icon_38_24"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_fuwu_item"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
@@ -29,7 +47,7 @@
                 android:text="XXX"
                 android:typeface="normal"
                 android:textColor="@color/black26"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_recommend_context"
@@ -44,23 +62,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:gravity="bottom">
-                <TextView
-                    android:id="@+id/tv_recommend_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/order_money"
-                    android:text="XXX"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:layout_marginLeft="3dp"
-                    android:visibility="invisible"
-                    android:textColor="@color/order_money"
-                    android:text="起"/>
+
                 <TextView
                     android:id="@+id/tv_recommend_num"
                     android:layout_width="wrap_content"
@@ -69,6 +73,85 @@
                     android:textColor="@color/blackcf"
                     android:text="XXX"/>
             </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_recommend_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/order_money"
+            android:text="XXX"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/jiantou"/>
+    </LinearLayout>
+    <!--服务详情-->
+    <LinearLayout
+        android:id="@+id/ll_fuwu_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="#F9F9F9">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="清洗项目: "/>
+            <TextView
+                android:id="@+id/tv_fuwu_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="XXX"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="清洗时间: "/>
+            <TextView
+                android:id="@+id/tv_fuwu_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="XXX"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="市场价格: "/>
+            <TextView
+                android:id="@+id/tv_fuwu_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#B7B7B7"
+                android:text="XXX"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
