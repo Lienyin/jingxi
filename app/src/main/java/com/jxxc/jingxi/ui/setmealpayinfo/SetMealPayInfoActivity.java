@@ -181,6 +181,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String comboProductId7="";
     private String comboProductId8="";
     private String comboProductIds="";
+    private String comboRecommendIds="";//进店套餐id
     private double fuwuTypeMoney6=0;
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
@@ -407,30 +408,45 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 ZzRouter.gotoActivity(this, RemarkActivity.class);
                 break;
             case R.id.tv_create_order://提交订单
-                if (AppUtils.isEmpty(tv_car_info.getText().toString())){
-                    toast(this,"请添加车辆");
-                }else if (AppUtils.isEmpty(tv_car_address.getText().toString())){
-                    toast(this,"请选择停车地点");
-                }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
-                    toast(this,"请选择服务时间");
+                if(AppUtils.isEmpty(companyId)){//上门
+                    if (AppUtils.isEmpty(tv_car_info.getText().toString())){
+                        toast(this,"请添加车辆");
+                    }else if (AppUtils.isEmpty(tv_car_address.getText().toString())){
+                        toast(this,"请选择停车地点");
+                    }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
+                        toast(this,"请选择服务时间");
+                    }else{
+                        StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                        comboProductIds = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
+                        mPresenter.createOrder(
+                                Integer.valueOf(serviceType),
+                                counponId,
+                                carNum,
+                                "",
+                                tv_phone_number.getText().toString(),
+                                tv_car_address.getText().toString(),
+                                siteLng,
+                                siteLat,
+                                appointmentStartTime,
+                                appointmentEndTime,
+                                remark,
+                                companyId,
+                                comboProductIds,
+                                comboId);
+                    }
                 }else{
+                    //进店
                     StyledDialog.buildLoading("正在下单").setActivity(this).show();
-                    comboProductIds = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
-                    mPresenter.createOrder(
-                            Integer.valueOf(serviceType),
+                    mPresenter.create2(
                             counponId,
                             carNum,
                             "",
                             tv_phone_number.getText().toString(),
-                            tv_car_address.getText().toString(),
-                            siteLng,
-                            siteLat,
                             appointmentStartTime,
                             appointmentEndTime,
                             remark,
                             companyId,
-                            comboProductIds,
-                            comboId);
+                            comboProductIds);
                 }
                 break;
             case R.id.tv_car_fuwu6:
@@ -575,6 +591,16 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     //提交订单返回数据
     @Override
     public void createOrderCallBack(CreateOrderEntity data) {
+        //支付订单
+        Intent intent = new Intent(this, PayOrderActivity.class);
+        intent.putExtra("orderId",data.orderId);
+        intent.putExtra("orderPrice",data.payPrice);
+        startActivity(intent);
+    }
+
+    //下单（进店服务）返回数据
+    @Override
+    public void create2CallBack(CreateOrderEntity data) {
         //支付订单
         Intent intent = new Intent(this, PayOrderActivity.class);
         intent.putExtra("orderId",data.orderId);

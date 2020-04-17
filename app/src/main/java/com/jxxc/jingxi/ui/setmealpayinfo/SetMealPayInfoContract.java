@@ -26,6 +26,7 @@ public class SetMealPayInfoContract {
         void createOrderCallBack(CreateOrderEntity data);
         void getActivitiesCallBack(List<ActivitiesEntity> data);
         void comboInfoCallBack(ProductInfoEntity data);
+        void create2CallBack(CreateOrderEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -48,5 +49,15 @@ public class SetMealPayInfoContract {
                          String comboTypeId);
         void getActivities();
         void comboInfo();
+
+        void create2(String counponId,
+                     String carNum,
+                     String carNums,
+                     String phonenumber,
+                     String appointmentStartTime,
+                     String appointmentEndTime,
+                     String remark,
+                     String companyId,
+                     String comboRecommendIds);
     }
 }

@@ -108,4 +108,6 @@ public class Api {
     public static final String SELECT_BY_PHONE = BASEURL + "/system/company/selectByPhone";
     //50-申请加入接口
     public static final String APPLY = BASEURL + "/system/company/applyToJoin";
+    //51-下单（进店服务）
+    public static final String CREATE2 = BASEURL + "/biz/order/create2";
 }

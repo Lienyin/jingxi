@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -115,9 +116,9 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         });
 
         if (position == defaultSelection) {// 选中时设置单纯颜色
-            holder.iv_fuwu_item.setBackgroundResource(R.mipmap.icon_38);
+            //holder.iv_fuwu_item.setBackgroundResource(R.mipmap.icon_38);
         } else {// 未选中时设置selector
-            holder.iv_fuwu_item.setBackgroundResource(R.mipmap.icon_38_24);
+            //holder.iv_fuwu_item.setBackgroundResource(R.mipmap.icon_38_24);
         }
         return convertView;
     }
@@ -134,7 +135,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         LinearLayout ll_fuwu_detail;
         LinearLayout ll_fuwu_item;
         LinearLayout ll_fuwu_select;
-        ImageView iv_fuwu_item;
+        CheckBox iv_fuwu_item;
     }
 
 /**

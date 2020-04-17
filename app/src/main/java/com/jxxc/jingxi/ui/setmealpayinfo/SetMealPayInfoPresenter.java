@@ -199,4 +199,45 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                     }
                 });
     }
+
+    /**
+     * 下单（进店服务）
+     * @param counponId
+     * @param carNum
+     * @param carNums
+     * @param phonenumber
+     * @param appointmentStartTime
+     * @param appointmentEndTime
+     * @param remark
+     * @param companyId
+     * @param comboRecommendIds
+     */
+    @Override
+    public void create2(String counponId, String carNum, String carNums,
+                        String phonenumber, String appointmentStartTime,
+                        String appointmentEndTime, String remark, String companyId,
+                        String comboRecommendIds) {
+        OkGo.<HttpResult<CreateOrderEntity>>post(Api.CREATE2)
+                .params("counponId",counponId)
+                .params("carNum",carNum)
+                .params("carNums",carNums)
+                .params("phonenumber",phonenumber)
+                .params("appointmentStartTime",appointmentStartTime)
+                .params("appointmentEndTime",appointmentEndTime)
+                .params("remark",remark)
+                .params("companyId",companyId)
+                .params("comboRecommendIds",comboRecommendIds)
+                .execute(new JsonCallback<HttpResult<CreateOrderEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<CreateOrderEntity>> response) {
+                        StyledDialog.dismissLoading();
+                        CreateOrderEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.create2CallBack(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
 }
