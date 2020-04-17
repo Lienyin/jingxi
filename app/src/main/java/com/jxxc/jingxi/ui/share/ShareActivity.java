@@ -262,22 +262,31 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         tv_hint_umber.setText(Html.fromHtml("当前邀请人数:<font color=\"#FFA521\"> "+data.inviteNum+"</font>人，已获赠免费洗车机会<font color=\"#FFA521\">"+data.couponNum+"</font>次。"));
         //1,6,12,18,24,30,36
         if (data.inviteNum==1){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
         }else if (data.inviteNum>1&&data.inviteNum<6){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_share_schedule_1011.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum==6){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_share_schedule_1011.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1012.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum>6&&data.inviteNum<12){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_share_schedule_1011.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1012.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1021.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum==12){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -286,6 +295,9 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1021.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1022.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum>12&&data.inviteNum<18){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -295,6 +307,10 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1022.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1031.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum==18){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_104.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -306,6 +322,10 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1031.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1032.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum>18&&data.inviteNum<24){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_104.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -318,6 +338,11 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1032.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1041.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum==24){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_104.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_105.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -332,6 +357,11 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1041.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1042.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum>24&&data.inviteNum<30){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_104.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_105.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);
@@ -347,6 +377,12 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
             view_share_schedule_1042.setBackgroundColor(getResources().getColor(R.color.public_all));
             view_share_schedule_1051.setBackgroundColor(getResources().getColor(R.color.public_all));
         }else if (data.inviteNum==30){
+            view_yuan_share_schedule_101.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_102.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_103.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_104.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_105.setTextColor(getResources().getColor(R.color.white));
+            view_yuan_share_schedule_106.setTextColor(getResources().getColor(R.color.white));
             view_yuan_share_schedule_101.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_102.setBackgroundResource(R.drawable.share_num_bg_yes);
             view_yuan_share_schedule_103.setBackgroundResource(R.drawable.share_num_bg_yes);

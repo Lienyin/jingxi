@@ -261,10 +261,12 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     gotoLogin();
                     return;
                 }else{
+                    if (recommendComboInfoEntity.size()<=0){toast(this,"请选择服务套餐");return;}
                     Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayInfoActivity.class);
                     intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity.get(0));
                     intent.putExtra("serviceType","1");
                     intent.putExtra("companyId",cId);
+                    intent.putExtra("address",address);
                     startActivity(intent);
                 }
                 break;

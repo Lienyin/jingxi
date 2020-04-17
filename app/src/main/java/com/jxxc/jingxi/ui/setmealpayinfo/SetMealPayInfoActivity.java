@@ -215,6 +215,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             tv_title.setText("到店洗车");
             tv_address_text.setText("门店地址");
             tv_car_address.setText(address);
+            tv_car_address.setClickable(true);
             //到店服务
             ll_set_type1.setVisibility(View.VISIBLE);
             ll_set_type2.setVisibility(View.GONE);
