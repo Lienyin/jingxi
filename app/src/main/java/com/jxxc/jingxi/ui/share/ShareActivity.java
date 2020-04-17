@@ -104,6 +104,8 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     TextView tv_achievement_cash;
     @BindView(R.id.tv_hint_umber)
     TextView tv_hint_umber;
+    @BindView(R.id.tv_xi_car_number)
+    TextView tv_xi_car_number;
     @BindView(R.id.lv_share_info)
     ListView lv_share_info;
     private FriendListAdapter adapter;
@@ -254,6 +256,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     public void getInfoCallBack(GetInfoEntity data) {
         tv_achievement_discounts.setText(data.inviteNum+"");
         tv_achievement_cash.setText(data.couponNum+"");
+        tv_xi_car_number.setText("已获得"+data.couponNum+"次免费洗车奖励");
         //邀请记录
         if (data.inviteCustomer.size()>0){
             adapter = new FriendListAdapter(this,data.inviteCustomer);

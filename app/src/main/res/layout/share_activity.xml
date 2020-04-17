@@ -333,6 +333,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/tv_xi_car_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="已获得0次免费洗车奖励"
