@@ -71,6 +71,12 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     TextView tv_recommend_context;
     @BindView(R.id.tv_recommend_money)
     TextView tv_recommend_money;
+    @BindView(R.id.tv_fuwu_name)
+    TextView tv_fuwu_name;
+    @BindView(R.id.tv_fuwu_money)
+    TextView tv_fuwu_money;
+    @BindView(R.id.tv_fuwu_time)
+    TextView tv_fuwu_time;
     @BindView(R.id.tv_recommend_num)
     TextView tv_recommend_num;
     @BindView(R.id.tv_car_address)
@@ -145,6 +151,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_set_type1;
     @BindView(R.id.ll_set_type2)
     LinearLayout ll_set_type2;
+    @BindView(R.id.ll_fuwu_detail)
+    LinearLayout ll_fuwu_detail;
 
     private String siteLat="";
     private String siteLng="";
@@ -202,8 +210,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList(companyId,queryDate);//查询预约时间
 
-//        if (!AppUtils.isEmpty(companyId)){//到店加载
-            //老的套餐数据
         if (!AppUtils.isEmpty(companyId)){
             recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
             tv_title.setText("到店洗车");
@@ -218,6 +224,21 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
             tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
             //tv_recommend_num.setText("已售"+recommendComboInfoEntity.salesVolume);
+            tv_fuwu_name.setText(recommendComboInfoEntity.comboComment);
+            tv_fuwu_time.setText(recommendComboInfoEntity.serviceHours);
+            String carType1 = "";//1-SUV 2-轿车 3-MPV
+            String carType2 = "";//1-SUV 2-轿车 3-MPV
+            String carType3 = "";//1-SUV 2-轿车 3-MPV
+            for (int i=0;i<recommendComboInfoEntity.carTypePrices.size();i++){
+                if (recommendComboInfoEntity.carTypePrices.get(i).carTypeId==1){
+                    carType1 = "SUV" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
+                }else if (recommendComboInfoEntity.carTypePrices.get(i).carTypeId==2){
+                    carType2 = "轿车" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
+                }else{
+                    carType3 = "MPV" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
+                }
+            }
+            tv_fuwu_money.setText(carType1+" "+" "+carType2+" "+carType3);
             comboMoney = recommendComboInfoEntity.totalPrice;//套餐金额
             //订单金额=套餐金额-活动金额-优惠券金额
             orderMoney = comboMoney-activityMoney-couponMoney;
@@ -226,6 +247,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             }else{
                 tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
             }
+            mPresenter.getCarList();//车辆列表
+            mPresenter.queryMyCoupon(0);//优惠券
+            mPresenter.getActivities();//活动
         }else {
             //上门服务
             tv_address_text.setText("停车地址");
@@ -355,7 +379,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
 
     @OnClick({R.id.tv_back,R.id.ll_stop_car_address,R.id.ll_car_info,R.id.ll_yuyue_time,
     R.id.ll_discount_coupon,R.id.tv_create_order,R.id.ll_remark,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,
-            R.id.tv_car_fuwu8})
+            R.id.tv_car_fuwu8,R.id.ll_set_type1})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -480,6 +504,13 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
                 }
                 break;
+            case R.id.ll_set_type1:
+                if (ll_fuwu_detail.getVisibility()==View.VISIBLE){
+                    ll_fuwu_detail.setVisibility(View.GONE);
+                }else{
+                    ll_fuwu_detail.setVisibility(View.VISIBLE);
+                }
+                break;
             default:
         }
     }
@@ -571,7 +602,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 double num = activityMoney+couponMoney;//总共优惠的金额
                 tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(num)+"元");
                 //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
-                orderMoney = comboData.basicPrice+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
+                orderMoney = comboMoney+fuwuTypeMoney6+fuwuTypeMoney7+fuwuTypeMoney8-couponMoney-activityMoney;
                 if (orderMoney<0){
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
                 }else{
