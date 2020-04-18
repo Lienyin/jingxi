@@ -75,7 +75,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        RecommendComboInfoEntity data = list.get(position);
+        final RecommendComboInfoEntity data = list.get(position);
         holder.iv_recommend_icon.setType(ZQImageViewRoundOval.TYPE_ROUND);
         holder.iv_recommend_icon.setRoundRadius(20);//矩形凹行大小
         GlideImgManager.loadRectangleImage(context, data.imgUrl, holder.iv_recommend_icon);
@@ -115,6 +115,22 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             }
         });
 
+        if (data.isSelect){
+            holder.iv_fuwu_item.setChecked(true);
+        }else{
+            holder.iv_fuwu_item.setChecked(false);
+        }
+        final ViewHolder finalHolder1 = holder;
+        holder.iv_fuwu_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (finalHolder1.iv_fuwu_item.isChecked()==false){
+                    data.setSelect(false);
+                }else{
+                    data.setSelect(true);
+                }
+            }
+        });
         if (position == defaultSelection) {// 选中时设置单纯颜色
             //holder.iv_fuwu_item.setBackgroundResource(R.mipmap.icon_38);
         } else {// 未选中时设置selector

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.ActivityDataAdapter;
+import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.dialog.DiscountCouponDialog;
 import com.jxxc.jingxi.dialog.TimeDialog;
 import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
@@ -63,22 +64,12 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.iv_recommend_icon)
-    ZQImageViewRoundOval iv_recommend_icon;
-    @BindView(R.id.tv_recommend_name)
-    TextView tv_recommend_name;
-    @BindView(R.id.tv_recommend_context)
-    TextView tv_recommend_context;
-    @BindView(R.id.tv_recommend_money)
-    TextView tv_recommend_money;
     @BindView(R.id.tv_fuwu_name)
     TextView tv_fuwu_name;
     @BindView(R.id.tv_fuwu_money)
     TextView tv_fuwu_money;
     @BindView(R.id.tv_fuwu_time)
     TextView tv_fuwu_time;
-    @BindView(R.id.tv_recommend_num)
-    TextView tv_recommend_num;
     @BindView(R.id.tv_car_address)
     TextView tv_car_address;
     @BindView(R.id.tv_car_info)
@@ -153,6 +144,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_set_type2;
     @BindView(R.id.ll_fuwu_detail)
     LinearLayout ll_fuwu_detail;
+    @BindView(R.id.lv_set_meal_data)
+    ListViewForScrollView lv_set_meal_data;
 
     private String siteLat="";
     private String siteLng="";
@@ -161,7 +154,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String appointmentEndTime="";
     private DiscountCouponDialog discountCouponDialog;//优惠券对话框
     private List<MyCoupon> myCouponList = new ArrayList<>();
-    private RecommendComboInfoEntity recommendComboInfoEntity;
+    private List<RecommendComboInfoEntity> recommendComboInfoEntity;
     private String serviceType="";
     private String counponId="";
     private String comboId="";
@@ -186,6 +179,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
     private ProductInfoEntity.Combo comboData = new ProductInfoEntity.Combo();//车型套餐数据
+    private RecommendSetMealAdapter recommendSetMealAdapter;
 
     @Override
     protected int layoutId() {
@@ -212,7 +206,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         mPresenter.appointmentList(companyId,queryDate);//查询预约时间
 
         if (!AppUtils.isEmpty(companyId)){
-            recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
+            recommendComboInfoEntity = (List<RecommendComboInfoEntity>) getIntent().getSerializableExtra("recommendComboInfoEntity");
             tv_title.setText("到店洗车");
             tv_address_text.setText("门店地址");
             tv_car_address.setText(address);
@@ -221,27 +215,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             ll_set_type1.setVisibility(View.VISIBLE);
             ll_set_type2.setVisibility(View.GONE);
             //套餐信息
-            comboId = recommendComboInfoEntity.comboId+"";
-            tv_recommend_name.setText(recommendComboInfoEntity.comboName);
-            tv_recommend_context.setText(recommendComboInfoEntity.comboComment);
-            tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(recommendComboInfoEntity.totalPrice));
-            //tv_recommend_num.setText("已售"+recommendComboInfoEntity.salesVolume);
-            tv_fuwu_name.setText(recommendComboInfoEntity.comboComment);
-            tv_fuwu_time.setText(recommendComboInfoEntity.serviceHours);
-            String carType1 = "";//1-SUV 2-轿车 3-MPV
-            String carType2 = "";//1-SUV 2-轿车 3-MPV
-            String carType3 = "";//1-SUV 2-轿车 3-MPV
-            for (int i=0;i<recommendComboInfoEntity.carTypePrices.size();i++){
-                if (recommendComboInfoEntity.carTypePrices.get(i).carTypeId==1){
-                    carType1 = "SUV" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
-                }else if (recommendComboInfoEntity.carTypePrices.get(i).carTypeId==2){
-                    carType2 = "轿车" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
-                }else{
-                    carType3 = "MPV" + recommendComboInfoEntity.carTypePrices.get(i).totalPrice+"元";
-                }
+            //设置套餐
+            recommendSetMealAdapter = new RecommendSetMealAdapter(this);
+            recommendSetMealAdapter.setData(recommendComboInfoEntity,2);
+            lv_set_meal_data.setAdapter(recommendSetMealAdapter);
+
+            for(int i=0;i<recommendComboInfoEntity.size();i++){
+                comboId += recommendComboInfoEntity.get(i).comboId+",";
+                comboMoney += recommendComboInfoEntity.get(i).totalPrice;//套餐金额
             }
-            tv_fuwu_money.setText(carType1+" "+" "+carType2+" "+carType3);
-            comboMoney = recommendComboInfoEntity.totalPrice;//套餐金额
             //订单金额=套餐金额-活动金额-优惠券金额
             orderMoney = comboMoney-activityMoney-couponMoney;
             if (orderMoney<0){
@@ -313,7 +295,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(couponMoney+activityMoney)+"元");
                 }else{
                     //折扣券
-                    double num = recommendComboInfoEntity.totalPrice-activityMoney;
+                    double num = comboMoney-activityMoney;
                     couponMoney =num - (num *(coupon.discount/10));
                     tv_xia_order_discounts.setText("已优惠："+new DecimalFormat("0.00").format(couponMoney+activityMoney)+"元");
                 }

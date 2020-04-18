@@ -4,6 +4,7 @@ package com.jxxc.jingxi.ui.shopdetails;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
@@ -30,11 +32,13 @@ import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.HorizontalListView;
+import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -85,7 +89,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     @BindView(R.id.btn_subscribe_time)
     Button btn_subscribe_time;
     @BindView(R.id.lv_set_meal_data)
-    ListView lv_set_meal_data;
+    ListViewForScrollView lv_set_meal_data;
     @BindView(R.id.ll_xia_dan)
     LinearLayout ll_xia_dan;
     @BindView(R.id.rb_xiche)
@@ -109,6 +113,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList0 = new ArrayList<>();//服务类型 1洗车2美容3护理
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList1 = new ArrayList<>();//服务类型 1洗车2美容3护理
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList2 = new ArrayList<>();//服务类型 1洗车2美容3护理
+    private List<RecommendComboInfoEntity> commitEntity = new ArrayList<>();//提交数据
     @Override
     protected int layoutId() {
         return R.layout.shop_details_activity;
@@ -126,23 +131,6 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         recommendSetMealAdapter = new RecommendSetMealAdapter(this);
         recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
         lv_set_meal_data.setAdapter(recommendSetMealAdapter);
-        lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                recommendSetMealAdapter.setSelectPosition(i);
-
-                if (rb_xiche.isChecked()==true){
-                    if (recommendComboInfoEntity.size()>0){recommendComboInfoEntity.clear();}
-                    recommendComboInfoEntity.add(recommendComboInfoEntityList0.get(i));
-                }else if (rb_meirong.isChecked()==true){
-                    if (recommendComboInfoEntity.size()>0){recommendComboInfoEntity.clear();}
-                    recommendComboInfoEntity.add(recommendComboInfoEntityList1.get(i));
-                }else{
-                    if (recommendComboInfoEntity.size()>0){recommendComboInfoEntity.clear();}
-                    recommendComboInfoEntity.add(recommendComboInfoEntityList2.get(i));
-                }
-            }
-        });
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -178,6 +166,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                 mPresenter.appointmentList(cId,dateStr);
             }
         });
+
+
     }
 
     /**
@@ -261,9 +251,18 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     gotoLogin();
                     return;
                 }else{
-                    if (recommendComboInfoEntity.size()<=0){toast(this,"请选择服务套餐");return;}
+                    if (recommendComboInfoEntity.size()>0){
+                        if (commitEntity.size()>0){commitEntity.clear();}
+                        for (int i=0;i<recommendComboInfoEntity.size();i++){
+                            if (recommendComboInfoEntity.get(i).isSelect==true){
+                                commitEntity.add(recommendComboInfoEntity.get(i));
+                            }
+                        }
+                    }
+
+                    if (commitEntity.size()<=0){toast(this,"请选择服务套餐");return;}
                     Intent intent = new Intent(ShopDetailsActivity.this, SetMealPayInfoActivity.class);
-                    intent.putExtra("recommendComboInfoEntity",recommendComboInfoEntity.get(0));
+                    intent.putExtra("recommendComboInfoEntity", (Serializable) commitEntity);
                     intent.putExtra("serviceType","1");
                     intent.putExtra("companyId",cId);
                     intent.putExtra("address",address);
@@ -336,17 +335,20 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     //洗车套餐列表数据
     @Override
     public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
-        for (int i=0;i<data.size();i++){
-            //服务类型 1洗车2美容3护理
-            if (data.get(i).serviceType==1){
-                recommendComboInfoEntityList0.add(data.get(i));
-            }else if (data.get(i).serviceType==2){
-                recommendComboInfoEntityList1.add(data.get(i));
-            }else{
-                recommendComboInfoEntityList2.add(data.get(i));
+        if (data.size()>0){
+            recommendComboInfoEntity = data;
+            for (int i=0;i<data.size();i++){
+                //服务类型 1洗车2美容3护理
+                if (data.get(i).serviceType==1){
+                    recommendComboInfoEntityList0.add(data.get(i));
+                }else if (data.get(i).serviceType==2){
+                    recommendComboInfoEntityList1.add(data.get(i));
+                }else{
+                    recommendComboInfoEntityList2.add(data.get(i));
+                }
             }
+            recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
+            recommendSetMealAdapter.notifyDataSetChanged();
         }
-        recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
-        recommendSetMealAdapter.notifyDataSetChanged();
     }
 }

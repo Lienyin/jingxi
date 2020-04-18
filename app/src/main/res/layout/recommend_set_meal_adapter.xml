@@ -27,14 +27,14 @@
             <CheckBox
                 android:id="@+id/iv_fuwu_item"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_style"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_fuwu_item"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingLeft="50dp"
+        android:paddingLeft="60dp"
         android:visibility="gone"
         android:orientation="vertical"
         android:background="#F9F9F9">

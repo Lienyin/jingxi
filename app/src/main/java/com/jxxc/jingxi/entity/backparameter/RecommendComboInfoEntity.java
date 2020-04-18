@@ -14,11 +14,20 @@ public class RecommendComboInfoEntity implements Serializable {
     public String imgUrls[];
     public double totalPrice;
     public int comboId;
+    public boolean isSelect;
 
     public String productIds;
     public List<ProductList> carTypePrices;
     public class ProductList implements Serializable{
         public String totalPrice;
         public int carTypeId;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 }
