@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/title"/>
+    <!--头部布局-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -66,6 +67,7 @@
                 android:src="@mipmap/sajiang_xing"/>
         </LinearLayout>
     </LinearLayout>
+    <!--中间布局-->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
@@ -78,4 +80,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v4.widget.SwipeRefreshLayout>
+    |<View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/black999"/>
+    <!--底部布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:textColor="@color/black333"
+                android:text="当前所处位置"/>
+            <TextView
+                android:id="@+id/tv_dingwei_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/black999"
+                android:text="当前所处位置"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ding_wei_address"/>
+    </LinearLayout>
 </LinearLayout>

@@ -64,6 +64,8 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
     SwipeRefreshLayout swipeLayout;
     @BindView(R.id.rv_list)
     RecyclerView rvList;
+    @BindView(R.id.tv_dingwei_address)
+    TextView tv_dingwei_address;
     private ShopListAdapter adapter;
     private int offset = 2;
     private PopFiltrate popFiltrate;
@@ -161,7 +163,7 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
                     }else{
                         tv_location_city.setText("当前位置");
                     }
-
+                    tv_dingwei_address.setText(location.getAddress().address);
                     //当前定位经纬度
                     lat = location.getLatitude();
                     lng = location.getLongitude();
