@@ -221,7 +221,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             lv_set_meal_data.setAdapter(recommendSetMealAdapter);
 
             for(int i=0;i<recommendComboInfoEntity.size();i++){
-                comboId += recommendComboInfoEntity.get(i).comboId+",";
+                comboRecommendIds += recommendComboInfoEntity.get(i).comboId+",";
                 comboMoney += recommendComboInfoEntity.get(i).totalPrice;//套餐金额
             }
             //订单金额=套餐金额-活动金额-优惠券金额
@@ -428,7 +428,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                             appointmentEndTime,
                             remark,
                             companyId,
-                            comboProductIds);
+                            comboRecommendIds);
                 }
                 break;
             case R.id.tv_car_fuwu6:
@@ -578,6 +578,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         intent.putExtra("orderId",data.orderId);
         intent.putExtra("orderPrice",data.payPrice);
         startActivity(intent);
+        finish();
     }
 
     //下单（进店服务）返回数据
@@ -588,6 +589,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         intent.putExtra("orderId",data.orderId);
         intent.putExtra("orderPrice",data.payPrice);
         startActivity(intent);
+        finish();
     }
 
     //活动数据

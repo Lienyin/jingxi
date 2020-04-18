@@ -267,6 +267,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     intent.putExtra("companyId",cId);
                     intent.putExtra("address",address);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.rb_xiche://洗车
