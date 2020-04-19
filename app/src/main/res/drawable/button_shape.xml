@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<solid android:color="#ce102c"/>-->
+    <!--定义某些组件的形式，就可以使用shape来定义-->
+    <stroke android:width="0.5dp"
+        android:color="@color/public_all"/>
+    <corners android:radius="5dp" />
+    <solid
+        android:color="@color/public_all" />
+
+</shape>

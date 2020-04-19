@@ -32,16 +32,10 @@
             android:textSize="14sp"
             android:textColor="@color/black333"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@color/gray"/>
     <!--账户输入框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
@@ -67,7 +61,7 @@
     <!--账户输入框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
