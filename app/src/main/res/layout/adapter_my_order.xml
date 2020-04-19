@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_order_itme"
         android:layout_width="match_parent"
         android:layout_height="380dp"
         android:background="@drawable/attestation_bg_edittext"
@@ -30,6 +31,38 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:text="XXXXXXXXX"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_fuwu_time"
+                android:visibility="gone"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/time_yuyue"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/black666"
+                    android:text="剩余"/>
+                <TextView
+                    android:id="@+id/tv_fuwu_shengyu_ime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/public_all"
+                    android:text="XXX"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/black666"
+                    android:text="完成"/>
+            </LinearLayout>
             <TextView
                 android:id="@+id/iv_order_static"
                 android:layout_width="60dp"
