@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="true" android:drawable="@mipmap/point1"/>
-    <item android:state_enabled="false" android:drawable="@mipmap/point2"/>
+    <item android:state_enabled="true" android:drawable="@drawable/we_view_yes"/>
+    <item android:state_enabled="false" android:drawable="@drawable/we_view_no"/>
     <!--state_enabled功能是能够接受触摸或者点击事件-->
 </selector>

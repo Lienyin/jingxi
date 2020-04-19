@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@mipmap/jingxi_login_icon"/>
+            android:src="@mipmap/jingxi_06"/>
     </LinearLayout>
 
     <!--正规来讲，应该尽量把宽度高度等值放在values的资源文件中，

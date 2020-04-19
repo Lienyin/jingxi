@@ -76,7 +76,7 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true" /> <!-- 欢迎界面 -->
         <activity android:name=".ui.welcome.WelcomeActivity">
-        </activity>
+        </activity><!-- 新欢迎界面 -->
         <activity android:name=".ui.WelcomeNew.WelcomeNewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
