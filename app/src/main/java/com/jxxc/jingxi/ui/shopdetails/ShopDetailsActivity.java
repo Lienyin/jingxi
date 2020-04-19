@@ -21,6 +21,7 @@ import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
+import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
@@ -115,6 +116,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList1 = new ArrayList<>();//服务类型 1洗车2美容3护理
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList2 = new ArrayList<>();//服务类型 1洗车2美容3护理
     private List<RecommendComboInfoEntity> commitEntity = new ArrayList<>();//提交数据
+    private int carType=0;//车型
     @Override
     protected int layoutId() {
         return R.layout.shop_details_activity;
@@ -127,11 +129,9 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         cId = ZzRouter.getIntentData(this,String.class);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCompany(cId);//加盟商详细
-        mPresenter.recommendComboInfo("1",cId);//获取洗车套餐
+        mPresenter.getCarList();
         //设置套餐
         recommendSetMealAdapter = new RecommendSetMealAdapter(this);
-        recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
-        lv_set_meal_data.setAdapter(recommendSetMealAdapter);
         //获取当前日期
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -273,17 +273,17 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                 break;
             case R.id.rb_xiche://洗车
                 recommendSetMealAdapter.setSelectPosition(-1);
-                recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
+                recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2,carType);
                 recommendSetMealAdapter.notifyDataSetChanged();
                 break;
             case R.id.rb_meirong://美容
                 recommendSetMealAdapter.setSelectPosition(-1);
-                recommendSetMealAdapter.setData(recommendComboInfoEntityList1,2);
+                recommendSetMealAdapter.setData(recommendComboInfoEntityList1,2,carType);
                 recommendSetMealAdapter.notifyDataSetChanged();
                 break;
             case R.id.rb_huli://护理
                 recommendSetMealAdapter.setSelectPosition(-1);
-                recommendSetMealAdapter.setData(recommendComboInfoEntityList2,2);
+                recommendSetMealAdapter.setData(recommendComboInfoEntityList2,2,carType);
                 recommendSetMealAdapter.notifyDataSetChanged();
                 break;
             default:
@@ -335,11 +335,37 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         gv_time_data.setAdapter(timeAdapter);
     }
 
+    //获取车辆列表
+    @Override
+    public void getCarListCallBack(List<CarListEntity> data) {
+        mPresenter.recommendComboInfo("1",cId);//获取洗车套餐
+
+        if (data.size()>0){//y有车
+            //展示默认车辆，没有默认车辆展示第一辆
+            //是否默认 1是0否
+            int a=0;
+            for (int i=0;i<data.size();i++){
+                if (data.get(i).isDefault==1){
+                    a++;
+                    carType = data.get(i).typeId;//默认车型
+                    SPUtils.put(SPUtils.K_CAR_TYPE,carType);
+                }
+            }
+            //没有设置默认车辆
+            if (a==0){
+                carType = data.get(0).typeId;//第一个车型
+                SPUtils.put(SPUtils.K_CAR_TYPE,carType);
+            }
+        }
+    }
+
     //洗车套餐列表数据
     @Override
     public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
         if (data.size()>0){
             recommendComboInfoEntity = data;
+            //根据绑定车型显示套餐
+            //默认显示第0个套餐
             for (int i=0;i<data.size();i++){
                 //服务类型 1洗车2美容3护理
                 if (data.get(i).serviceType==1){
@@ -350,7 +376,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     recommendComboInfoEntityList2.add(data.get(i));
                 }
             }
-            recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2);
+            recommendSetMealAdapter.setData(recommendComboInfoEntityList0,2,carType);
+            lv_set_meal_data.setAdapter(recommendSetMealAdapter);
             recommendSetMealAdapter.notifyDataSetChanged();
         }
     }

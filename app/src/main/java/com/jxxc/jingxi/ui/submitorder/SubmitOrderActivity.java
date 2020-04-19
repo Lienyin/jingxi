@@ -35,6 +35,7 @@ import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.text.DecimalFormat;
@@ -355,7 +356,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
             }
             tv_car_number.setText(carListEntity.carNum);
             tv_car_type.setText(carListEntity.brandName+"  "+carListEntity.typeName);
-            comboTypeId = carListEntity.typeId;
+            comboTypeId = carListEntity.typeId+"";
             setService(productInfoEntity);
             carColor(carListEntity.color);
             tv_car_fuwu6.setSelected(false);
@@ -533,16 +534,18 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
                     a++;
                     tv_car_number.setText(data.get(i).carNum);
                     tv_car_type.setText(data.get(i).brandName+"  "+data.get(i).typeName);
-                    comboTypeId = data.get(i).typeId;//默认车型id
+                    comboTypeId = data.get(i).typeId+"";//默认车型id
                     carColor(data.get(i).color);
+                    SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
                 }
             }
             //没有设置默认车辆
             if (a==0){
                 tv_car_number.setText(data.get(0).carNum);
                 tv_car_type.setText(data.get(0).brandName+"  "+data.get(0).typeName);
-                comboTypeId = data.get(0).typeId;//套餐组合套餐Id
+                comboTypeId = data.get(0).typeId+"";//套餐组合套餐Id
                 carColor(data.get(0).color);
+                SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
             }
         }else{
             ll_add_car.setVisibility(View.VISIBLE);

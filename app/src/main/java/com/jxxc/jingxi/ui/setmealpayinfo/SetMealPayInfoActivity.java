@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.ActivityDataAdapter;
+import com.jxxc.jingxi.adapter.OrderPaySetMealAdapter;
 import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
 import com.jxxc.jingxi.dialog.DiscountCouponDialog;
 import com.jxxc.jingxi.dialog.TimeDialog;
@@ -173,7 +174,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private List<RecommendComboInfoEntity> recommendComboInfoEntity;
     private String serviceType="";
     private String counponId="";
-    private String comboId="";
+    private String comboId="0";
     private String carNum="";
     private String companyId="";//运营商ID 进店类型必传 上门不用传
     private String remark="";
@@ -196,7 +197,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private double fuwuTypeMoney7=0;
     private double fuwuTypeMoney8=0;
     private ProductInfoEntity.Combo comboData = new ProductInfoEntity.Combo();//车型套餐数据
-    private RecommendSetMealAdapter recommendSetMealAdapter;
+    private OrderPaySetMealAdapter recommendSetMealAdapter;
+    private int carType=0;
 
     @Override
     protected int layoutId() {
@@ -213,6 +215,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         appointmentEndTime = getIntent().getStringExtra("appointmentEndTime");
         address = getIntent().getStringExtra("address");//店铺地址
         companyName = getIntent().getStringExtra("companyName");//店铺地址
+        carType = SPUtils.get(SPUtils.K_CAR_TYPE,0);//获取车型
+        SPUtils.put(SPUtils.K_COMPANY_ID,companyId);
         if (!AppUtils.isEmpty(appointmentStartTime)){
             tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
         }
@@ -234,13 +238,18 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             ll_set_type2.setVisibility(View.GONE);
             //套餐信息
             //设置套餐
-            recommendSetMealAdapter = new RecommendSetMealAdapter(this);
-            recommendSetMealAdapter.setData(recommendComboInfoEntity,2);
+            recommendSetMealAdapter = new OrderPaySetMealAdapter(this);
+            recommendSetMealAdapter.setData(recommendComboInfoEntity,2,carType);
             lv_set_meal_data.setAdapter(recommendSetMealAdapter);
-
+            comboMoney=0;
+            comboRecommendIds="";
             for(int i=0;i<recommendComboInfoEntity.size();i++){
-                comboRecommendIds += recommendComboInfoEntity.get(i).comboId+",";
-                comboMoney += recommendComboInfoEntity.get(i).totalPrice;//套餐金额
+                for (int j=0;j < recommendComboInfoEntity.get(i).carTypePrices.size(); j++){
+                    if (recommendComboInfoEntity.get(i).carTypePrices.get(j).carTypeId==carType) {//默认车型
+                        comboMoney += recommendComboInfoEntity.get(i).carTypePrices.get(j).totalPrice;//套餐金额
+                        comboRecommendIds += recommendComboInfoEntity.get(i).comboId+",";
+                    }
+                }
             }
             //订单金额=套餐金额-活动金额-优惠券金额
             orderMoney = comboMoney-activityMoney-couponMoney;
@@ -362,20 +371,43 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
             tv_car_info.setText(carListEntity.carNum+"  "+carListEntity.brandName+"  "+carListEntity.typeName);
             carNum = carListEntity.carNum;
-            comboTypeId = carListEntity.typeId;
-            setService(productInfoEntity);
-            tv_car_fuwu6.setSelected(false);
-            iv_car_fuwu6.setSelected(false);
-            tv_car_fuwu7.setSelected(false);
-            iv_car_fuwu7.setSelected(false);
-            tv_car_fuwu8.setSelected(false);
-            iv_car_fuwu8.setSelected(false);
-            fuwuTypeMoney6 = 0;
-            comboProductId6="";
-            fuwuTypeMoney7 = 0;
-            comboProductId7="";
-            fuwuTypeMoney8 = 0;
-            comboProductId8="";
+            comboTypeId = carListEntity.typeId+"";
+            if (!AppUtils.isEmpty(companyId)){
+                recommendSetMealAdapter.setData(recommendComboInfoEntity,2,carListEntity.typeId);
+                recommendSetMealAdapter.notifyDataSetChanged();
+                comboMoney=0;
+                comboRecommendIds="";
+                for(int i=0;i<recommendComboInfoEntity.size();i++){
+                    for (int j=0;j < recommendComboInfoEntity.get(i).carTypePrices.size(); j++){
+                        if (recommendComboInfoEntity.get(i).carTypePrices.get(j).carTypeId==carListEntity.typeId) {//默认车型
+                            comboMoney += recommendComboInfoEntity.get(i).carTypePrices.get(j).totalPrice;//套餐金额
+                            comboRecommendIds += recommendComboInfoEntity.get(i).comboId+",";
+                        }
+                    }
+                }
+                //订单金额=套餐金额-活动金额-优惠券金额
+                orderMoney = comboMoney-activityMoney-couponMoney;
+                if (orderMoney<0){
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(0)+"元</font>"));
+                }else{
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">"+new DecimalFormat("0.00").format(orderMoney)+"元</font>"));
+                }
+            }else{
+                setService(productInfoEntity);
+                tv_car_fuwu6.setSelected(false);
+                iv_car_fuwu6.setSelected(false);
+                tv_car_fuwu7.setSelected(false);
+                iv_car_fuwu7.setSelected(false);
+                tv_car_fuwu8.setSelected(false);
+                iv_car_fuwu8.setSelected(false);
+                fuwuTypeMoney6 = 0;
+                comboProductId6="";
+                fuwuTypeMoney7 = 0;
+                comboProductId7="";
+                fuwuTypeMoney8 = 0;
+                comboProductId8="";
+            }
+
         }
     };
     private BroadcastReceiver receiverRemark = new BroadcastReceiver() {
@@ -445,17 +477,23 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     }
                 }else{
                     //进店
-                    StyledDialog.buildLoading("正在下单").setActivity(this).show();
-                    mPresenter.create2(
-                            counponId,
-                            carNum,
-                            "",
-                            tv_phone_number.getText().toString(),
-                            appointmentStartTime,
-                            appointmentEndTime,
-                            remark,
-                            companyId,
-                            comboRecommendIds);
+                    if (AppUtils.isEmpty(tv_car_info.getText().toString())){
+                        toast(this,"请添加车辆");
+                    }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
+                        toast(this,"请选择服务时间");
+                    }else{
+                        StyledDialog.buildLoading("正在下单").setActivity(this).show();
+                        mPresenter.create2(
+                                counponId,
+                                carNum,
+                                "",
+                                tv_phone_number.getText().toString(),
+                                appointmentStartTime,
+                                appointmentEndTime,
+                                remark,
+                                companyId,
+                                comboRecommendIds);
+                    }
                 }
                 break;
             case R.id.tv_car_fuwu6:
@@ -578,15 +616,17 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 if (data.get(i).isDefault==1){
                     a++;
                     carNum = data.get(i).carNum;
-                    comboTypeId = data.get(i).typeId;
+                    comboTypeId = data.get(i).typeId+"";
                     tv_car_info.setText(data.get(i).carNum+"  "+data.get(i).brandName+"  "+data.get(i).typeName);
+                    SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
                 }
             }
             //没有设置默认车辆
             if (a==0){
                 carNum = data.get(0).carNum;
-                comboTypeId = data.get(0).typeId;
+                comboTypeId = data.get(0).typeId+"";
                 tv_car_info.setText(data.get(0).carNum+"  "+data.get(0).brandName+"  "+data.get(0).typeName);
+                SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
             }
         }
     }

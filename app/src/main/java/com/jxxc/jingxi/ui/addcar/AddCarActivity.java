@@ -322,8 +322,8 @@ public class AddCarActivity extends MVPBaseActivity<AddCarContract.View, AddCarP
 
         if (!AppUtils.isEmpty(carData)){
             //编辑车辆
-            brandId = carData.brandId;
-            carTypeId = carData.typeId;
+            brandId = carData.brandId+"";
+            carTypeId = carData.typeId+"";
             colorId = carData.color+"";
             if (carData.carNum.length()>7){
                 //新能源车牌

@@ -29,6 +29,9 @@ public class SPUtils {
     public static final String K_CITY = "city";//当前定位城市
     public static final String K_WX_HEAD = "wxHeadimgurl";//微信头像
     public static final String K_WX_NAME = "fullName";//微信昵称
+    public static final String K_CAR_TYPE = "carType";//车型
+    public static final String K_COMPANY_ID = "companyId";//运营商id
+    public static final String K_JING_DU = "jingDu";//下单进度
     private static Context mContext;
 
     public static SharedPreferences init(Context context) {

@@ -405,7 +405,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
         if (data.size() > 0) {
             RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-            recommendSetMealAdapter.setData(data, 1);//只显示前面两条
+            recommendSetMealAdapter.setData(data, 1,0);//只显示前面两条
             lv_set_meal_data.setAdapter(recommendSetMealAdapter);
             lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

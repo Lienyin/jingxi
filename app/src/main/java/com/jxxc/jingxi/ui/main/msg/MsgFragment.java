@@ -152,7 +152,7 @@ public class MsgFragment extends MVPBaseFragment<MsgContract.View, MsgPresenter>
     public void recommendComboInfoCallBack(final List<RecommendComboInfoEntity> data) {
         swipeLayout_sm.setRefreshing(false);
         RecommendSetMealAdapter recommendSetMealAdapter = new RecommendSetMealAdapter(context);
-        recommendSetMealAdapter.setData(data,2);
+        recommendSetMealAdapter.setData(data,2,0);
         lv_set_meal_data.setAdapter(recommendSetMealAdapter);
         lv_set_meal_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

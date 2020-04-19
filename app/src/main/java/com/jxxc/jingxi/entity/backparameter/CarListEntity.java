@@ -7,7 +7,7 @@ public class CarListEntity implements Serializable {
     public String carNum;
     public String brandId;
     public String brandName;
-    public String typeId;
+    public int typeId;
     public String typeName;
     public int color;
     public int isDefault;

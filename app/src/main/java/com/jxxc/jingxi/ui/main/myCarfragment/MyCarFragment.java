@@ -389,7 +389,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             CarListEntity carListEntity = (CarListEntity) intent.getSerializableExtra("carInfo");
             carNum = carListEntity.carNum;
             tv_car_info.setText(carListEntity.carNum+ "  "+carListEntity.brandName+"  "+carListEntity.typeName);
-            comboTypeId = carListEntity.typeId;
+            comboTypeId = carListEntity.typeId+"";
             setService(productInfoEntity);
             carColor(carListEntity.color);
             tv_car_fuwu6.setSelected(false);
@@ -674,16 +674,18 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     a++;
                     carNum = data.get(i).carNum;
                     tv_car_info.setText(data.get(i).carNum+ "  "+data.get(i).brandName+"  "+data.get(i).typeName);
-                    comboTypeId = data.get(i).typeId;//默认套餐组合套餐Id
+                    comboTypeId = data.get(i).typeId+"";//默认套餐组合套餐Id
                     carColor(data.get(i).color);
+                    SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
                 }
             }
             //没有设置默认车辆
             if (a==0){
                 carNum = data.get(0).carNum;
                 tv_car_info.setText(data.get(0).carNum+ "  "+data.get(0).brandName+"  "+data.get(0).typeName);
-                comboTypeId = data.get(0).typeId;//套餐组合套餐Id
+                comboTypeId = data.get(0).typeId+"";//套餐组合套餐Id
                 carColor(data.get(0).color);
+                SPUtils.put(SPUtils.K_CAR_TYPE,comboTypeId);
             }
         }
     }

@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.shopdetails;
 import android.content.Context;
 
 import com.jxxc.jingxi.entity.backparameter.AppointmentListEntity;
+import com.jxxc.jingxi.entity.backparameter.CarListEntity;
 import com.jxxc.jingxi.entity.backparameter.CompanyDetailsEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
 import com.jxxc.jingxi.mvp.BasePresenter;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class ShopDetailsContract {
     interface View extends BaseView {
+        void getCarListCallBack(List<CarListEntity> data);
         void getCompanyCallBack(CompanyDetailsEntity data);
         void appointmentListCallBack(List<AppointmentListEntity> data);
 
@@ -24,6 +26,7 @@ public class ShopDetailsContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
+        void getCarList();
         void getCompany(String companyId);
         void appointmentList(String companyId,String queryDate);
 

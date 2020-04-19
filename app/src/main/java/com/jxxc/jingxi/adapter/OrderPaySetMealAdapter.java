@@ -6,29 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
-import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
-import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RecommendSetMealAdapter extends BaseAdapter {
+public class OrderPaySetMealAdapter extends BaseAdapter {
     private Context context;
     private int defaultSelection=-1;
     private List<RecommendComboInfoEntity> list;
     private int type;
     private int carType;
 
-    public RecommendSetMealAdapter(Context context){
+    public OrderPaySetMealAdapter(Context context){
         this.context=context;
     }
 
@@ -98,6 +94,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         String carType1 = "";//1-SUV 2-轿车 3-MPV
         String carType2 = "";//1-SUV 2-轿车 3-MPV
         String carType3 = "";//1-SUV 2-轿车 3-MPV
+        double orderMoney = data.totalPrice;
         for (int i=0;i<data.carTypePrices.size();i++){
             if (data.carTypePrices.get(i).carTypeId==1){
                 carType1 = "SUV" + data.carTypePrices.get(i).totalPrice+"元";
@@ -106,14 +103,14 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             }else{
                 carType3 = "MPV" + data.carTypePrices.get(i).totalPrice+"元";
             }
+
             if (data.carTypePrices.get(i).carTypeId==carType){//默认车型
-                holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(i).totalPrice));
-            }else{
-                //第一个车型
-                holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
+                orderMoney = data.carTypePrices.get(i).totalPrice;
             }
         }
         holder.tv_fuwu_money.setText(carType1+" "+" "+carType2+" "+carType3);
+        holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(orderMoney));
+
 
         final ViewHolder finalHolder = holder;
         holder.ll_fuwu_item.setOnClickListener(new View.OnClickListener() {
