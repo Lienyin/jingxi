@@ -50,11 +50,18 @@ public class ActivityDataAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.activity_data_adapter,null);
             holder.activity_name = convertView.findViewById(R.id.activity_name);
             holder.activity_memo = convertView.findViewById(R.id.activity_memo);
+            holder.tv_activity_type = convertView.findViewById(R.id.tv_activity_type);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
         ActivitiesEntity data = list.get(position);
+        //活动类型1满减，3立减
+        if (data.type==1){
+            holder.tv_activity_type.setText("满减");
+        }else{
+            holder.tv_activity_type.setText("立减");
+        }
         if (data.doorsillMoney>0){
             holder.activity_name.setText(data.activitiesName+"满减"+new DecimalFormat("0.00").format(data.money)+"元");
             holder.activity_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
@@ -68,6 +75,7 @@ public class ActivityDataAdapter extends BaseAdapter {
     class ViewHolder{
         TextView activity_name;
         TextView activity_memo;
+        TextView tv_activity_type;
     }
 
     /**

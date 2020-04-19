@@ -7,6 +7,6 @@ public class ActivitiesEntity implements Serializable {
     public double doorsillMoney;
     public String startTime;
     public String endTime;
-    public String type;
+    public int type;
     public String activitiesName;
 }

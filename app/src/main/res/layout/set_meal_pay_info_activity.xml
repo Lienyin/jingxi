@@ -696,6 +696,14 @@
                         android:src="@mipmap/jiantou"/>
                 </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black5f"
+                android:text="促销信息"/>
             <!--活动-->
             <com.jxxc.jingxi.utils.ListViewForScrollView
                 android:id="@+id/activity_data"
