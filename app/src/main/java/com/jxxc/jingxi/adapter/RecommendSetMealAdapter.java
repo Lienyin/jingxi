@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
@@ -71,6 +72,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             holder.ll_fuwu_detail = convertView.findViewById(R.id.ll_fuwu_detail);
             holder.ll_fuwu_item = convertView.findViewById(R.id.ll_fuwu_item);
             holder.iv_fuwu_item = convertView.findViewById(R.id.iv_fuwu_item);
+            holder.ll_fuwu_select = convertView.findViewById(R.id.ll_fuwu_select);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();

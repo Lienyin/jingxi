@@ -162,6 +162,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String companyId="";//运营商ID 进店类型必传 上门不用传
     private String remark="";
     private String address="";
+    private String companyName="";
     private double orderMoney=0;//订单金额
     private double comboMoney=0;//套餐金额
     private double couponMoney=0;//优惠券金额
@@ -195,6 +196,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         appointmentStartTime = getIntent().getStringExtra("appointmentStartTime");
         appointmentEndTime = getIntent().getStringExtra("appointmentEndTime");
         address = getIntent().getStringExtra("address");//店铺地址
+        companyName = getIntent().getStringExtra("companyName");//店铺地址
         if (!AppUtils.isEmpty(appointmentStartTime)){
             tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
         }
@@ -208,8 +210,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         if (!AppUtils.isEmpty(companyId)){
             recommendComboInfoEntity = (List<RecommendComboInfoEntity>) getIntent().getSerializableExtra("recommendComboInfoEntity");
             tv_title.setText("到店洗车");
-            tv_address_text.setText("门店地址");
-            tv_car_address.setText(address);
+            tv_address_text.setText("预约门店");
+            tv_car_address.setText(companyName);
             tv_car_address.setClickable(true);
             //到店服务
             ll_set_type1.setVisibility(View.VISIBLE);

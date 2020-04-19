@@ -102,6 +102,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     private String cId;
     private String phonenumber="";
     private String address="";
+    private String companyName="";
     private TechnicianAdapter technicianAdapter;
     private TimeAdapter timeAdapter;
     private WeekOfAdapter weekOfAdapter;
@@ -265,7 +266,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     intent.putExtra("recommendComboInfoEntity", (Serializable) commitEntity);
                     intent.putExtra("serviceType","1");
                     intent.putExtra("companyId",cId);
-                    intent.putExtra("address",address);
+                    intent.putExtra("companyName",companyName);
                     startActivity(intent);
                     finish();
                 }
@@ -302,6 +303,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         gv_technician_data.setAdapter(technicianAdapter);
 
         GlideImgManager.loadRectangleSiteImage(this, data.company.imgUrl,iv_details_shop_mendian);
+        companyName = data.company.companyName;
         tv_details_shop_name.setText(data.company.companyName);
         if (data.company.isBusiness==1){
             tv_details_shop_yy.setText("营业中");
