@@ -359,6 +359,38 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="@color/blackf1"/>
+        <!--加盟菁喜-->
+        <LinearLayout
+            android:id="@+id/ll_jiameng"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="20dp"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/jingxi_jiameng"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:text="加盟菁喜"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/jiantou"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/blackf1"/>
         <!--系统设置-->
         <LinearLayout
             android:id="@+id/ll_setting"
@@ -392,10 +424,6 @@
             android:layout_marginLeft="20dp"
             android:background="@color/blackf1"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#eee" />
         <View
             android:id="@+id/view_style"
             android:layout_width="match_parent"

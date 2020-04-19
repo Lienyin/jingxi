@@ -7,8 +7,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,6 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:background="@drawable/attestation_bg_edittext"
                 android:orientation="vertical">
 
@@ -86,254 +86,6 @@
                             android:layout_height="wrap_content"
                             android:src="@mipmap/sty_you"/>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu1"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car7"
-                                android:gravity="center"
-                                android:text="外观清洗"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu1_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:visibility="invisible"
-                                android:text="+￥0"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu2"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car1"
-                                android:gravity="center"
-                                android:text="内饰清洗"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu2_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:visibility="invisible"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu3"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car8"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="塑料件护理"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu3_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:visibility="invisible"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu4"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car3"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="漆面封体"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu4_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:visibility="invisible"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu5"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car6"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="轮毂清洗"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu5_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:visibility="invisible"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu6"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car2"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="蜡品护理"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu6_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu7"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car5"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="发动机舱护理"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu7_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu8"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@drawable/tab_menu_bg"
-                                android:drawableTop="@drawable/tab_home_car4"
-                                android:drawablePadding="3dp"
-                                android:gravity="center"
-                                android:text="内饰SPA"
-                                android:textColor="@drawable/tab_menu_deal_text"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_car_fuwu8_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="+￥0"
-                                android:textColor="@color/order_money"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -353,6 +105,8 @@
                         android:textSize="22dp" />
                 </LinearLayout>
             </LinearLayout>
+            <!--选择布局-->
+            <include layout="@layout/select_itme"/>
             <!--车辆信息-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -701,7 +455,7 @@
                     android:id="@+id/ll_remark"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:paddingRight="10dp"
                     android:gravity="center_vertical">
 
@@ -799,50 +553,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+
+            <!--下单布局-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_xia_order_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单金额：0.00元"
+                        android:textColor="@color/order_money"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_xia_order_discounts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已优惠：0.00元"
+                        android:visibility="gone"
+                        android:textColor="@color/order_money"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_create_order"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/public_all"
+                    android:gravity="center"
+                    android:text="立即下单"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingLeft="20dp">
-
-            <TextView
-                android:id="@+id/tv_xia_order_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单金额：0.00元"
-                android:textColor="@color/order_money"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_xia_order_discounts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已优惠：0.00元"
-                android:visibility="gone"
-                android:textColor="@color/order_money"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_create_order"
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
-            android:background="@color/public_all"
-            android:gravity="center"
-            android:text="立即下单"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
 </LinearLayout>

@@ -83,6 +83,14 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private TextView tv_car_fuwu6;
     private TextView tv_car_fuwu7;
     private TextView tv_car_fuwu8;
+    private ImageView iv_car_fuwu1;
+    private ImageView iv_car_fuwu2;
+    private ImageView iv_car_fuwu3;
+    private ImageView iv_car_fuwu4;
+    private ImageView iv_car_fuwu5;
+    private ImageView iv_car_fuwu6;
+    private ImageView iv_car_fuwu7;
+    private ImageView iv_car_fuwu8;
     private TextView tv_car_fuwu1_money;
     private TextView tv_car_fuwu2_money;
     private TextView tv_car_fuwu3_money;
@@ -186,13 +194,21 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         tv_user_remark = view.findViewById(R.id.tv_user_remark);
         tv_car_color = view.findViewById(R.id.tv_car_color);
         tv_car_fuwu1 = view.findViewById(R.id.tv_car_fuwu1);
+        iv_car_fuwu1 = view.findViewById(R.id.iv_car_fuwu1);
         tv_car_fuwu2 = view.findViewById(R.id.tv_car_fuwu2);
+        iv_car_fuwu2 = view.findViewById(R.id.iv_car_fuwu2);
         tv_car_fuwu3 = view.findViewById(R.id.tv_car_fuwu3);
+        iv_car_fuwu3 = view.findViewById(R.id.iv_car_fuwu3);
         tv_car_fuwu4 = view.findViewById(R.id.tv_car_fuwu4);
+        iv_car_fuwu4 = view.findViewById(R.id.iv_car_fuwu4);
         tv_car_fuwu5 = view.findViewById(R.id.tv_car_fuwu5);
+        iv_car_fuwu5 = view.findViewById(R.id.iv_car_fuwu5);
         tv_car_fuwu6 = view.findViewById(R.id.tv_car_fuwu6);
+        iv_car_fuwu6 = view.findViewById(R.id.iv_car_fuwu6);
         tv_car_fuwu7 = view.findViewById(R.id.tv_car_fuwu7);
+        iv_car_fuwu7 = view.findViewById(R.id.iv_car_fuwu7);
         tv_car_fuwu8 = view.findViewById(R.id.tv_car_fuwu8);
+        iv_car_fuwu8 = view.findViewById(R.id.iv_car_fuwu8);
         tv_xia_order_money = view.findViewById(R.id.tv_xia_order_money);
         tv_car_fuwu1_money = view.findViewById(R.id.tv_car_fuwu1_money);
         tv_car_fuwu2_money = view.findViewById(R.id.tv_car_fuwu2_money);
@@ -227,8 +243,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
 //        tv_car_fuwu5.setOnClickListener(this);
 
         tv_car_fuwu6.setOnClickListener(this);
+        iv_car_fuwu6.setOnClickListener(this);
         tv_car_fuwu7.setOnClickListener(this);
+        iv_car_fuwu7.setOnClickListener(this);
         tv_car_fuwu8.setOnClickListener(this);
+        iv_car_fuwu8.setOnClickListener(this);
         ll_address.setOnClickListener(this);
         iv_time_date.setOnClickListener(this);
         ll_car_info.setOnClickListener(this);
@@ -256,10 +275,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
 
         //默认选择前5想基础套餐
         tv_car_fuwu1.setSelected(true);
+        iv_car_fuwu1.setSelected(true);
         tv_car_fuwu2.setSelected(true);
+        iv_car_fuwu2.setSelected(true);
         tv_car_fuwu3.setSelected(true);
+        iv_car_fuwu3.setSelected(true);
         tv_car_fuwu4.setSelected(true);
+        iv_car_fuwu4.setSelected(true);
         tv_car_fuwu5.setSelected(true);
+        iv_car_fuwu5.setSelected(true);
 
         timeDialog = new TimeDialog(context);
         timeDialog.setOnFenxiangClickListener(new TimeDialog.OnFenxiangClickListener() {
@@ -369,8 +393,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             setService(productInfoEntity);
             carColor(carListEntity.color);
             tv_car_fuwu6.setSelected(false);
+            iv_car_fuwu6.setSelected(false);
             tv_car_fuwu7.setSelected(false);
+            iv_car_fuwu7.setSelected(false);
             tv_car_fuwu8.setSelected(false);
+            iv_car_fuwu8.setSelected(false);
             fuwuTypeMoney6 = 0;
             comboProductId6="";
             fuwuTypeMoney7 = 0;
@@ -438,39 +465,16 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             case R.id.ll_remark://备注
                 ZzRouter.gotoActivity((Activity) context, RemarkActivity.class);
                 break;
-            case R.id.tv_car_fuwu1:
-            case R.id.tv_car_fuwu2:
-            case R.id.tv_car_fuwu3:
-            case R.id.tv_car_fuwu4:
-            case R.id.tv_car_fuwu5:
-                if (tv_car_fuwu1.isSelected()==true){
-                    tv_car_fuwu1.setSelected(false);
-                    tv_car_fuwu2.setSelected(false);
-                    tv_car_fuwu3.setSelected(false);
-                    tv_car_fuwu4.setSelected(false);
-                    tv_car_fuwu5.setSelected(false);
-                }else{
-                    tv_car_fuwu1.setSelected(true);
-                    tv_car_fuwu2.setSelected(true);
-                    tv_car_fuwu3.setSelected(true);
-                    tv_car_fuwu4.setSelected(true);
-                    tv_car_fuwu5.setSelected(true);
-                }
-                break;
             case R.id.tv_car_fuwu6:
-                if (tv_car_fuwu6.isSelected()==true){
+            case R.id.iv_car_fuwu6:
+                if (tv_car_fuwu6.isSelected()==true||iv_car_fuwu6.isSelected()==true){
                     tv_car_fuwu6.setSelected(false);
+                    iv_car_fuwu6.setSelected(false);
                     fuwuTypeMoney6 = 0;
                     comboProductId6="";
                 }else{
                     tv_car_fuwu6.setSelected(true);
-                    if (tv_car_fuwu1.isSelected()==false){
-                        tv_car_fuwu1.setSelected(true);
-                        tv_car_fuwu2.setSelected(true);
-                        tv_car_fuwu3.setSelected(true);
-                        tv_car_fuwu4.setSelected(true);
-                        tv_car_fuwu5.setSelected(true);
-                    }
+                    iv_car_fuwu6.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==6){
                             fuwuTypeMoney6 = comboData.productList.get(j).price;
@@ -489,19 +493,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 break;
             case R.id.tv_car_fuwu7:
-                if (tv_car_fuwu7.isSelected()==true){
+            case R.id.iv_car_fuwu7:
+                if (tv_car_fuwu7.isSelected()==true||iv_car_fuwu7.isSelected()==true){
                     tv_car_fuwu7.setSelected(false);
+                    iv_car_fuwu7.setSelected(false);
                     fuwuTypeMoney7 = 0;
                     comboProductId7="";
                 }else{
                     tv_car_fuwu7.setSelected(true);
-                    if (tv_car_fuwu1.isSelected()==false){
-                        tv_car_fuwu1.setSelected(true);
-                        tv_car_fuwu2.setSelected(true);
-                        tv_car_fuwu3.setSelected(true);
-                        tv_car_fuwu4.setSelected(true);
-                        tv_car_fuwu5.setSelected(true);
-                    }
+                    iv_car_fuwu7.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==7){
                             fuwuTypeMoney7 = comboData.productList.get(j).price;
@@ -520,19 +520,15 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 break;
             case R.id.tv_car_fuwu8:
-                if (tv_car_fuwu8.isSelected()==true){
+            case R.id.iv_car_fuwu8:
+                if (tv_car_fuwu8.isSelected()==true||iv_car_fuwu8.isSelected()==true){
                     tv_car_fuwu8.setSelected(false);
+                    iv_car_fuwu8.setSelected(false);
                     fuwuTypeMoney8 = 0;
                     comboProductId8="";
                 }else{
                     tv_car_fuwu8.setSelected(true);
-                    if (tv_car_fuwu1.isSelected()==false){
-                        tv_car_fuwu1.setSelected(true);
-                        tv_car_fuwu2.setSelected(true);
-                        tv_car_fuwu3.setSelected(true);
-                        tv_car_fuwu4.setSelected(true);
-                        tv_car_fuwu5.setSelected(true);
-                    }
+                    iv_car_fuwu8.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==8){
                             fuwuTypeMoney8 = comboData.productList.get(j).price;

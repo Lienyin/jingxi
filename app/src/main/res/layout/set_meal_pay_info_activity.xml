@@ -137,13 +137,16 @@
                 <!--选项布局-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="260dp">
+                    android:layout_height="230dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
                     <LinearLayout
                         android:id="@+id/ll_car_fuwu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
+                        <!--第一排-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -157,12 +160,17 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu1"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car7"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car7"
                                     android:gravity="center"
                                     android:text="外观清洗"
                                     android:textColor="@drawable/tab_menu_deal_text"
@@ -173,6 +181,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:visibility="invisible"
                                     android:text="+￥0"
                                     android:textColor="@color/order_money"
@@ -186,13 +195,19 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu2"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car1" />
+
                                 <TextView
                                     android:id="@+id/tv_car_fuwu2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car1"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="内饰清洗"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -202,6 +217,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:visibility="invisible"
                                     android:textColor="@color/order_money"
@@ -215,14 +231,18 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car8"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car8"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="塑料件护理"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -232,6 +252,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:visibility="invisible"
                                     android:textColor="@color/order_money"
@@ -244,15 +265,18 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
-
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu4"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car3"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car3"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="漆面封体"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -262,6 +286,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:visibility="invisible"
                                     android:textColor="@color/order_money"
@@ -269,6 +294,7 @@
                             </LinearLayout>
                         </LinearLayout>
 
+                        <!--第二排-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -281,15 +307,18 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
-
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu5"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car6"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car6"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="轮毂清洗"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -299,6 +328,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:visibility="invisible"
                                     android:textColor="@color/order_money"
@@ -311,15 +341,18 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
-
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu6"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car2"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu6"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car2"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="蜡品护理"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -329,6 +362,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:textColor="@color/order_money"
                                     android:textSize="12sp" />
@@ -340,15 +374,18 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
-
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu7"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car5"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu7"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car5"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="发动机舱护理"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -358,6 +395,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:textColor="@color/order_money"
                                     android:textSize="12sp" />
@@ -369,15 +407,18 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
-
+                                <ImageView
+                                    android:id="@+id/iv_car_fuwu8"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/tab_home_car4"/>
                                 <TextView
                                     android:id="@+id/tv_car_fuwu8"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:background="@drawable/tab_menu_bg"
-                                    android:drawableTop="@drawable/tab_home_car4"
-                                    android:drawablePadding="3dp"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="内饰SPA"
                                     android:textColor="@drawable/tab_menu_deal_text"
                                     android:textSize="14sp" />
@@ -387,6 +428,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
+                                    android:layout_marginTop="5dp"
                                     android:text="+￥0"
                                     android:textColor="@color/order_money"
                                     android:textSize="12sp" />
@@ -429,6 +471,10 @@
                         android:textColor="@color/black333"
                         android:text="到店"/>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#eeeeee"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"

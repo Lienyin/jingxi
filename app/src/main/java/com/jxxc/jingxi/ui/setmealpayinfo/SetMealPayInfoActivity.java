@@ -146,6 +146,22 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_fuwu_detail;
     @BindView(R.id.lv_set_meal_data)
     ListViewForScrollView lv_set_meal_data;
+    @BindView(R.id.iv_car_fuwu1)
+    ImageView iv_car_fuwu1;
+    @BindView(R.id.iv_car_fuwu2)
+    ImageView iv_car_fuwu2;
+    @BindView(R.id.iv_car_fuwu3)
+    ImageView iv_car_fuwu3;
+    @BindView(R.id.iv_car_fuwu4)
+    ImageView iv_car_fuwu4;
+    @BindView(R.id.iv_car_fuwu5)
+    ImageView iv_car_fuwu5;
+    @BindView(R.id.iv_car_fuwu6)
+    ImageView iv_car_fuwu6;
+    @BindView(R.id.iv_car_fuwu7)
+    ImageView iv_car_fuwu7;
+    @BindView(R.id.iv_car_fuwu8)
+    ImageView iv_car_fuwu8;
 
     private String siteLat="";
     private String siteLng="";
@@ -245,10 +261,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             mPresenter.comboInfo();//查套餐
             //默认选择前5项套餐
             tv_car_fuwu1.setSelected(true);
+            iv_car_fuwu1.setSelected(true);
             tv_car_fuwu2.setSelected(true);
+            iv_car_fuwu2.setSelected(true);
             tv_car_fuwu3.setSelected(true);
+            iv_car_fuwu3.setSelected(true);
             tv_car_fuwu4.setSelected(true);
+            iv_car_fuwu4.setSelected(true);
             tv_car_fuwu5.setSelected(true);
+            iv_car_fuwu5.setSelected(true);
         }
 
         if (!AppUtils.isEmpty(companyId)){
@@ -344,8 +365,11 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             comboTypeId = carListEntity.typeId;
             setService(productInfoEntity);
             tv_car_fuwu6.setSelected(false);
+            iv_car_fuwu6.setSelected(false);
             tv_car_fuwu7.setSelected(false);
+            iv_car_fuwu7.setSelected(false);
             tv_car_fuwu8.setSelected(false);
+            iv_car_fuwu8.setSelected(false);
             fuwuTypeMoney6 = 0;
             comboProductId6="";
             fuwuTypeMoney7 = 0;
@@ -364,8 +388,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     };
 
     @OnClick({R.id.tv_back,R.id.ll_stop_car_address,R.id.ll_car_info,R.id.ll_yuyue_time,
-    R.id.ll_discount_coupon,R.id.tv_create_order,R.id.ll_remark,R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,
-            R.id.tv_car_fuwu8,R.id.ll_set_type1})
+    R.id.ll_discount_coupon,R.id.tv_create_order,R.id.ll_remark,
+            R.id.tv_car_fuwu6,R.id.tv_car_fuwu7,R.id.tv_car_fuwu8,R.id.ll_set_type1,
+    R.id.iv_car_fuwu6,R.id.iv_car_fuwu7,R.id.iv_car_fuwu8})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -434,12 +459,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
                 break;
             case R.id.tv_car_fuwu6:
-                if (tv_car_fuwu6.isSelected()==true){
+            case R.id.iv_car_fuwu6:
+                if (tv_car_fuwu6.isSelected()==true||iv_car_fuwu6.isSelected()==true){
                     tv_car_fuwu6.setSelected(false);
+                    iv_car_fuwu6.setSelected(false);
                     fuwuTypeMoney6 = 0;
                     comboProductId6="";
                 }else{
                     tv_car_fuwu6.setSelected(true);
+                    iv_car_fuwu6.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==6){
                             fuwuTypeMoney6 = comboData.productList.get(j).price;
@@ -458,12 +486,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
                 break;
             case R.id.tv_car_fuwu7:
-                if (tv_car_fuwu7.isSelected()==true){
+            case R.id.iv_car_fuwu7:
+                if (tv_car_fuwu7.isSelected()==true||iv_car_fuwu7.isSelected()==true){
                     tv_car_fuwu7.setSelected(false);
+                    iv_car_fuwu7.setSelected(false);
                     fuwuTypeMoney7 = 0;
                     comboProductId7="";
                 }else{
                     tv_car_fuwu7.setSelected(true);
+                    iv_car_fuwu7.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==7){
                             fuwuTypeMoney7 = comboData.productList.get(j).price;
@@ -482,12 +513,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
                 break;
             case R.id.tv_car_fuwu8:
-                if (tv_car_fuwu8.isSelected()==true){
+            case R.id.iv_car_fuwu8:
+                if (tv_car_fuwu8.isSelected()==true||iv_car_fuwu8.isSelected()==true){
                     tv_car_fuwu8.setSelected(false);
+                    iv_car_fuwu8.setSelected(false);
                     fuwuTypeMoney8 = 0;
                     comboProductId8="";
                 }else{
                     tv_car_fuwu8.setSelected(true);
+                    iv_car_fuwu8.setSelected(true);
                     for (int j=0;j<comboData.productList.size();j++){
                         if (comboData.productList.get(j).productId==8){
                             fuwuTypeMoney8 = comboData.productList.get(j).price;
@@ -660,17 +694,17 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         //如果是推荐套餐,根据选择拿对应套餐id
         if (!AppUtils.isEmpty(recommendComboInfoEntity)){
             for (int j=0;j<comboData.productList.size();j++){
-                if (tv_car_fuwu6.isSelected()==true){
+                if (tv_car_fuwu6.isSelected()==true||iv_car_fuwu6.isSelected()==true){
                     if (comboData.productList.get(j).productId==6){
                         comboProductId6= comboData.productList.get(j).comboProductId+",";
                     }
                 }
-                if (tv_car_fuwu7.isSelected()==true){
+                if (tv_car_fuwu7.isSelected()==true||iv_car_fuwu7.isSelected()==true){
                     if (comboData.productList.get(j).productId==7){
                         comboProductId7= comboData.productList.get(j).comboProductId+",";
                     }
                 }
-                if (tv_car_fuwu8.isSelected()==true){
+                if (tv_car_fuwu8.isSelected()==true||iv_car_fuwu8.isSelected()==true){
                     if (comboData.productList.get(j).productId==8){
                         comboProductId8= comboData.productList.get(j).comboProductId+",";
                     }
@@ -691,17 +725,17 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             }else if (comboData.productList.get(j).productId==5){
                 tv_car_fuwu5_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==6){
-                if (tv_car_fuwu6.isSelected()==true){
+                if (tv_car_fuwu6.isSelected()==true||iv_car_fuwu6.isSelected()==true){
                     fuwuTypeMoney6 = comboData.productList.get(j).price;
                 }
                 tv_car_fuwu6_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             }else if (comboData.productList.get(j).productId==7){
-                if (tv_car_fuwu7.isSelected()==true){
+                if (tv_car_fuwu7.isSelected()==true||iv_car_fuwu7.isSelected()==true){
                     fuwuTypeMoney7 = comboData.productList.get(j).price;
                 }
                 tv_car_fuwu7_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             }else if (comboData.productList.get(j).productId==8){
-                if (tv_car_fuwu8.isSelected()==true){
+                if (tv_car_fuwu8.isSelected()==true||iv_car_fuwu8.isSelected()==true){
                     fuwuTypeMoney8 = comboData.productList.get(j).price;
                 }
                 tv_car_fuwu8_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));

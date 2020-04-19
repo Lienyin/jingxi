@@ -43,6 +43,7 @@ import com.jxxc.jingxi.ui.message.MessageActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
+import com.jxxc.jingxi.ui.partnership.PartnershipActivity;
 import com.jxxc.jingxi.ui.seting.SetingActivity;
 import com.jxxc.jingxi.ui.share.ShareActivity;
 import com.jxxc.jingxi.ui.usercenter.UsercenterActivity;
@@ -108,6 +109,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     LinearLayout ll_share;
     @BindView(R.id.ll_user_info)
     LinearLayout ll_user_info;
+    @BindView(R.id.ll_jiameng)
+    LinearLayout ll_jiameng;
     @BindView(R.id.view_style)
     View view_style;
     @BindView(R.id.view_my_invoice)
@@ -204,6 +207,12 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 //ZzRouter.gotoActivity(MainActivity.this, UsercenterActivity.class);
+            }
+        });
+        ll_jiameng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ZzRouter.gotoActivity(MainActivity.this, PartnershipActivity.class);
             }
         });
         //400电话
