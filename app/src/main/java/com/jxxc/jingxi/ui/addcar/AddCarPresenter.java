@@ -63,6 +63,9 @@ public class AddCarPresenter extends BasePresenterImpl<AddCarContract.View> impl
                 .params("typeId",typeId)
                 .params("color",color)
                 .params("isNewEnergy",isNewEnergy)
+                .params("realName","")
+                .params("mobile","")
+                .params("idCart","")
                 .execute(new JsonCallback<HttpResult>() {
                     @Override
                     public void onSuccess(Response<HttpResult> response) {

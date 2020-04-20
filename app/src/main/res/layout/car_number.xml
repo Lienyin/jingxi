@@ -11,7 +11,7 @@
         <TextView
             android:id="@+id/t1"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/car_num"
             android:gravity="center"
             android:inputType="number"
@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/t2"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/car_num"
             android:gravity="center"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/t3"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/car_num"
             android:gravity="center"
             android:inputType="number"
@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/t4"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/car_num"
             android:gravity="center"
@@ -67,7 +67,7 @@
         <TextView
             android:id="@+id/t5"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/car_num"
             android:gravity="center"
@@ -80,7 +80,7 @@
         <TextView
             android:id="@+id/t6"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/car_num"
             android:gravity="center"
@@ -93,7 +93,7 @@
         <TextView
             android:id="@+id/t7"
             android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/car_num"
             android:gravity="center"
@@ -110,7 +110,7 @@
             <TextView
                 android:id="@+id/t8"
                 android:layout_width="35dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="@drawable/car_num"
                 android:gravity="center"
                 android:inputType="number"
@@ -123,7 +123,7 @@
             <TextView
                 android:id="@+id/tv_new"
                 android:layout_width="35dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="@drawable/car_num"
                 android:gravity="center"
                 android:textSize="10sp"
