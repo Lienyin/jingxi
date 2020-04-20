@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.dialog.CancelOrderDialog;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
+import com.jxxc.jingxi.entity.backparameter.OrderNumEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
 import com.jxxc.jingxi.ui.orderdetailsdaifuwu.OrderDetailsDaiFuWuActivity;
@@ -211,10 +212,20 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         onRefresh();
     }
 
+    //订单数量
+    @Override
+    public void orderNumCallBack(OrderNumEntity data) {
+        rb_order_all.setText("全部("+data.all+")");
+        rb_order_daizhifu.setText("待支付("+data.notPay+")");
+        rb_order_daifuwu.setText("待服务("+data.notService+")");
+        rb_order_yiwc.setText("已完成("+data.complete+")");
+    }
+
     @Override
     public void onRefresh() {
         offset = 2;
         mPresenter.myOrder(orderType,1,10);
+        mPresenter.orderNum();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.myorder;
 
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
+import com.jxxc.jingxi.entity.backparameter.OrderNumEntity;
 import com.jxxc.jingxi.mvp.BaseView;
 import com.jxxc.jingxi.mvp.BasePresenter;
 
@@ -16,11 +17,13 @@ public class MyOrderContract {
         void myOrderCallBack(List<MyOrderEntity> data);
         void myOrderMoreCallBack(List<MyOrderEntity> data);
         void cancelOrderCallBack();
+        void orderNumCallBack(OrderNumEntity data);
     }
 
     interface  Presenter extends BasePresenter<View> {
         void myOrder(String status,int pageNum,int pageSize);
         void myOrderMore(String status,int pageNum,int pageSize);
         void cancelOrder(String orderId);
+        void orderNum();
     }
 }

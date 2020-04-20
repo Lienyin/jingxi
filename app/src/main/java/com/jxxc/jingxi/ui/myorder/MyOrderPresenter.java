@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.myorder;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
+import com.jxxc.jingxi.entity.backparameter.OrderNumEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
 import com.jxxc.jingxi.http.JsonCallback;
@@ -76,6 +77,26 @@ public class MyOrderPresenter extends BasePresenterImpl<MyOrderContract.View> im
                         StyledDialog.dismissLoading();
                         if (response.body().code==0){
                             mView.cancelOrderCallBack();
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 查询订单数量
+     */
+    @Override
+    public void orderNum() {
+        OkGo.<HttpResult<OrderNumEntity>>post(Api.ORDER_NUM)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<OrderNumEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<OrderNumEntity>> response) {
+                        OrderNumEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.orderNumCallBack(d);
                         }else{
                             toast(mContext,response.body().message);
                         }

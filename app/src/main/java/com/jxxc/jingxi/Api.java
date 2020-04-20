@@ -110,4 +110,6 @@ public class Api {
     public static final String APPLY = BASEURL + "/system/company/applyToJoin";
     //51-下单（进店服务）
     public static final String CREATE2 = BASEURL + "/biz/order/create2";
+    //52-获取订单数量
+    public static final String ORDER_NUM = BASEURL + "/biz/order/orderNum";
 }

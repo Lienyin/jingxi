@@ -42,26 +42,13 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/time_yuyue"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/black666"
-                    android:text="剩余"/>
-                <TextView
                     android:id="@+id/tv_fuwu_shengyu_ime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/public_all"
-                    android:text="XXX"/>
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_marginRight="5dp"
                     android:textColor="@color/black666"
-                    android:text="完成"/>
+                    android:text="剩余XXX完成"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/iv_order_static"

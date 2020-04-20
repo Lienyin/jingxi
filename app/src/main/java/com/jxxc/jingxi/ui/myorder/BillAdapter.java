@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.myorder;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -65,7 +67,11 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
         }else if (item.status==3){
             //服务中
             int m = item.surplusCompleteTime/60;
-            helper.setText(R.id.tv_fuwu_shengyu_ime,m+"分钟");
+            if (m>=0){
+                helper.setText(R.id.tv_fuwu_shengyu_ime,Html.fromHtml("剩余<font color=\"#008487\">"+m+"分钟</font>完成"));
+            }else{
+                helper.setText(R.id.tv_fuwu_shengyu_ime,Html.fromHtml("已超时<font color=\"#666666\">"+Math.abs(m)+"分钟</font>"));
+            }
             helper.setGone(R.id.ll_fuwu_time,true);
             helper.setGone(R.id.iv_order_static,false);
             helper.setBackgroundRes(R.id.iv_order_static,R.drawable.order_static);
