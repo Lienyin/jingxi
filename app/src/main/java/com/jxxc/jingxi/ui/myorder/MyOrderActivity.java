@@ -145,8 +145,8 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
-            //订单状态 不传查默认所有 ( 0, “待支付”),( 1, “已支付待接单”),( 2, “已接单待服务”),
-            // ( 3, “服务中”),( 4, “服务已完成”),( 5, “取消订单”)
+            //订单状态 不传查默认所有 (-1 查除服务中状态的订单) ( 0, “待支付”),( 1, “待服务”),
+            // ( 3, “服务中”),( 4, “服务已完成”)
             case R.id.tv_back:
                 finish();
                 break;
@@ -163,7 +163,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 mPresenter.myOrder(orderType,1,10);
                 break;
             case R.id.rb_order_daifuwu://待服务
-                orderType = "2";
+                orderType = "1";
                 mPresenter.myOrder(orderType,1,10);
                 break;
             case R.id.rb_order_jignxz://进行中
