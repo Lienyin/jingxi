@@ -85,8 +85,10 @@ public class TimeAdapter extends BaseAdapter {
                     holder.tv_time_num.setText(Html.fromHtml("预计等待<font color=\"#00B487\">"+data.awaitMinute+"</font>分"));
                 }else{
                     holder.tv_time_num.setText(Html.fromHtml("可预约"));
+                    holder.tv_time_num.setVisibility(View.GONE);
                 }
             }else{
+                holder.tv_time_num.setVisibility(View.GONE);
                 holder.tv_time_num.setText(Html.fromHtml("可预约"));
             }
         }
