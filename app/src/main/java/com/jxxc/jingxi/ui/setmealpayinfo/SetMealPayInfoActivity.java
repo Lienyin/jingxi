@@ -381,7 +381,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         } else {
             view_qiye.setVisibility(View.GONE);
             ll_car_info.setVisibility(View.VISIBLE);
-            ll_order_sty.setVisibility(View.GONE);
+            ll_order_sty.setVisibility(View.VISIBLE);
         }
         et_var_type_1.addTextChangedListener(new TextWatcher() {
             @Override
