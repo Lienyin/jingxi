@@ -51,6 +51,7 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
                             SPUtils.put(SPUtils.K_SESSION_MOBILE,d.phonenumber);
+                            SPUtils.put(SPUtils.K_ROLE,d.accountType);
                         }else {
                             toast(mContext,response.body().message);
                         }

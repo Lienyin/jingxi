@@ -107,8 +107,14 @@
             </LinearLayout>
             <!--选择布局-->
             <include layout="@layout/select_itme"/>
+            <!--企业下单专用-->
+            <include
+                android:id="@+id/view_qiye"
+                layout="@layout/set_car_type_number"
+                android:visibility="gone"/>
             <!--车辆信息-->
             <LinearLayout
+                android:id="@+id/ll_car_info_view"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
@@ -573,6 +579,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_order_sty"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

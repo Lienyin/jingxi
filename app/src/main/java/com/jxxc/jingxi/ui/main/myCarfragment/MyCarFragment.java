@@ -45,6 +45,7 @@ import com.jxxc.jingxi.mvp.MVPBaseFragment;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
 import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.ui.mycar.MyCarActivity;
+import com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.ui.remark.RemarkActivity;
 import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
@@ -115,10 +116,14 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private EditText et_car_memo;
     private LinearLayout ll_daodian,ll_address,ll_shop_site;
     private LinearLayout ll_discount_coupon,ll_remark;
+    private LinearLayout ll_car_info_view;
     private View shang_men,view_daodian_fuwu;
     private SwipeRefreshLayout swipeLayout;
     private RecyclerView rv_list;
     private ListViewForScrollView activity_data;
+    private View view_qiye;
+    private EditText et_var_type_1,et_var_type_2,et_var_type_3;
+    private LinearLayout ll_order_sty;
     private int fuwu1;
     private int fuwu2;
     private int fuwu3;
@@ -129,7 +134,12 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private String comboTypeId="";//车类型（SUN,轿车，MYVP）
     private int serviceType=0;
     private String counponId="";
-    private String comboProductId="";
+    private String productIds="";//企业服务id
+    private String productIds0="";
+    private String productIds6="";
+    private String productIds7="";
+    private String productIds8="";
+    private String comboProductId="";//个人服务id
     private String comboProductId0="";
     private String comboProductId6="";
     private String comboProductId7="";
@@ -162,6 +172,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private DiscountCouponDialog discountCouponDialog;//优惠券对话框
     private ActivityDataAdapter activityDataAdapter;
     private String remark="";
+    private String OrderId="";
 
     public MyCarFragment(Context context){
         this.context = context;
@@ -178,6 +189,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         shang_men = view.findViewById(R.id.shang_men);
         swipeLayout = view.findViewById(R.id.swipeLayout);
         rv_list = view.findViewById(R.id.rv_list);
+        ll_order_sty = view.findViewById(R.id.ll_order_sty);
         activity_data = view.findViewById(R.id.activity_data);
         tv_car_info = view.findViewById(R.id.tv_car_info);
         ll_discount_coupon = view.findViewById(R.id.ll_discount_coupon);
@@ -228,6 +240,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         et_car_memo = view.findViewById(R.id.et_car_memo);
         tv_xia_order_discounts = view.findViewById(R.id.tv_xia_order_discounts);
         et_car_address_daodian = view.findViewById(R.id.et_car_address_daodian);
+        view_qiye = view.findViewById(R.id.view_qiye);
+        ll_car_info_view = view.findViewById(R.id.ll_car_info_view);
+        et_var_type_1 = view.findViewById(R.id.et_var_type_1);
+        et_var_type_2 = view.findViewById(R.id.et_var_type_2);
+        et_var_type_3 = view.findViewById(R.id.et_var_type_3);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
         rb_shangmen_service.setOnClickListener(this);
@@ -344,6 +361,16 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
             }
         });
+        //显示企业模块
+        if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+            view_qiye.setVisibility(View.VISIBLE);
+            ll_car_info_view.setVisibility(View.GONE);
+            ll_order_sty.setVisibility(View.INVISIBLE);
+        }else{
+            view_qiye.setVisibility(View.GONE);
+            ll_car_info_view.setVisibility(View.VISIBLE);
+            ll_order_sty.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -440,6 +467,11 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 view_daodian_fuwu.setVisibility(View.GONE);
                 break;
             case R.id.rb_daodian_service://到店
+                //企业账户不提供到店服务
+                if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+                    Toast.makeText(context,"企业账户不提供到店服务",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 shang_men.setVisibility(View.GONE);
                 view_daodian_fuwu.setVisibility(View.VISIBLE);
                 serviceType = 1;
@@ -472,6 +504,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     iv_car_fuwu6.setSelected(false);
                     fuwuTypeMoney6 = 0;
                     comboProductId6="";
+                    productIds6="";
                 }else{
                     tv_car_fuwu6.setSelected(true);
                     iv_car_fuwu6.setSelected(true);
@@ -479,6 +512,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         if (comboData.productList.get(j).productId==6){
                             fuwuTypeMoney6 = comboData.productList.get(j).price;
                             comboProductId6=comboData.productList.get(j).comboProductId+",";
+                            productIds6=comboData.productList.get(j).productId+",";
                         }
                     }
                 }
@@ -499,6 +533,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     iv_car_fuwu7.setSelected(false);
                     fuwuTypeMoney7 = 0;
                     comboProductId7="";
+                    productIds7="";
                 }else{
                     tv_car_fuwu7.setSelected(true);
                     iv_car_fuwu7.setSelected(true);
@@ -506,6 +541,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         if (comboData.productList.get(j).productId==7){
                             fuwuTypeMoney7 = comboData.productList.get(j).price;
                             comboProductId7=comboData.productList.get(j).comboProductId+",";
+                            productIds7=comboData.productList.get(j).productId+",";
                         }
                     }
                 }
@@ -526,6 +562,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     iv_car_fuwu8.setSelected(false);
                     fuwuTypeMoney8 = 0;
                     comboProductId8="";
+                    productIds8="";
                 }else{
                     tv_car_fuwu8.setSelected(true);
                     iv_car_fuwu8.setSelected(true);
@@ -533,6 +570,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                         if (comboData.productList.get(j).productId==8){
                             fuwuTypeMoney8 = comboData.productList.get(j).price;
                             comboProductId8=comboData.productList.get(j).comboProductId+",";
+                            productIds8=comboData.productList.get(j).productId+",";
                         }
                     }
                 }
@@ -570,15 +608,46 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     gotoLogin();
                     return;
                 }
-                if (AppUtils.isEmpty(tv_car_info.getText().toString())){
+                if (AppUtils.isEmpty(tv_car_info.getText().toString())&&
+                        "0".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
                     Toast.makeText(context,"请添加车辆",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(et_car_address.getText().toString())&&serviceType==0){
                     Toast.makeText(context,"请选择停车地点",Toast.LENGTH_SHORT).show();
                 }else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())){
                     Toast.makeText(context,"请选择服务时间",Toast.LENGTH_SHORT).show();
                 }else{
+                    String carNumStr = "";
+                    if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+                        //企业车辆数目统计
+                        int jiaoche = 0;
+                        int suv = 0;
+                        int mpv = 0;
+                        if (AppUtils.isEmpty(et_var_type_1.getText().toString().trim())){
+                            jiaoche = 0;
+                        }else {
+                            jiaoche = Integer.valueOf(et_var_type_1.getText().toString().trim());
+                        }
+                        if (AppUtils.isEmpty(et_var_type_2.getText().toString().trim())){
+                            suv = 0;
+                        }else {
+                            suv = Integer.valueOf(et_var_type_2.getText().toString().trim());
+                        }
+                        if (AppUtils.isEmpty(et_var_type_3.getText().toString().trim())){
+                            mpv = 0;
+                        }else {
+                            mpv = Integer.valueOf(et_var_type_3.getText().toString().trim());
+                        }
+                        carNumStr = jiaoche+","+suv+","+mpv;
+                        //企业账户
+                        if (jiaoche==0&&suv==0&&mpv==0){
+                            Toast.makeText(context,"请输入数量",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
                     StyledDialog.buildLoading("正在下单").setActivity((Activity) context).show();
                     comboProductId = comboProductId0+comboProductId6+comboProductId7+comboProductId8;
+                    productIds = productIds0+productIds6+productIds7+productIds8;
                     mPresenter.createOrder(
                             serviceType,
                             counponId,
@@ -593,7 +662,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                             remark,
                             companyId,
                             comboProductId.substring(0,comboProductId.length()-1),
-                            comboTypeId);
+                            comboTypeId,
+                            productIds,
+                            carNumStr);
                 }
                 break;
         }
@@ -755,8 +826,10 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         }
         //拿前五项基本套餐
         comboProductId0="";
+        productIds0="";
         for (int i=0;i<5;i++){
             comboProductId0 += comboData.productList.get(i).comboProductId+",";
+            productIds0 += comboData.productList.get(i).productId+",";
         }
         for (int j=0;j<comboData.productList.size();j++){
             if (comboData.productList.get(j).productId==1){
@@ -792,11 +865,23 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
 
     @Override
     public void createOrderCallBack(CreateOrderEntity data) {
-        //支付订单
-        Intent intent = new Intent(context, PayOrderActivity.class);
-        intent.putExtra("orderId",data.orderId);
-        intent.putExtra("orderPrice",data.payPrice);
-        startActivity(intent);
+        //显示企业模块
+        if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+            OrderId = data.orderId;
+            mPresenter.BalancePay(data.orderId);
+        }else{
+            //支付订单
+            Intent intent = new Intent(context, PayOrderActivity.class);
+            intent.putExtra("orderId",data.orderId);
+            intent.putExtra("orderPrice",data.payPrice);
+            startActivity(intent);
+        }
+    }
+
+    //企业余额支付
+    @Override
+    public void BalancePayCallBack() {
+        ZzRouter.gotoActivity((Activity) context, OrderDetailsActivity.class,OrderId);
     }
 
     //查询预约时间返回

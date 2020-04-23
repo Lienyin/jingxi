@@ -32,6 +32,7 @@ public class SPUtils {
     public static final String K_CAR_TYPE = "carType";//车型
     public static final String K_COMPANY_ID = "companyId";//运营商id
     public static final String K_JING_DU = "jingDu";//下单进度
+    public static final String K_ROLE = "role";//角色 帐号类型，0：个人帐号；1企业帐号
     private static Context mContext;
 
     public static SharedPreferences init(Context context) {

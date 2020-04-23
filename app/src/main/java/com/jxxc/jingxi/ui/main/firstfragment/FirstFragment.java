@@ -283,6 +283,11 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 startActivity(intent);
                 break;
             case R.id.iv_yuyue_daodian://新版到店
+                //企业账户不提供到店服务
+                if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+                    Toast.makeText(context,"企业账户不提供到店服务",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ZzRouter.gotoActivity((Activity) context, ShopListActivity.class);
                 break;
             case R.id.rb_work_order_all://上门

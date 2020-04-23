@@ -29,6 +29,7 @@ public class MyCarFragmentContract {
         void companyListCallBack(List<companyListEntity> data);
         void companyListCallBackMore(List<companyListEntity> data);
         void getActivitiesCallBack(List<ActivitiesEntity> data);
+        void BalancePayCallBack();
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -48,11 +49,14 @@ public class MyCarFragmentContract {
                          String remark,
                          String companyId,
                          String comboProductIds,
-                         String comboTypeId);
+                         String comboTypeId,
+                         String productIds,
+                         String cars);
         void appointmentList(String companyId,String queryDate);
 
         void companyList(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
         void companyListMore(double lng,double lat,String queryFlag,String sort,String areaId,int pageNum,int pageSize);
         void getActivities();
+        void BalancePay(String orderId);
     }
 }

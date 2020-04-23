@@ -144,7 +144,9 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                             String remark,
                             String companyId,
                             String comboProductIds,
-                            String comboTypeId) {
+                            String comboTypeId,
+                            String productIds,
+                            String cars) {
         OkGo.<HttpResult<CreateOrderEntity>>post(Api.CREATE_ORDER)
                 .params("serviceType",serviceType)
                 .params("counponId",counponId)
@@ -160,6 +162,8 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                 .params("companyId",companyId)
                 .params("comboProductIds",comboProductIds)
                 .params("comboTypeId",comboTypeId)
+                .params("productIds",productIds)
+                .params("cars",cars)
                 .execute(new JsonCallback<HttpResult<CreateOrderEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<CreateOrderEntity>> response) {
@@ -238,6 +242,27 @@ public class MyCarFragmentPresenter extends BasePresenterImpl<MyCarFragmentContr
                         List<companyListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.companyListCallBackMore(d);
+                        }else{
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 余额支付
+     * @param orderId
+     */
+    @Override
+    public void BalancePay(String orderId) {
+        OkGo.<HttpResult>post(Api.BALANCE_PAY)
+                .params("orderId",orderId)
+                .execute(new JsonCallback<HttpResult>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult> response) {
+                        StyledDialog.dismissLoading();
+                        if (response.body().code==0){
+                            mView.BalancePayCallBack();
                         }else{
                             toast(mContext,response.body().message);
                         }
