@@ -15,6 +15,7 @@ public class OrderEntity implements Serializable {
     public String orderId;
     public String arriveDate;
     public String remark;
+    public String cars;
     public String commentContent;
     public String technicianRealName;
     public List<Products> products;

@@ -238,14 +238,14 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 finish();
                 break;
             case R.id.tv_user_xieyi:
-                String URL = "http://47.101.185.138:8090/tool/build/agreement";
+                String URL = "https://jx.bashideban.com/tool/build/agreement";
                 Intent intent = new Intent(this, RegardsAgreementActivity.class);
                 intent.putExtra("URL",URL);
                 intent.putExtra("h5Type","1");
                 startActivity(intent);
                 break;
             case R.id.tv_yingsi_xieyi:
-                String URL1 = "http://47.101.185.138:8090/tool/build/ios_privacy";
+                String URL1 = "https://jx.bashideban.com/tool/build/ios_privacy";
                 Intent intent1 = new Intent(this, RegardsAgreementActivity.class);
                 intent1.putExtra("URL",URL1);
                 intent1.putExtra("h5Type","0");

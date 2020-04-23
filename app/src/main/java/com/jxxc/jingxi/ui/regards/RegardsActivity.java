@@ -66,7 +66,7 @@ public class RegardsActivity extends MVPBaseActivity<RegardsContract.View, Regar
                 gradeGo();
                 break;
             case R.id.ll_privacy://隐私政策
-                String URL = "http://47.101.185.138:8090/tool/build/ios_privacy";
+                String URL = "https://jx.bashideban.com/tool/build/ios_privacy";
                 Intent intent = new Intent(this, RegardsAgreementActivity.class);
                 intent.putExtra("URL",URL);
                 intent.putExtra("h5Type","0");

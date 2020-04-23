@@ -21,6 +21,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
+import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -78,8 +79,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     GridView gv_fuwu_data;
     @BindView(R.id.ll_my_pingjia)
     LinearLayout ll_my_pingjia;
+    @BindView(R.id.ll_jishi_info)
+    LinearLayout ll_jishi_info;
+    @BindView(R.id.ll_qiyq_sty)
+    LinearLayout ll_qiyq_sty;
     @BindView(R.id.tv_delete)
     TextView tv_delete;
+    @BindView(R.id.tv_details_car_type_number)
+    TextView tv_details_car_type_number;
     @BindView(R.id.gv_img_data)
     GridView gv_img_data;
     private String OrderId;
@@ -87,6 +94,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     private OrderEntity orderEntity = new OrderEntity();
     private ImgAdapter imgAdapter;
     private List<String> imgList = new ArrayList<>();
+    private List<String> carList = new ArrayList<>();
     private ImgDialog imgDialog;
     @Override
     protected int layoutId() {
@@ -110,6 +118,15 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
             }
         });
         imgDialog = new ImgDialog(this);
+
+        //显示企业模块
+        if ("1".equals(SPUtils.get(SPUtils.K_ROLE, "0"))) {
+            ll_jishi_info.setVisibility(View.GONE);
+            ll_qiyq_sty.setVisibility(View.VISIBLE);
+        }else{
+            ll_jishi_info.setVisibility(View.VISIBLE);
+            ll_qiyq_sty.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_pingjian,R.id.tv_again,R.id.tv_delete})
@@ -153,6 +170,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         imgAdapter.notifyDataSetChanged();
 
         tv_details_order_id.setText(data.orderId);
+        String[] car = data.cars.split(",");
+        for (int i=0;i<car.length;i++){
+            carList.add(car[i]);
+        }
+        if (carList.size()>0){
+            tv_details_car_type_number.setText("轿车"+carList.get(0)+"辆，SUV"+carList.get(1)+"辆，MPV"+carList.get(2)+"辆");//企业车型数量
+        }
+
         tv_details_order_static.setText(data.statusName);
         tv_details_order_xia_time.setText(data.appointmentTime);
         tv_details_order_address.setText(data.address);

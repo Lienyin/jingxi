@@ -55,6 +55,9 @@ import com.jxxc.jingxi.utils.GlideImgManager;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -80,6 +83,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     TextView tv_details_jishi_name;
     @BindView(R.id.tv_details_order_id)
     TextView tv_details_order_id;
+    @BindView(R.id.tv_details_car_type_number)
+    TextView tv_details_car_type_number;
     @BindView(R.id.tv_details_order_static)
     TextView tv_details_order_static;
     @BindView(R.id.tv_details_order_xia_time)
@@ -110,6 +115,10 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     ScrollView mScrollView;
     @BindView(R.id.jishi_info)
     LinearLayout jishi_info;
+    @BindView(R.id.ll_jishi_info)
+    LinearLayout ll_jishi_info;
+    @BindView(R.id.ll_qiyq_sty)
+    LinearLayout ll_qiyq_sty;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -121,6 +130,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     private OrderDetailsDataAdapter adapter;
     private RoutePlanSearch mSearch;
     private CancelOrderDialog dialog;
+    private List<String> carList = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.order_details_dai_fu_wu_activity;
@@ -157,6 +167,15 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 return false;
             }
         });
+
+        //显示企业模块
+        if ("1".equals(SPUtils.get(SPUtils.K_ROLE, "0"))) {
+            ll_jishi_info.setVisibility(View.GONE);
+            ll_qiyq_sty.setVisibility(View.VISIBLE);
+        }else{
+            ll_jishi_info.setVisibility(View.VISIBLE);
+            ll_qiyq_sty.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_call_phone,R.id.tv_details_cancel_order,
@@ -250,6 +269,13 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
 
         //订单信息
         tv_details_order_id.setText(data.orderId);
+        String[] car = data.cars.split(",");
+        for (int i=0;i<car.length;i++){
+            carList.add(car[i]);
+        }
+        if (carList.size()>0){
+            tv_details_car_type_number.setText("轿车"+carList.get(0)+"辆，SUV"+carList.get(1)+"辆，MPV"+carList.get(2)+"辆");//企业车型数量
+        }
         tv_details_order_static.setText(data.statusName);
         tv_details_order_xia_time.setText(data.appointmentTime);
         tv_details_order_address.setText(data.address);
