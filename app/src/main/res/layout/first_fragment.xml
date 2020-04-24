@@ -49,13 +49,17 @@
                     android:background="@color/transparent"
                     android:visibility="visible">
 
-                    <ImageView
+                    <LinearLayout
                         android:id="@+id/iv_my_user"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:src="@mipmap/my_user"/>
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/my_user"/>
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/tv_location_city"
                         android:layout_width="wrap_content"
@@ -66,15 +70,19 @@
                         android:text="菁喜"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
-                    <ImageView
+                    <LinearLayout
                         android:id="@+id/iv_msg"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:src="@mipmap/msg_xiaoxi"/>
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@mipmap/msg_xiaoxi"/>
+                    </LinearLayout>
                 </RelativeLayout>
             </FrameLayout>
 

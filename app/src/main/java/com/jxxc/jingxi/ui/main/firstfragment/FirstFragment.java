@@ -88,8 +88,9 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
     private TextView tv_car_fuwu1, tv_car_fuwu2, tv_car_fuwu3, tv_car_fuwu4, tv_car_fuwu5, tv_car_fuwu6,
             tv_car_fuwu7, tv_car_fuwu8;
     private TextView tv_more, tv_more_set;
-    private ImageView iv_my_user, iv_msg,iv_he_huoren;
+    private ImageView iv_he_huoren;
     private ImageView iv_yuyue_shangmen, iv_yuyue_daodian;
+    private LinearLayout iv_my_user,iv_msg;
     private int num1 = 0;
     private int num2 = 0;
     private int num3 = 0;
