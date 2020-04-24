@@ -432,6 +432,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         if (data.accountType==1){
             ll_my_invoice.setVisibility(View.VISIBLE);
             view_my_invoice.setVisibility(View.VISIBLE);
+            ll_my_car.setVisibility(View.GONE);
+        }else{
+            ll_my_invoice.setVisibility(View.GONE);
+            view_my_invoice.setVisibility(View.GONE);
+            ll_my_car.setVisibility(View.VISIBLE);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.jxxc.jingxi.ui.myorder;
 
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -11,6 +12,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.HomeDataAdapter;
 import com.jxxc.jingxi.entity.backparameter.MyOrderEntity;
+import com.jxxc.jingxi.http.ZzRouter;
+import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -130,6 +133,18 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
                 onFenxiangClickListener.onFenxiangClick(4,"",item.orderId,item.status+"");
             }
         });
+        helper.setOnClickListener(R.id.iv_order_static, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (item.status==0){
+                    Intent intent = new Intent(mContext, PayOrderActivity.class);
+                    intent.putExtra("orderId",item.orderId);
+                    intent.putExtra("orderPrice",item.price);
+                    mContext.startActivity(intent);
+                }
+            }
+        });
+
     }
 
     private OnFenxiangClickListener onFenxiangClickListener;
