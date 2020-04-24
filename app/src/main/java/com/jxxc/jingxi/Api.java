@@ -3,7 +3,7 @@ package com.jxxc.jingxi;
 import com.jxxc.jingxi.utils.SPUtils;
 
 public class Api {
-   public static final String BASEURL = "https://jx.bashideban.com/customer";
+   public static final String BASEURL = "https://jx.incofuture.com/customer";
    //public static final String BASEURL = "http://192.168.0.59:8080";//于立华
 
     //1-客户登录
