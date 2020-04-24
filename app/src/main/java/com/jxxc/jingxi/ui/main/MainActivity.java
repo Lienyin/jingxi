@@ -24,6 +24,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.jxxc.jingxi.dialog.ShareDialog;
@@ -44,8 +45,11 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
 import com.jxxc.jingxi.ui.mywallet.MyWalletActivity;
 import com.jxxc.jingxi.ui.partnership.PartnershipActivity;
+import com.jxxc.jingxi.ui.recharge.RechargeActivity;
 import com.jxxc.jingxi.ui.seting.SetingActivity;
+import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.ui.share.ShareActivity;
+import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.usercenter.UsercenterActivity;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -449,16 +453,45 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 final int finalI = i;
                 imageView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {// 设置图片点击事件
+                        //跳转类型 1文章 2 活动 3 充值 4 门店5 下单
                         if (data.get(finalI).linkType==1){
-                            //跳转类型 1发现文章；2活动
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
                             Intent intent = new Intent(MainActivity.this, FindDetailsActivity.class);
-                            //intent.putExtra("linkId",data.get(finalI).linkId);
-                            intent.putExtra("linkId","16");
+                            intent.putExtra("linkId",data.get(finalI).linkId);
                             startActivity(intent);
                         } else if (data.get(finalI).linkType == 2) {
-                            //跳转类型 1发现文章；2活动
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
                             Intent intent = new Intent(MainActivity.this, ShareActivity.class);
                             //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                            startActivity(intent);
+                        }else if (data.get(finalI).linkType == 3) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(MainActivity.this, RechargeActivity.class);
+                            startActivity(intent);
+                        }else if (data.get(finalI).linkType == 4) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
+                            startActivity(intent);
+                        }else if (data.get(finalI).linkType == 5) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(MainActivity.this, SetMealPayInfoActivity.class);
+                            intent.putExtra("serviceType", "0");
+                            intent.putExtra("companyId", "");
                             startActivity(intent);
                         } else{
                             toast(MainActivity.this,"暂无标签");
@@ -487,6 +520,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
             }
         });
+    }
+
+    private void gotoLogin() {
+        toast(this, "请先登录后使用");
+        ZzRouter.gotoActivity(this, ConfigApplication.LOGIN_PATH, ZzRouter.HOST_PLUGIN);
     }
 
     //活动状态接口返回数据

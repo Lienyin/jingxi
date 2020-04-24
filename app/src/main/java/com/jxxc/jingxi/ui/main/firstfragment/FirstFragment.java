@@ -460,14 +460,48 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
             lv_product_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (data.get(i).linkType == 1||data.get(i).linkType == 3) {
-                        //跳转类型 1发现文章；2活动
-                        //Intent intent = new Intent(context, FindDetailsActivity.class);
-                        //intent.putExtra("linkId",data.get(i).linkId);
+                    //跳转类型 1文章 2 活动 3 充值 4 门店5 下单
+                    if (data.get(myPager.getCurIndex()).linkType==1){
+                        if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                            gotoLogin();
+                            return;
+                        }
+                        Intent intent = new Intent(context, FindDetailsActivity.class);
+                        intent.putExtra("linkId",data.get(myPager.getCurIndex()).linkId);
+                        startActivity(intent);
+                    } else if (data.get(myPager.getCurIndex()).linkType == 2) {
+                        if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                            gotoLogin();
+                            return;
+                        }
+                        Intent intent = new Intent(context, ShareActivity.class);
+                        //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
+                        startActivity(intent);
+                    }else if (data.get(myPager.getCurIndex()).linkType == 3) {
+                        if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                            gotoLogin();
+                            return;
+                        }
                         Intent intent = new Intent(context, RechargeActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        toast(context, "暂无标签");
+                        startActivity(intent);
+                    }else if (data.get(myPager.getCurIndex()).linkType == 4) {
+                        if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                            gotoLogin();
+                            return;
+                        }
+                        Intent intent = new Intent(context, ShopListActivity.class);
+                        startActivity(intent);
+                    }else if (data.get(myPager.getCurIndex()).linkType == 5) {
+                        if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                            gotoLogin();
+                            return;
+                        }
+                        Intent intent = new Intent(context, SetMealPayInfoActivity.class);
+                        intent.putExtra("serviceType", "0");
+                        intent.putExtra("companyId", "");
+                        startActivity(intent);
+                    } else{
+                        toast(context,"暂无标签");
                     }
                 }
             });
@@ -483,19 +517,48 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 MyImageView imageView = new MyImageView(context);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {// 设置图片点击事件
-                        if (data.get(myPager.getCurIndex()).linkType == 1) {
-                            //跳转类型 1发现文章；2活动
+                        //跳转类型 1文章 2 活动 3 充值 4 门店5 下单
+                        if (data.get(myPager.getCurIndex()).linkType==1){
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
                             Intent intent = new Intent(context, FindDetailsActivity.class);
-                            intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
-                            //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
-                            context.startActivity(intent);
+                            intent.putExtra("linkId",data.get(myPager.getCurIndex()).linkId);
+                            startActivity(intent);
                         } else if (data.get(myPager.getCurIndex()).linkType == 2) {
-                            //跳转类型 1发现文章；2活动
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
                             Intent intent = new Intent(context, ShareActivity.class);
                             //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
-                            context.startActivity(intent);
-                        } else {
-                            toast(context, "暂无标签");
+                            startActivity(intent);
+                        }else if (data.get(myPager.getCurIndex()).linkType == 3) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(context, RechargeActivity.class);
+                            startActivity(intent);
+                        }else if (data.get(myPager.getCurIndex()).linkType == 4) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(context, ShopListActivity.class);
+                            startActivity(intent);
+                        }else if (data.get(myPager.getCurIndex()).linkType == 5) {
+                            if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                                gotoLogin();
+                                return;
+                            }
+                            Intent intent = new Intent(context, SetMealPayInfoActivity.class);
+                            intent.putExtra("serviceType", "0");
+                            intent.putExtra("companyId", "");
+                            startActivity(intent);
+                        } else{
+                            toast(context,"暂无标签");
                         }
                     }
                 });

@@ -5,68 +5,82 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/title"/>
+    <include layout="@layout/title" />
     <!--头部布局-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <LinearLayout
             android:id="@+id/ll_city_filtrate"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center">
+
             <TextView
                 android:id="@+id/tv_location_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="XXX"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="XXX"/>
+                android:textSize="14sp" />
+
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:layout_marginLeft="5dp"
-                android:src="@mipmap/sajiang_xing"/>
+                android:src="@mipmap/sajiang_xing" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_paixu_filtrate"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="默认排序"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="默认排序"/>
+                android:textSize="14sp" />
+
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:layout_marginLeft="5dp"
-                android:src="@mipmap/sajiang_xing"/>
+                android:src="@mipmap/sajiang_xing" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_static_filtrate"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="筛选"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="筛选"/>
+                android:textSize="14sp" />
+
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:layout_marginLeft="5dp"
-                android:src="@mipmap/sajiang_xing"/>
+                android:src="@mipmap/sajiang_xing" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#eeeeee" />
     <!--中间布局-->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
@@ -80,43 +94,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v4.widget.SwipeRefreshLayout>
-    |<View
-    android:layout_width="match_parent"
-    android:layout_height="0.5dp"
-    android:background="@color/black999"/>
+    |
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#eeeeee" />
     <!--底部布局-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center_vertical">
+
         <LinearLayout
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:textSize="16sp"
+                android:text="当前所处位置"
                 android:textColor="@color/black333"
-                android:text="当前所处位置"/>
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tv_dingwei_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:textSize="12sp"
+                android:text="当前所处位置"
                 android:textColor="@color/black999"
-                android:text="当前所处位置"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/ding_wei_address"/>
+            android:src="@mipmap/ding_wei_address" />
     </LinearLayout>
 </LinearLayout>
