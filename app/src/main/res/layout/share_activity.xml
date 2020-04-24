@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#6DCAA2"
+                android:background="#25986d"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
                 <LinearLayout
@@ -305,7 +305,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="已成功邀请"
                                 android:textColor="@color/black666"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
                         <!--可得现金红包-->
                         <LinearLayout
@@ -341,7 +341,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="已获得0次免费洗车奖励"
                                 android:textColor="@color/black666"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -355,9 +355,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="查看计算规则>"
-                            android:visibility="gone"
                             android:textColor="@color/public_all"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
