@@ -112,6 +112,10 @@
                 android:id="@+id/view_qiye"
                 layout="@layout/set_car_type_number"
                 android:visibility="gone"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#eeeeee"/>
             <!--车辆信息-->
             <LinearLayout
                 android:id="@+id/ll_car_info_view"
@@ -490,6 +494,10 @@
                         android:src="@mipmap/jiantou"/>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/set_bg"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

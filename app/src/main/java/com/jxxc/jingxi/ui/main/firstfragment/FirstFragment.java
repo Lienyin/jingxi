@@ -461,15 +461,15 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     //跳转类型 1文章 2 活动 3 充值 4 门店5 下单
-                    if (data.get(myPager.getCurIndex()).linkType==1){
+                    if (data.get(i).linkType==1){
                         if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                             gotoLogin();
                             return;
                         }
                         Intent intent = new Intent(context, FindDetailsActivity.class);
-                        intent.putExtra("linkId",data.get(myPager.getCurIndex()).linkId);
+                        intent.putExtra("linkId",data.get(i).linkId);
                         startActivity(intent);
-                    } else if (data.get(myPager.getCurIndex()).linkType == 2) {
+                    } else if (data.get(i).linkType == 2) {
                         if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                             gotoLogin();
                             return;
@@ -477,21 +477,21 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                         Intent intent = new Intent(context, ShareActivity.class);
                         //intent.putExtra("linkId", data.get(myPager.getCurIndex()).linkId);
                         startActivity(intent);
-                    }else if (data.get(myPager.getCurIndex()).linkType == 3) {
+                    }else if (data.get(i).linkType == 3) {
                         if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                             gotoLogin();
                             return;
                         }
                         Intent intent = new Intent(context, RechargeActivity.class);
                         startActivity(intent);
-                    }else if (data.get(myPager.getCurIndex()).linkType == 4) {
+                    }else if (data.get(i).linkType == 4) {
                         if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                             gotoLogin();
                             return;
                         }
                         Intent intent = new Intent(context, ShopListActivity.class);
                         startActivity(intent);
-                    }else if (data.get(myPager.getCurIndex()).linkType == 5) {
+                    }else if (data.get(i).linkType == 5) {
                         if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
                             gotoLogin();
                             return;
