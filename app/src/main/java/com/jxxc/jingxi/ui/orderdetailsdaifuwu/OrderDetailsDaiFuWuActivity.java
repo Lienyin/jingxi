@@ -73,6 +73,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_affirm)
+    TextView tv_affirm;
     @BindView(R.id.tv_details_call_phone)
     TextView tv_details_call_phone;
     @BindView(R.id.tv_details_cancel_order)
@@ -181,7 +183,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_call_phone,R.id.tv_details_cancel_order,
-            R.id.tv_details_cui_order,R.id.tv_details_go_pay,R.id.ll_go_pay})
+            R.id.tv_details_cui_order,R.id.tv_details_go_pay,R.id.ll_go_pay,R.id.tv_affirm})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -195,6 +197,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                     toast(this,"空号");
                 }
                 break;
+            case R.id.tv_affirm:
             case R.id.tv_details_cancel_order://取消订单
                 dialog.showShareDialog(true);
                 break;
@@ -230,10 +233,14 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
             tv_details_hint_text.setText("请先完成订单支付。");
             tv_details_go_pay.setVisibility(View.VISIBLE);
             ll_go_pay.setVisibility(View.VISIBLE);
+            ll_jishi_info.setVisibility(View.GONE);
+            tv_affirm.setVisibility(View.VISIBLE);
+            tv_affirm.setText("取消");
         }else if (data.status==1){
             tv_details_hint_tilt.setText("等待技师接单");
             tv_details_hint_text.setText("请耐心等待技师接单。");
             tv_details_cui_order.setVisibility(View.GONE);
+            ll_jishi_info.setVisibility(View.GONE);
         }else if (data.status==2){
             tv_details_hint_tilt.setText("预计"+data.arriveDate+"分钟后到达");
             tv_details_hint_text.setText("请耐心等待，技师已在路上。");
@@ -257,6 +264,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
                 tv_details_call_phone.setVisibility(View.GONE);
             }
             tv_details_cancel_order.setVisibility(View.GONE);
+            ll_jishi_info.setVisibility(View.GONE);
         }
         //技师星级
         if (data.technicianGrade>=0&&data.technicianGrade<=1){
