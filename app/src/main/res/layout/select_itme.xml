@@ -67,8 +67,8 @@
                             android:background="@drawable/tab_menu_bg"
                             android:gravity="center"
                             android:text="外观清洗"
-                            android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black888"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu1_money"
@@ -103,8 +103,8 @@
                             android:gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="内饰清洗"
-                            android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black888"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu2_money"
@@ -138,8 +138,8 @@
                             android:gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="塑料件护理"
-                            android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black888"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu3_money"
@@ -172,8 +172,8 @@
                             android:gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="漆面封体"
-                            android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black888"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu4_money"
@@ -214,8 +214,8 @@
                             android:gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="轮毂清洗"
-                            android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textColor="@color/black888"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu5_money"
@@ -249,7 +249,7 @@
                             android:layout_marginTop="5dp"
                             android:text="蜡品护理"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu6_money"
@@ -282,7 +282,7 @@
                             android:layout_marginTop="5dp"
                             android:text="发动机舱护理"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu7_money"
@@ -315,7 +315,7 @@
                             android:layout_marginTop="5dp"
                             android:text="内饰SPA"
                             android:textColor="@drawable/tab_menu_deal_text"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_car_fuwu8_money"

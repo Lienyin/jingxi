@@ -268,8 +268,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     if (recommendComboInfoEntity.get(i).carTypePrices.get(j).carTypeId == carType) {//默认车型
                         comboMoney += recommendComboInfoEntity.get(i).carTypePrices.get(j).totalPrice;//套餐金额
                     }
-                    comboRecommendIds += recommendComboInfoEntity.get(i).comboId + ",";
                 }
+                comboRecommendIds += recommendComboInfoEntity.get(i).comboId + ",";
             }
             //订单金额=套餐金额-活动金额-优惠券金额
             orderMoney = comboMoney - activityMoney - couponMoney;
@@ -440,8 +440,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                         if (recommendComboInfoEntity.get(i).carTypePrices.get(j).carTypeId == carListEntity.typeId) {//默认车型
                             comboMoney += recommendComboInfoEntity.get(i).carTypePrices.get(j).totalPrice;//套餐金额
                         }
-                        comboRecommendIds += recommendComboInfoEntity.get(i).comboId + ",";
                     }
+                    comboRecommendIds += recommendComboInfoEntity.get(i).comboId + ",";
                 }
                 //订单金额=套餐金额-活动金额-优惠券金额
                 orderMoney = comboMoney - activityMoney - couponMoney;
