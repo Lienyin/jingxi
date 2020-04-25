@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/ll_order_itme"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="290dp"
         android:background="@drawable/attestation_bg_edittext"
         android:layout_margin="10dp"
         android:orientation="vertical">
@@ -68,12 +68,11 @@
         <LinearLayout
             android:id="@+id/ll_gv_data"
             android:layout_width="match_parent"
-            android:layout_height="180dp">
-            <GridView
+            android:layout_height="90dp">
+            <com.jxxc.jingxi.utils.HorizontalListView
                 android:id="@+id/gv_fuwu_data"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numColumns="4"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,8 +131,8 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:src="@mipmap/call_jishi"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -152,8 +151,8 @@
                 android:gravity="center"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:src="@mipmap/my_pingjia"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,8 +172,8 @@
                 android:visibility="gone"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:src="@mipmap/quxia_dingdan"/>
                 <TextView
                     android:layout_width="wrap_content"
