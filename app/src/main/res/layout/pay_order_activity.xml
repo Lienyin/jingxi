@@ -85,6 +85,7 @@
                     android:id="@+id/iv_yaojing_icon0"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
+                    android:rotation="30"
                     android:src="@mipmap/jx_logo"/>
                 <TextView
                     android:layout_width="0dp"

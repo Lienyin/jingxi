@@ -82,7 +82,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
     private String datouzhenAddress = "";//大头针地址
     private MapJingXiDialog dialog;
     private GeoCoder mCoder;
-    private int distance=1000;
+    private int distance=3000;
     private List<NearbyConpanyEntity> nearbyConpanyEntityList;
     private int isFuwu=0;//是否在服务范围内 0否 1是
     @Override
@@ -220,7 +220,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
             //构造CircleOptions对象
             CircleOptions mCircleOptions = new CircleOptions().center(point)
                     .radius(site.serviceRadius)
-                    .fillColor(0xAA00B487) //填充颜色
+                    .fillColor(0x8800B487) //填充颜色
                     .stroke(new Stroke(2, 0xAA00b487)); //边框宽和边框颜色
             //在地图上显示圆
             Overlay mCircle = mBaiduMap.addOverlay(mCircleOptions);

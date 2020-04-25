@@ -108,7 +108,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                     if (!AppUtils.isEmpty(mobile)){
                         AppUtils.callPhone(MyOrderActivity.this,mobile);
                     }else{
-                        toast(MyOrderActivity.this,"空号");
+                        toast(MyOrderActivity.this,"等待技师接单");
                     }
                 }else if (type==2){
                     //评价

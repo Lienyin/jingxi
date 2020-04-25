@@ -170,12 +170,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         imgAdapter.notifyDataSetChanged();
 
         tv_details_order_id.setText(data.orderId);
-        String[] car = data.cars.split(",");
-        for (int i=0;i<car.length;i++){
-            carList.add(car[i]);
-        }
-        if (carList.size()>0){
-            tv_details_car_type_number.setText("轿车"+carList.get(0)+"辆，SUV"+carList.get(1)+"辆，MPV"+carList.get(2)+"辆");//企业车型数量
+        if (!AppUtils.isEmpty(data.cars)){
+            String[] car = data.cars.split(",");
+            for (int i=0;i<car.length;i++){
+                carList.add(car[i]);
+            }
+            if (carList.size()>0){
+                tv_details_car_type_number.setText("轿车"+carList.get(0)+"辆，SUV"+carList.get(1)+"辆，MPV"+carList.get(2)+"辆");//企业车型数量
+            }
         }
 
         tv_details_order_static.setText(data.statusName);
