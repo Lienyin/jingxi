@@ -249,6 +249,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
             tv_details_cui_order.setVisibility(View.VISIBLE);
             jishi_info.setVisibility(View.VISIBLE);
             tv_details_call_phone.setVisibility(View.VISIBLE);
+            mMapView.setVisibility(View.VISIBLE);
         }else if (data.status==3){
             tv_details_hint_tilt.setText("技师正在洗车");
             tv_details_hint_text.setText("技师正在洗车，请耐心等待。");

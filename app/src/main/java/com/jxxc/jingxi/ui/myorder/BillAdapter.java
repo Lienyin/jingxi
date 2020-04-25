@@ -51,6 +51,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,true);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,false);
         }else if (item.status==1){
             //已支付待接单
             helper.setText(R.id.iv_order_static,"已支付");
@@ -59,6 +60,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,true);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,false);
         }else if (item.status==2){
             //已接单待服务
             helper.setText(R.id.iv_order_static,"已接单");
@@ -67,6 +69,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,true);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,true);
         }else if (item.status==3){
             //服务中
             int m = item.surplusCompleteTime/60;
@@ -81,6 +84,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_evaluate,false);
             helper.setGone(R.id.ll_cancel_order,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.order_staic_bg);
+            helper.setVisible(R.id.ll_call_phone,true);
         }else if (item.status==4){
             //服务已完成
             helper.setText(R.id.iv_order_static,"已完成");
@@ -89,6 +93,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,false);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,true);
         }else if (item.status==5){
             //取消订单
             helper.setText(R.id.iv_order_static,"已取消");
@@ -97,6 +102,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,false);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,true);
         }else{
             helper.setText(R.id.iv_order_static,"订单异常");
             helper.setBackgroundRes(R.id.iv_order_static,R.drawable.order_static_red);
@@ -104,6 +110,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_cancel_order,false);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setVisible(R.id.ll_call_phone,true);
         }
         helper.setOnClickListener(R.id.ll_call_phone, new View.OnClickListener() {
             @Override
