@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jxxc.jingxi.R;
+import com.jxxc.jingxi.ui.orderdetails.LookImgAdapter;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.GlideImgManager;
+
+import java.util.List;
 
 
 /**
@@ -27,7 +31,7 @@ public class ImgDialog implements View.OnClickListener{
     private Context context;
     private Dialog dialog;
     private View view;
-    private ImageView iv_lmg_icon;
+    private ViewPager viewPager;
 
     public ImgDialog(Context context){
         this(context,true);
@@ -46,12 +50,14 @@ public class ImgDialog implements View.OnClickListener{
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setContentView(view, params);
 
-        iv_lmg_icon = view.findViewById(R.id.iv_lmg_icon);
+        viewPager = view.findViewById(R.id.viewPager);
 
     }
 
-    public void showShareDialog(boolean outTouchCancel,String url) {
-        GlideImgManager.loadImage(context, url, iv_lmg_icon);
+    public void showShareDialog(boolean outTouchCancel, List<String> url) {
+        LookImgAdapter adapter = new LookImgAdapter(context,url);
+        viewPager.setAdapter(adapter);
+
         dialog.setCanceledOnTouchOutside(outTouchCancel);
         dialog.show();
     }

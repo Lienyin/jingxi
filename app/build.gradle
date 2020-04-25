@@ -117,4 +117,5 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     implementation files('libs/libapshare20161108.jar')
     implementation files('libs/jsoup-1.13.1.jar')
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

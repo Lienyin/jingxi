@@ -114,7 +114,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                imgDialog.showShareDialog(true,imgList.get(i));
+                imgDialog.showShareDialog(true,imgList);
             }
         });
         imgDialog = new ImgDialog(this);
