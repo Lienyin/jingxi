@@ -1,6 +1,8 @@
 package com.jxxc.jingxi.ui.orderdetails;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,6 +17,8 @@ import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
+import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
+import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.R;
@@ -87,6 +91,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView tv_delete;
     @BindView(R.id.tv_details_car_type_number)
     TextView tv_details_car_type_number;
+    @BindView(R.id.tv_details_order_car_number)
+    TextView tv_details_order_car_number;
     @BindView(R.id.gv_img_data)
     GridView gv_img_data;
     private String OrderId;
@@ -144,7 +150,15 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 }
                 break;
             case R.id.tv_again://再来一单
-                ZzRouter.gotoActivity(this, SubmitOrderActivity.class);
+                //0上门服务 1进店服务
+                if (orderEntity.serviceType==1){
+                    ZzRouter.gotoActivity(this, ShopListActivity.class);
+                }else{
+                    Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+                    intent.putExtra("serviceType", "0");
+                    intent.putExtra("companyId", "");
+                    startActivity(intent);
+                }
                 break;
             case R.id.tv_delete://删除评论
                 StyledDialog.buildLoading("数据加载中").setActivity(this).show();
@@ -181,9 +195,10 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         }
 
         tv_details_order_static.setText(data.statusName);
+        tv_details_order_car_number.setText(data.carNum);
         tv_details_order_xia_time.setText(data.appointmentTime);
         tv_details_order_address.setText(data.address);
-        tv_details_order_memo.setText(data.remark);
+        tv_details_order_memo.setText(!AppUtils.isEmpty(data.remark)?"无":data.remark);
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
         tv_details_jishi_name.setText(data.technicianRealName);

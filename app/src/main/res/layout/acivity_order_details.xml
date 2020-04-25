@@ -175,6 +175,7 @@
                     android:id="@+id/ll_qiyq_sty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -194,6 +195,30 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
+                <!--车牌号码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车牌号码"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_details_order_car_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:text="XXXXXXX"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!--预约时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

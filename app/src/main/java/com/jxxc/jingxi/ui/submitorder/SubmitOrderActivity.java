@@ -107,7 +107,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @BindView(R.id.iv_address)
     ImageView iv_address;
     @BindView(R.id.iv_time_date)
-    ImageView iv_time_date;
+    LinearLayout iv_time_date;
     @BindView(R.id.lv_coupon_data)
     ListViewForScrollView lv_coupon_data;
     @BindView(R.id.et_car_address)

@@ -38,7 +38,7 @@ public class LookImgAdapter extends PagerAdapter{
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView=new ImageView(context);
         ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
-        //imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         container.addView(imageView);
         return imageView;
     }

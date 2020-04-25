@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class OrderEntity implements Serializable {
-    public String serviceType;
+    public int serviceType;
     public String isComment;
     public String address;
     public double lng;
@@ -16,6 +16,7 @@ public class OrderEntity implements Serializable {
     public String arriveDate;
     public String remark;
     public String cars;
+    public String carNum;
     public String commentContent;
     public String technicianRealName;
     public List<Products> products;
