@@ -297,7 +297,7 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         tv_details_order_car_number.setText(data.carNum);
         tv_details_order_xia_time.setText(data.appointmentTime);
         tv_details_order_address.setText(data.address);
-        tv_details_order_memo.setText(!AppUtils.isEmpty(data.remark)?"无":data.remark);
+        tv_details_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
         orderPrice = data.price;
