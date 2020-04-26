@@ -17,6 +17,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.adapter.CouponAdapter;
 import com.jxxc.jingxi.utils.AnimUtils;
+import com.jxxc.jingxi.utils.AppUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -107,7 +108,9 @@ public class DiscountCouponDialog implements View.OnClickListener {
                 cleanDialog();
                 break;
             case R.id.tv_quren://确定
-                onFenxiangClickListener.onFenxiangClick(coupon);
+                if (!AppUtils.isEmpty(coupon.counponName)){
+                    onFenxiangClickListener.onFenxiangClick(coupon);
+                }
                 cleanDialog();
                 break;
         }
