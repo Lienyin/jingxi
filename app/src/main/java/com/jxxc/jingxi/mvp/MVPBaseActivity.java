@@ -18,6 +18,7 @@ import com.hss01248.dialog.StyledDialog;
 import com.hss01248.dialog.interfaces.MyDialogListener;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.ui.main.MainActivity;
+import com.jxxc.jingxi.ui.mapjingsi.MapJingSiActivity;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -45,6 +46,7 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
         super.onCreate(savedInstanceState);
         mPresenter= getInstance(this,1);
         mPresenter.attachView((V) this);
+        MapJingSiActivity.setMapCustomFile(this, "custom_map_config.json");
         if (layoutId() != 0) {
             setContentView(layoutId());
         }

@@ -720,6 +720,10 @@
                 android:dividerHeight="0.5dp"/>
         </LinearLayout>
     </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/set_bg"/>
     <!--下单-->
     <LinearLayout
         android:layout_width="match_parent"
