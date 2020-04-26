@@ -1,10 +1,14 @@
 package com.jxxc.jingxi.ui.cartypeselect;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.hss01248.dialog.StyledDialog;
@@ -12,6 +16,7 @@ import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.BandAndTypeEntity;
 import com.jxxc.jingxi.entity.requestparameter.ExitLogin;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
+import com.jxxc.jingxi.ui.cartypechoose.CarTypeChooseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 
@@ -39,6 +44,8 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
     TextView tv_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.gv_car_data)
+    GridView gv_car_data;
     private RecyclerView rvMain;
     private IndexWord iwMain;
     private TextView tvMain;
@@ -51,6 +58,8 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
     private int childCount;
     private LinearLayoutManager linearmanger;
     private int childCount1;
+    private ReMenCarAdapter reMenCarAdapter;
+    private List<BandAndTypeEntity.CarBrand> carBrandList = new ArrayList<>();//热门品牌
 
     @Override
     protected int layoutId() {
@@ -64,6 +73,19 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getBandAndType();
         EventBus.getDefault().register(this);
+
+        reMenCarAdapter = new ReMenCarAdapter(this);
+        reMenCarAdapter.setData(carBrandList);
+        gv_car_data.setAdapter(reMenCarAdapter);
+        gv_car_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(CarTypeSelectActivity.this, CarTypeChooseActivity.class);
+                intent.putExtra("brandId",carBrandList.get(i).brandId);
+                intent.putExtra("brandName",carBrandList.get(i).brandName);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initview() {
@@ -144,6 +166,10 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
         persons = new ArrayList<>();
         for (int i=0;i<data.brand.size();i++){
             persons.add(new Person(data.brand.get(i).brandIcon,data.brand.get(i).brandName,data.brand.get(i).brandId));
+
+            if (data.brand.get(i).isRecommend==1){
+                carBrandList.add(data.brand.get(i));
+            }
         }
         //排序
         Collections.sort(persons, new Comparator<Person>() {
@@ -153,6 +179,9 @@ public class CarTypeSelectActivity extends MVPBaseActivity<CarTypeSelectContract
             }
         });
         initview();//初始化视图
+
+        reMenCarAdapter.setData(carBrandList);
+        reMenCarAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

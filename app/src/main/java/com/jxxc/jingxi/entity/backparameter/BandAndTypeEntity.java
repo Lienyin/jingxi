@@ -17,5 +17,7 @@ public class BandAndTypeEntity implements Serializable {
         public String brandId;
         public String brandName;
         public String brandIcon;
+        public String letter;
+        public int isRecommend;
     }
 }
