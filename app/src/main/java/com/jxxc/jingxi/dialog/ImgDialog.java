@@ -32,6 +32,7 @@ public class ImgDialog implements View.OnClickListener{
     private Dialog dialog;
     private View view;
     private ViewPager viewPager;
+    private LinearLayout ll_img_icon;
 
     public ImgDialog(Context context){
         this(context,true);
@@ -50,14 +51,21 @@ public class ImgDialog implements View.OnClickListener{
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setContentView(view, params);
 
+        ll_img_icon = view.findViewById(R.id.ll_img_icon);
         viewPager = view.findViewById(R.id.viewPager);
+        ll_img_icon.setOnClickListener(this);
 
     }
 
     public void showShareDialog(boolean outTouchCancel, List<String> url) {
         LookImgAdapter adapter = new LookImgAdapter(context,url);
         viewPager.setAdapter(adapter);
-
+        adapter.setOnFenxiangClickListener(new LookImgAdapter.OnFenxiangClickListener() {
+            @Override
+            public void onFenxiangClick() {
+                cleanDialog();
+            }
+        });
         dialog.setCanceledOnTouchOutside(outTouchCancel);
         dialog.show();
     }
@@ -69,9 +77,9 @@ public class ImgDialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.iv_order_cancel://取消
-//                cleanDialog();
-//                break;
+            case R.id.ll_img_icon://取消
+                cleanDialog();
+                break;
         }
     }
 }

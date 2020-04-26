@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.jxxc.jingxi.dialog.ActivityDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -40,11 +41,28 @@ public class LookImgAdapter extends PagerAdapter{
         ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         container.addView(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFenxiangClickListener.onFenxiangClick();
+            }
+        });
         return imageView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
+    }
+
+    private OnFenxiangClickListener onFenxiangClickListener;
+
+    public void setOnFenxiangClickListener(OnFenxiangClickListener onFenxiangClickListener) {
+        this.onFenxiangClickListener = onFenxiangClickListener;
+    }
+
+    public interface OnFenxiangClickListener {
+        void onFenxiangClick();
     }
 }
