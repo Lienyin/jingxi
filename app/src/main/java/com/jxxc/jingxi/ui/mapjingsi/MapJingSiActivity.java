@@ -100,6 +100,7 @@ public class MapJingSiActivity extends MVPBaseActivity<MapJingSiContract.View, M
         StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("附近技师");
         initMap();
+        //MapView.setMapCustomEnable(true);//开启个性化地图开关
         tv_affirm.setVisibility(View.VISIBLE);
         Drawable img = this.getResources().getDrawable(R.mipmap.icon_54);
         img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());

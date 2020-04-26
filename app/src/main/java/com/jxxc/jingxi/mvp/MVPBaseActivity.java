@@ -46,7 +46,7 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
         super.onCreate(savedInstanceState);
         mPresenter= getInstance(this,1);
         mPresenter.attachView((V) this);
-        MapJingSiActivity.setMapCustomFile(this, "custom_map_config.json");
+        //MapJingSiActivity.setMapCustomFile(this, "custom_map_config.json");
         if (layoutId() != 0) {
             setContentView(layoutId());
         }
