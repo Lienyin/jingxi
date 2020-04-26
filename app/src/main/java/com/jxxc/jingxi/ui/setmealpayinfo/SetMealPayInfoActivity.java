@@ -238,7 +238,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         carType = SPUtils.get(SPUtils.K_CAR_TYPE, 0);//获取车型
         SPUtils.put(SPUtils.K_COMPANY_ID, companyId);
         if (!AppUtils.isEmpty(appointmentStartTime)) {
-            tv_appointment_time.setText(appointmentStartTime.substring(5) + "—至—" + appointmentEndTime.substring(5));
+            tv_appointment_time.setText(appointmentStartTime.substring(10) + "—至—" + appointmentEndTime.substring(10));
         }
         tv_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE, ""));//手机号码
         //获取当前日期
@@ -325,7 +325,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     //获得时间段
                     appointmentStartTime = startTime;
                     appointmentEndTime = endTime;
-                    tv_appointment_time.setText(appointmentStartTime.substring(5) + "—至—" + appointmentEndTime.substring(5));
+                    tv_appointment_time.setText(appointmentStartTime.substring(10) + "—至—" + appointmentEndTime.substring(10));
                     timeDialog.cleanDialog();
                 }
             }

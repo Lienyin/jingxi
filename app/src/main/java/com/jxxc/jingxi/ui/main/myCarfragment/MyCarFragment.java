@@ -313,7 +313,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                     //获得时间段
                     appointmentStartTime = startTime;
                     appointmentEndTime = endTime;
-                    tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+                    tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
                     timeDialog.cleanDialog();
                 }
             }
@@ -443,7 +443,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             companyId = intent.getStringExtra("companyId");
             address = intent.getStringExtra("address");
             et_car_address_daodian.setText(address);
-            tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+            tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
         }
     };
 
@@ -691,7 +691,7 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
             public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
                 appointmentStartTime = year + "-" + month + "-" + day+"  "+hour+":"+minute;
                 appointmentEndTime = year + "-" + month + "-" + day+"  "+(Integer.valueOf(hour)+1)+":"+minute;
-                tv_appointment_time.setText(appointmentStartTime.substring(5)+"—至—"+appointmentEndTime.substring(5));
+                tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
             }
         });
         picker.show();
