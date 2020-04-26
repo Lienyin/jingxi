@@ -6,9 +6,11 @@
     <LinearLayout
         android:id="@+id/ll_order_itme"
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/attestation_bg_edittext"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +70,7 @@
         <LinearLayout
             android:id="@+id/ll_gv_data"
             android:layout_width="match_parent"
-            android:layout_height="90dp">
+            android:layout_height="80dp">
             <com.jxxc.jingxi.utils.HorizontalListView
                 android:id="@+id/gv_fuwu_data"
                 android:layout_width="wrap_content"
@@ -76,9 +78,10 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -97,9 +100,11 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -122,7 +127,7 @@
             android:background="@color/set_bg"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center_vertical">
             <LinearLayout
                 android:id="@+id/ll_call_phone"

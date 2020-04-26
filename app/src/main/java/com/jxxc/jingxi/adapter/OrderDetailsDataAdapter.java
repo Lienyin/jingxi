@@ -48,7 +48,7 @@ public class OrderDetailsDataAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.home_data_adapter,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.home_data_detail_adapter,null);
             holder.iv_home_fuwu = convertView.findViewById(R.id.iv_home_fuwu);
             holder.home_fuwu_name = convertView.findViewById(R.id.home_fuwu_name);
             convertView.setTag(holder);
