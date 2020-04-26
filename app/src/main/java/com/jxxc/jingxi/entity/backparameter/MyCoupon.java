@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 public class MyCoupon implements Serializable {
-    public int counponId;
+    public String counponId;
     public String counponName;
     public int couponRuleType;
     public int status;
@@ -37,5 +37,13 @@ public class MyCoupon implements Serializable {
 
     public void setCounponName(String counponName) {
         this.counponName = counponName;
+    }
+
+    public String getCounponId() {
+        return counponId;
+    }
+
+    public void setCounponId(String counponId) {
+        this.counponId = counponId;
     }
 }

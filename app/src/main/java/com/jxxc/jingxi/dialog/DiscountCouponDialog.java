@@ -71,6 +71,7 @@ public class DiscountCouponDialog implements View.OnClickListener {
             }
         }
         MyCoupon myCoupon = new MyCoupon();
+        myCoupon.setCounponId("");
         myCoupon.setCounponName("不使用优惠券");
         myCoupon.setForbidden(false);
         list.add(myCoupon);

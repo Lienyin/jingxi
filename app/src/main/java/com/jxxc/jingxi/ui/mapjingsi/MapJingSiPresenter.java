@@ -32,7 +32,7 @@ public class MapJingSiPresenter extends BasePresenterImpl<MapJingSiContract.View
      * @param lat
      */
     @Override
-    public void nearbyConpany(int distance, double lng, double lat) {
+    public void nearbyConpany(String distance, double lng, double lat) {
         OkGo.<HttpResult<List<NearbyConpanyEntity>>>post(Api.NEARBY_CONPANY)
                 .params("distance",distance)
                 .params("lng",lng)

@@ -19,6 +19,6 @@ public class MapJingSiContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void nearbyConpany(int distance,double lng,double lat);
+        void nearbyConpany(String distance,double lng,double lat);
     }
 }
