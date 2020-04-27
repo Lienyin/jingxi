@@ -284,6 +284,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         } else {
             //上门服务
             tv_address_text.setText("停车地址");
+            if (!AppUtils.isEmpty(address)){
+                tv_car_address.setText(address);//订单详情再来一单过来
+            }
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
             ll_set_type2.setVisibility(View.VISIBLE);

@@ -157,7 +157,9 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                     Intent intent = new Intent(this, SetMealPayInfoActivity.class);
                     intent.putExtra("serviceType", "0");
                     intent.putExtra("companyId", "");
+                    intent.putExtra("address", orderEntity.address);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.tv_delete://删除评论
@@ -241,6 +243,12 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
 
     @Override
     public void clearCommentCallBack() {
+        mPresenter.getOrder(OrderId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mPresenter.getOrder(OrderId);
     }
 }

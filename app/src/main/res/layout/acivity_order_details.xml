@@ -359,7 +359,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/attestation_bg_edittext"
                 android:elevation="1dp"
@@ -375,7 +375,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <GridView
+                <com.jxxc.jingxi.utils.MyGridView
                     android:id="@+id/gv_img_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
