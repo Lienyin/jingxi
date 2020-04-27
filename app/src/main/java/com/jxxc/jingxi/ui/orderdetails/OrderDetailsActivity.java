@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.orderdetails;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -179,6 +180,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         gv_fuwu_data.setAdapter(adapter);
         //技师端上传的图片
         if (!AppUtils.isEmpty(data.technicianCommentImgs)){
+            imgList.clear();
             String[] split = data.technicianCommentImgs.split(",");
             for (int i=0;i<split.length;i++){
                 imgList.add(split[i]);
@@ -251,6 +253,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("TAG","1233");
         mPresenter.getOrder(OrderId);
     }
 }
