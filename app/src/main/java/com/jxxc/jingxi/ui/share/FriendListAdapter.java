@@ -26,7 +26,7 @@ public class FriendListAdapter extends BaseAdapter {
     public FriendListAdapter(Context context, List<GetInfoEntity.Customer> list) {
         this.context = context;
         this.list = list;
-        typeFace = Typeface.createFromAsset(context.getAssets(), "fonts/DIN-MEDIUM_1.OTF");//自定义字体
+        //typeFace = Typeface.createFromAsset(context.getAssets(), "fonts/DIN-MEDIUM_1.OTF");//自定义字体
     }
 
     @Override

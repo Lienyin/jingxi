@@ -23,8 +23,10 @@ import com.alipay.share.sdk.openapi.APMediaMessage;
 import com.alipay.share.sdk.openapi.APWebPageObject;
 import com.alipay.share.sdk.openapi.IAPApi;
 import com.alipay.share.sdk.openapi.SendMessageToZFB;
+import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.QueryActivityDetailEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
@@ -110,6 +112,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     ListView lv_share_info;
     private FriendListAdapter adapter;
     private ShareDialog dialog;
+    private String cId="";
     private String URL = "";
     private String BaseURL = "";
     private String BaseURLIMG = "";
@@ -130,6 +133,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         tv_title.setText("邀请好友");
         mPresenter.getInfo();
         mPresenter.getUserInfo();
+        mPresenter.queryActivityDetail();
         //支付宝
         aliApi = APAPIFactory.createZFBApi(getApplicationContext(), Constant.ALIPAY_APPID, false);
 
@@ -210,7 +214,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = BaseTitle;
         msg.description = BaseDescription;
-        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.wx_logo);
+        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.share_icon);
         msg.thumbData = com.tencent.mm.sdk.platformtools.Util.bmpToByteArray(bitmap, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
@@ -445,7 +449,16 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
 
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
-        BaseURL = "http://47.101.185.138:8090/share/shareRegister.html?cId="+data.customerId;
+        cId = data.customerId;
+    }
+
+    //分享数据
+    @Override
+    public void queryActivityDetailCallBack(QueryActivityDetailEntity data) {
+        BaseURL = data.activityRegisterUrl+"?cId="+cId;
+        BaseTitle = data.activityTitle;
+        BaseURLIMG = data.activityUi;
+        BaseDescription = data.activityDescription;
     }
 
     /**

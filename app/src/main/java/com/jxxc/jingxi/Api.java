@@ -112,4 +112,6 @@ public class Api {
     public static final String CREATE2 = BASEURL + "/biz/order/create2";
     //52-获取订单数量
     public static final String ORDER_NUM = BASEURL + "/biz/order/orderNum";
+    //53-获取推广详情
+    public static final String QUERY_ACTIVITY_DETAIL = BASEURL + "/system/upgrade_pack/query_activity_detail";
 }

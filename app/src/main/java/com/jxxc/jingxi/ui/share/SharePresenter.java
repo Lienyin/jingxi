@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jxxc.jingxi.Api;
 import com.jxxc.jingxi.entity.backparameter.GetInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.QueryActivityDetailEntity;
 import com.jxxc.jingxi.entity.backparameter.UserInfoEntity;
 import com.jxxc.jingxi.http.EventCenter;
 import com.jxxc.jingxi.http.HttpResult;
@@ -57,6 +58,24 @@ public class SharePresenter extends BasePresenterImpl<ShareContract.View> implem
                         if (response.body().code==0){
                             mView.getUserInfoCallBack(d);
                         }else {
+                            toast(mContext,response.body().message);
+                        }
+                    }
+                });
+    }
+
+    //分享数据
+    @Override
+    public void queryActivityDetail() {
+        OkGo.<HttpResult<QueryActivityDetailEntity>>post(Api.QUERY_ACTIVITY_DETAIL)
+                .tag(this)
+                .execute(new JsonCallback<HttpResult<QueryActivityDetailEntity>>() {
+                    @Override
+                    public void onSuccess(Response<HttpResult<QueryActivityDetailEntity>> response) {
+                        QueryActivityDetailEntity d = response.body().data;
+                        if (response.body().code==0){
+                            mView.queryActivityDetailCallBack(d);
+                        }else{
                             toast(mContext,response.body().message);
                         }
                     }
