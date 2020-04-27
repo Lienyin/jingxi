@@ -19,17 +19,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a5ca23-686a-4d68-9ab2-9315ec7c5834" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/libs/armeabi/libBaiduMapSDK_base_v4_5_2.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/armeabi/libBaiduMapSDK_map_v4_5_2.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/no_tong_guo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/libs/armeabi-v7a/libBaiduMapSDK_base_v5_4_4.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/libs/armeabi-v7a/libBaiduMapSDK_map_v5_4_4.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/libs/armeabi/libBaiduMapSDK_base_v5_4_4.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/libs/armeabi/libBaiduMapSDK_map_v5_4_4.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/adapter_my_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adapter_my_order.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/binding_phone_number_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/binding_phone_number_activity.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +112,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="4fda3620" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/libs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -132,9 +126,12 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\lienyin\jingxi\app\src\main\res\drawable" />
-      <recent name="D:\lienyin\jingxi\app\src\main\res\xml" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\lienyin\jingxi\app\src\main\res\mipmap-xhdpi" />
+      <recent name="D:\lienyin\jingxi\app\libs" />
+      <recent name="D:\lienyin\jingxi\app\libs\armeabi" />
+      <recent name="D:\lienyin\jingxi\app\src\main\assets\customConfigDir" />
+      <recent name="D:\lienyin\jingxi\app\src\main\res\layout" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.jxxc.jingxi.ui.WelcomeNew" />
@@ -146,12 +143,9 @@
       <recent name="com.jxxc.jingxi.ui.welcome" />
       <recent name="com.jxxc.jingxi.ui.setmealpay" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\lienyin\jingxi\app\libs" />
-      <recent name="D:\lienyin\jingxi\app\libs\armeabi" />
-      <recent name="D:\lienyin\jingxi\app\src\main\assets\customConfigDir" />
-      <recent name="D:\lienyin\jingxi\app\src\main\res\layout" />
-      <recent name="D:\lienyin\jingxi" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\lienyin\jingxi\app\src\main\res\drawable" />
+      <recent name="D:\lienyin\jingxi\app\src\main\res\xml" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -420,27 +414,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550798933541</updated>
-    </task>
-    <task id="LOCAL-00203" summary="添加">
-      <created>1587128355664</created>
-      <option name="number" value="00203" />
-      <option name="presentableId" value="LOCAL-00203" />
-      <option name="project" value="LOCAL" />
-      <updated>1587128355664</updated>
-    </task>
-    <task id="LOCAL-00204" summary="添加">
-      <created>1587133664759</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1587133664760</updated>
-    </task>
-    <task id="LOCAL-00205" summary="添加">
-      <created>1587135624512</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1587135624512</updated>
     </task>
     <task id="LOCAL-00206" summary="添加">
       <created>1587181265811</created>
@@ -764,7 +737,28 @@
       <option name="project" value="LOCAL" />
       <updated>1587910469806</updated>
     </task>
-    <option name="localTasksCounter" value="252" />
+    <task id="LOCAL-00252" summary="添加">
+      <created>1587912522360</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1587912522361</updated>
+    </task>
+    <task id="LOCAL-00253" summary="添加">
+      <created>1587920363157</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1587920363157</updated>
+    </task>
+    <task id="LOCAL-00254" summary="添加">
+      <created>1587972371725</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1587972371726</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -800,7 +794,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/ui/setmealpayinfo/SetMealPayInfoActivity.java</url>
-          <line>327</line>
+          <line>330</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

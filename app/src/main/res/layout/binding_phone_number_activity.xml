@@ -99,7 +99,7 @@
             android:paddingLeft="15dp"
             android:drawablePadding="15dp"
             android:textSize="14sp"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:background="@color/transparent"
             android:text=""/>
         <Button
