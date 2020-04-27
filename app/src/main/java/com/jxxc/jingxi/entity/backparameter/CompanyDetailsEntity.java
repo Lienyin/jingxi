@@ -15,6 +15,7 @@ public class CompanyDetailsEntity implements Serializable {
         public int companyType;
         public String imgUrl;
         public int isBusiness;
+        public int distance;
         public String technicianNum;
     }
 

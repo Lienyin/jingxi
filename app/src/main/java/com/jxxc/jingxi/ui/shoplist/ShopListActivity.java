@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.ui.shoplist;
 
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -190,7 +191,10 @@ public class ShopListActivity extends MVPBaseActivity<ShopListContract.View, Sho
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ZzRouter.gotoActivity(ShopListActivity.this, ShopDetailsActivity.class,list.get(position).companyId);
+                Intent intent = new Intent(ShopListActivity.this, ShopDetailsActivity.class);
+                intent.putExtra("companyId",list.get(position).companyId);
+                intent.putExtra("distance",list.get(position).distance);
+                startActivity(intent);
             }
         });
     }

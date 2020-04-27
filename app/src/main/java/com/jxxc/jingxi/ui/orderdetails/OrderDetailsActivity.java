@@ -178,12 +178,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         adapter.setData(orderEntity.products);
         gv_fuwu_data.setAdapter(adapter);
         //技师端上传的图片
-        String[] split = data.technicianCommentImgs.split(",");
-        for (int i=0;i<split.length;i++){
-            imgList.add(split[i]);
+        if (!AppUtils.isEmpty(data.technicianCommentImgs)){
+            String[] split = data.technicianCommentImgs.split(",");
+            for (int i=0;i<split.length;i++){
+                imgList.add(split[i]);
+            }
+            imgAdapter.setData(imgList);
+            imgAdapter.notifyDataSetChanged();
         }
-        imgAdapter.setData(imgList);
-        imgAdapter.notifyDataSetChanged();
 
         tv_details_order_id.setText(data.orderId);
         if (!AppUtils.isEmpty(data.cars)){

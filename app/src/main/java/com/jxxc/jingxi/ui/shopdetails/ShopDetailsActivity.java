@@ -40,6 +40,7 @@ import com.jxxc.jingxi.utils.StatusBarUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,6 +82,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     TextView tv_details_shop_call_number;
     @BindView(R.id.tv_details_shop_call)
     TextView tv_details_shop_call;
+    @BindView(R.id.tv_details_shop_juli)
+    TextView tv_details_shop_juli;
     @BindView(R.id.gv_technician_data)
     HorizontalListView gv_technician_data;
     @BindView(R.id.gv_time_data)
@@ -101,6 +104,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     RadioButton rb_huli;
 
     private String cId;
+    private double distance;
     private String phonenumber="";
     private String address="";
     private String companyName="";
@@ -126,7 +130,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("门店详情");
-        cId = ZzRouter.getIntentData(this,String.class);
+        cId = getIntent().getStringExtra("companyId");
+        distance = getIntent().getDoubleExtra("distance",0);
         StyledDialog.buildLoading("数据加载中").setActivity(this).show();
         mPresenter.getCompany(cId);//加盟商详细
         mPresenter.getCarList();
@@ -317,6 +322,14 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
         }else{
             tv_details_shop_jm.setText("合作店");
         }
+        //计算距离distance
+        String showDistance = "?? m";
+        if (distance > 1000) {
+            showDistance = new DecimalFormat("0.00").format(distance / 1000d) + " km";
+        } else {
+            showDistance = new DecimalFormat("0").format(distance) + " m";
+        }
+        tv_details_shop_juli.setText(showDistance);
         tv_details_shop_pf.setText(data.company.score);
         tv_details_shop_dd.setText(data.company.orderNum);
         tv_details_shop_js.setText(data.company.technicianNum);
