@@ -757,7 +757,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             intent.putExtra("orderId", data.orderId);
             intent.putExtra("orderPrice", data.payPrice);
             startActivity(intent);
-            finish();
         }
     }
 
