@@ -274,6 +274,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         StyledDialog.buildLoading("数据加载中").setActivity((Activity) context).show();
         mPresenter.comboInfo();//查询套餐
 
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_ADDRESS,""))){
+            et_car_address.setText(SPUtils.get(SPUtils.K_ADDRESS,""));
+        }
         et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));//手机号码
         lat = SPUtils.get(context, "lat", "");
         lng = SPUtils.get(context, "lng", "");
@@ -585,7 +588,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
                 }
                 break;
             case R.id.ll_address://选择地址
-                ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
+                //ZzRouter.gotoActivity((Activity) context, MapJingSiActivity.class);
+                ZzRouter.gotoActivity((Activity) context, AddressDetailsActivity.class);
                 break;
             case R.id.iv_time_date://选择时间
                 if (ll_daodian.getVisibility()==View.VISIBLE){

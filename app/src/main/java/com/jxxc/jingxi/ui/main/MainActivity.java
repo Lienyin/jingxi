@@ -256,6 +256,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                     isFirstLoc = false;
                     locationLatitude = location.getLatitude();
                     locationLongitude = location.getLongitude();
+                    SPUtils.put(SPUtils.K_ADDRESS,location.getAddress().address);
                     if ("4.9E-324".equals(locationLongitude) && "4.9E-324".equals(locationLatitude)) {
                         toast(MainActivity.this, "百度地图定位失败");
                     } else if ("5e-324".equals(locationLongitude) && "5e-324".equals(locationLatitude)) {

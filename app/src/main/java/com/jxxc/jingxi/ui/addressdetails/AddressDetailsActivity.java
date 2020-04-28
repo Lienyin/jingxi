@@ -2,12 +2,14 @@ package com.jxxc.jingxi.ui.addressdetails;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,11 +20,16 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -34,10 +41,12 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.baidu.mapapi.utils.SpatialRelationUtil;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.dialog.AddressSeekDialog;
 import com.jxxc.jingxi.entity.backparameter.AddressEntity;
 import com.jxxc.jingxi.entity.backparameter.AddressSeek;
+import com.jxxc.jingxi.entity.backparameter.NearbyConpanyEntity;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
@@ -82,6 +91,12 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
     private String locationCity;
     private AddressSeekDialog addressDialog;
     private MapStatus startLatLng;//地图移动开始经纬度，结束经纬度
+    private List<NearbyConpanyEntity> nearbyConpanyEntityList;
+    private double locationLatitude = 0;//当前经度
+    private double locationLongitude = 0;//当前纬度
+    private double datouzhenLatitude = 0;//大头针经度
+    private double datouzhenLongitude = 0;//大头针纬度
+    private int isFuwu=0;//是否在服务范围内 0否 1是
 
     @Override
     protected int layoutId() {
@@ -140,11 +155,25 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
         lv_address_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setAction("jingxi_car_addres_12002");
-                intent.putExtra("addressEntity",list.get(position));
-                sendOrderedBroadcast(intent,null);
-                finish();
+
+                Log.i("TAG","服务值："+getIsFuwu(Double.valueOf(list.get(position).lat),Double.valueOf(list.get(position).lng)));
+                if (getIsFuwu(Double.valueOf(list.get(position).lat),Double.valueOf(list.get(position).lng))==1){
+                    //服务范围内
+                    Intent intent = new Intent();
+                    intent.setAction("jingxi_car_addres_12002");
+                    intent.putExtra("datouzhenLatitude",list.get(position).lat);
+                    intent.putExtra("datouzhenLongitude",list.get(position).lng);
+                    intent.putExtra("datouzhenAddress",list.get(position).address);
+                    sendOrderedBroadcast(intent,null);
+                    finish();
+                }else{
+                    toast(AddressDetailsActivity.this,"不在服务范围内");
+                }
+//                Intent intent = new Intent();
+//                intent.setAction("jingxi_car_addres_12002");
+//                intent.putExtra("addressEntity",list.get(position));
+//                sendOrderedBroadcast(intent,null);
+//                finish();
             }
         });
 
@@ -172,10 +201,34 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
                 mCoder.setOnGetGeoCodeResultListener(listener);
                 mCoder.reverseGeoCode(new ReverseGeoCodeOption()
                         .location(new LatLng(mapStatus.target.latitude, mapStatus.target.longitude)));
+
+
+                datouzhenLatitude = mapStatus.target.latitude;
+                datouzhenLongitude = mapStatus.target.longitude;
+                //获取周边技师
+                mPresenter.nearbyConpany("",mapStatus.target.longitude,mapStatus.target.latitude);
+
+                getIsFuwu(mapStatus.target.latitude,mapStatus.target.longitude);
             }
         });
     }
 
+    //判断地址是否在服务范围内
+    private int getIsFuwu(double lat,double lng){
+        boolean a = false;
+        for (NearbyConpanyEntity site : nearbyConpanyEntityList) {
+            LatLng point = new LatLng(site.lat, site.lng);
+            a = SpatialRelationUtil.isCircleContainsPoint(point,
+                    site.serviceRadius,new LatLng(lat, lng));
+            if (a == true){ break;}
+        }
+        if (a==true){
+            isFuwu = 1;
+        }else{
+            isFuwu = 0;
+        }
+        return isFuwu;
+    }
     OnGetSuggestionResultListener listener1 = new OnGetSuggestionResultListener() {
         @Override
         public void onGetSuggestionResult(SuggestionResult suggestionResult) {
@@ -255,10 +308,11 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
             if (isFirstLoc) {
                 isFirstLoc = false;
                 latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//                locationLatitude = location.getLatitude();
-//                locationLongitude = location.getLongitude();
+                locationLatitude = location.getLatitude();
+                locationLongitude = location.getLongitude();
                 locationCity = location.getCity();
 //                locationProvince = location.getProvince();//当前定位省份
+                mPresenter.nearbyConpany("",location.getLatitude(),location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(latLng).zoom(16.0f);//地图级别
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
@@ -298,6 +352,38 @@ public class AddressDetailsActivity extends MVPBaseActivity<AddressDetailsContra
             }
         }
     };
+
+    //周边技师返回数据
+    @Override
+    public void nearbyConpanyCallBack(List<NearbyConpanyEntity> data) {
+        //定义Maker坐标点
+        mBaiduMap.clear();
+        nearbyConpanyEntityList = data;
+        for (NearbyConpanyEntity site : data) {
+            LatLng point = new LatLng(site.lat, site.lng);
+            View view = View.inflate(this, R.layout.site_pop_view_img, null);
+            ImageView ivView = (ImageView) view.findViewById(R.id.iv_pop_view_img_battery);
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromView(view);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("batSite", site);
+            OverlayOptions option = new MarkerOptions()
+                    .animateType(MarkerOptions.MarkerAnimateType.jump)
+                    .position(point)
+                    .extraInfo(bundle)
+                    .icon(bitmap);
+            //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(option);
+
+            //构造CircleOptions对象
+            CircleOptions mCircleOptions = new CircleOptions().center(point)
+                    .radius(site.serviceRadius)
+                    .fillColor(0x4400B487) //填充颜色
+                    .stroke(new Stroke(2, 0xAA00b487)); //边框宽和边框颜色
+            //在地图上显示圆
+            Overlay mCircle = mBaiduMap.addOverlay(mCircleOptions);
+
+        }
+    }
 
     @OnClick({R.id.tv_back})
     public void onViewClicked(View view) {

@@ -286,6 +286,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             tv_address_text.setText("停车地址");
             if (!AppUtils.isEmpty(address)){
                 tv_car_address.setText(address);//订单详情再来一单过来
+            }else if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_ADDRESS,""))){
+                tv_car_address.setText(SPUtils.get(SPUtils.K_ADDRESS,""));//默认显示当前定位地址
             }
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
@@ -491,7 +493,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 finish();
                 break;
             case R.id.ll_stop_car_address://停车地址
-                ZzRouter.gotoActivity(this, MapJingSiActivity.class);
+                //ZzRouter.gotoActivity(this, MapJingSiActivity.class);
+                ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
                 break;
             case R.id.ll_car_info://爱车信息
                 ZzRouter.gotoActivity(this, MyCarActivity.class, "1");
