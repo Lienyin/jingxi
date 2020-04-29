@@ -277,7 +277,9 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         mPresenter.comboInfo();//查询套餐
 
         if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_ADDRESS,""))){
-            et_car_address.setText(SPUtils.get(SPUtils.K_ADDRESS,""));
+            et_car_address.setText(SPUtils.get(SPUtils.K_ADDRESS,"选择停车地址"));
+        }else{
+            et_car_address.setText("");
         }
         et_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE,""));//手机号码
         lat = SPUtils.get(context, "lat", "");
