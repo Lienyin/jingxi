@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -289,6 +290,20 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             }else if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_ADDRESS,""))){
                 tv_car_address.setText(SPUtils.get(SPUtils.K_ADDRESS,""));//默认显示当前定位地址
             }
+
+            //默认拿当前时间
+            Time t=new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+            t.setToNow(); // 取得系统时间。
+            int year = t.year;
+            int month = t.month+1;
+            int day = t.monthDay;
+            int hour = t.hour; // 0-23
+            int minute = t.minute;
+            int second = t.second;
+            appointmentStartTime = year+"-"+month+"-"+day+"  "+hour+":"+minute;
+            appointmentEndTime = year+"-"+month+"-"+day+"  "+(hour+1)+":"+minute;
+            tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
+
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
             ll_set_type2.setVisibility(View.VISIBLE);

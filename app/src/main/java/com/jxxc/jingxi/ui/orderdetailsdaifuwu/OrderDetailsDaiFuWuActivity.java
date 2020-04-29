@@ -107,6 +107,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
     TextView tv_details_go_pay;
     @BindView(R.id.tv_details_order_car_number)
     TextView tv_details_order_car_number;
+    @BindView(R.id.tv_details_order_pay_money)
+    TextView tv_details_order_pay_money;
     @BindView(R.id.iv_jishi_hand)
     ImageView iv_jishi_hand;
     @BindView(R.id.iv_jishi_jibie)
@@ -300,7 +302,8 @@ public class OrderDetailsDaiFuWuActivity extends MVPBaseActivity<OrderDetailsDai
         tv_details_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
-        orderPrice = data.price;
+        tv_details_order_pay_money.setText("￥"+data.payPrice);
+        orderPrice = data.payPrice;
 
         //技师位置
         LatLng point = new LatLng(data.technicianLat, data.technicianLng);

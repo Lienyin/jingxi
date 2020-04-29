@@ -94,6 +94,8 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView tv_details_car_type_number;
     @BindView(R.id.tv_details_order_car_number)
     TextView tv_details_order_car_number;
+    @BindView(R.id.tv_details_order_pay_money)
+    TextView tv_details_order_pay_money;
     @BindView(R.id.gv_img_data)
     GridView gv_img_data;
     private String OrderId;
@@ -207,6 +209,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         tv_details_order_memo.setText(!AppUtils.isEmpty(data.remark)?data.remark:"无");
         tv_details_order_coupon.setText("-￥"+data.discountsPrice);
         tv_details_order_money.setText("￥"+data.price);
+        tv_details_order_pay_money.setText("￥"+data.payPrice);
         tv_details_jishi_name.setText(data.technicianRealName);
         if (!AppUtils.isEmpty(data.customerCommentTime)){
             tv_details_pingjian.setText("已评价");

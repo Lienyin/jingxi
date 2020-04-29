@@ -29,6 +29,7 @@ public class OrderEntity implements Serializable {
     public String duration;
     public String appointmentTime;
     public String price;
+    public String payPrice;
     public String statusName;
     public int technicianGrade;
     public int starLevel;

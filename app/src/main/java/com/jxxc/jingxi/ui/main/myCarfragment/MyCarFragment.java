@@ -12,6 +12,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -287,6 +289,19 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList("",queryDate);
+        //默认拿当前时间
+        Time t=new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        t.setToNow(); // 取得系统时间。
+        int year = t.year;
+        int month = t.month+1;
+        int day = t.monthDay;
+        int hour = t.hour; // 0-23
+        int minute = t.minute;
+        int second = t.second;
+
+        appointmentStartTime = year+"-"+month+"-"+day+"  "+hour+":"+minute;
+        appointmentEndTime = year+"-"+month+"-"+day+"  "+(hour+1)+":"+minute;
+        tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
 
         context.registerReceiver(receiver, new IntentFilter("jingxi_car_addres_12002"));
         context.registerReceiver(receiverCarInfo, new IntentFilter("jing_xi_my_car_info"));
