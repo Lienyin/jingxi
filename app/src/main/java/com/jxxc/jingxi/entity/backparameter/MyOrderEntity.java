@@ -9,6 +9,7 @@ public class MyOrderEntity implements Serializable {
     public String technicianPhonenumber;
     public String orderId;
     public String price;
+    public String payPrice;
     public String statusName;
     public int status;
     public int surplusCompleteTime;

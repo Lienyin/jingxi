@@ -36,7 +36,7 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
         helper.setText(R.id.tv_order_id, item.orderId);
         helper.setText(R.id.tv_fuwu_address, item.address);
         helper.setText(R.id.tv_fuwu_type, item.serviceType==0?"上门服务":"到店服务");
-        helper.setText(R.id.tv_order_money, "￥"+item.price);
+        helper.setText(R.id.tv_order_money, "￥"+item.payPrice);
         adapter = new HomeDataAdapter(mContext);
         adapter.setData(item.products);
         helper.setAdapter(R.id.gv_fuwu_data,adapter);
