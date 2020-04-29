@@ -20,10 +20,8 @@
   <component name="ChangeListManager">
     <list default="true" id="63a5ca23-686a-4d68-9ab2-9315ec7c5834" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/entity/backparameter/MyOrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/jxxc/jingxi/entity/backparameter/MyOrderEntity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,12 +124,9 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\lienyin\jingxi\app\src\main\res\mipmap-xhdpi" />
-      <recent name="D:\lienyin\jingxi\app\libs" />
-      <recent name="D:\lienyin\jingxi\app\libs\armeabi" />
-      <recent name="D:\lienyin\jingxi\app\src\main\assets\customConfigDir" />
-      <recent name="D:\lienyin\jingxi\app\src\main\res\layout" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\lienyin\jingxi\app\src\main\res\drawable" />
+      <recent name="D:\lienyin\jingxi\app\src\main\res\xml" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.jxxc.jingxi.ui.WelcomeNew" />
@@ -143,9 +138,12 @@
       <recent name="com.jxxc.jingxi.ui.welcome" />
       <recent name="com.jxxc.jingxi.ui.setmealpay" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\lienyin\jingxi\app\src\main\res\drawable" />
-      <recent name="D:\lienyin\jingxi\app\src\main\res\xml" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\lienyin\jingxi\app\src\main\res\mipmap-xhdpi" />
+      <recent name="D:\lienyin\jingxi\app\libs" />
+      <recent name="D:\lienyin\jingxi\app\libs\armeabi" />
+      <recent name="D:\lienyin\jingxi\app\src\main\assets\customConfigDir" />
+      <recent name="D:\lienyin\jingxi\app\src\main\res\layout" />
     </key>
   </component>
   <component name="RunDashboard">
