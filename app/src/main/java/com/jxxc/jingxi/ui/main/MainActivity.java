@@ -357,25 +357,33 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 }
                 break;
             case R.id.txt_deal3:
-                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
-                selected();
-                txt_deal3.setSelected(true);
-                if(f3==null){
-                    f3 = new MyCarFragment(this);
-                    transaction.add(R.id.fragment_container,f3);
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    selected();
+                    txt_deal3.setSelected(true);
+                    if(f3==null){
+                        f3 = new MyCarFragment(this);
+                        transaction.add(R.id.fragment_container,f3);
+                    }else{
+                        transaction.show(f3);
+                    }
                 }else{
-                    transaction.show(f3);
+                    toast(this,"请先登录后使用");
+                    ZzRouter.gotoActivity(this, LoginActivity.class);
                 }
                 break;
             case R.id.txt_deal4:
-                //StatusBarUtil.setStatusBarMode(this, false, R.color.white);
-                selected();
-                txt_deal4.setSelected(true);
-                if(f4==null){
-                    f4 = new MsgFragment(this);
-                    transaction.add(R.id.fragment_container,f4);
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    selected();
+                    txt_deal4.setSelected(true);
+                    if(f4==null){
+                        f4 = new MsgFragment(this);
+                        transaction.add(R.id.fragment_container,f4);
+                    }else{
+                        transaction.show(f4);
+                    }
                 }else{
-                    transaction.show(f4);
+                    toast(this,"请先登录后使用");
+                    ZzRouter.gotoActivity(this, LoginActivity.class);
                 }
                 break;
             case R.id.txt_deal5:
