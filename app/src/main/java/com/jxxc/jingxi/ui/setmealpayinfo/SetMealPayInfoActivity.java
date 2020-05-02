@@ -442,6 +442,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     }
                 } else {
                     tv_discounts.setText("");
+                    tv_xia_order_discounts.setVisibility(View.GONE);//显示优惠
                 }
                 //订单金额=套餐金额-活动金额-优惠券金额
                 orderMoney = comboMoney - activityMoney - couponMoney;
@@ -840,7 +841,42 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     public void queryMyCouponCallback(List<MyCoupon> data) {
         if (data.size() > 0) {
             myCouponList = data;
+
+            double a = 0;
+            int pos = 0;
+            for (int i=0;i < data.size();i++){
+                if (data.get(i).money>a){
+                    a = data.get(i).money;
+                    pos = i;
+                }
+            }
+            //优惠券
+            counponId = data.get(pos).counponId + "";
+            tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+            tv_discounts.setText(new DecimalFormat("0.00").format(a) + "元优惠券");
+            //优惠券类型 0无门槛减N 1满N减N 2折扣券
+            if (data.get(pos).couponRuleType == 0) {
+                couponMoney = data.get(pos).money;
+                double orderMoney = couponMoney + activityMoney;
+                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
+            } else if (data.get(pos).couponRuleType == 1) {
+                couponMoney = data.get(pos).money;
+                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
+            } else {
+                //折扣券
+                double num = comboMoney - activityMoney;
+                couponMoney = num - (num * (data.get(pos).discount / 10));
+                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
+            }
+            //订单金额=套餐金额-活动金额-优惠券金额
+            orderMoney = comboMoney - activityMoney - couponMoney;
+            if (orderMoney < 0) {
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
+            } else {
+                tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+            }
         }
+
     }
 
     //提交订单返回数据

@@ -272,6 +272,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                     intent.putExtra("serviceType","1");
                     intent.putExtra("companyId",cId);
                     intent.putExtra("companyName",companyName);
+                    intent.putExtra("gotoType","1");
                     startActivity(intent);
                     finish();
                 }

@@ -18,6 +18,7 @@ public class MainContract {
         void getUserInfoCallBack(UserInfoEntity data);
         void bannerCallBack(List<BannerEntity> data);
         void getStaticCallBack(GetStaticEntity data);
+        void updateCB(boolean must);
     }
 
     interface  Presenter extends BasePresenter<View> {
