@@ -93,7 +93,7 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     @BindView(R.id.btn_subscribe_time)
     Button btn_subscribe_time;
     @BindView(R.id.lv_set_meal_data)
-    ListViewForScrollView lv_set_meal_data;
+    ListView lv_set_meal_data;
     @BindView(R.id.ll_xia_dan)
     LinearLayout ll_xia_dan;
     @BindView(R.id.rb_xiche)
@@ -102,6 +102,8 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     RadioButton rb_meirong;
     @BindView(R.id.rb_huli)
     RadioButton rb_huli;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
 
     private String cId;
     private double distance;
@@ -173,6 +175,19 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
             }
         });
 
+//        lv_set_meal_data.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                //scrollView.getScrollY()超出屏幕的高度
+//                //scrollView.getHeight()屏幕显示的高度
+//                //scrollView.getPaddingTop()，scrollView.getPaddingBottom()//上下Padding
+//                //scrollView.getChildAt(0).getHeight()//scrollView唯一子View的高度
+//                if(scrollView.getScrollY() + scrollView.getHeight() - scrollView.getPaddingTop() - scrollView.getPaddingBottom() == scrollView.getChildAt(0).getHeight()){
+//                    scrollView.requestDisallowInterceptTouchEvent(true);
+//                }
+//                return false;
+//            }
+//        });
 
     }
 

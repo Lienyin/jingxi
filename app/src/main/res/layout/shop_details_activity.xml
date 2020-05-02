@@ -8,6 +8,7 @@
     <include layout="@layout/title" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -301,10 +302,10 @@
                 </RadioGroup>
             </LinearLayout>
             <!--门店下的套餐列表-->
-            <com.jxxc.jingxi.utils.ListViewForScrollView
+            <ListView
                 android:id="@+id/lv_set_meal_data"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="800dp"
                 android:background="@color/white"
                 android:divider="@color/blackf1"
                 android:dividerHeight="0.5dp"

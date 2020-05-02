@@ -1,6 +1,7 @@
 package com.jxxc.jingxi.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,6 +127,9 @@ public class RecommendSetMealAdapter extends BaseAdapter {
                 }else{
                     finalHolder.iv_jian_dongtai.setRotation(-90);
                     finalHolder.ll_fuwu_detail.setVisibility(View.VISIBLE);
+                }
+                if (position == (list.size()-1)){
+                    Log.i("TAG","===="+position);
                 }
             }
         });
