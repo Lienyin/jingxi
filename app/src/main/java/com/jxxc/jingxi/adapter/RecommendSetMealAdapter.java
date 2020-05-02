@@ -77,6 +77,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             holder.ll_fuwu_item = convertView.findViewById(R.id.ll_fuwu_item);
             holder.iv_fuwu_item = convertView.findViewById(R.id.iv_fuwu_item);
             holder.ll_fuwu_select = convertView.findViewById(R.id.ll_fuwu_select);
+            holder.iv_jian_dongtai = convertView.findViewById(R.id.iv_jian_dongtai);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -121,7 +122,9 @@ public class RecommendSetMealAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (finalHolder.ll_fuwu_detail.getVisibility()==View.VISIBLE){
                     finalHolder.ll_fuwu_detail.setVisibility(View.GONE);
+                    finalHolder.iv_jian_dongtai.setRotation(90);
                 }else{
+                    finalHolder.iv_jian_dongtai.setRotation(-90);
                     finalHolder.ll_fuwu_detail.setVisibility(View.VISIBLE);
                 }
             }
@@ -164,6 +167,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         LinearLayout ll_fuwu_item;
         LinearLayout ll_fuwu_select;
         CheckBox iv_fuwu_item;
+        ImageView iv_jian_dongtai;
     }
 
 /**

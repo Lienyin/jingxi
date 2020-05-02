@@ -281,6 +281,7 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 Intent intent = new Intent((Activity) context, SetMealPayInfoActivity.class);
                 intent.putExtra("serviceType", "0");
                 intent.putExtra("companyId", "");
+                intent.putExtra("gotoType", "1");
                 startActivity(intent);
                 break;
             case R.id.iv_yuyue_daodian://新版到店

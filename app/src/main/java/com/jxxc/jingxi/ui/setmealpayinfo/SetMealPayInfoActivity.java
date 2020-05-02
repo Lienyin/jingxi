@@ -6,6 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -15,14 +18,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.ActivityDataAdapter;
 import com.jxxc.jingxi.adapter.OrderPaySetMealAdapter;
 import com.jxxc.jingxi.adapter.RecommendSetMealAdapter;
+import com.jxxc.jingxi.adapter.ShopListAdapter;
 import com.jxxc.jingxi.dialog.DiscountCouponDialog;
 import com.jxxc.jingxi.dialog.TimeDialog;
 import com.jxxc.jingxi.entity.backparameter.ActivitiesEntity;
@@ -33,6 +39,7 @@ import com.jxxc.jingxi.entity.backparameter.CreateOrderEntity;
 import com.jxxc.jingxi.entity.backparameter.MyCoupon;
 import com.jxxc.jingxi.entity.backparameter.ProductInfoEntity;
 import com.jxxc.jingxi.entity.backparameter.RecommendComboInfoEntity;
+import com.jxxc.jingxi.entity.backparameter.companyListEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.mvp.MVPBaseActivity;
 import com.jxxc.jingxi.ui.addressdetails.AddressDetailsActivity;
@@ -41,6 +48,7 @@ import com.jxxc.jingxi.ui.mycar.MyCarActivity;
 import com.jxxc.jingxi.ui.orderdetails.OrderDetailsActivity;
 import com.jxxc.jingxi.ui.payorder.PayOrderActivity;
 import com.jxxc.jingxi.ui.remark.RemarkActivity;
+import com.jxxc.jingxi.ui.shopdetails.ShopDetailsActivity;
 import com.jxxc.jingxi.utils.AnimUtils;
 import com.jxxc.jingxi.utils.AppUtils;
 import com.jxxc.jingxi.utils.GlideImgManager;
@@ -48,6 +56,7 @@ import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
 import com.jxxc.jingxi.utils.ZQImageViewRoundOval;
+import com.yuyh.easyadapter.helper.ViewHelper;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -64,7 +73,7 @@ import butterknife.OnClick;
  * 邮箱 784787081@qq.com
  */
 
-public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContract.View, SetMealPayInfoPresenter> implements SetMealPayInfoContract.View {
+public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContract.View, SetMealPayInfoPresenter> implements SetMealPayInfoContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.tv_back)
     TextView tv_back;
@@ -194,9 +203,26 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     LinearLayout ll_fuwu_item7;
     @BindView(R.id.ll_fuwu_item8)
     LinearLayout ll_fuwu_item8;
+    @BindView(R.id.ll_shangmen_daodian_btn)
+    LinearLayout ll_shangmen_daodian_btn;
+    @BindView(R.id.rb_shangmen_service)
+    RadioButton rb_shangmen_service;
+    @BindView(R.id.rb_daodian_service)
+    RadioButton rb_daodian_service;
+    @BindView(R.id.shang_men)
+    View shang_men;
+    @BindView(R.id.view_daodian_fuwu)
+    View view_daodian_fuwu;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
+    @BindView(R.id.rv_list)
+    RecyclerView rv_list;
 
     private String siteLat = "";
     private String siteLng = "";
+    private String queryFlag="";//筛选 1直营 2加盟 3合作 4营业中
+    private String sort="";
+    private String cityId="";
     private TimeDialog timeDialog;
     private String appointmentStartTime = "";
     private String appointmentEndTime = "";
@@ -211,6 +237,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private String remark = "";
     private String address = "";
     private String companyName = "";
+    private String gotoType = "";//0从洗车按钮进来 1从预约上门进来
     private double orderMoney = 0;//订单金额
     private double comboMoney = 0;//套餐金额
     private double couponMoney = 0;//优惠券金额
@@ -236,6 +263,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private OrderPaySetMealAdapter recommendSetMealAdapter;
     private int carType = 0;
     private String OrderId = "";
+    private int offset = 2;
+    private ShopListAdapter shopListAdapter;
+    private List<companyListEntity> companyListEntityList = new ArrayList<>();
 
     @Override
     protected int layoutId() {
@@ -252,11 +282,21 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         appointmentEndTime = getIntent().getStringExtra("appointmentEndTime");
         address = getIntent().getStringExtra("address");//店铺地址
         companyName = getIntent().getStringExtra("companyName");//店铺地址
+        gotoType = getIntent().getStringExtra("gotoType");//0从洗车按钮进来 1从预约上门进来
+        if ("1".equals(gotoType)){
+            ll_shangmen_daodian_btn.setVisibility(View.GONE);
+        }else{
+            ll_shangmen_daodian_btn.setVisibility(View.VISIBLE);
+        }
         carType = SPUtils.get(SPUtils.K_CAR_TYPE, 0);//获取车型
         SPUtils.put(SPUtils.K_COMPANY_ID, companyId);
         if (!AppUtils.isEmpty(appointmentStartTime)) {
             tv_appointment_time.setText(appointmentStartTime.substring(10) + "—至—" + appointmentEndTime.substring(10));
         }
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
+        siteLat = SPUtils.get("lat","");
+        siteLng = SPUtils.get("lng","");
         tv_phone_number.setText(SPUtils.get(SPUtils.K_SESSION_MOBILE, ""));//手机号码
         //获取当前日期
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -451,6 +491,8 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
             }
         });
+
+        initAdapter();
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -521,12 +563,29 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     @OnClick({R.id.tv_back, R.id.ll_stop_car_address, R.id.ll_car_info, R.id.ll_yuyue_time,
             R.id.ll_discount_coupon, R.id.tv_create_order, R.id.ll_remark,
             R.id.tv_car_fuwu6, R.id.tv_car_fuwu7, R.id.tv_car_fuwu8, R.id.ll_set_type1,
-            R.id.iv_car_fuwu6, R.id.iv_car_fuwu7, R.id.iv_car_fuwu8})
+            R.id.iv_car_fuwu6, R.id.iv_car_fuwu7, R.id.iv_car_fuwu8,R.id.rb_shangmen_service,
+            R.id.rb_daodian_service})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
+                break;
+            case R.id.rb_shangmen_service://上门
+                serviceType = "0";
+                shang_men.setVisibility(View.VISIBLE);
+                view_daodian_fuwu.setVisibility(View.GONE);
+                break;
+            case R.id.rb_daodian_service://到店
+                //企业账户不提供到店服务
+                if ("1".equals(SPUtils.get(SPUtils.K_ROLE,"0"))){
+                    Toast.makeText(this,"企业账户不提供到店服务",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                onRefresh();
+                shang_men.setVisibility(View.GONE);
+                view_daodian_fuwu.setVisibility(View.VISIBLE);
+                serviceType = "1";
                 break;
             case R.id.ll_stop_car_address://停车地址
                 //ZzRouter.gotoActivity(this, MapJingSiActivity.class);
@@ -958,5 +1017,63 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         } else {
             tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
         }
+    }
+
+    //下来刷新
+    @Override
+    public void onRefresh() {
+        offset=2;
+        mPresenter.companyList(Double.valueOf(siteLng),Double.valueOf(siteLat),queryFlag,sort,cityId,1,10);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        swipeLayout.setRefreshing(false);
+        mPresenter.companyListMore(Double.valueOf(siteLng),Double.valueOf(siteLat),queryFlag,sort,cityId,offset,10);
+    }
+
+    //门店数据
+    @Override
+    public void companyListCallBack(List<companyListEntity> data) {
+        companyListEntityList = data;
+        swipeLayout.setRefreshing(false);
+        shopListAdapter.setNewData(data);
+        if (data.size() < 10) {
+            shopListAdapter.loadMoreEnd();
+        }else{
+            shopListAdapter.disableLoadMoreIfNotFullPage();
+        }
+    }
+
+    //门店数据更多
+    @Override
+    public void companyListCallBackMore(List<companyListEntity> data) {
+        companyListEntityList.addAll(data);
+        swipeLayout.setRefreshing(false);
+        offset++;
+        shopListAdapter.addData(data);
+        shopListAdapter.loadMoreComplete();
+        if (data.size() < 10) {
+            shopListAdapter.loadMoreEnd();
+        }
+    }
+
+    private void initAdapter() {
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorSchemeColors(getResources().getColor(R.color.public_all));
+        rv_list.setLayoutManager(new LinearLayoutManager(this));
+        shopListAdapter = new ShopListAdapter(R.layout.shop_list_adapter, new ArrayList<companyListEntity>());
+        rv_list.setAdapter(shopListAdapter);
+        shopListAdapter.setOnLoadMoreListener(this, rv_list);
+        shopListAdapter.setEmptyView(R.layout.layout_nothing);
+
+        shopListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(SetMealPayInfoActivity.this, ShopDetailsActivity.class);
+                intent.putExtra("companyId",companyListEntityList.get(position).companyId);
+                startActivity(intent);
+            }
+        });
     }
 }

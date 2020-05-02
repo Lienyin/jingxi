@@ -306,6 +306,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                     Intent intent = new Intent(MainActivity.this, SetMealPayInfoActivity.class);
                     intent.putExtra("serviceType", "0");
                     intent.putExtra("companyId", "");
+                    intent.putExtra("gotoType", "0");
                     startActivity(intent);
                 }else{
                     toast(MainActivity.this,"请先登录后使用");
