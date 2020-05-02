@@ -303,6 +303,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList(companyId, queryDate);//查询预约时间
+        mPresenter.queryMyCoupon(0);//优惠券
+        mPresenter.getCarList();//车辆列表
+        mPresenter.getActivities();//活动
 
         if (!AppUtils.isEmpty(companyId)) {
             recommendComboInfoEntity = (List<RecommendComboInfoEntity>) getIntent().getSerializableExtra("recommendComboInfoEntity");
@@ -335,9 +338,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             } else {
                 tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
             }
-            mPresenter.getCarList();//车辆列表
-            mPresenter.queryMyCoupon(0);//优惠券
-            mPresenter.getActivities();//活动
         } else {
             //上门服务
             tv_address_text.setText("停车地址");
@@ -368,7 +368,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
             ll_set_type2.setVisibility(View.VISIBLE);
-            mPresenter.comboInfo();//查套餐
             //默认选择前5项套餐
             tv_car_fuwu1.setSelected(true);
             iv_car_fuwu1.setSelected(true);
@@ -826,6 +825,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 SPUtils.put(SPUtils.K_CAR_TYPE, comboTypeId);
             }
         }
+        mPresenter.comboInfo();//查套餐
     }
 
     @Override
@@ -911,9 +911,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     public void comboInfoCallBack(ProductInfoEntity proData) {
         productInfoEntity = proData;
         setService(productInfoEntity);
-        mPresenter.queryMyCoupon(0);//优惠券
-        mPresenter.getCarList();//车辆列表
-        mPresenter.getActivities();//活动
     }
 
     //设置服务选项UI
@@ -961,6 +958,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             }
         }
 
+        ll_fuwu_item1.setVisibility(View.INVISIBLE);
+        ll_fuwu_item2.setVisibility(View.INVISIBLE);
+        ll_fuwu_item3.setVisibility(View.INVISIBLE);
+        ll_fuwu_item4.setVisibility(View.INVISIBLE);
+        ll_fuwu_item5.setVisibility(View.INVISIBLE);
+        ll_fuwu_item6.setVisibility(View.INVISIBLE);
+        ll_fuwu_item7.setVisibility(View.INVISIBLE);
+        ll_fuwu_item8.setVisibility(View.INVISIBLE);
         //筛选后车型数据（设置每项对应的套餐价格）
         for (int j = 0; j < comboData.productList.size(); j++) {
             if (comboData.productList.get(j).productId == 1) {
