@@ -178,6 +178,22 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     EditText et_var_type_3;
     @BindView(R.id.ll_order_sty)
     LinearLayout ll_order_sty;
+    @BindView(R.id.ll_fuwu_item1)
+    LinearLayout ll_fuwu_item1;
+    @BindView(R.id.ll_fuwu_item2)
+    LinearLayout ll_fuwu_item2;
+    @BindView(R.id.ll_fuwu_item3)
+    LinearLayout ll_fuwu_item3;
+    @BindView(R.id.ll_fuwu_item4)
+    LinearLayout ll_fuwu_item4;
+    @BindView(R.id.ll_fuwu_item5)
+    LinearLayout ll_fuwu_item5;
+    @BindView(R.id.ll_fuwu_item6)
+    LinearLayout ll_fuwu_item6;
+    @BindView(R.id.ll_fuwu_item7)
+    LinearLayout ll_fuwu_item7;
+    @BindView(R.id.ll_fuwu_item8)
+    LinearLayout ll_fuwu_item8;
 
     private String siteLat = "";
     private String siteLng = "";
@@ -298,11 +314,16 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             int month = t.month+1;
             int day = t.monthDay;
             int hour = t.hour; // 0-23
-            int minute = t.minute;
+            String minute = "";
+            if (t.minute<10){
+                minute = "0"+t.minute;
+            }else{
+                minute = ""+t.minute;
+            }
             int second = t.second;
             appointmentStartTime = year+"-"+month+"-"+day+"  "+hour+":"+minute;
             appointmentEndTime = year+"-"+month+"-"+day+"  "+(hour+1)+":"+minute;
-            tv_appointment_time.setText(appointmentStartTime.substring(10)+"—至—"+appointmentEndTime.substring(10));
+            tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
 
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
@@ -884,29 +905,45 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         //筛选后车型数据（设置每项对应的套餐价格）
         for (int j = 0; j < comboData.productList.size(); j++) {
             if (comboData.productList.get(j).productId == 1) {
+                ll_fuwu_item1.setVisibility(View.VISIBLE);
+                tv_car_fuwu1.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu1_money.setText("+￥" + comboData.productList.get(j).price);
             } else if (comboData.productList.get(j).productId == 2) {
+                ll_fuwu_item2.setVisibility(View.VISIBLE);
+                tv_car_fuwu2.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu2_money.setText("+￥" + comboData.productList.get(j).price);
             } else if (comboData.productList.get(j).productId == 3) {
+                ll_fuwu_item3.setVisibility(View.VISIBLE);
+                tv_car_fuwu3.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu3_money.setText("+￥" + comboData.productList.get(j).price);
             } else if (comboData.productList.get(j).productId == 4) {
+                ll_fuwu_item4.setVisibility(View.VISIBLE);
+                tv_car_fuwu4.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu4_money.setText("+￥" + comboData.productList.get(j).price);
             } else if (comboData.productList.get(j).productId == 5) {
+                ll_fuwu_item5.setVisibility(View.VISIBLE);
+                tv_car_fuwu5.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu5_money.setText("+￥" + comboData.productList.get(j).price);
             } else if (comboData.productList.get(j).productId == 6) {
                 if (tv_car_fuwu6.isSelected() == true || iv_car_fuwu6.isSelected() == true) {
                     fuwuTypeMoney6 = comboData.productList.get(j).price;
                 }
+                ll_fuwu_item6.setVisibility(View.VISIBLE);
+                tv_car_fuwu6.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu6_money.setText("+￥" + new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             } else if (comboData.productList.get(j).productId == 7) {
                 if (tv_car_fuwu7.isSelected() == true || iv_car_fuwu7.isSelected() == true) {
                     fuwuTypeMoney7 = comboData.productList.get(j).price;
                 }
+                ll_fuwu_item7.setVisibility(View.VISIBLE);
+                tv_car_fuwu7.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu7_money.setText("+￥" + new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             } else if (comboData.productList.get(j).productId == 8) {
                 if (tv_car_fuwu8.isSelected() == true || iv_car_fuwu8.isSelected() == true) {
                     fuwuTypeMoney8 = comboData.productList.get(j).price;
                 }
+                ll_fuwu_item8.setVisibility(View.VISIBLE);
+                tv_car_fuwu8.setText(comboData.productList.get(j).productName);
                 tv_car_fuwu8_money.setText("+￥" + new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             } else {
                 //外加服务

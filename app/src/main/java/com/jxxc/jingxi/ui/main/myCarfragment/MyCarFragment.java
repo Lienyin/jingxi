@@ -119,6 +119,8 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
     private LinearLayout ll_daodian,ll_address,ll_shop_site;
     private LinearLayout ll_discount_coupon,ll_remark;
     private LinearLayout ll_car_info_view;
+    private LinearLayout ll_fuwu_itme1,ll_fuwu_itme2,ll_fuwu_itme3,ll_fuwu_itme4;
+    private LinearLayout ll_fuwu_itme5,ll_fuwu_itme6,ll_fuwu_itme7,ll_fuwu_itme8;
     private View shang_men,view_daodian_fuwu;
     private SwipeRefreshLayout swipeLayout;
     private RecyclerView rv_list;
@@ -191,6 +193,14 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         shang_men = view.findViewById(R.id.shang_men);
         swipeLayout = view.findViewById(R.id.swipeLayout);
         rv_list = view.findViewById(R.id.rv_list);
+        ll_fuwu_itme1 = view.findViewById(R.id.ll_fuwu_itme1);
+        ll_fuwu_itme2 = view.findViewById(R.id.ll_fuwu_itme2);
+        ll_fuwu_itme3 = view.findViewById(R.id.ll_fuwu_itme3);
+        ll_fuwu_itme4 = view.findViewById(R.id.ll_fuwu_itme4);
+        ll_fuwu_itme5 = view.findViewById(R.id.ll_fuwu_itme5);
+        ll_fuwu_itme6 = view.findViewById(R.id.ll_fuwu_itme6);
+        ll_fuwu_itme7 = view.findViewById(R.id.ll_fuwu_itme7);
+        ll_fuwu_itme8 = view.findViewById(R.id.ll_fuwu_itme8);
         ll_order_sty = view.findViewById(R.id.ll_order_sty);
         activity_data = view.findViewById(R.id.activity_data);
         tv_car_info = view.findViewById(R.id.tv_car_info);
@@ -854,20 +864,28 @@ public class MyCarFragment extends MVPBaseFragment<MyCarFragmentContract.View, M
         }
         for (int j=0;j<comboData.productList.size();j++){
             if (comboData.productList.get(j).productId==1){
+                ll_fuwu_itme1.setVisibility(View.VISIBLE);
                 tv_car_fuwu1_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==2){
+                ll_fuwu_itme2.setVisibility(View.VISIBLE);
                 tv_car_fuwu2_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==3){
+                ll_fuwu_itme3.setVisibility(View.VISIBLE);
                 tv_car_fuwu3_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==4){
+                ll_fuwu_itme4.setVisibility(View.VISIBLE);
                 tv_car_fuwu4_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==5){
+                ll_fuwu_itme5.setVisibility(View.VISIBLE);
                 tv_car_fuwu5_money.setText("+￥"+comboData.productList.get(j).price);
             }else if (comboData.productList.get(j).productId==6){
+                ll_fuwu_itme6.setVisibility(View.VISIBLE);
                 tv_car_fuwu6_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             }else if (comboData.productList.get(j).productId==7){
+                ll_fuwu_itme7.setVisibility(View.VISIBLE);
                 tv_car_fuwu7_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             }else if (comboData.productList.get(j).productId==8){
+                ll_fuwu_itme8.setVisibility(View.VISIBLE);
                 tv_car_fuwu8_money.setText("+￥"+new DecimalFormat("0.00").format(comboData.productList.get(j).price));
             }else{
                 tv_car_fuwu8_money.setText("外加服务");

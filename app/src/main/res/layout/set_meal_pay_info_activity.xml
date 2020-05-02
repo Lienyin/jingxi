@@ -154,6 +154,8 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item1"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -189,6 +191,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item2"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -225,6 +229,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item3"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -260,6 +266,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item4"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -302,6 +310,8 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item5"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -336,6 +346,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item6"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -369,6 +381,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item7"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -402,6 +416,8 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_fuwu_item8"
+                                android:visibility="invisible"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"

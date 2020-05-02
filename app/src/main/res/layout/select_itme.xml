@@ -48,10 +48,12 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:orientation="vertical">
 
                         <ImageView
@@ -83,10 +85,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:orientation="vertical">
 
                         <ImageView
@@ -119,10 +123,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:orientation="vertical">
 
                         <ImageView
@@ -154,10 +160,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_car_fuwu4"
@@ -196,10 +204,12 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="invisible"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_car_fuwu5"
@@ -230,10 +240,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="invisible"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_car_fuwu6"
@@ -263,10 +275,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="invisible"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_car_fuwu7"
@@ -296,10 +310,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_fuwu_itme8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="invisible"
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_car_fuwu8"

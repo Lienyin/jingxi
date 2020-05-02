@@ -293,18 +293,33 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
         txt_deal1.setOnClickListener(this);
         txt_deal2.setOnClickListener(this);
-        txt_deal3.setOnClickListener(this);
+        //txt_deal3.setOnClickListener(this);
         txt_deal4.setOnClickListener(this);
         txt_deal5.setOnClickListener(this);
         //默认显示第一个Fragment
         txt_deal1.performClick();//自动触发首页按钮
+
+        txt_deal3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+                    Intent intent = new Intent(MainActivity.this, SetMealPayInfoActivity.class);
+                    intent.putExtra("serviceType", "0");
+                    intent.putExtra("companyId", "");
+                    startActivity(intent);
+                }else{
+                    toast(MainActivity.this,"请先登录后使用");
+                    ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
+                }
+            }
+        });
     }
 
     //重置所有文本的选中状态
     public void selected(){
         txt_deal1.setSelected(false);
         txt_deal2.setSelected(false);
-        txt_deal3.setSelected(false);
+        //txt_deal3.setSelected(false);
         txt_deal4.setSelected(false);
         txt_deal5.setSelected(false);
     }
@@ -356,21 +371,25 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                     transaction.show(f2);
                 }
                 break;
-            case R.id.txt_deal3:
-                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
-                    selected();
-                    txt_deal3.setSelected(true);
-                    if(f3==null){
-                        f3 = new MyCarFragment(this);
-                        transaction.add(R.id.fragment_container,f3);
-                    }else{
-                        transaction.show(f3);
-                    }
-                }else{
-                    toast(this,"请先登录后使用");
-                    ZzRouter.gotoActivity(this, LoginActivity.class);
-                }
-                break;
+//            case R.id.txt_deal3:
+//                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+//                    selected();
+//                    txt_deal3.setSelected(true);
+//                    if(f3==null){
+//                        f3 = new MyCarFragment(this);
+//                        transaction.add(R.id.fragment_container,f3);
+//                    }else{
+//                        transaction.show(f3);
+//                    }
+//                    Intent intent = new Intent(this, SetMealPayInfoActivity.class);
+//                    intent.putExtra("serviceType", "0");
+//                    intent.putExtra("companyId", "");
+//                    startActivity(intent);
+//                }else{
+//                    toast(this,"请先登录后使用");
+//                    ZzRouter.gotoActivity(this, LoginActivity.class);
+//                }
+//                break;
             case R.id.txt_deal4:
                 if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
                     selected();
