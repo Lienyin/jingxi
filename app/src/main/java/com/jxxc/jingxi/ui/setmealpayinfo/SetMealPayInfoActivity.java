@@ -1072,6 +1072,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(SetMealPayInfoActivity.this, ShopDetailsActivity.class);
                 intent.putExtra("companyId",companyListEntityList.get(position).companyId);
+                intent.putExtra("distance",companyListEntityList.get(position).distance);
                 startActivity(intent);
             }
         });
