@@ -214,7 +214,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = BaseTitle;
         msg.description = BaseDescription;
-        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.share_icon);
+        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.shrea_icon_f);
         msg.thumbData = com.tencent.mm.sdk.platformtools.Util.bmpToByteArray(bitmap, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
