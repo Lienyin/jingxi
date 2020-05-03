@@ -131,9 +131,8 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, true, R.color.white);//状态栏颜色
         tv_title.setText("邀请好友");
-        mPresenter.getInfo();
         mPresenter.getUserInfo();
-        mPresenter.queryActivityDetail();
+
         //支付宝
         aliApi = APAPIFactory.createZFBApi(getApplicationContext(), Constant.ALIPAY_APPID, false);
 
@@ -450,6 +449,8 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
     @Override
     public void getUserInfoCallBack(UserInfoEntity data) {
         cId = data.customerId;
+        mPresenter.getInfo();
+        mPresenter.queryActivityDetail();
     }
 
     //分享数据
