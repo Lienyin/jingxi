@@ -243,6 +243,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     private double couponMoney = 0;//优惠券金额
     private double activityMoney = 0;//活动金额
     private ActivityDataAdapter activityDataAdapter;
+    private List<ActivitiesEntity> activitiesEntityList = new ArrayList<>();
     private ProductInfoEntity productInfoEntity = new ProductInfoEntity();
     private String productIds = "";//企业服务id
     private String productIds0 = "";
@@ -303,9 +304,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
         mPresenter.appointmentList(companyId, queryDate);//查询预约时间
-        mPresenter.queryMyCoupon(0);//优惠券
         mPresenter.getCarList();//车辆列表
-        mPresenter.getActivities();//活动
 
         if (!AppUtils.isEmpty(companyId)) {
             recommendComboInfoEntity = (List<RecommendComboInfoEntity>) getIntent().getSerializableExtra("recommendComboInfoEntity");
@@ -416,20 +415,15 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             public void onFenxiangClick(MyCoupon coupon) {
                 //优惠券
                 counponId = coupon.counponId + "";
-                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
                 //优惠券类型 0无门槛减N 1满N减N 2折扣券
                 if (coupon.couponRuleType == 0) {
                     couponMoney = coupon.money;
-                    double orderMoney = couponMoney + activityMoney;
-                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
                 } else if (coupon.couponRuleType == 1) {
                     couponMoney = coupon.money;
-                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
                 } else {
                     //折扣券
                     double num = comboMoney - activityMoney;
                     couponMoney = num - (num * (coupon.discount / 10));
-                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
                 }
                 if (!"不使用优惠券".equals(coupon.counponName)) {
                     tv_discounts.setText(new DecimalFormat("0.00").format(coupon.money) + "元优惠券");
@@ -450,6 +444,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
                 } else {
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+                }
+
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                double num = couponMoney + activityMoney;
+                if (num > orderMoney){
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(comboMoney) + "元");
+                }else{
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(num) + "元");
                 }
             }
         });
@@ -852,21 +854,16 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             }
             //优惠券
             counponId = data.get(pos).counponId + "";
-            tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
             tv_discounts.setText(new DecimalFormat("0.00").format(a) + "元优惠券");
             //优惠券类型 0无门槛减N 1满N减N 2折扣券
             if (data.get(pos).couponRuleType == 0) {
                 couponMoney = data.get(pos).money;
-                double orderMoney = couponMoney + activityMoney;
-                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
             } else if (data.get(pos).couponRuleType == 1) {
                 couponMoney = data.get(pos).money;
-                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
             } else {
                 //折扣券
                 double num = comboMoney - activityMoney;
                 couponMoney = num - (num * (data.get(pos).discount / 10));
-                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(couponMoney + activityMoney) + "元");
             }
             //订单金额=套餐金额-活动金额-优惠券金额
             orderMoney = comboMoney - activityMoney - couponMoney;
@@ -874,6 +871,14 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
             } else {
                 tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+            }
+
+            tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+            double num = couponMoney + activityMoney;
+            if (num > orderMoney){
+                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(comboMoney) + "元");
+            }else{
+                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(num) + "元");
             }
         }
 
@@ -916,6 +921,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     public void getActivitiesCallBack(List<ActivitiesEntity> data) {
         //组装活动
         if (data.size() > 0) {
+            activitiesEntityList = data;
             activityDataAdapter = new ActivityDataAdapter(this);
             activityDataAdapter.setData(data);
             activity_data.setAdapter(activityDataAdapter);
@@ -928,15 +934,19 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 }
             }
             if (activityMoney > 0) {//大于0说明有活动
-                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
-                double num = activityMoney + couponMoney;//总共优惠的金额
-                tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(num) + "元");
                 //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
                 orderMoney = comboMoney + fuwuTypeMoney6 + fuwuTypeMoney7 + fuwuTypeMoney8 - couponMoney - activityMoney;
                 if (orderMoney < 0) {
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
                 } else {
                     tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+                }
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                double num = activityMoney + couponMoney;//总共优惠的金额
+                if (num > orderMoney){
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(comboMoney) + "元");
+                }else{
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(num) + "元");
                 }
             }
         }
@@ -947,6 +957,9 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
     public void comboInfoCallBack(ProductInfoEntity proData) {
         productInfoEntity = proData;
         setService(productInfoEntity);
+
+        mPresenter.queryMyCoupon(0);//优惠券
+        mPresenter.getActivities();//活动
     }
 
     //设置服务选项UI
@@ -1057,6 +1070,33 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
         } else {
             tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+        }
+
+        //组装活动金额
+        if (activitiesEntityList.size()>0){
+            for (int i = 0; i < activitiesEntityList.size(); i++) {
+                if (comboMoney >= activitiesEntityList.get(i).doorsillMoney) {
+                    if (activitiesEntityList.get(i).money > activityMoney) {
+                        activityMoney = activitiesEntityList.get(i).money;
+                    }
+                }
+            }
+            if (activityMoney > 0) {//大于0说明有活动
+                //订单金额=基础套餐金额+选择服务项金额-优惠券金额-活动金额
+                orderMoney = comboMoney + fuwuTypeMoney6 + fuwuTypeMoney7 + fuwuTypeMoney8 - couponMoney - activityMoney;
+                if (orderMoney < 0) {
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(0) + "元</font>"));
+                } else {
+                    tv_xia_order_money.setText(Html.fromHtml("订单金额: <font color=\"#FF2700\">" + new DecimalFormat("0.00").format(orderMoney) + "元</font>"));
+                }
+                tv_xia_order_discounts.setVisibility(View.VISIBLE);//显示优惠
+                double num = activityMoney + couponMoney;//总共优惠的金额
+                if (num > orderMoney){
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(comboMoney) + "元");
+                }else{
+                    tv_xia_order_discounts.setText("已优惠：" + new DecimalFormat("0.00").format(num) + "元");
+                }
+            }
         }
     }
 

@@ -63,11 +63,11 @@ public class ActivityDataAdapter extends BaseAdapter {
             holder.tv_activity_type.setText("立减");
         }
         if (data.doorsillMoney>0){
-            holder.activity_name.setText(data.activitiesName+"满减"+new DecimalFormat("0.00").format(data.money)+"元");
+            holder.activity_name.setText(data.activitiesName+",下单满减"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元减"+new DecimalFormat("0.00").format(data.money)+"元");
             holder.activity_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
         }else{
-            holder.activity_name.setText(data.activitiesName+"立减"+new DecimalFormat("0.00").format(data.money)+"元");
-            holder.activity_memo.setText("");
+            holder.activity_name.setText(data.activitiesName+"，下单满减"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元减"+new DecimalFormat("0.00").format(data.money)+"元");
+            holder.activity_memo.setText("(满"+new DecimalFormat("0.00").format(data.doorsillMoney)+"元使用)");
         }
         return convertView;
     }

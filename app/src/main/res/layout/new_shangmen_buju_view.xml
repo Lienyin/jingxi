@@ -706,7 +706,7 @@
                         android:maxLength="12"
                         android:gravity="center_vertical|right"
                         android:textColor="@color/black26"
-                        android:hint="添加备注信息"
+                        android:hint="我想对技师说(选填)"
                         android:text=""/>
                     <ImageView
                         android:layout_width="wrap_content"
