@@ -97,25 +97,26 @@ public class RecommendSetMealAdapter extends BaseAdapter {
         holder.tv_recommend_num.setText("已售"+data.salesVolume);
         holder.tv_fuwu_name.setText(data.comboComment);
         holder.tv_fuwu_time.setText(data.serviceHours);
-        String carType1 = "";//1-SUV 2-轿车 3-MPV
-        String carType2 = "";//1-SUV 2-轿车 3-MPV
-        String carType3 = "";//1-SUV 2-轿车 3-MPV
-        for (int i=0;i<data.carTypePrices.size();i++){
-            if (data.carTypePrices.get(i).carTypeId==1){
-                carType1 = "SUV" + data.carTypePrices.get(i).totalPrice+"元";
-            }else if (data.carTypePrices.get(i).carTypeId==2){
-                carType2 = "轿车" + data.carTypePrices.get(i).totalPrice+"元";
-            }else{
-                carType3 = "MPV" + data.carTypePrices.get(i).totalPrice+"元";
+        if (data.carTypePrices.size()==3){
+            for (int i=0;i<data.carTypePrices.size();i++){
+                if (data.carTypePrices.get(i).carTypeId==carType){//默认车型
+                    holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(i).totalPrice));
+                }else{
+                    //第一个车型
+                    //holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
+                }
             }
-            if (data.carTypePrices.get(i).carTypeId==carType){//默认车型
-                holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(i).totalPrice));
-            }else{
-                //第一个车型
-                holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
+
+        }else{
+            for (int i=0;i<data.carTypePrices.size();i++){
+                if (data.carTypePrices.get(i).carTypeId==carType){//默认车型
+                    holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(i).totalPrice));
+                }else{
+                    //第一个车型
+                    holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
+                }
             }
         }
-        holder.tv_fuwu_money.setText(carType1+" "+" "+carType2+" "+carType3);
 
         final ViewHolder finalHolder = holder;
         holder.ll_fuwu_item.setOnClickListener(new View.OnClickListener() {
