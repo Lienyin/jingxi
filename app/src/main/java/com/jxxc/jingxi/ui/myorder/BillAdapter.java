@@ -89,7 +89,12 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             //服务已完成
             helper.setText(R.id.iv_order_static,"已完成");
             helper.setBackgroundRes(R.id.iv_order_static,R.drawable.order_static_blue);
-            helper.setGone(R.id.ll_evaluate,true);
+            if (item.isComment==1){
+                //车主是否已评价1是 0否
+                helper.setGone(R.id.ll_evaluate,false);
+            }else{
+                helper.setGone(R.id.ll_evaluate,true);
+            }
             helper.setGone(R.id.ll_cancel_order,false);
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);

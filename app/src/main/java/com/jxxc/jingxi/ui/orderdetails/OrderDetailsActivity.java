@@ -123,6 +123,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                StyledDialog.buildLoading("图片加载中").setActivity(OrderDetailsActivity.this).show();
                 imgDialog.showShareDialog(true,imgList);
             }
         });

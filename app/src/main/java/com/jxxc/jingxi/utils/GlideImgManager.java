@@ -17,7 +17,7 @@ import java.io.File;
 
 public class GlideImgManager {
 
-    private static int noImg = R.mipmap.biao;
+    private static int noImg = R.mipmap.zhan_weitu;
 //    private static int noImg = R.drawable.loading_large;
 
     //    public static final  float THUMBNAIL_LEVEL =0.2f;

@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.hss01248.dialog.StyledDialog;
 import com.jxxc.jingxi.dialog.ActivityDialog;
+import com.jxxc.jingxi.utils.GlideImgManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -38,10 +40,11 @@ public class LookImgAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView=new ImageView(context);
-        ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
+        //ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
+        GlideImgManager.loadImage(context, list.get(position%list.size()), imageView);
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         container.addView(imageView);
-
+        StyledDialog.dismissLoading();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

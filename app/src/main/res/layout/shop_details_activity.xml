@@ -306,7 +306,7 @@
             <ListView
                 android:id="@+id/lv_set_meal_data"
                 android:layout_width="match_parent"
-                android:layout_height="800dp"
+                android:layout_height="1000dp"
                 android:background="@color/white"
                 android:divider="@color/blackf1"
                 android:dividerHeight="0.5dp"

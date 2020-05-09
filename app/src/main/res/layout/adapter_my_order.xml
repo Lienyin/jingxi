@@ -171,7 +171,7 @@
                     android:gravity="center"
                     android:text="联系技师"/>
             </LinearLayout>
-<!--            评价-->
+            <!-- 评价-->
             <LinearLayout
                 android:id="@+id/ll_evaluate"
                 android:layout_width="100dp"
