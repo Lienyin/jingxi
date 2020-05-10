@@ -58,7 +58,7 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
-                            String url = version.url;
+                            String url = "http://"+version.url;
                             String memo = version.memo;
                             String ver = version.version;
                             if (!AppUtils.isEmpty(version)) {
@@ -171,8 +171,8 @@ public class RegardsPresenter extends BasePresenterImpl<RegardsContract.View> im
                             UpdateProgressDialog.dismiss();
                             File file = mRxDownload.getRealFiles("jingxi.apk", ConfigApplication.CACHA_URL)[0];
                             Context context = mView.getContext().getApplicationContext();
-                            AppUtils.installApk(context, file, BuildConfig.APPLICATION_ID + ".provider");
-                            //install(mContext,file);
+                            //AppUtils.installApk(context, file, BuildConfig.APPLICATION_ID + ".provider");
+                            install(mContext,file);
                         }
 
                     }

@@ -79,7 +79,7 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
                         LatestVersionEntity version = response.body().data;
                         if (response.body().code == 0){
                             SPUtils.put(SPUtils.K_STATIC_URL,version.staticUrl);
-                            String url = version.url;
+                            String url = "http://"+version.url;
                             String memo = version.memo;
                             String ver = version.version;
                             if (!AppUtils.isEmpty(version)) {
