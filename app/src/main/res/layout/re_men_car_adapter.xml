@@ -13,7 +13,7 @@
             android:id="@+id/iv_car_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/jx_logo"/>
+            android:src="@mipmap/jingxi_logo"/>
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"

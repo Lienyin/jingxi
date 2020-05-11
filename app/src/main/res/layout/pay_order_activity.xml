@@ -86,7 +86,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:rotation="30"
-                    android:src="@mipmap/jx_logo"/>
+                    android:src="@mipmap/jingxi_logo"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
