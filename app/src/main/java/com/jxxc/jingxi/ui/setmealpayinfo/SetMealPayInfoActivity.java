@@ -362,7 +362,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             int second = t.second;
             appointmentStartTime = year+"-"+month+"-"+day+"  "+hour+":"+minute;
             appointmentEndTime = year+"-"+month+"-"+day+"  "+(hour+1)+":"+minute;
-            tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
+            //tv_appointment_time.setText(appointmentStartTime+"—至—"+appointmentEndTime);
 
             tv_title.setText("上门洗车");
             ll_set_type1.setVisibility(View.GONE);
@@ -621,9 +621,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                         toast(this, "请添加车辆");
                     } else if (AppUtils.isEmpty(tv_car_address.getText().toString())) {
                         toast(this, "请选择停车地点");
-                    } else if (AppUtils.isEmpty(tv_appointment_time.getText().toString())) {
-                        toast(this, "请选择服务时间");
-                    } else {
+                    }else {
                         String carNumStr = "";
                         if ("1".equals(SPUtils.get(SPUtils.K_ROLE, "0"))) {
                             //企业车辆数目统计
