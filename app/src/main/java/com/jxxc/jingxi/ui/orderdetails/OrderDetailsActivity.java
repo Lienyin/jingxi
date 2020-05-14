@@ -3,6 +3,7 @@ package com.jxxc.jingxi.ui.orderdetails;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.jxxc.jingxi.entity.backparameter.OrderEntity;
 import com.jxxc.jingxi.http.ZzRouter;
 import com.jxxc.jingxi.ui.evaluate.EvaluateActivity;
 import com.jxxc.jingxi.ui.myorder.MyOrderActivity;
+import com.jxxc.jingxi.ui.photoview.PhotoViewActivity;
 import com.jxxc.jingxi.ui.setmealpayinfo.SetMealPayInfoActivity;
 import com.jxxc.jingxi.ui.shoplist.ShopListActivity;
 import com.jxxc.jingxi.ui.submitorder.SubmitOrderActivity;
@@ -123,8 +125,14 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         gv_img_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                StyledDialog.buildLoading("图片加载中").setActivity(OrderDetailsActivity.this).show();
-                imgDialog.showShareDialog(true,imgList);
+                Log.i("TAG","i==="+i);
+//                StyledDialog.buildLoading("图片加载中").setActivity(OrderDetailsActivity.this).show();
+//                imgDialog.showShareDialog(true,imgList,i);
+
+                Intent intent = new Intent(OrderDetailsActivity.this, PhotoViewActivity.class);
+                intent.putExtra("currentPosition", i);
+                intent.putExtra("dataBeanUrl", orderEntity.technicianCommentImgs);
+                startActivity(intent);
             }
         });
         imgDialog = new ImgDialog(this);

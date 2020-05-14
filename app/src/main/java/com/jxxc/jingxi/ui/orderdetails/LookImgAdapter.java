@@ -18,9 +18,11 @@ public class LookImgAdapter extends PagerAdapter{
 
     private Context context;
     private List<String> list;
-    public LookImgAdapter(Context context, List<String> list) {
+    private int pos = 0;
+    public LookImgAdapter(Context context, List<String> list,int pos) {
         this.context=context;
         this.list=list;
+        this.pos=pos;
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
 
@@ -29,7 +31,7 @@ public class LookImgAdapter extends PagerAdapter{
     @Override
     public int getCount() {
 
-        return Integer.MAX_VALUE;
+        return list.size();
     }
 
     @Override
@@ -42,6 +44,8 @@ public class LookImgAdapter extends PagerAdapter{
         ImageView imageView=new ImageView(context);
         //ImageLoader.getInstance().displayImage(list.get(position%list.size()),imageView);
         GlideImgManager.loadRectangleSiteImage(context, list.get(position%list.size()), imageView);
+        //GlideImgManager.loadRectangleSiteImage(context, list.get(pos), imageView);
+
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         container.addView(imageView);
         StyledDialog.dismissLoading();

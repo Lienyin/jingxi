@@ -57,8 +57,8 @@ public class ImgDialog implements View.OnClickListener{
 
     }
 
-    public void showShareDialog(boolean outTouchCancel, List<String> url) {
-        LookImgAdapter adapter = new LookImgAdapter(context,url);
+    public void showShareDialog(boolean outTouchCancel, List<String> url,int pos) {
+        LookImgAdapter adapter = new LookImgAdapter(context,url,pos);
         viewPager.setAdapter(adapter);
         adapter.setOnFenxiangClickListener(new LookImgAdapter.OnFenxiangClickListener() {
             @Override
