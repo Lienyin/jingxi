@@ -103,7 +103,7 @@ public class RecommendSetMealAdapter extends BaseAdapter {
                     holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(i).totalPrice));
                 }else{
                     //第一个车型
-                    //holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
+                    holder.tv_recommend_money.setText("￥"+new DecimalFormat("0.00").format(data.carTypePrices.get(0).totalPrice));
                 }
             }
 
