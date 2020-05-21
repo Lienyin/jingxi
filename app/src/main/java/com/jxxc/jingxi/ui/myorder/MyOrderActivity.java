@@ -233,4 +233,10 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         swipeLayout.setRefreshing(false);
         mPresenter.myOrderMore(orderType,offset,10);
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        onRefresh();
+    }
 }

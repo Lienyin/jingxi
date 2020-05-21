@@ -23,8 +23,8 @@ android {
         applicationId "com.jxxc.jingxi"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 108
-        versionName '1.0.8'
+        versionCode 110
+        versionName '1.1.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
