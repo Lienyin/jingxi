@@ -89,6 +89,7 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                 .execute(new JsonCallback<HttpResult<List<MyCoupon>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<MyCoupon>>> response) {
+                        StyledDialog.dismissLoading();
                         HttpResult<List<MyCoupon>> body = response.body();
                         if (!AppUtils.isEmpty(body)) {
                             List<MyCoupon> data = body.data;
@@ -175,6 +176,7 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                 .execute(new JsonCallback<HttpResult<List<ActivitiesEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<ActivitiesEntity>>> response) {
+                        StyledDialog.dismissLoading();
                         List<ActivitiesEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.getActivitiesCallBack(d);
@@ -195,6 +197,7 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                 .execute(new JsonCallback<HttpResult<ProductInfoEntity>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<ProductInfoEntity>> response) {
+                        StyledDialog.dismissLoading();
                         ProductInfoEntity d = response.body().data;
                         if (response.body().code==0){
                             mView.comboInfoCallBack(d);
@@ -304,6 +307,7 @@ public class SetMealPayInfoPresenter extends BasePresenterImpl<SetMealPayInfoCon
                 .execute(new JsonCallback<HttpResult<List<companyListEntity>>>() {
                     @Override
                     public void onSuccess(Response<HttpResult<List<companyListEntity>>> response) {
+                        StyledDialog.dismissLoading();
                         List<companyListEntity> d = response.body().data;
                         if (response.body().code==0){
                             mView.companyListCallBackMore(d);

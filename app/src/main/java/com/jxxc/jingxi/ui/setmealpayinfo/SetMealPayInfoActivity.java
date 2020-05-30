@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hss01248.dialog.StyledDialog;
+import com.jxxc.jingxi.ConfigApplication;
 import com.jxxc.jingxi.R;
 import com.jxxc.jingxi.adapter.ActivityDataAdapter;
 import com.jxxc.jingxi.adapter.OrderPaySetMealAdapter;
@@ -303,8 +304,6 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String queryDate = formatter.format(date);//今天日期
-        mPresenter.appointmentList(companyId, queryDate);//查询预约时间
-        mPresenter.getCarList();//车辆列表
 
         if (!AppUtils.isEmpty(companyId)) {
             recommendComboInfoEntity = (List<RecommendComboInfoEntity>) getIntent().getSerializableExtra("recommendComboInfoEntity");
@@ -378,6 +377,20 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
             iv_car_fuwu4.setSelected(true);
             tv_car_fuwu5.setSelected(true);
             iv_car_fuwu5.setSelected(true);
+        }
+
+        //没有登录状态下
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+            mPresenter.appointmentList(companyId, queryDate);//查询预约时间
+            mPresenter.getCarList();//车辆列表
+        }else{
+            if ("上门洗车".equals(tv_title.getText().toString())){
+                mPresenter.comboInfo();//上门洗车需要查服务项
+            }else{
+                //到店洗车需要请求
+                mPresenter.queryMyCoupon(0);//优惠券
+                mPresenter.getActivities();//活动
+            }
         }
 
         if (!AppUtils.isEmpty(companyId)) {
@@ -500,6 +513,7 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         });
 
         initAdapter();
+
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -595,16 +609,28 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 serviceType = "1";
                 break;
             case R.id.ll_stop_car_address://停车地址
+                 if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                    gotoLogin();
+                    return;
+                 }
                 //ZzRouter.gotoActivity(this, MapJingSiActivity.class);
                 ZzRouter.gotoActivity(this, AddressDetailsActivity.class);
                 break;
             case R.id.ll_car_info://爱车信息
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                    gotoLogin();
+                    return;
+                }
                 ZzRouter.gotoActivity(this, MyCarActivity.class, "1");
                 break;
             case R.id.ll_yuyue_time://服务时间
                 timeDialog.showShareDialog(true);
                 break;
             case R.id.ll_discount_coupon://优惠券
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                    gotoLogin();
+                    return;
+                }
                 if (myCouponList.size() > 0) {
                     discountCouponDialog.showShareDialog(true, myCouponList, comboMoney);
                 } else {
@@ -615,6 +641,10 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 ZzRouter.gotoActivity(this, RemarkActivity.class);
                 break;
             case R.id.tv_create_order://提交订单
+                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+                    gotoLogin();
+                    return;
+                }
                 if (AppUtils.isEmpty(companyId)) {//上门
                     if (AppUtils.isEmpty(tv_car_info.getText().toString()) &&
                             "0".equals(SPUtils.get(SPUtils.K_ROLE, "0"))) {
@@ -1002,8 +1032,10 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
         productInfoEntity = proData;
         setService(productInfoEntity);
 
-        mPresenter.queryMyCoupon(0);//优惠券
         mPresenter.getActivities();//活动
+        if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+            mPresenter.queryMyCoupon(0);//优惠券
+        }
     }
 
     //设置服务选项UI
@@ -1209,5 +1241,10 @@ public class SetMealPayInfoActivity extends MVPBaseActivity<SetMealPayInfoContra
                 startActivity(intent);
             }
         });
+    }
+
+    private void gotoLogin() {
+        toast(this, "请先登录后使用");
+        ZzRouter.gotoActivity(this, ConfigApplication.LOGIN_PATH, ZzRouter.HOST_PLUGIN);
     }
 }

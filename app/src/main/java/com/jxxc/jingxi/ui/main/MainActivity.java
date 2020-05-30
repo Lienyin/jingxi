@@ -302,16 +302,16 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         txt_deal3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
-                    Intent intent = new Intent(MainActivity.this, SetMealPayInfoActivity.class);
-                    intent.putExtra("serviceType", "0");
-                    intent.putExtra("companyId", "");
-                    intent.putExtra("gotoType", "0");
-                    startActivity(intent);
-                }else{
-                    toast(MainActivity.this,"请先登录后使用");
-                    ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
-                }
+                Intent intent = new Intent(MainActivity.this, SetMealPayInfoActivity.class);
+                intent.putExtra("serviceType", "0");
+                intent.putExtra("companyId", "");
+                intent.putExtra("gotoType", "0");
+                startActivity(intent);
+//                if (!AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN,""))){
+//                }else{
+//                    toast(MainActivity.this,"请先登录后使用");
+//                    ZzRouter.gotoActivity(MainActivity.this, LoginActivity.class);
+//                }
             }
         });
     }

@@ -274,10 +274,10 @@ public class FirstFragment extends MVPBaseFragment<FirseFramentContract.View, Fi
                 ZzRouter.gotoActivity((Activity) context, PartnershipActivity.class);
                 break;
             case R.id.iv_yuyue_shangmen://新版上门
-                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
-                    gotoLogin();
-                    return;
-                }
+//                if (AppUtils.isEmpty(SPUtils.get(SPUtils.K_TOKEN, ""))) {
+//                    gotoLogin();
+//                    return;
+//                }
                 Intent intent = new Intent((Activity) context, SetMealPayInfoActivity.class);
                 intent.putExtra("serviceType", "0");
                 intent.putExtra("companyId", "");
