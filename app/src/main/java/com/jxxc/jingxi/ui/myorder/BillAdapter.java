@@ -108,6 +108,15 @@ public class BillAdapter extends BaseQuickAdapter<MyOrderEntity, BaseViewHolder>
             helper.setGone(R.id.ll_fuwu_time,false);
             helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
             helper.setGone(R.id.ll_call_phone,false);
+        }else if (item.status==6){
+            //待评价
+            helper.setText(R.id.iv_order_static,"待评价");
+            helper.setBackgroundRes(R.id.iv_order_static,R.drawable.order_static_gray);
+            helper.setGone(R.id.ll_evaluate,true);
+            helper.setGone(R.id.ll_cancel_order,false);
+            helper.setGone(R.id.ll_fuwu_time,false);
+            helper.setBackgroundRes(R.id.ll_order_itme,R.drawable.attestation_bg_edittext);
+            helper.setGone(R.id.ll_call_phone,true);
         }else{
             helper.setText(R.id.iv_order_static,"订单异常");
             helper.setBackgroundRes(R.id.iv_order_static,R.drawable.order_static_red);

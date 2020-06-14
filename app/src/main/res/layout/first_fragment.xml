@@ -54,11 +54,17 @@
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:gravity="center">
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/my_user"/>
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:gravity="center"
+                            android:background="@drawable/home_user_bg">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/my_user"/>
+                        </LinearLayout>
                     </LinearLayout>
                     <TextView
                         android:id="@+id/tv_location_city"
@@ -78,10 +84,16 @@
                         android:layout_alignParentRight="true"
                         android:gravity="center"
                         android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:gravity="center"
+                        android:background="@drawable/home_user_bg">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
                             android:src="@mipmap/msg_xiaoxi"/>
+                    </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
             </FrameLayout>

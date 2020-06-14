@@ -75,6 +75,18 @@
                 android:textColor="@drawable/radio"
                 android:textSize="14sp" />
             <RadioButton
+                android:id="@+id/rb_order_dai_pingjia"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="待评价"
+                android:visibility="visible"
+                android:drawableBottom="@drawable/radio_bg"
+                android:textColor="@drawable/radio"
+                android:textSize="14sp" />
+            <RadioButton
                 android:id="@+id/rb_order_yiwc"
                 android:layout_width="0dp"
                 android:layout_height="30dp"

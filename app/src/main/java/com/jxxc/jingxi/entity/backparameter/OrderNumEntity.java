@@ -7,4 +7,5 @@ public class OrderNumEntity implements Serializable {
     public String notPay;
     public String complete;
     public String notService;
+    public String notComment;
 }

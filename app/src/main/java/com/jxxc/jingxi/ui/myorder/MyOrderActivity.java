@@ -61,6 +61,8 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     RadioButton rb_order_daijiedan;
     @BindView(R.id.rb_order_daifuwu)
     RadioButton rb_order_daifuwu;
+    @BindView(R.id.rb_order_dai_pingjia)
+    RadioButton rb_order_dai_pingjia;
     @BindView(R.id.rb_order_cancel)
     RadioButton rb_order_cancel;
 
@@ -141,7 +143,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     }
 
     @OnClick({R.id.tv_back,R.id.rb_order_all,R.id.rb_order_daizhifu,R.id.rb_order_jignxz,R.id.rb_order_yiwc,
-    R.id.rb_order_daijiedan,R.id.rb_order_daifuwu,R.id.rb_order_cancel})
+    R.id.rb_order_daijiedan,R.id.rb_order_daifuwu,R.id.rb_order_cancel,R.id.rb_order_dai_pingjia})
     public void onViewClicked(View view) {
         AnimUtils.clickAnimator(view);
         switch (view.getId()) {
@@ -164,6 +166,10 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
                 break;
             case R.id.rb_order_daifuwu://待服务
                 orderType = "1";
+                mPresenter.myOrder(orderType,1,10);
+                break;
+            case R.id.rb_order_dai_pingjia://待评价
+                orderType = "6";
                 mPresenter.myOrder(orderType,1,10);
                 break;
             case R.id.rb_order_jignxz://进行中
@@ -218,6 +224,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         rb_order_all.setText("全部("+data.all+")");
         rb_order_daizhifu.setText("待支付("+data.notPay+")");
         rb_order_daifuwu.setText("待服务("+data.notService+")");
+        rb_order_dai_pingjia.setText("待服评价("+data.notComment+")");
         rb_order_yiwc.setText("已完成("+data.complete+")");
     }
 

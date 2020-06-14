@@ -11,4 +11,6 @@ public class UserInfoEntity {
     public String idCart;
     public String balance;
     public int isAuth;
+    public int finishedOrders;
+    public int saveWater;
 }
