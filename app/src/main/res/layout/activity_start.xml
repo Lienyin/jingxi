@@ -6,11 +6,25 @@
     android:background="@color/white"
     android:gravity="center">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/jingxi_logo_qidong"
-        android:orientation="vertical"/>
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:background="@mipmap/jingxi_login_icon"
+            android:orientation="vertical"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="24sp"
+            android:textColor="@color/black333"
+            android:text="上门蒸汽洗车专家"/>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
