@@ -224,7 +224,7 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
         rb_order_all.setText("全部("+data.all+")");
         rb_order_daizhifu.setText("待支付("+data.notPay+")");
         rb_order_daifuwu.setText("待服务("+data.notService+")");
-        rb_order_dai_pingjia.setText("待服评价("+data.notComment+")");
+        rb_order_dai_pingjia.setText("待评价("+data.notComment+")");
         rb_order_yiwc.setText("已完成("+data.complete+")");
     }
 
