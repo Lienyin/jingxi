@@ -63,6 +63,7 @@ public class SetingActivity extends MVPBaseActivity<SetingContract.View, SetingP
                 ZzRouter.gotoActivity(this, RegardsActivity.class);
                 break;
             case R.id.btn_out_login://退出登录
+                mPresenter.outLogin();
                 SPUtils.remove(this,SPUtils.K_TOKEN);
                 ZzRouter.gotoActivity(this, LoginActivity.class);
                 break;

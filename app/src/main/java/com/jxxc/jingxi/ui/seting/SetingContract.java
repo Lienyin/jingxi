@@ -14,6 +14,6 @@ public class SetingContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        
+        void outLogin();
     }
 }
