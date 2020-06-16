@@ -125,6 +125,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     TextView tv_jie_yong_shui;
     @BindView(R.id.tv_jie_yong_shui_liang)
     TextView tv_jie_yong_shui_liang;
+    @BindView(R.id.ll_jie_yue)
+    LinearLayout ll_jie_yue;
     private FragmentManager fragmentManager;
     private long exitTime = 0;
     public static String registrationId;
@@ -228,6 +230,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             @Override
             public void onClick(View view) {
                 AppUtils.callPhone(MainActivity.this,"4001008682");
+            }
+        });
+        //空白
+        ll_jie_yue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -465,13 +474,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         GlideImgManager.loadCircleImage(this, data.avatar, iv_user_logo);
         tv_user_name.setText(AppUtils.isEmpty(data.userName)?data.realName:data.userName);
         tv_user_phonenumber.setText(data.phonenumber);
-        tv_jie_yong_shui_liang.setText(data.saveWater+"L");
-        if (data.finishedOrders > 0){
-            int shui = data.finishedOrders * data.saveWater;
-            tv_jie_yong_shui.setText(shui+"L");
-        }else{
-            tv_jie_yong_shui.setText("0L");
-        }
+        tv_jie_yong_shui.setText(data.saveWater+"L");
+//        if (data.finishedOrders > 0){
+//            int shui = data.finishedOrders * data.saveWater;
+//            tv_jie_yong_shui.setText(shui+"L");
+//        }else{
+//            tv_jie_yong_shui.setText("0L");
+//        }
         //帐号类型，0：个人帐号；1企业帐号
         if (data.accountType==1){
             ll_my_invoice.setVisibility(View.VISIBLE);

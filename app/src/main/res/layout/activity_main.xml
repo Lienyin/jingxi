@@ -199,6 +199,7 @@
         </LinearLayout>
         <!--节约用水-->
         <LinearLayout
+            android:id="@+id/ll_jie_yue"
             android:layout_width="match_parent"
             android:layout_height="70dp">
             <LinearLayout
@@ -244,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:text="0L"/>
+                        android:text="200L"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
