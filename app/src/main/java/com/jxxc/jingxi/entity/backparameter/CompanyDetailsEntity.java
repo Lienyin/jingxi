@@ -17,6 +17,8 @@ public class CompanyDetailsEntity implements Serializable {
         public int isBusiness;
         public int distance;
         public String technicianNum;
+        public double lng;
+        public double lat;
     }
 
     public List<Jishi> technicians;

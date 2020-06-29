@@ -36,6 +36,7 @@ import com.jxxc.jingxi.utils.HorizontalListView;
 import com.jxxc.jingxi.utils.ListViewForScrollView;
 import com.jxxc.jingxi.utils.SPUtils;
 import com.jxxc.jingxi.utils.StatusBarUtil;
+import com.yusong.plugin_navi.NaviUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -123,6 +124,9 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     private List<RecommendComboInfoEntity> recommendComboInfoEntityList2 = new ArrayList<>();//服务类型 1洗车2美容3护理
     private List<RecommendComboInfoEntity> commitEntity = new ArrayList<>();//提交数据
     private int carType=0;//车型
+    private double siteLat=0;
+    private double siteLng=0;
+    private String siteAddress = "";
     @Override
     protected int layoutId() {
         return R.layout.shop_details_activity;
@@ -236,9 +240,9 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     }
 
     @OnClick({R.id.tv_back,R.id.tv_details_shop_call,R.id.btn_subscribe_time,R.id.ll_xia_dan,
-    R.id.rb_xiche,R.id.rb_meirong,R.id.rb_huli})
+    R.id.rb_xiche,R.id.rb_meirong,R.id.rb_huli,R.id.tv_details_shop_address})
     public void onViewClicked(View view) {
-        AnimUtils.clickAnimator(view);
+        //AnimUtils.clickAnimator(view);
         switch (view.getId()) {
             case R.id.tv_back://返回
                 finish();
@@ -307,6 +311,13 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
                 recommendSetMealAdapter.setData(recommendComboInfoEntityList2,2,carType);
                 recommendSetMealAdapter.notifyDataSetChanged();
                 break;
+            case R.id.tv_details_shop_address://导航
+                String locationLatitude = SPUtils.get("lat","0");
+                String locationLongitude = SPUtils.get("lng","0");
+                NaviUtil.with(ShopDetailsActivity.this, NaviUtil.DB09).navi(
+                        Double.valueOf(locationLatitude), Double.valueOf(locationLongitude),
+                        "我的位置", siteLat, siteLng, siteAddress, getApplicationInfo().name);
+                break;
             default:
         }
     }
@@ -319,6 +330,9 @@ public class ShopDetailsActivity extends MVPBaseActivity<ShopDetailsContract.Vie
     //返回详情
     @Override
     public void getCompanyCallBack(CompanyDetailsEntity data) {
+        siteLat = data.company.lat;
+        siteLng = data.company.lng;
+        siteAddress = data.company.address;
         technicianAdapter = new TechnicianAdapter(this);
         technicianAdapter.setData(data.technicians);
         gv_technician_data.setAdapter(technicianAdapter);
