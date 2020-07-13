@@ -77,36 +77,39 @@ public class CarListAdapter extends BaseAdapter {
         holder.tv_car_name.setText(data.brandName+"  "+data.typeName);
         if (data.color==1){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_1);
-            holder.tv_car_color_name.setText("绿色");
+            holder.tv_car_color_name.setText("白色");
         }else if (data.color==2){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_2);
-            holder.tv_car_color_name.setText("蓝色");
+            holder.tv_car_color_name.setText("黑色");
         }else if (data.color==3){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_3);
-            holder.tv_car_color_name.setText("橙色");
+            holder.tv_car_color_name.setText("红色");
         }else if (data.color==4){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_4);
-            holder.tv_car_color_name.setText("黄色");
+            holder.tv_car_color_name.setText("蓝色");
         }else if (data.color==5){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_5);
-            holder.tv_car_color_name.setText("红色");
+            holder.tv_car_color_name.setText("绿色");
         }else if (data.color==6){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_6);
-            holder.tv_car_color_name.setText("黑色");
+            holder.tv_car_color_name.setText("黄色");
         }else if (data.color==7){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_7);
-            holder.tv_car_color_name.setText("灰色");
+            holder.tv_car_color_name.setText("橙色");
         }else if (data.color==8){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_8);
-            holder.tv_car_color_name.setText("白色");
+            holder.tv_car_color_name.setText("紫色");
         }else if (data.color==9){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_9);
-            holder.tv_car_color_name.setText("紫色");
+            holder.tv_car_color_name.setText("银色");
         }else if (data.color==10){
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_10);
+            holder.tv_car_color_name.setText("玫红");
+        }else if (data.color==11){
             holder.tv_car_color.setBackgroundResource(R.drawable.car_color_10);
             holder.tv_car_color_name.setText("棕色");
         }else{
-            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_8);
+            holder.tv_car_color.setBackgroundResource(R.drawable.car_color_1);
             holder.tv_car_color_name.setText("其他");
         }
 
