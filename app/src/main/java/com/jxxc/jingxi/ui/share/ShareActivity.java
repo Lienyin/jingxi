@@ -171,7 +171,7 @@ public class ShareActivity extends MVPBaseActivity<ShareContract.View, SharePres
                     //分享到支付宝
                     if (aliApi.isZFBSupportAPI()){
                         sendToAliPay();
-                        //sendToAliPay("智租出行",ShareActivity.this);
+                        //sendToAliPay("菁喜洗车",ShareActivity.this);
                     }else{
                         toast(ShareActivity.this,"目前您安装的支付宝版本过低或尚未安装 ");
                     }

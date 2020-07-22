@@ -128,7 +128,18 @@
         <!-- 我的订单 -->
         <activity
             android:name=".ui.myorder.MyOrderActivity"
-            android:screenOrientation="portrait" />
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="com.jxxc.jingxi"
+                    android:pathPrefix="/jingxi"
+                    android:scheme="jingxiuseriosevaluate" />
+            </intent-filter>
+        </activity>
         <!-- 订单详情—已完成 -->
         <activity
             android:name=".ui.orderdetails.OrderDetailsActivity"
@@ -192,7 +203,18 @@
         <!-- 下单 -->
         <activity
             android:name=".ui.submitorder.SubmitOrderActivity"
-            android:screenOrientation="portrait" />
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="com.jxxc.jingxi"
+                    android:pathPrefix="/jingxi"
+                    android:scheme="jingxiuseriosorder" />
+            </intent-filter>
+        </activity>
         <!-- 选择下单地址 -->
         <activity
             android:name=".ui.addressdetails.AddressDetailsActivity"

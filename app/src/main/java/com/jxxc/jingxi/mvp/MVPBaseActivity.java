@@ -135,7 +135,7 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
                     }
                 }
                 // 没有权限，申请权限。
-//                StyledDialog.buildIosAlert("权限提示", "应用定位权限未开启，会影响您的使用哦！请在手机的“设置-应用管理-智租出行-权限管理-定位服务”应用列表中，允许智租出行访问位置信息；然后结束app重新打开。", new MyDialogListener() {
+//                StyledDialog.buildIosAlert("权限提示", "应用定位权限未开启，会影响您的使用哦！请在手机的“设置-应用管理-菁喜洗车-权限管理-定位服务”应用列表中，允许菁喜洗车访问位置信息；然后结束app重新打开。", new MyDialogListener() {
 //                    @Override
 //                    public void onFirst() {
 //                        toSetting();
@@ -151,7 +151,7 @@ public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenter
             }
         } else {
             //统检测到手机未开启GPS定位服务
-            StyledDialog.buildIosAlert("权限提示", "应用检测到手机未开启GPS定位服务；打开定位后请结束智租出行APP，然后再重新打开智租出行APP。", new MyDialogListener() {
+            StyledDialog.buildIosAlert("权限提示", "应用检测到手机未开启GPS定位服务；打开定位后请结束菁喜洗车APP，然后再重新打开菁喜洗车APP。", new MyDialogListener() {
                 @Override
                 public void onFirst() {
                     Intent intent = new Intent();
