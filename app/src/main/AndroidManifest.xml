@@ -125,6 +125,27 @@
         <activity
             android:name=".ui.usercenter.UsercenterActivity"
             android:screenOrientation="portrait" />
+        <!-- 下单 -->
+        <activity
+            android:name=".ui.submitorder.SubmitOrderActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!-- 到店洗车/上门洗车 -->
+        <activity
+            android:name=".ui.setmealpayinfo.SetMealPayInfoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="order"
+                    android:pathPrefix="/jingxiuseriosorder"
+                    android:scheme="jingxiuseriosorder" />
+            </intent-filter>
+        </activity>
         <!-- 我的订单 -->
         <activity
             android:name=".ui.myorder.MyOrderActivity"
@@ -135,8 +156,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
                 <data
-                    android:host="com.jxxc.jingxi"
-                    android:pathPrefix="/jingxi"
+                    android:host="evaluate"
+                    android:pathPrefix="/jingxiuseriosevaluate"
                     android:scheme="jingxiuseriosevaluate" />
             </intent-filter>
         </activity>
@@ -200,21 +221,6 @@
         <activity
             android:name=".ui.recharge.RechargeActivity"
             android:screenOrientation="portrait" />
-        <!-- 下单 -->
-        <activity
-            android:name=".ui.submitorder.SubmitOrderActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.VIEW" />
-                <data
-                    android:host="com.jxxc.jingxi"
-                    android:pathPrefix="/jingxi"
-                    android:scheme="jingxiuseriosorder" />
-            </intent-filter>
-        </activity>
         <!-- 选择下单地址 -->
         <activity
             android:name=".ui.addressdetails.AddressDetailsActivity"
@@ -258,10 +264,6 @@
         <!-- 套餐详情 -->
         <activity
             android:name=".ui.setmealpay.SetMealPayActivity"
-            android:screenOrientation="portrait" />
-        <!-- 到店洗车/上门洗车 -->
-        <activity
-            android:name=".ui.setmealpayinfo.SetMealPayInfoActivity"
             android:screenOrientation="portrait" />
         <!-- 备注 -->
         <activity

@@ -135,7 +135,7 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
     @BindView(R.id.tv_xia_order_discounts)
     TextView tv_xia_order_discounts;
     @BindView(R.id.et_phone_number)
-    EditText et_phone_number;
+    TextView et_phone_number;
     @BindView(R.id.et_car_memo)
     EditText et_car_memo;
     @BindView(R.id.ll_daodian)
@@ -185,76 +185,6 @@ public class SubmitOrderActivity extends MVPBaseActivity<SubmitOrderContract.Vie
         recommendComboInfoEntity = (RecommendComboInfoEntity) getIntent().getSerializableExtra("recommendComboInfoEntity");
         if (!AppUtils.isEmpty(recommendComboInfoEntity)){
             //根据车型显示套餐选项
-            //1-SUV(1-8) 2-轿车(9-16)  3-MPV(17-24)
-//            if (recommendComboInfoEntity.carTypeId==1){
-//                for (int i=0;i<recommendComboInfoEntity.productList.size();i++){
-//                    if (recommendComboInfoEntity.productList.get(i).comboProductId==1){
-//                        tv_car_fuwu1.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==2){
-//                        tv_car_fuwu2.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==3){
-//                        tv_car_fuwu3.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==4){
-//                        tv_car_fuwu4.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==5){
-//                        tv_car_fuwu5.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==6){
-//                        tv_car_fuwu6.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==7){
-//                        tv_car_fuwu7.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==8){
-//                        tv_car_fuwu8.setSelected(true);
-//                    }else{
-//                        //
-//                    }
-//                }
-//            }else if (recommendComboInfoEntity.carTypeId==2){
-//                for (int i=0;i<recommendComboInfoEntity.productList.size();i++){
-//                    if (recommendComboInfoEntity.productList.get(i).comboProductId==9){
-//                        tv_car_fuwu1.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==10){
-//                        tv_car_fuwu2.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==11){
-//                        tv_car_fuwu3.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==12){
-//                        tv_car_fuwu4.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==13){
-//                        tv_car_fuwu5.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==14){
-//                        tv_car_fuwu6.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==15){
-//                        tv_car_fuwu7.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==16){
-//                        tv_car_fuwu8.setSelected(true);
-//                    }else{
-//                        //
-//                    }
-//                }
-//            }else if (recommendComboInfoEntity.carTypeId==3){
-//                for (int i=0;i<recommendComboInfoEntity.productList.size();i++){
-//                    if (recommendComboInfoEntity.productList.get(i).comboProductId==17){
-//                        tv_car_fuwu1.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==18){
-//                        tv_car_fuwu2.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==19){
-//                        tv_car_fuwu3.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==20){
-//                        tv_car_fuwu4.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==21){
-//                        tv_car_fuwu5.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==22){
-//                        tv_car_fuwu6.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==23){
-//                        tv_car_fuwu7.setSelected(true);
-//                    }else if (recommendComboInfoEntity.productList.get(i).comboProductId==24){
-//                        tv_car_fuwu8.setSelected(true);
-//                    }else{
-//                        //
-//                    }
-//                }
-//            }else{
-//                //没有对应车型
-//            }
         }else{
             //默认选择前5项套餐
             tv_car_fuwu1.setSelected(true);

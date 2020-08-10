@@ -2,6 +2,7 @@ package com.jxxc.jingxi.ui.myorder;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,9 +82,23 @@ public class MyOrderActivity extends MVPBaseActivity<MyOrderContract.View, MyOrd
     public void initData() {
         StatusBarUtil.setStatusBarMode(this, false, R.color.white);
         tv_title.setText("我的订单");
+        rb_order_all.setChecked(true);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type= null;
+        if (Intent.ACTION_VIEW.equals(action)) {
+            Uri uri = intent.getData();
+            if (uri != null) {
+                type = uri.getQueryParameter("type");
+                if ("1".equals(type)){
+                    orderType = "6";
+                    rb_order_dai_pingjia.setChecked(true);
+                }
+            }
+        }
+
         initAdapter();
         onRefresh();
-        rb_order_all.setChecked(true);
         dialog = new CancelOrderDialog(this);
         dialog.setOnFenxiangClickListener(new CancelOrderDialog.OnFenxiangClickListener() {
             @Override
